@@ -13,7 +13,8 @@ func _ready():
 func load_data():
 	var file = File.new()
 	file.open(playerDataPath, file.READ)
-	playerData.parse(file.get_as_text())
+	# sam note for error checks
+	playerData = JSON.parse(file.get_as_text()).result
 	file.close()
 
 func save_data():

@@ -1,7 +1,7 @@
 extends Control
 
 func _ready():
-	self.connect("update_resource", self, "update_resource")
+	ResourceManager.connect("update_resource", self, "update_resource")
 	$options_menu.hide()
 	pass 
 
@@ -11,19 +11,20 @@ func update_resource(resource, value):
 		var value_to_update
 		match resource:
 			ResourceManager.Resource.WOOD:
-				value_to_update = $bottom_menu/resources/wood/value
+				value_to_update = $bottom_menu/bottom_menu_list/resources/wood/value
 			ResourceManager.Resource.STONE:
-				value_to_update = $bottom_menu/resources/stone/value
+				value_to_update = $bottom_menu/bottom_menu_list/resources/stone/value
 			ResourceManager.Resource.GOLD:
-				value_to_update = $bottom_menu/resources/gold/value
+				value_to_update = $bottom_menu/bottom_menu_list/resources/gold/value
 			ResourceManager.Resource.FOOD:
-				value_to_update = $bottom_menu/resources/food/value
+				value_to_update = $bottom_menu/bottom_menu_list/resources/food/value
 			ResourceManager.Resource.POPULATION:
-				value_to_update = $bottom_menu/resources/population/value
+				value_to_update = $bottom_menu/bottom_menu_list/resources/population/value
 			ResourceManager.Resource.EGG:
-				value_to_update = $bottom_menu/resources/eggs/value
+				value_to_update = $bottom_menu/bottom_menu_list/resources/eggs/value
 		if value_to_update != null:
-			value_to_update.text += value
+			print("do the update bit!")
+			value_to_update.text = String(int(value_to_update.text) + value)
 			#TODO ANIMATION!
 
 func _on_settings_button_pressed():
@@ -34,7 +35,7 @@ func _on_settings_button_pressed():
 
 
 func _on_resume_button_pressed():
-	$options_menu.show()
+	$options_menu.hide()
 
 
 func _on_quit_button_pressed():
