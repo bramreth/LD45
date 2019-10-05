@@ -7,7 +7,7 @@
 				"button_text": "Next",
 				"next_action": "next",
 				"duration": "",
-				"text_speed": 0.03
+				"text_speed": 0.01
 			},
 			{
 				"state": "read",
@@ -16,7 +16,7 @@
 				"button_text": "Next",
 				"next_action": "next",
 				"duration": "",
-				"text_speed": 0.03
+				"text_speed": 0.09
 			},
 			{
 				"state": "read_input",
@@ -33,7 +33,7 @@
 				"animation": "",
 				"button_text": "",
 				"next_action": "",
-				"duration": 7,
+				"duration": 3,
 				"text_speed": 0.03
 			},
 			{

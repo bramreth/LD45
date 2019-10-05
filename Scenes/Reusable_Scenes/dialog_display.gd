@@ -9,14 +9,15 @@ onready var dialog_container = get_node("dialog_menu/dialog_container")
 onready var text_input = get_node("dialog_menu/text_input")
 onready var action_button = get_node("action_button")
 
-
+onready var scene_to_open = null
 onready var lock_thread = false
 onready var next_action = ""
 
 func _ready():
 	print("dialog ready")
 	
-func start_dialog(scene):
+func start_dialog(scene, _scene_to_open):
+	scene_to_open = _scene_to_open
 	dialog = StringManager.strings["dialog"][scene]
 	if dialog != null:
 		dialog_index = 0
@@ -27,6 +28,8 @@ func start_dialog(scene):
 
 func kill_dialog():
 	self.visible = false
+	if scene_to_open != null:
+		scene_transition.change_scene(scene_to_open)
 
 func handle_dialog():
 	var current_dialog_item = dialog[dialog_index]
