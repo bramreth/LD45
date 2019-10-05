@@ -1,8 +1,7 @@
 extends Control
 
 func _ready():
-	print("tutorial ready")
-	$dialog_display.start_dialog("tutorial")
+	$dialog_display.start_dialog("tutorial", "game")
 #
 #var text_queue = ["you are one of the last goblins left, hunted to near extinction by the nasty human king Clement",
 #	"you have nothing left, is this the end for you?"]
