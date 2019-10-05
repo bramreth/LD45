@@ -4,25 +4,38 @@
 [ext_resource path="res://Scenes/overlay.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Images/ui_icons/settings_cog.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Fonts/default.ttf" type="DynamicFontData" id=4]
-[ext_resource path="res://Assets/Prefabs/button_style_box_gen.tres" type="StyleBox" id=5]
-[ext_resource path="res://Assets/Images/ui_icons/wood.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Images/ui_icons/rock.png" type="Texture" id=7]
-[ext_resource path="res://Assets/Images/ui_icons/gold.png" type="Texture" id=8]
-[ext_resource path="res://Assets/Images/ui_icons/food.png" type="Texture" id=9]
-[ext_resource path="res://Assets/Images/ui_icons/population.png" type="Texture" id=10]
-[ext_resource path="res://Assets/Images/ui_icons/egg.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Images/ui_icons/wood.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Images/ui_icons/rock.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Images/ui_icons/gold.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Images/ui_icons/food.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Images/ui_icons/population.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Images/ui_icons/egg.png" type="Texture" id=10]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
 font_data = ExtResource( 4 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="StyleBoxFlat" id=2]
+content_margin_top = 10.0
+content_margin_bottom = 10.0
+bg_color = Color( 0.32549, 0.168627, 0.0705882, 1 )
+border_width_top = 2
+border_color = Color( 0, 0, 0, 1 )
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+shadow_size = 3
+
+[sub_resource type="DynamicFont" id=3]
 size = 22
 font_data = ExtResource( 4 )
 
 [node name="overlay" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 0.451859
+margin_top = 0.225952
+margin_right = 0.451904
+margin_bottom = 0.225952
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
 
@@ -72,7 +85,8 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -47.0
-custom_styles/bg = ExtResource( 5 )
+mouse_filter = 2
+custom_styles/bg = SubResource( 2 )
 
 [node name="bottom_menu_list" type="VBoxContainer" parent="bottom_menu"]
 anchor_left = 0.5
@@ -87,137 +101,181 @@ margin_bottom = 16.0
 [node name="resources" type="HBoxContainer" parent="bottom_menu/bottom_menu_list"]
 margin_right = 792.0
 margin_bottom = 32.0
+size_flags_vertical = 3
 custom_constants/separation = 1
 
-[node name="wood" type="HBoxContainer" parent="bottom_menu/bottom_menu_list/resources"]
+[node name="Tree" type="Tree" parent="bottom_menu/bottom_menu_list/resources"]
 margin_right = 131.0
+margin_bottom = 32.0
+hint_tooltip = "wood"
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="wood" type="HBoxContainer" parent="bottom_menu/bottom_menu_list/resources/Tree"]
+margin_left = 2.0
+margin_right = 132.0
 margin_bottom = 32.0
 size_flags_horizontal = 3
 custom_constants/separation = 10
 
-[node name="icon" type="TextureRect" parent="bottom_menu/bottom_menu_list/resources/wood"]
+[node name="icon" type="TextureRect" parent="bottom_menu/bottom_menu_list/resources/Tree/wood"]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 5 )
+expand = true
+
+[node name="value" type="Label" parent="bottom_menu/bottom_menu_list/resources/Tree/wood"]
+margin_left = 42.0
+margin_top = 2.0
+margin_right = 56.0
+margin_bottom = 30.0
+custom_fonts/font = SubResource( 3 )
+text = "0"
+
+[node name="Tree2" type="Tree" parent="bottom_menu/bottom_menu_list/resources"]
+margin_left = 132.0
+margin_right = 263.0
+margin_bottom = 32.0
+hint_tooltip = "stone"
+size_flags_horizontal = 3
+
+[node name="stone" type="HBoxContainer" parent="bottom_menu/bottom_menu_list/resources/Tree2"]
+margin_left = 2.0
+margin_right = 132.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+custom_constants/separation = 10
+
+[node name="icon" type="TextureRect" parent="bottom_menu/bottom_menu_list/resources/Tree2/stone"]
 margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 texture = ExtResource( 6 )
 expand = true
 
-[node name="value" type="Label" parent="bottom_menu/bottom_menu_list/resources/wood"]
+[node name="value" type="Label" parent="bottom_menu/bottom_menu_list/resources/Tree2/stone"]
 margin_left = 42.0
 margin_top = 2.0
 margin_right = 56.0
 margin_bottom = 30.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "0"
 
-[node name="stone" type="HBoxContainer" parent="bottom_menu/bottom_menu_list/resources"]
-margin_left = 132.0
-margin_right = 263.0
+[node name="Tree3" type="Tree" parent="bottom_menu/bottom_menu_list/resources"]
+margin_left = 264.0
+margin_right = 395.0
+margin_bottom = 32.0
+hint_tooltip = "gold"
+size_flags_horizontal = 3
+
+[node name="gold" type="HBoxContainer" parent="bottom_menu/bottom_menu_list/resources/Tree3"]
+margin_left = 2.0
+margin_right = 132.0
 margin_bottom = 32.0
 size_flags_horizontal = 3
 custom_constants/separation = 10
 
-[node name="icon" type="TextureRect" parent="bottom_menu/bottom_menu_list/resources/stone"]
+[node name="icon" type="TextureRect" parent="bottom_menu/bottom_menu_list/resources/Tree3/gold"]
 margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 texture = ExtResource( 7 )
 expand = true
 
-[node name="value" type="Label" parent="bottom_menu/bottom_menu_list/resources/stone"]
+[node name="value" type="Label" parent="bottom_menu/bottom_menu_list/resources/Tree3/gold"]
 margin_left = 42.0
 margin_top = 2.0
 margin_right = 56.0
 margin_bottom = 30.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "0"
 
-[node name="gold" type="HBoxContainer" parent="bottom_menu/bottom_menu_list/resources"]
-margin_left = 264.0
-margin_right = 395.0
+[node name="Tree4" type="Tree" parent="bottom_menu/bottom_menu_list/resources"]
+margin_left = 396.0
+margin_right = 527.0
+margin_bottom = 32.0
+hint_tooltip = "food"
+size_flags_horizontal = 3
+
+[node name="food" type="HBoxContainer" parent="bottom_menu/bottom_menu_list/resources/Tree4"]
+margin_left = 2.0
+margin_right = 132.0
 margin_bottom = 32.0
 size_flags_horizontal = 3
 custom_constants/separation = 10
 
-[node name="icon" type="TextureRect" parent="bottom_menu/bottom_menu_list/resources/gold"]
+[node name="icon" type="TextureRect" parent="bottom_menu/bottom_menu_list/resources/Tree4/food"]
 margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 texture = ExtResource( 8 )
 expand = true
 
-[node name="value" type="Label" parent="bottom_menu/bottom_menu_list/resources/gold"]
+[node name="value" type="Label" parent="bottom_menu/bottom_menu_list/resources/Tree4/food"]
 margin_left = 42.0
 margin_top = 2.0
 margin_right = 56.0
 margin_bottom = 30.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "0"
 
-[node name="food" type="HBoxContainer" parent="bottom_menu/bottom_menu_list/resources"]
-margin_left = 396.0
-margin_right = 527.0
+[node name="Tree5" type="Tree" parent="bottom_menu/bottom_menu_list/resources"]
+margin_left = 528.0
+margin_right = 659.0
+margin_bottom = 32.0
+hint_tooltip = "population"
+size_flags_horizontal = 3
+
+[node name="population" type="HBoxContainer" parent="bottom_menu/bottom_menu_list/resources/Tree5"]
+margin_left = 2.0
+margin_right = 132.0
 margin_bottom = 32.0
 size_flags_horizontal = 3
 custom_constants/separation = 10
 
-[node name="icon" type="TextureRect" parent="bottom_menu/bottom_menu_list/resources/food"]
+[node name="icon" type="TextureRect" parent="bottom_menu/bottom_menu_list/resources/Tree5/population"]
 margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 texture = ExtResource( 9 )
 expand = true
 
-[node name="value" type="Label" parent="bottom_menu/bottom_menu_list/resources/food"]
+[node name="value" type="Label" parent="bottom_menu/bottom_menu_list/resources/Tree5/population"]
 margin_left = 42.0
 margin_top = 2.0
 margin_right = 56.0
 margin_bottom = 30.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "0"
 
-[node name="population" type="HBoxContainer" parent="bottom_menu/bottom_menu_list/resources"]
-margin_left = 528.0
-margin_right = 659.0
+[node name="Tree6" type="Tree" parent="bottom_menu/bottom_menu_list/resources"]
+margin_left = 660.0
+margin_right = 792.0
+margin_bottom = 32.0
+hint_tooltip = "eggs"
+size_flags_horizontal = 3
+
+[node name="eggs" type="HBoxContainer" parent="bottom_menu/bottom_menu_list/resources/Tree6"]
+margin_left = 2.0
+margin_right = 137.0
 margin_bottom = 32.0
 size_flags_horizontal = 3
 custom_constants/separation = 10
 
-[node name="icon" type="TextureRect" parent="bottom_menu/bottom_menu_list/resources/population"]
+[node name="icon" type="TextureRect" parent="bottom_menu/bottom_menu_list/resources/Tree6/eggs"]
 margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 texture = ExtResource( 10 )
 expand = true
 
-[node name="value" type="Label" parent="bottom_menu/bottom_menu_list/resources/population"]
+[node name="value" type="Label" parent="bottom_menu/bottom_menu_list/resources/Tree6/eggs"]
 margin_left = 42.0
 margin_top = 2.0
 margin_right = 56.0
 margin_bottom = 30.0
-custom_fonts/font = SubResource( 2 )
-text = "0"
-
-[node name="eggs" type="HBoxContainer" parent="bottom_menu/bottom_menu_list/resources"]
-margin_left = 660.0
-margin_right = 792.0
-margin_bottom = 32.0
-size_flags_horizontal = 3
-custom_constants/separation = 10
-
-[node name="icon" type="TextureRect" parent="bottom_menu/bottom_menu_list/resources/eggs"]
-margin_right = 32.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 11 )
-expand = true
-
-[node name="value" type="Label" parent="bottom_menu/bottom_menu_list/resources/eggs"]
-margin_left = 42.0
-margin_top = 2.0
-margin_right = 56.0
-margin_bottom = 30.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "0"
 
 [connection signal="pressed" from="top_menu/settings_button" to="." method="_on_settings_button_pressed"]

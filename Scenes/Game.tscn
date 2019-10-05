@@ -1,10 +1,11 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Scripts/Scene_Scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Tiles/default_tile.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Tiles/hut_tile.png" type="Texture" id=3]
 [ext_resource path="res://Scripts/Prefab_Scripts/Map.gd" type="Script" id=4]
 [ext_resource path="res://Assets/Prefabs/Character.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/overlay.tscn" type="PackedScene" id=6]
 
 [sub_resource type="NavigationPolygon" id=1]
 vertices = PoolVector2Array( 0, -35, 64, -3, 0, 29, -64, -3 )
@@ -207,3 +208,10 @@ position = Vector2( 440.997, 323.546 )
 position = Vector2( 235.998, 202.958 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 510, 300 )
+current = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
+
+[node name="overlay" parent="Camera2D/CanvasLayer" instance=ExtResource( 6 )]
+
