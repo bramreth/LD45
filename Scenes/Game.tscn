@@ -4,7 +4,7 @@
 [ext_resource path="res://Assets/Tiles/default_tile.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Tiles/hut_tile.png" type="Texture" id=3]
 [ext_resource path="res://Scripts/Prefab_Scripts/Map.gd" type="Script" id=4]
-[ext_resource path="res://Assets/Prefabs/Character.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/Prefabs/CharacterMapEntity.tscn" type="PackedScene" id=5]
 
 [sub_resource type="NavigationPolygon" id=1]
 vertices = PoolVector2Array( 0, -35, 64, -3, 0, 29, -64, -3 )
@@ -200,10 +200,10 @@ script = ExtResource( 4 )
 
 [node name="Characters" type="Node" parent="Map/Navigation/YSort"]
 
-[node name="Character" parent="Map/Navigation/YSort/Characters" instance=ExtResource( 5 )]
-position = Vector2( 440.997, 323.546 )
+[node name="MapEntity" parent="Map/Navigation/YSort/Characters" instance=ExtResource( 5 )]
+position = Vector2( 250.459, 163.29 )
 
-[node name="Character2" parent="Map/Navigation/YSort/Characters" instance=ExtResource( 5 )]
-position = Vector2( 235.998, 202.958 )
+[node name="MapEntity2" parent="Map/Navigation/YSort/Characters" instance=ExtResource( 5 )]
+position = Vector2( 381.827, 427.254 )
 
 [node name="Camera2D" type="Camera2D" parent="."]

@@ -24,7 +24,7 @@ func setup(entities, characters, root):
 	for cell in get_used_cells_by_id(1):
 		add_hut(cell)
 
-var hut = preload("res://Assets/Prefabs/Building.tscn")
+var hut = preload("res://Assets/Prefabs/BuildingMapEntity.tscn")
 
 func add_hut(cell: Vector2):
 	var newHut = hut.instance()
