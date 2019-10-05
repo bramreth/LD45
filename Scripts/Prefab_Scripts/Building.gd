@@ -1,20 +1,14 @@
-extends Node2D
-
-var mouseOver = false
+extends "res://Scripts/Prefab_Scripts/MapEntity.gd"
 
 func _ready():
-	$Click_Area.connect("mouse_entered",self,"mouse_over", [true])
-	$Click_Area.connect("mouse_exited",self,"mouse_over", [false])
+	._ready()
+	type = GameManager.ENTITY_TYPE.BUILDING
 
 func get_position():
-	return $Entrance.position
-
-func mouse_over(m):
-	mouseOver = m
+	return position + $Entrance.position
 
 func _unhandled_input(event):
 	if mouseOver and event is InputEventMouseButton:
 		if event.button_index == BUTTON_RIGHT and event.pressed:
-			print("HOUSE")
 			get_tree().set_input_as_handled()
 			emit_signal("selected", self)

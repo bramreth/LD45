@@ -30,3 +30,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 
 func _on_AudioStreamPlayer2D_finished():
 	$AudioStreamPlayer2D.play()
+
+
+func _on_test_button_pressed():
+	scene_transition.change_scene("game")
