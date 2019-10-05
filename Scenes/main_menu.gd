@@ -1,7 +1,7 @@
 extends Control
 
 onready var anim_player = get_node("ColorRect/AnimationPlayer")
-var tutorial_scene = preload("res://Scenes/tutorial.tscn")
+#var tutorial_scene = preload("res://Scenes/tutorial.tscn")
 
 
 # Called when the node enters the scene tree for the first time.
@@ -23,7 +23,7 @@ func _on_quit_button_pressed():
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "close":
-		scene_transition.change_scene("tutorial")
+		scene_transition.change_scene("game")
 	if anim_name == "open":
 		$AudioStreamPlayer2D.play()
 

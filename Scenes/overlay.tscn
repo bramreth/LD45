@@ -302,9 +302,9 @@ custom_fonts/font = SubResource( 3 )
 text = "0"
 
 [node name="dialog_screen" parent="." instance=ExtResource( 12 )]
+visible = false
 position = Vector2( 75, 50 )
 scale = Vector2( 0.85, 0.85 )
-
 [connection signal="pressed" from="top_menu/settings_button" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="options_menu/resume_button" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="options_menu/quit_button" to="." method="_on_quit_button_pressed"]

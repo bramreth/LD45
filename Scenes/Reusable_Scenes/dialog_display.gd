@@ -3,6 +3,7 @@ extends Node2D
 var dialog = {}
 var current_dialog = {}
 var dialog_index
+var current_dialog_name
 
 onready var dialog_image_animation= get_node("dialog_menu/dialog_image/sprite_container/animated_sprite")
 onready var dialog_container = get_node("dialog_menu/dialog_container")
@@ -18,15 +19,19 @@ func _ready():
 	
 	
 func start_dialog(scene):
-	dialog = StringManager.strings["dialog"][scene]
+	current_dialog_name = scene
+	dialog = StringManager.strings["dialog"][current_dialog_name]
 	if dialog != null:
 		dialog_index = 0
 		self.visible = true
 		handle_dialog()
 	else:
-		print("Error loading dialog " + scene)
+		kill_dialog()
+		print("Error loading dialog " + current_dialog_name)
 
 func kill_dialog():
+	if(current_dialog_name == "tutorial"):
+		GameManager.start_game()
 	self.visible = false
 
 func handle_dialog():
