@@ -8,14 +8,27 @@ var selectedCharacter = null
 var selectedEntity = null
 var selectedItem = null
 
+onready var map = $Map/Navigation/Map
+
 func _ready():
+	GameManager.connect("spawn_items", self, "spawn_items")
 	for character in $Map/Navigation/YSort/Characters.get_children():
 		character.connect("selected", self, "select_character")
 		character.connect("movement_done", self, "perform_contextual_action")
 	for entity in $Map/Navigation/YSort/Entities.get_children():
 		entity.connect("selected", self, "select_entity")
 	
-	$Map/Navigation/Map.setup($Map/Navigation/YSort/Entities, $Map/Navigation/YSort/Characters, self)
+	map.setup($Map/Navigation/YSort/Entities, $Map/Navigation/YSort/Characters, self)
+	
+	GameManager.start_game()
+
+################################################################################################
+# ITEM SPAWNING
+################################################################################################
+func spawn_items(items):
+	for item in items:
+		if(items[item] > 0):
+			map.spawn_items(item, items[item]) 
 
 ################################################################################################
 # ENTITY SELECTION
@@ -35,10 +48,12 @@ func select_item(item):
 	move_character(selectedItem.position)
 
 func perform_contextual_action():
-	if selectedEntity.type == GameManager.ENTITY_TYPE.BUILDING:
-		pass
-	elif selectedEntity.type == GameManager.ENTITY_TYPE.ITEM:
-		selectedEntity.pickup()
+	if selectedEntity != null:
+		if selectedEntity.type == GameManager.ENTITY_TYPE.BUILDING:
+			pass
+		elif selectedEntity.type == GameManager.ENTITY_TYPE.ITEM:
+			selectedEntity.pickup()
+		selectedEntity = null
 
 ################################################################################################
 # MOVEMENT
