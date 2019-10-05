@@ -7,7 +7,8 @@ var build = false
 func _ready():
 	ResourceManager.connect("update_resource", self, "update_resource")
 	$options_menu.hide()
-	pass 
+	yield(get_tree().create_timer(randi()%20 + 4), "timeout")
+	$AudioStreamPlayer2D.play()
 
 
 func update_resource(resource, value):
@@ -51,3 +52,9 @@ func _on_build_button_pressed():
 	else:
 		$VBoxContainer/build_button.modulate = Color(1.0,1.0,1.0,1.0)
 	emit_signal("build", build)
+
+
+func _on_AudioStreamPlayer2D_finished():
+	randomize()
+	yield(get_tree().create_timer(randi()%20 + 4), "timeout")
+	$AudioStreamPlayer2D.play()
