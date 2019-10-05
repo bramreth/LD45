@@ -18,7 +18,7 @@ vertices = PoolVector2Array( 0, -3, -32, -19, 0, -35, 64, -3, 0, 29, -32, 13 )
 polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 5, 0, 3 ) ]
 outlines = [ PoolVector2Array( 0, -3, -32, 13, 0, 29, 64, -3, 0, -35, -32, -19 ) ]
 
-[sub_resource type="NavigationPolygon" id=4]
+[sub_resource type="NavigationPolygon" id=11]
 vertices = PoolVector2Array( -64, -3, 0, -35, 32, -19, -32, 13 )
 polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 outlines = [ PoolVector2Array( -64, -3, 0, -35, 32, -19, -32, 13 ) ]
@@ -94,7 +94,7 @@ outlines = [ PoolVector2Array( -32, -19, -64, -3, 0, 29, 64, -3, 32, -19, 0, -3 
 3/tile_mode = 0
 3/occluder_offset = Vector2( 64, 35 )
 3/navigation_offset = Vector2( 64, 35 )
-3/navigation = SubResource( 4 )
+3/navigation = SubResource( 11 )
 3/shapes = [  ]
 3/z_index = 0
 4/name = "wall_north"
@@ -174,4 +174,3 @@ outlines = [ PoolVector2Array( -32, -19, -64, -3, 0, 29, 64, -3, 32, -19, 0, -3 
 10/navigation = SubResource( 3 )
 10/shapes = [  ]
 10/z_index = 0
-
