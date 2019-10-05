@@ -1,6 +1,9 @@
 extends Control
 
 onready var anim_player = get_node("ColorRect/AnimationPlayer")
+var tutorial_scene = preload("res://Scenes/tutorial.tscn")
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	anim_player.play("open")
@@ -16,3 +19,8 @@ func _on_play_button_pressed():
 
 func _on_quit_button_pressed():
 	get_tree().quit()
+
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if anim_name == "close":
+		get_tree().get_root().add_child(tutorial_scene.instance())
