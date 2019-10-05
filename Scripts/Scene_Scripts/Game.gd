@@ -12,6 +12,8 @@ func _ready():
 	for character in $Map/Navigation/YSort/Characters.get_children():
 		character.connect("selected", self, "select_character")
 		character.connect("movement_done", self, "perform_contextual_action")
+	for entity in $Map/Navigation/YSort/Entities.get_children():
+		entity.connect("selected", self, "select_entity")
 	
 	$Map/Navigation/Map.setup($Map/Navigation/YSort/Entities, $Map/Navigation/YSort/Characters, self)
 

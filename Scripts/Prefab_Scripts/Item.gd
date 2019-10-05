@@ -10,6 +10,7 @@ func _ready():
 
 func pickup():
 	ResourceManager.update_resource(resourceType, amount)
+	queue_free()
 
 func _unhandled_input(event):
 	if mouseOver and event is InputEventMouseButton:
