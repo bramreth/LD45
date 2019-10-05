@@ -26,8 +26,13 @@ margin_right = 624.0
 margin_bottom = 176.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-text = "this is a load of text
-"
+bbcode_enabled = true
+
+[node name="LineEdit" type="LineEdit" parent="MarginContainer/VBoxContainer"]
+visible = false
+margin_top = 147.0
+margin_right = 624.0
+margin_bottom = 176.0
 
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer"]
 margin_left = 555.0
@@ -37,4 +42,5 @@ margin_bottom = 200.0
 size_flags_horizontal = 8
 text = "okay"
 
+[connection signal="text_entered" from="MarginContainer/VBoxContainer/LineEdit" to="." method="_on_LineEdit_text_entered"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Button" to="." method="_on_Button_pressed"]

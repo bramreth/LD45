@@ -27,3 +27,4 @@ position = Vector2( 440.997, 323.546 )
 [node name="Characters" type="Node" parent="Map/Navigation"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
