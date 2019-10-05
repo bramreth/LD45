@@ -17,9 +17,10 @@ var charactersNode
 var gameRoot
 
 # Called when the node enters the scene tree for the first time.
-func setup(entities, characters):
+func setup(entities, characters, root):
 	entitiesNode = entities
 	charactersNode = characters
+	gameRoot = root
 	for cell in get_used_cells_by_id(1):
 		add_hut(cell)
 
