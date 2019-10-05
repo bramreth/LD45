@@ -15,19 +15,18 @@ func update_resource(resource, value):
 		var value_to_update
 		match resource:
 			ResourceManager.Resource.WOOD:
-				value_to_update = $bottom_menu/bottom_menu_list/resources/wood/value
+				value_to_update = $VBoxContainer/bottom_menu/bottom_menu_list/resources/Tree/wood/value
 			ResourceManager.Resource.STONE:
-				value_to_update = $bottom_menu/bottom_menu_list/resources/stone/value
+				value_to_update = $VBoxContainer/bottom_menu/bottom_menu_list/resources/Tree2/stone/value
 			ResourceManager.Resource.GOLD:
-				value_to_update = $bottom_menu/bottom_menu_list/resources/gold/value
+				value_to_update = $VBoxContainer/bottom_menu/bottom_menu_list/resources/Tree3/gold/value
 			ResourceManager.Resource.FOOD:
-				value_to_update = $bottom_menu/bottom_menu_list/resources/food/value
+				value_to_update = $VBoxContainer/bottom_menu/bottom_menu_list/resources/Tree4/food/value
 			ResourceManager.Resource.POPULATION:
-				value_to_update = $bottom_menu/bottom_menu_list/resources/population/value
+				value_to_update = $VBoxContainer/bottom_menu/bottom_menu_list/resources/Tree5/population/value
 			ResourceManager.Resource.EGG:
-				value_to_update = $bottom_menu/bottom_menu_list/resources/eggs/value
+				value_to_update = $VBoxContainer/bottom_menu/bottom_menu_list/resources/Tree6/eggs/value
 		if value_to_update != null:
-			print("do the update bit!")
 			value_to_update.text = String(int(value_to_update.text) + value)
 			#TODO ANIMATION!
 
