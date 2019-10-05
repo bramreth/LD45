@@ -15,5 +15,6 @@ func mouse_over(m):
 func _unhandled_input(event):
 	if mouseOver and event is InputEventMouseButton:
 		if event.button_index == BUTTON_RIGHT and event.pressed:
+			print("HOUSE")
 			get_tree().set_input_as_handled()
 			emit_signal("selected", self)
