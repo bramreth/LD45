@@ -1,0 +1,77 @@
+{
+	"dialog": {
+		"tutorial": [{
+				"state": "read",
+				"text": "You are one of the last goblins left, hunted to near extinction by the nasty human king Clement",
+				"animation": "wizard",
+				"button_text": "Next",
+				"next_action": "next",
+				"duration": "",
+				"text_speed": 0.03
+			},
+			{
+				"state": "read",
+				"text": "you have nothing left, is this the end for you?",
+				"animation": "wizard",
+				"button_text": "Next",
+				"next_action": "next",
+				"duration": "",
+				"text_speed": 0.03
+			},
+			{
+				"state": "read_input",
+				"text": "you need to choose a name little goblin.",
+				"animation": "wizard",
+				"button_text": "Confirm",
+				"next_action": "submit_name",
+				"duration": "",
+				"text_speed": 0.03
+			},
+			{
+				"state": "cutscene",
+				"text": "",
+				"animation": "",
+				"button_text": "",
+				"next_action": "",
+				"duration": 7,
+				"text_speed": 0.03
+			},
+			{
+				"state": "read",
+				"text": "A goblin! what a rarity. Greetings, I am Higgledy Piggledy the Wiggley merchant wizard at your service!",
+				"animation": "",
+				"button_text": "Next",
+				"next_action": "next",
+				"duration": "",
+				"text_speed": 0.03
+			},
+			{
+				"state": "read",
+				"text": "If you are going to survive the wrath of nasty king Clement you'll need all the help you can get.",
+				"animation": "",
+				"button_text": "Next",
+				"next_action": "next",
+				"duration": "",
+				"text_speed": 0.03
+			},
+			{
+				"state": "read",
+				"text": "If you build a camp here you will attract local straggler goblins to join you!",
+				"animation": "wizard",
+				"button_text": "Next",
+				"next_action": "next",
+				"duration": "",
+				"text_speed": 0.03
+			},
+			{
+				"state": "read",
+				"text": "The more ATTRACTIVE your home the more wild goblins will be drawn to join you in your efforts to survive.",
+				"animation": "",
+				"button_text": "Next",
+				"next_action": "close",
+				"duration": "",
+				"text_speed": 0.03
+			}
+		]
+	}
+}

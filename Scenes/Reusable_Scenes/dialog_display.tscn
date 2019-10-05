@@ -1,0 +1,72 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scenes/Reusable_Scenes/dialog_display.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Theme/goblin_theme.tres" type="Theme" id=2]
+[ext_resource path="res://Assets/Images/ui_icons/population.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Images/ui_icons/food.png" type="Texture" id=4]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [  ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "wizard",
+"speed": 5.0
+} ]
+
+[node name="root" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="dialog_menu" type="VBoxContainer" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 50.0
+margin_top = 63.0
+margin_right = 974.0
+margin_bottom = 513.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 2 )
+
+[node name="dialog_image" type="Control" parent="dialog_menu"]
+margin_right = 924.0
+margin_bottom = 205.0
+size_flags_vertical = 3
+
+[node name="sprite_container" type="Control" parent="dialog_menu/dialog_image"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+
+[node name="animated_sprite" type="AnimatedSprite" parent="dialog_menu/dialog_image/sprite_container"]
+frames = SubResource( 1 )
+animation = "wizard"
+frame = 1
+
+[node name="dialog_container" type="RichTextLabel" parent="dialog_menu"]
+margin_top = 209.0
+margin_right = 924.0
+margin_bottom = 414.0
+size_flags_vertical = 3
+
+[node name="text_input" type="LineEdit" parent="dialog_menu"]
+margin_top = 418.0
+margin_right = 924.0
+margin_bottom = 449.0
+align = 1
+
+[node name="action_button" type="Button" parent="."]
+margin_left = 770.0
+margin_top = 520.0
+margin_right = 973.0
+margin_bottom = 561.0
+theme = ExtResource( 2 )
+text = "ACTION_BUTTON"
+
+[connection signal="pressed" from="action_button" to="." method="_on_action_button_pressed"]
