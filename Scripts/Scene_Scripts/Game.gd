@@ -14,7 +14,7 @@ func _ready():
 func select_character(character):
 	selectedCharacter = character
 
-func selected_entity(entity):
+func select_entity(entity):
 	selectedEntity = entity
 	
 	move_character(selectedEntity.get_position())
@@ -25,6 +25,7 @@ func _unhandled_input(event: InputEvent):
 			move_character(event.position)
 
 func move_character(target):
+	print(target)
 	if selectedCharacter != null:
 		var path = navigation.get_simple_path(selectedCharacter.position, target, false)
 		selectedCharacter.move(path)
