@@ -13,12 +13,6 @@ func _ready():
 	set_process(false)
 
 func mouse_over(m):
-	print(m)
-	var sprite: Sprite = $Character_Sprite
-	if m:
-		sprite.modulate = (Color(0,1,1))
-	else :
-		sprite.modulate = (Color(1,1,1))
 	mouseOver = m
 
 func move(newPath: PoolVector2Array):

@@ -21,6 +21,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
+ResourceManager="*res://Scripts/Global_Scripts/ResourceManager.gd"
 scene_transition="*res://Scripts/Global_Scripts/scene_transition.gd"
 ResourceManager="*res://Scripts/Global_Scripts/ResourceManager.gd"
 SystemManager="*res://Scripts/Global_Scripts/SystemManager.gd"

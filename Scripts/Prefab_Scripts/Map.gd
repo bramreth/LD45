@@ -12,10 +12,21 @@ enum WallType {
 	NORTH_WEST = 10
 }
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	for cell in get_used_cells_by_id(WallType.WALL):
-		set_wall_type(cell)
+var entitiesNode
+var charactersNode
+var gameRoot
 
-func set_wall_type(cell: Vector2):
-	pass
+# Called when the node enters the scene tree for the first time.
+func setup(entities, characters):
+	entitiesNode = entities
+	charactersNode = characters
+	for cell in get_used_cells_by_id(1):
+		add_hut(cell)
+
+var hut = preload("res://Assets/Prefabs/Building.tscn")
+
+func add_hut(cell: Vector2):
+	var newHut = hut.instance()
+	entitiesNode.add_child(newHut)
+	newHut.position = map_to_world(cell) + Vector2(0, cell_size.y/2+10)
+	newHut.connect("selected", gameRoot, "select_entity")
