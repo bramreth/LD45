@@ -34,6 +34,7 @@ func _process(delta):
 			position = position.linear_interpolate(path[0], (speed * delta)/d)
 		else:
 			path.remove(0)
+	$highlight.rotate(0.1)
 
 func _unhandled_input(event):
 	if mouseOver and event is InputEventMouseButton:
