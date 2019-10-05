@@ -3,6 +3,8 @@ extends Control
 signal build(val)
 
 var build = false
+var s1 = preload("res://Assets/Music/ambient.wav")
+var s2 = preload("res://Assets/Music/main_theme.wav")
 
 func _ready():
 	ResourceManager.connect("update_resource", self, "update_resource")
@@ -57,4 +59,8 @@ func _on_build_button_pressed():
 func _on_AudioStreamPlayer2D_finished():
 	randomize()
 	yield(get_tree().create_timer(randi()%20 + 4), "timeout")
+	if $AudioStreamPlayer2D.stream == s2:
+		 $AudioStreamPlayer2D.stream = s1
+	else:
+		$AudioStreamPlayer2D.stream = s2
 	$AudioStreamPlayer2D.play()
