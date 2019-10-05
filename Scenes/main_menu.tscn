@@ -46,7 +46,7 @@ margin_bottom = 45.0
 [node name="play_button" type="Button" parent="MarginContainer/VBoxContainer"]
 margin_top = 49.0
 margin_right = 624.0
-margin_bottom = 69.0
+margin_bottom = 90.0
 text = "play"
 
 [node name="options_button" type="Button" parent="MarginContainer/VBoxContainer"]
@@ -57,9 +57,9 @@ margin_bottom = 93.0
 text = "options"
 
 [node name="quit_button" type="Button" parent="MarginContainer/VBoxContainer"]
-margin_top = 73.0
+margin_top = 94.0
 margin_right = 624.0
-margin_bottom = 93.0
+margin_bottom = 135.0
 text = "quit"
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -71,6 +71,8 @@ color = Color( 0, 0, 0, 1 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ColorRect"]
 anims/close = ExtResource( 4 )
 anims/open = ExtResource( 5 )
+
+[node name="Node" type="Node" parent="."]
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/play_button" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/quit_button" to="." method="_on_quit_button_pressed"]

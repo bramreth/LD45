@@ -9,42 +9,28 @@ enum Resource {
 	EGG
 }
 
-var resourceJson
-var resourceJsonPath = "res://GameData/resources.json"
 func _ready():
-	load_resources()
+	pass
 	
-func load_resources():
-	var file = File.new()
-	file.open(resourceJsonPath, file.READ)
-	resourceJson.parse_json(file.get_as_text())
-	file.close()
-
-func save_resources():
-	var settingsFile = File.new()
-	settingsFile.open(resourceJsonPath, settingsFile.WRITE)
-	settingsFile.store_line(to_json(resourceJson))
-	settingsFile.close()
-
 func update_resource(resource, value):
 	if resource != null:
 		match resource:
 			ResourceManager.Resource.WOOD:
 				emit_signal("update_resource", Resource.WOOD, value)
-				resourceJson["wood"] += value
+				SystemManager.playerData["resource"]["wood"] += value
 			ResourceManager.Resource.STONE:
 				emit_signal("update_resource", Resource.STONE, value)
-				resourceJson["stone"] += value
+				SystemManager.playerData["resource"]["stone"] += value
 			ResourceManager.Resource.GOLD:
 				emit_signal("update_resource", Resource.GOLD, value)
-				resourceJson["gold"] += value
+				SystemManager.playerData["resource"]["gold"] += value
 			ResourceManager.Resource.FOOD:
 				emit_signal("update_resource", Resource.FOOD, value)
-				resourceJson["food"] += value
+				SystemManager.playerData["resource"]["food"] += value
 			ResourceManager.Resource.POPULATION:
 				emit_signal("update_resource", Resource.POPULATION, value)
-				resourceJson["population"] += value
+				SystemManager.playerData["resource"]["population"] += value
 			ResourceManager.Resource.EGG:
 				emit_signal("update_resource", Resource.EGG, value)
-				resourceJson["eggs"] += value
+				SystemManager.playerData["resource"]["eggs"] += value
 
