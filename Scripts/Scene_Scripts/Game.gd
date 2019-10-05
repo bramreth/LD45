@@ -8,6 +8,8 @@ var selectedCharacter = null
 var selectedEntity = null
 var selectedItem = null
 
+var mousePos = Vector2()
+
 func _ready():
 	for character in $Map/Navigation/YSort/Characters.get_children():
 		character.connect("selected", self, "select_character")
@@ -76,7 +78,12 @@ func _input(event):
 		print("scroll")
 		if $Camera2D.zoom.x > 0.3:
 			$Camera2D.zoom -=  Vector2(0.1, 0.1)
-			
+	
+	if Input.is_action_just_pressed("middle_mouse"):
+		mousePos = get_global_mouse_position()
+	if Input.is_action_just_released("middle_mouse"):
+		mousePos = null
+	
 func _process(delta):
 	if Input.is_action_pressed("ui_left") and $Camera2D.position.x > -500:
 		$Camera2D.position.x = lerp($Camera2D.position.x, $Camera2D.position.x - (20), 20*$Camera2D.zoom.x* delta)
@@ -89,7 +96,22 @@ func _process(delta):
 		
 	if Input.is_action_pressed("ui_down")and $Camera2D.position.y < 300:
 		$Camera2D.position.y = lerp($Camera2D.position.y, $Camera2D.position.y + (20), 20*$Camera2D.zoom.x* delta)			
+
 	
+	if mousePos:
+		# and $Camera2D.position.x > -500 and $Camera2D.position.x < 500 and $Camera2D.position.y > -300and $Camera2D.position.y < 300
+		var dif = mousePos - get_global_mouse_position()
+		if $Camera2D.position.x <= -500 and dif.x < 0:
+			return
+		if $Camera2D.position.x >= 500 and dif.x > 0:
+			return
+		if $Camera2D.position.y <= -300 and dif.y < 0:
+			return
+		if $Camera2D.position.y >= 300 and dif.y > 0:
+			return
+			
+		$Camera2D.position += (mousePos - get_global_mouse_position()) * delta * $Camera2D.zoom * 5.0
+		
 func _on_overlay_build(val):
 	building = val
 	$Map/Navigation/YSort/build_tool.visible = building
