@@ -101,23 +101,23 @@ func _input(event):
 	if Input.is_action_just_released("middle_mouse"):
 		mousePos = null
 
-const leftLimit: int = -3212
-const rightLimit: int = 3212
-const topLimit: int = -100
-const bottomLimit: int = 3308
+const leftLimit: int = -3300*4
+const rightLimit: int = 3100*4
+const topLimit: int = -80*4
+const bottomLimit: int = 3120*4
 
 func _process(delta):
 	if Input.is_action_pressed("ui_left") and $Camera2D.position.x > leftLimit:
-		$Camera2D.position.x = lerp($Camera2D.position.x, $Camera2D.position.x - (20), 20*$Camera2D.zoom.x* delta)
+		$Camera2D.position.x = lerp($Camera2D.position.x, $Camera2D.position.x - (50), 20*$Camera2D.zoom.x* delta)
 		
 	if Input.is_action_pressed("ui_right") and $Camera2D.position.x < rightLimit:
-		$Camera2D.position.x = lerp($Camera2D.position.x, $Camera2D.position.x + (20), 20*$Camera2D.zoom.x* delta)
+		$Camera2D.position.x = lerp($Camera2D.position.x, $Camera2D.position.x + (50), 20*$Camera2D.zoom.x* delta)
 
 	if Input.is_action_pressed("ui_up") and $Camera2D.position.y > topLimit:
-		$Camera2D.position.y = lerp($Camera2D.position.y, $Camera2D.position.y - (20), 20*$Camera2D.zoom.y* delta)	
+		$Camera2D.position.y = lerp($Camera2D.position.y, $Camera2D.position.y - (50), 20*$Camera2D.zoom.y* delta)
 		
 	if Input.is_action_pressed("ui_down") and $Camera2D.position.y < bottomLimit:
-		$Camera2D.position.y = lerp($Camera2D.position.y, $Camera2D.position.y + (20), 20*$Camera2D.zoom.x* delta)			
+		$Camera2D.position.y = lerp($Camera2D.position.y, $Camera2D.position.y + (50), 20*$Camera2D.zoom.x* delta)
 
 	
 	if mousePos:
