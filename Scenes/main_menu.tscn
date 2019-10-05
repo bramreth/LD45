@@ -50,20 +50,20 @@ margin_right = 624.0
 margin_bottom = 90.0
 text = "play"
 
-[node name="options_button" type="Button" parent="MarginContainer/VBoxContainer"]
-visible = false
-margin_top = 73.0
-margin_right = 624.0
-margin_bottom = 93.0
-text = "options"
-
-[node name="quit_button" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="test_button" type="Button" parent="MarginContainer/VBoxContainer"]
 margin_top = 94.0
 margin_right = 624.0
 margin_bottom = 135.0
+text = "jump_to_gameplay"
+
+[node name="quit_button" type="Button" parent="MarginContainer/VBoxContainer"]
+margin_top = 139.0
+margin_right = 624.0
+margin_bottom = 180.0
 text = "quit"
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -78,6 +78,7 @@ stream = ExtResource( 6 )
 volume_db = -1.0
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/play_button" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/test_button" to="." method="_on_test_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/quit_button" to="." method="_on_quit_button_pressed"]
 [connection signal="animation_finished" from="ColorRect/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_AudioStreamPlayer2D_finished"]
