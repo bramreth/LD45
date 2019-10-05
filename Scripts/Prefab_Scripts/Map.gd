@@ -15,6 +15,10 @@ var gameRoot
 
 func get_cell_size():
 	return cell_size
+	
+func get_cell_val(cell):
+	return get_cellv(cell)
+	
 
 # Called when the node enters the scene tree for the first time.
 func setup(entities, characters, root):
