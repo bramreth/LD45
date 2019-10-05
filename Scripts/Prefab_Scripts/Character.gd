@@ -34,10 +34,14 @@ func _process(delta):
 			position = position.linear_interpolate(path[0], (speed * delta)/d)
 		else:
 			path.remove(0)
-	$highlight.rotate(0.1)
+
 
 func _unhandled_input(event):
 	if mouseOver and event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and event.pressed:
 			get_tree().set_input_as_handled()
 			emit_signal("selected", self)
+			$highlight/AnimationPlayer.play("unhighlight")
+
+func remove_highlight():
+	$highlight/AnimationPlayer.play("highlight")

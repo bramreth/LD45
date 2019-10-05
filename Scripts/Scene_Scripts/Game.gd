@@ -36,6 +36,8 @@ func spawn_items(items):
 # ENTITY SELECTION
 ################################################################################################
 func select_character(character):
+	if selectedCharacter:
+		selectedCharacter.remove_highlight()
 	selectedCharacter = character
 
 func select_entity(entity):
