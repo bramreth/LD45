@@ -2,12 +2,6 @@ extends Node2D
 
 signal selected()
 
-enum ENTITY_TYPE {
-	CHARACTER,
-	BUILDING,
-	RESOURCE
-}
-
 var type
 
 var mouseOver = false
