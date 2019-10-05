@@ -1,0 +1,161 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Scenes/overlay.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Images/ui_icons/wood.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Images/ui_icons/rock.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Images/ui_icons/gold.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Images/ui_icons/food.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Images/ui_icons/settings_cog.png" type="Texture" id=6]
+
+[node name="overlay" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="bottom_menu" type="VBoxContainer" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -14.0
+
+[node name="resources" type="HBoxContainer" parent="bottom_menu"]
+margin_right = 1024.0
+margin_bottom = 14.0
+custom_constants/separation = 1
+
+[node name="wood" type="HBoxContainer" parent="bottom_menu/resources"]
+margin_right = 169.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+custom_constants/separation = 1
+alignment = 1
+
+[node name="icon" type="TextureRect" parent="bottom_menu/resources/wood"]
+margin_left = 73.0
+margin_right = 87.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 14, 0 )
+texture = ExtResource( 2 )
+expand = true
+
+[node name="value" type="Label" parent="bottom_menu/resources/wood"]
+margin_left = 88.0
+margin_right = 96.0
+margin_bottom = 14.0
+text = "0"
+
+[node name="stone" type="HBoxContainer" parent="bottom_menu/resources"]
+margin_left = 170.0
+margin_right = 339.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+custom_constants/separation = 1
+alignment = 1
+
+[node name="icon" type="TextureRect" parent="bottom_menu/resources/stone"]
+margin_left = 73.0
+margin_right = 87.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 14, 0 )
+texture = ExtResource( 3 )
+expand = true
+
+[node name="value" type="Label" parent="bottom_menu/resources/stone"]
+margin_left = 88.0
+margin_right = 96.0
+margin_bottom = 14.0
+text = "0"
+
+[node name="gold" type="HBoxContainer" parent="bottom_menu/resources"]
+margin_left = 340.0
+margin_right = 509.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+custom_constants/separation = 1
+alignment = 1
+
+[node name="icon" type="TextureRect" parent="bottom_menu/resources/gold"]
+margin_left = 73.0
+margin_right = 87.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 14, 0 )
+texture = ExtResource( 4 )
+expand = true
+
+[node name="value" type="Label" parent="bottom_menu/resources/gold"]
+margin_left = 88.0
+margin_right = 96.0
+margin_bottom = 14.0
+text = "0"
+
+[node name="food" type="HBoxContainer" parent="bottom_menu/resources"]
+margin_left = 510.0
+margin_right = 679.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+custom_constants/separation = 1
+alignment = 1
+
+[node name="icon" type="TextureRect" parent="bottom_menu/resources/food"]
+margin_left = 73.0
+margin_right = 87.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 14, 0 )
+texture = ExtResource( 5 )
+expand = true
+
+[node name="value" type="Label" parent="bottom_menu/resources/food"]
+margin_left = 88.0
+margin_right = 96.0
+margin_bottom = 14.0
+text = "0"
+
+[node name="population" type="HBoxContainer" parent="bottom_menu/resources"]
+margin_left = 680.0
+margin_right = 849.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+custom_constants/separation = 1
+alignment = 1
+
+[node name="icon" type="TextureRect" parent="bottom_menu/resources/population"]
+margin_left = 80.0
+margin_right = 80.0
+margin_bottom = 14.0
+expand = true
+
+[node name="value" type="Label" parent="bottom_menu/resources/population"]
+margin_left = 81.0
+margin_right = 89.0
+margin_bottom = 14.0
+text = "0"
+
+[node name="eggs" type="HBoxContainer" parent="bottom_menu/resources"]
+margin_left = 850.0
+margin_right = 1024.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+custom_constants/separation = 1
+
+[node name="icon" type="TextureRect" parent="bottom_menu/resources/eggs"]
+margin_bottom = 14.0
+expand = true
+
+[node name="value" type="Label" parent="bottom_menu/resources/eggs"]
+margin_left = 1.0
+margin_right = 9.0
+margin_bottom = 14.0
+text = "0"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+alignment = 2
+
+[node name="settings_button" type="TextureButton" parent="HBoxContainer"]
+margin_left = 992.0
+margin_right = 1024.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+texture_normal = ExtResource( 6 )
+expand = true
+
