@@ -21,12 +21,12 @@ config/icon="res://icon.png"
 
 [autoload]
 
-SystemManager="*res://Scripts/Global_Scripts/SystemManager.gd"
-ResourceManager="*res://Scripts/Global_Scripts/ResourceManager.gd"
-StringManager="*res://Scripts/Global_Scripts/StringManager.gd"
 scene_transition="*res://Scripts/Global_Scripts/scene_transition.gd"
+ResourceManager="*res://Scripts/Global_Scripts/ResourceManager.gd"
+SystemManager="*res://Scripts/Global_Scripts/SystemManager.gd"
 AssetLoader="*res://Scripts/Global_Scripts/AssetLoader.gd"
 GameManager="*res://Scripts/Global_Scripts/GameManager.gd"
+StringManager="*res://Scripts/Global_Scripts/StringManager.gd"
 
 [rendering]
 
