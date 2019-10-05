@@ -23,4 +23,4 @@ func _on_quit_button_pressed():
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "close":
-		get_tree().get_root().add_child(tutorial_scene.instance())
+		scene_transition.change_scene("tutorial")
