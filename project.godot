@@ -22,8 +22,8 @@ config/icon="res://icon.png"
 [autoload]
 
 scene_transition="*res://Scripts/Global_Scripts/scene_transition.gd"
-SystemManager="*res://Scripts/Global_Scripts/SystemManager.gd"
 ResourceManager="*res://Scripts/Global_Scripts/ResourceManager.gd"
+SystemManager="*res://Scripts/Global_Scripts/SystemManager.gd"
 
 [rendering]
 

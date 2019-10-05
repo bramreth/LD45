@@ -1,19 +1,12 @@
-extends Node2D
-
-signal selected()
+extends "res://Scripts/Prefab_Scripts/MapEntity.gd"
 
 var path: PoolVector2Array
 var isMoving: bool = false
-var mouseOver = false
 export var speed := 250
 
 func _ready():
-	$Click_Area.connect("mouse_entered",self,"mouse_over", [true])
-	$Click_Area.connect("mouse_exited",self,"mouse_over", [false])
+	._ready()
 	set_process(false)
-
-func mouse_over(m):
-	mouseOver = m
 
 func move(newPath: PoolVector2Array):
 	path = newPath

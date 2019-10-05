@@ -201,11 +201,11 @@ script = ExtResource( 4 )
 
 [node name="Characters" type="Node" parent="Map/Navigation/YSort"]
 
-[node name="Character" parent="Map/Navigation/YSort/Characters" instance=ExtResource( 5 )]
-position = Vector2( 440.997, 323.546 )
+[node name="MapEntity" parent="Map/Navigation/YSort/Characters" instance=ExtResource( 5 )]
+position = Vector2( 250.459, 163.29 )
 
-[node name="Character2" parent="Map/Navigation/YSort/Characters" instance=ExtResource( 5 )]
-position = Vector2( 235.998, 202.958 )
+[node name="MapEntity2" parent="Map/Navigation/YSort/Characters" instance=ExtResource( 5 )]
+position = Vector2( 381.827, 427.254 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 510, 300 )
