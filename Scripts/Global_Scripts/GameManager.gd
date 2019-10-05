@@ -1,0 +1,7 @@
+extends Node
+
+enum ENTITY_TYPE {
+	CHARACTER,
+	BUILDING,
+	ITEM
+}

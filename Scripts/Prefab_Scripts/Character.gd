@@ -6,6 +6,7 @@ export var speed := 125
 
 func _ready():
 	._ready()
+	type = GameManager.ENTITY_TYPE.CHARACTER
 	set_process(false)
 
 func move(newPath: PoolVector2Array):
