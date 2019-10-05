@@ -27,6 +27,7 @@ SystemManager="*res://Scripts/Global_Scripts/SystemManager.gd"
 AssetLoader="*res://Scripts/Global_Scripts/AssetLoader.gd"
 GameManager="*res://Scripts/Global_Scripts/GameManager.gd"
 StringManager="*res://Scripts/Global_Scripts/StringManager.gd"
+WorldGenerator="*res://Scripts/Global_Scripts/WorldGenerator.gd"
 
 [display]
 
