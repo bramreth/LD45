@@ -1,0 +1,74 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Assets/Tiles/default_tile.png" type="Texture" id=1]
+
+[sub_resource type="NavigationPolygon" id=1]
+vertices = PoolVector2Array( 0, -35, 64, -3, 0, 29, -64, -3 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+outlines = [ PoolVector2Array( 0, -35, 64, -3, 0, 29, -64, -3 ) ]
+
+[sub_resource type="NavigationPolygon" id=2]
+vertices = PoolVector2Array( 32, -19, 64, -3, 0, 29, 0, -3, -64, -3, -32, -19 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 2, 4, 5, 3 ), PoolIntArray( 5, 3, 5 ) ]
+outlines = [ PoolVector2Array( -32, -19, -32, -19, -64, -3, 0, 29, 64, -3, 32, -19, 0, -3 ) ]
+
+[sub_resource type="NavigationPolygon" id=3]
+vertices = PoolVector2Array( 0, -35, 64, -3, 0, 29, -64, -3 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+outlines = [ PoolVector2Array( -64, -3, 0, 29, 64, -3, 0, -35 ) ]
+
+[sub_resource type="NavigationPolygon" id=4]
+vertices = PoolVector2Array( 64, -3, 0, 29, -64, -3, 0, -35 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+outlines = [ PoolVector2Array( 0, -35, -64, -3, 0, 29, 64, -3 ) ]
+
+[sub_resource type="NavigationPolygon" id=5]
+vertices = PoolVector2Array( 0, -35, 64, -3, 0, 29, -64, -3 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+outlines = [ PoolVector2Array( -64, -3, 0, 29, 64, -3, 0, -35 ) ]
+
+[node name="MapTiles" type="Node2D"]
+
+[node name="Base" type="Sprite" parent="."]
+position = Vector2( 0, 3 )
+texture = ExtResource( 1 )
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Base"]
+navpoly = SubResource( 1 )
+
+[node name="Wall" type="Sprite" parent="."]
+modulate = Color( 0.305882, 0.305882, 0.305882, 1 )
+position = Vector2( 128, 3 )
+texture = ExtResource( 1 )
+
+[node name="Building" type="Sprite" parent="."]
+modulate = Color( 0.462745, 0.462745, 0.462745, 1 )
+position = Vector2( 256, 3 )
+texture = ExtResource( 1 )
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Building"]
+navpoly = SubResource( 2 )
+
+[node name="Grass" type="Sprite" parent="."]
+modulate = Color( 0.384314, 0.882353, 0.403922, 1 )
+position = Vector2( 384, 3 )
+texture = ExtResource( 1 )
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Grass"]
+navpoly = SubResource( 3 )
+
+[node name="Forest" type="Sprite" parent="."]
+modulate = Color( 0, 0.290196, 0.0941176, 1 )
+position = Vector2( 512, 3 )
+texture = ExtResource( 1 )
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Forest"]
+navpoly = SubResource( 4 )
+
+[node name="Cave" type="Sprite" parent="."]
+modulate = Color( 0.301961, 0.176471, 0, 1 )
+position = Vector2( 640, 3 )
+texture = ExtResource( 1 )
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Cave"]
+navpoly = SubResource( 5 )
