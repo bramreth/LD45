@@ -51,6 +51,8 @@ position = Vector2( 381.827, 427.254 )
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2( 512, 300 )
 current = true
+drag_margin_h_enabled = false
+drag_margin_v_enabled = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
 
