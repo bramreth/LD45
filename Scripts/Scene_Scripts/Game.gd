@@ -1,5 +1,8 @@
 extends Node2D
 
+
+signal start_dialog(scene)
+
 onready var navigation: Navigation2D = $Map/Navigation
 
 var building = false
@@ -16,7 +19,7 @@ func _ready():
 		character.connect("movement_done", self, "perform_contextual_action")
 	
 	$Map/Navigation/Map.setup($Map/Navigation/YSort/Entities, $Map/Navigation/YSort/Characters, self)
-
+	emit_signal("start_dialog", "tutorial")
 ################################################################################################
 # ENTITY SELECTION
 ################################################################################################

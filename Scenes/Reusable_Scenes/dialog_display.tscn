@@ -39,7 +39,7 @@ animations = [ {
 size = 32
 font_data = ExtResource( 16 )
 
-[node name="root" type="Node2D"]
+[node name="dialog_screen" type="Node2D"]
 script = ExtResource( 1 )
 
 [node name="dialog_menu" type="VBoxContainer" parent="."]
@@ -72,10 +72,11 @@ region_enabled = true
 region_rect = Rect2( 300, 200, 1000, 600 )
 
 [node name="animated_sprite" type="AnimatedSprite" parent="dialog_menu/dialog_image/sprite_container"]
+position = Vector2( 14.9999, 276 )
+scale = Vector2( 0.4, 0.4 )
 frames = SubResource( 1 )
 animation = "goblin"
-frame = 5
-playing = true
+frame = 7
 
 [node name="dialog_container" type="RichTextLabel" parent="dialog_menu"]
 margin_top = 209.0
