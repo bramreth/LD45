@@ -8,6 +8,8 @@ func _ready():
 	._ready()
 	type = GameManager.ENTITY_TYPE.CHARACTER
 	set_process(false)
+	randomize()
+	$MapEntity_Sprite/teeth.frame = randi() % 4
 
 func move(newPath: PoolVector2Array):
 	path = newPath

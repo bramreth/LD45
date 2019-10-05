@@ -63,7 +63,9 @@ func _physics_process(delta):
 		if $Map/Navigation/Map.get_cell_val(tile) == 0 or $Map/Navigation/Map.get_cell_val(tile) == 1:
 			$Map/Navigation/YSort/build_tool/Sprite.get_material().set_shader_param("color", Color("8c980101"))
 		else:
-			$Map/Navigation/YSort/build_tool/Sprite.get_material().set_shader_param("color", Color("8c299801"))			
+			$Map/Navigation/YSort/build_tool/Sprite.get_material().set_shader_param("color", Color("8c299801"))	
+			
+					
 func _on_overlay_build(val):
 	building = val
 	$Map/Navigation/YSort/build_tool.visible = building
