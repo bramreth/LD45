@@ -33,11 +33,23 @@ func setup(entities, characters, root):
 	entitiesNode = entities
 	charactersNode = characters
 	gameRoot = root
+	
+	WorldGenerator.generate_world(get_used_cells().max())
+	draw_world()
+	
 	for cell in get_used_cells_by_id(TILETYPE.BUILDING):
 		add_hut(cell)
 
 var hut = preload("res://Assets/Prefabs/BuildingMapEntity.tscn")
 var itemEntity = preload("res://Assets/Prefabs/ItemMapEntity.tscn")
+
+func draw_world():
+	for cell in get_used_cells_by_id(TILETYPE.BASE):
+		var noiseVal = WorldGenerator.get_noise_value(cell)
+		if noiseVal <= 0:
+			set_cellv(cell, TILETYPE.GRASS)
+		else:
+			set_cellv(cell, TILETYPE.FOREST)
 
 func spawn_items(item, amount):
 	var newItem = itemEntity.instance()
@@ -47,7 +59,7 @@ func spawn_items(item, amount):
 	
 	for i in range(amount):
 		var spawn = validSpawns[randi()%validSpawns.size()]
-		var spawnPosition = map_to_world(spawn) + Vector2(0, cell_size.y/2+10)
+		var spawnPosition = map_to_world(spawn) + Vector2(0, cell_size.y/2)
 		newItem.resourceType = item
 		entitiesNode.add_child(newItem)
 		newItem.position = spawnPosition

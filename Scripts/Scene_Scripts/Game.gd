@@ -102,31 +102,36 @@ func _input(event):
 		mousePos = get_global_mouse_position()
 	if Input.is_action_just_released("middle_mouse"):
 		mousePos = null
-	
-func _process(delta):
-	if Input.is_action_pressed("ui_left") and $Camera2D.position.x > -500:
-		$Camera2D.position.x = lerp($Camera2D.position.x, $Camera2D.position.x - (20), 20*$Camera2D.zoom.x* delta)
-		
-	if Input.is_action_pressed("ui_right")and $Camera2D.position.x < 500:
-		$Camera2D.position.x = lerp($Camera2D.position.x, $Camera2D.position.x + (20), 20*$Camera2D.zoom.x* delta)
 
-	if Input.is_action_pressed("ui_up")and $Camera2D.position.y > -300:
-		$Camera2D.position.y = lerp($Camera2D.position.y, $Camera2D.position.y - (20), 20*$Camera2D.zoom.y* delta)	
+const leftLimit: int = -3300*4
+const rightLimit: int = 3100*4
+const topLimit: int = -80*4
+const bottomLimit: int = 3120*4
+
+func _process(delta):
+	if Input.is_action_pressed("ui_left") and $Camera2D.position.x > leftLimit:
+		$Camera2D.position.x = lerp($Camera2D.position.x, $Camera2D.position.x - (50), 20*$Camera2D.zoom.x* delta)
 		
-	if Input.is_action_pressed("ui_down")and $Camera2D.position.y < 300:
-		$Camera2D.position.y = lerp($Camera2D.position.y, $Camera2D.position.y + (20), 20*$Camera2D.zoom.x* delta)			
+	if Input.is_action_pressed("ui_right") and $Camera2D.position.x < rightLimit:
+		$Camera2D.position.x = lerp($Camera2D.position.x, $Camera2D.position.x + (50), 20*$Camera2D.zoom.x* delta)
+
+	if Input.is_action_pressed("ui_up") and $Camera2D.position.y > topLimit:
+		$Camera2D.position.y = lerp($Camera2D.position.y, $Camera2D.position.y - (50), 20*$Camera2D.zoom.y* delta)
+		
+	if Input.is_action_pressed("ui_down") and $Camera2D.position.y < bottomLimit:
+		$Camera2D.position.y = lerp($Camera2D.position.y, $Camera2D.position.y + (50), 20*$Camera2D.zoom.x* delta)
 
 	
 	if mousePos:
 		# and $Camera2D.position.x > -500 and $Camera2D.position.x < 500 and $Camera2D.position.y > -300and $Camera2D.position.y < 300
 		var dif = mousePos - get_global_mouse_position()
-		if $Camera2D.position.x <= -500 and dif.x < 0:
+		if $Camera2D.position.x <= leftLimit and dif.x < 0:
 			return
-		if $Camera2D.position.x >= 500 and dif.x > 0:
+		if $Camera2D.position.x >= rightLimit and dif.x > 0:
 			return
-		if $Camera2D.position.y <= -300 and dif.y < 0:
+		if $Camera2D.position.y <= topLimit and dif.y < 0:
 			return
-		if $Camera2D.position.y >= 300 and dif.y > 0:
+		if $Camera2D.position.y >= bottomLimit and dif.y > 0:
 			return
 			
 		$Camera2D.position += (mousePos - get_global_mouse_position()) * delta * $Camera2D.zoom * 5.0
