@@ -64,8 +64,19 @@ func _physics_process(delta):
 			$Map/Navigation/YSort/build_tool/Sprite.get_material().set_shader_param("color", Color("8c980101"))
 		else:
 			$Map/Navigation/YSort/build_tool/Sprite.get_material().set_shader_param("color", Color("8c299801"))	
+		
+# handle basic inputs	
+func _input(event):
+	if Input.is_action_just_pressed("scroll_out"):
+		print("scroll")
+		if $Camera2D.zoom.x < 2.0:
+			$Camera2D.zoom +=  Vector2(0.1, 0.1)
+		
+	if Input.is_action_just_pressed("scroll_up"):
+		print("scroll")
+		if $Camera2D.zoom.x > 0.3:
+			$Camera2D.zoom -=  Vector2(0.1, 0.1)
 			
-					
 func _on_overlay_build(val):
 	building = val
 	$Map/Navigation/YSort/build_tool.visible = building
