@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Scenes/Reusable_Scenes/dialog_display.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Theme/goblin_theme.tres" type="Theme" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://Assets/Images/goblin/Untitled_Artwork-17.png" type="Texture" id=14]
 [ext_resource path="res://Assets/Images/goblin/Untitled_Artwork-18.png" type="Texture" id=15]
 [ext_resource path="res://Assets/Fonts/default.ttf" type="DynamicFontData" id=16]
+[ext_resource path="res://Assets/Images/dialog/background_panel.png" type="Texture" id=17]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -55,6 +56,7 @@ size_flags_vertical = 3
 theme = ExtResource( 2 )
 
 [node name="dialog_image" type="Control" parent="dialog_menu"]
+editor/display_folded = true
 margin_right = 924.0
 margin_bottom = 205.0
 size_flags_vertical = 3
@@ -64,6 +66,8 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+margin_top = -42.5
+margin_bottom = -42.5
 
 [node name="goblin_head_sprite" type="Sprite" parent="dialog_menu/dialog_image/sprite_container"]
 scale = Vector2( 0.4, 0.4 )
@@ -82,8 +86,17 @@ frame = 7
 margin_top = 209.0
 margin_right = 924.0
 margin_bottom = 414.0
+rect_clip_content = false
 size_flags_vertical = 3
 custom_fonts/normal_font = SubResource( 2 )
+
+[node name="TextureRect" type="TextureRect" parent="dialog_menu/dialog_container"]
+show_behind_parent = true
+margin_left = -50.0
+margin_top = -50.0
+margin_right = 974.0
+margin_bottom = 250.0
+texture = ExtResource( 17 )
 
 [node name="text_input" type="LineEdit" parent="dialog_menu"]
 margin_top = 418.0
@@ -98,5 +111,4 @@ margin_right = 973.0
 margin_bottom = 561.0
 theme = ExtResource( 2 )
 text = "ACTION_BUTTON"
-
 [connection signal="pressed" from="action_button" to="." method="_on_action_button_pressed"]
