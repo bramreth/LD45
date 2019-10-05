@@ -44,7 +44,7 @@ func perform_contextual_action():
 func _unhandled_input(event: InputEvent):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_RIGHT and event.pressed:
-			move_character(event.position)
+			move_character(get_global_mouse_position())
 
 func move_character(target):
 	print(target)
@@ -77,6 +77,19 @@ func _input(event):
 		if $Camera2D.zoom.x > 0.3:
 			$Camera2D.zoom -=  Vector2(0.1, 0.1)
 			
+func _process(delta):
+	if Input.is_action_pressed("ui_left") and $Camera2D.position.x > -500:
+		$Camera2D.position.x = lerp($Camera2D.position.x, $Camera2D.position.x - (20), 20*$Camera2D.zoom.x* delta)
+		
+	if Input.is_action_pressed("ui_right")and $Camera2D.position.x < 500:
+		$Camera2D.position.x = lerp($Camera2D.position.x, $Camera2D.position.x + (20), 20*$Camera2D.zoom.x* delta)
+
+	if Input.is_action_pressed("ui_up")and $Camera2D.position.y > -300:
+		$Camera2D.position.y = lerp($Camera2D.position.y, $Camera2D.position.y - (20), 20*$Camera2D.zoom.y* delta)	
+		
+	if Input.is_action_pressed("ui_down")and $Camera2D.position.y < 300:
+		$Camera2D.position.y = lerp($Camera2D.position.y, $Camera2D.position.y + (20), 20*$Camera2D.zoom.x* delta)			
+	
 func _on_overlay_build(val):
 	building = val
 	$Map/Navigation/YSort/build_tool.visible = building
