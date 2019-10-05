@@ -24,3 +24,9 @@ func _on_quit_button_pressed():
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "close":
 		scene_transition.change_scene("tutorial")
+	if anim_name == "open":
+		$AudioStreamPlayer2D.play()
+
+
+func _on_AudioStreamPlayer2D_finished():
+	$AudioStreamPlayer2D.play()
