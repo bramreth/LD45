@@ -38,4 +38,4 @@ func _on_resume_button_pressed():
 
 
 func _on_quit_button_pressed():
-	SystemManager.go_to_scene("main_menu.tscn")
+	scene_transition.change_scene("menu")

@@ -79,7 +79,7 @@ func handle_scene():
 			text_queue = text_queue_2
 			next_scene()
 		"end":
-			queue_free()
+			scene_transition.change_scene("game")
 	
 	
 	

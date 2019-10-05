@@ -21,11 +21,7 @@ func save_data():
 	settingsFile.open(playerDataPath, settingsFile.WRITE)
 	settingsFile.store_line(to_json(playerData))
 	settingsFile.close()
-	
-func go_to_scene(scene):
-	get_tree().change_scene("res://Scenes/"+ scene)
-	
-	
+		
 func changeBackgroundMusic(track):	
 	musicPlayer.stream = load(bgm_dir + track)
 	musicPlayer.play()
