@@ -19,6 +19,10 @@ config/name="LD45"
 run/main_scene="res://Scenes/main_menu.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+ResourceManager="*res://Scripts/Global_Scripts/ResourceManager.gd"
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"
