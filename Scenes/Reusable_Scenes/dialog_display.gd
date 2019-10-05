@@ -14,10 +14,10 @@ onready var lock_thread = false
 onready var next_action = ""
 
 func _ready():
-	print("dialog ready")
+	GameManager.connect("start_dialog", self, "start_dialog")
 	
-func start_dialog(scene, _scene_to_open):
-	scene_to_open = _scene_to_open
+	
+func start_dialog(scene):
 	dialog = StringManager.strings["dialog"][scene]
 	if dialog != null:
 		dialog_index = 0
@@ -28,8 +28,6 @@ func start_dialog(scene, _scene_to_open):
 
 func kill_dialog():
 	self.visible = false
-	if scene_to_open != null:
-		scene_transition.change_scene(scene_to_open)
 
 func handle_dialog():
 	var current_dialog_item = dialog[dialog_index]
@@ -41,7 +39,7 @@ func handle_dialog():
 	var duration = current_dialog_item["duration"]
 	var text_speed = current_dialog_item["text_speed"] if TYPE_REAL == typeof(current_dialog_item["text_speed"]) else 0.03
 	
-	print("handle dialog--------------------")
+	print("handling dialog------------------")
 	print("current_dialog_item: " + String(dialog_index))
 	print("state: " + String(state))
 	print("text: " + String(text))
@@ -51,7 +49,6 @@ func handle_dialog():
 	print("duration: " + String(duration))
 	print("text_speed: " + String(text_speed))
 	print("---------------------------------")
-	print("")
 	
 	match state:
 		"read":	

@@ -28,19 +28,6 @@ scene_transition="*res://Scripts/Global_Scripts/scene_transition.gd"
 AssetLoader="*res://Scripts/Global_Scripts/AssetLoader.gd"
 GameManager="*res://Scripts/Global_Scripts/GameManager.gd"
 
-[input]
-
-scroll_up={
-"deadzone": 0.5,
-"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":4,"pressed":false,"doubleclick":false,"script":null)
- ]
-}
-scroll_out={
-"deadzone": 0.5,
-"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":5,"pressed":false,"doubleclick":false,"script":null)
- ]
-}
-
 [rendering]
 
 environment/default_environment="res://default_env.tres"
