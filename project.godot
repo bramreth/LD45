@@ -28,6 +28,11 @@ AssetLoader="*res://Scripts/Global_Scripts/AssetLoader.gd"
 GameManager="*res://Scripts/Global_Scripts/GameManager.gd"
 StringManager="*res://Scripts/Global_Scripts/StringManager.gd"
 
+[display]
+
+window/size/resizable=false
+window/vsync/use_vsync=false
+
 [input]
 
 scroll_up={

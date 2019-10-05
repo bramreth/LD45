@@ -20,8 +20,9 @@ func _ready():
 	for entity in $Map/Navigation/YSort/Entities.get_children():
 		entity.connect("selected", self, "select_entity")
 	
-	GameManager.start_dialog("tutorial")
+	#GameManager.start_dialog("tutorial")
 	map.setup($Map/Navigation/YSort/Entities, $Map/Navigation/YSort/Characters, self)
+	GameManager.start_game()
 
 ################################################################################################
 # ITEM SPAWNING
