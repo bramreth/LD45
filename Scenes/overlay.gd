@@ -1,5 +1,9 @@
 extends Control
 
+signal build(val)
+
+var build = false
+
 func _ready():
 	ResourceManager.connect("update_resource", self, "update_resource")
 	$options_menu.hide()
@@ -40,3 +44,11 @@ func _on_resume_button_pressed():
 
 func _on_quit_button_pressed():
 	scene_transition.change_scene("menu")
+
+func _on_build_button_pressed():
+	build = not build
+	if build:
+		$VBoxContainer/build_button.modulate = Color(0.4,0.4,0.4,1.0)
+	else:
+		$VBoxContainer/build_button.modulate = Color(1.0,1.0,1.0,1.0)
+	emit_signal("build", build)

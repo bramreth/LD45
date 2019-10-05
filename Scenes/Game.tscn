@@ -199,6 +199,7 @@ script = ExtResource( 4 )
 [node name="YSort" type="YSort" parent="Map/Navigation"]
 
 [node name="build_tool" type="Node2D" parent="Map/Navigation/YSort"]
+visible = false
 
 [node name="Sprite" type="Sprite" parent="Map/Navigation/YSort/build_tool"]
 material = ExtResource( 5 )
@@ -221,3 +222,4 @@ position = Vector2( 381.827, 427.254 )
 [node name="overlay" parent="Camera2D/CanvasLayer" instance=ExtResource( 7 )]
 mouse_filter = 2
 
+[connection signal="build" from="Camera2D/CanvasLayer/overlay" to="." method="_on_overlay_build"]
