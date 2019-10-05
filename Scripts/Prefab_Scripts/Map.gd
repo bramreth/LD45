@@ -33,11 +33,18 @@ func setup(entities, characters, root):
 	entitiesNode = entities
 	charactersNode = characters
 	gameRoot = root
+	
+	WorldGenerator.generate_world(get_used_cells().max())
+	draw_world()
+	
 	for cell in get_used_cells_by_id(TILETYPE.BUILDING):
 		add_hut(cell)
 
 var hut = preload("res://Assets/Prefabs/BuildingMapEntity.tscn")
 var itemEntity = preload("res://Assets/Prefabs/ItemMapEntity.tscn")
+
+func draw_world():
+	pass
 
 func spawn_items(item, amount):
 	var newItem = itemEntity.instance()
