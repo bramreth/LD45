@@ -31,6 +31,14 @@ enum ENTITY_TYPE {
 	PLAYER,
 }
 
+enum Building {
+	CAMP,
+	HUT,
+	SENTRY,
+	HATCHERY,
+	MESS
+}
+
 func start_dialog(scene):
 	if scene != null && !scene.empty():
 		emit_signal("start_dialog", scene)

@@ -29,6 +29,7 @@ angle_random = 1.0
 scale = 0.4
 
 [node name="MapEntity" instance=ExtResource( 1 )]
+scale = Vector2( 2, 2 )
 script = ExtResource( 2 )
 
 [node name="MapEntity_Sprite" parent="." index="0"]
