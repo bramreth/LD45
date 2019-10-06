@@ -1,0 +1,196 @@
+[gd_scene load_steps=31 format=2]
+
+[ext_resource path="res://Assets/Images/goblin/Untitled_Artwork-2.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Images/goblin/Untitled_Artwork-1.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Images/goblin/Untitled_Artwork-4.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Images/goblin/Untitled_Artwork-3.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Prefabs/sway.shader" type="Shader" id=5]
+[ext_resource path="res://Assets/Images/goblin/Untitled_Artwork-5.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Images/goblin/Untitled_Artwork-6.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Images/goblin/Untitled_Artwork-7.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Images/goblin/Untitled_Artwork-8.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Images/goblin/Untitled_Artwork-10.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Images/goblin/Untitled_Artwork-13.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Images/goblin/Untitled_Artwork-14.png" type="Texture" id=12]
+[ext_resource path="res://Assets/anim/goblin_mouth.tres" type="SpriteFrames" id=13]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform float seed = 1.1;
+
+void vertex(){
+	VERTEX.x += (sin(TIME * 1.5 * seed + (100.0 * seed * seed)) -0.5)	* 12.0;
+	VERTEX.y += (sin(TIME * 0.5 * seed + (100.0 * seed * seed)))	* 6.0;
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/seed = 1.0
+
+[sub_resource type="Shader" id=3]
+code = "shader_type canvas_item;
+
+uniform float seed = 1.1;
+
+void vertex(){
+	VERTEX.x += (sin(TIME * 1.5 * seed + (100.0 * seed * seed)) -0.5)	* 12.0;
+	VERTEX.y += (sin(TIME * 0.5 * seed + (100.0 * seed * seed)))	* 6.0;
+}"
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 3 )
+shader_param/seed = 1.0
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = ExtResource( 5 )
+shader_param/seed = 1.0
+
+[sub_resource type="Shader" id=6]
+code = "shader_type canvas_item;
+
+uniform float seed = 1.1;
+
+void vertex(){
+	VERTEX.x += (sin(TIME * 1.5 * seed + (100.0 * seed * seed)) -0.5)	* 12.0;
+	VERTEX.y += (sin(TIME * 0.5 * seed + (100.0 * seed * seed)))	* 6.0;
+}"
+
+[sub_resource type="ShaderMaterial" id=7]
+shader = SubResource( 6 )
+shader_param/seed = 1.0
+
+[sub_resource type="Shader" id=8]
+code = "shader_type canvas_item;
+
+uniform float seed = 1.1;
+
+void vertex(){
+	VERTEX.x += (sin(TIME * 1.5 * seed + (100.0 * seed * seed)) -0.5)	* 12.0;
+	VERTEX.y += (sin(TIME * 0.5 * seed + (100.0 * seed * seed)))	* 6.0;
+}"
+
+[sub_resource type="ShaderMaterial" id=9]
+shader = SubResource( 8 )
+shader_param/seed = 1.0
+
+[sub_resource type="Shader" id=10]
+code = "shader_type canvas_item;
+
+uniform float seed = 1.1;
+
+void vertex(){
+	VERTEX.x += (sin(TIME * 1.5 * seed + (100.0 * seed * seed)) -0.5)	* 12.0;
+	VERTEX.y += (sin(TIME * 0.5 * seed + (100.0 * seed * seed)))	* 6.0;
+}"
+
+[sub_resource type="ShaderMaterial" id=11]
+shader = SubResource( 10 )
+shader_param/seed = 1.0
+
+[sub_resource type="Shader" id=12]
+code = "shader_type canvas_item;
+
+uniform float seed = 1.1;
+
+void vertex(){
+	VERTEX.x += (sin(TIME * 1.5 * seed + (100.0 * seed * seed)) -0.5)	* 12.0;
+	VERTEX.y += (sin(TIME * 0.5 * seed + (100.0 * seed * seed)))	* 6.0;
+}"
+
+[sub_resource type="ShaderMaterial" id=13]
+shader = SubResource( 12 )
+shader_param/seed = 1.0
+
+[sub_resource type="Shader" id=14]
+code = "shader_type canvas_item;
+
+uniform float seed = 1.1;
+
+void vertex(){
+	VERTEX.x += (sin(TIME * 1.5 * seed + (100.0 * seed * seed)) -0.5)	* 12.0;
+	VERTEX.y += (sin(TIME * 0.5 * seed + (100.0 * seed * seed)))	* 6.0;
+}"
+
+[sub_resource type="ShaderMaterial" id=15]
+shader = SubResource( 14 )
+shader_param/seed = 1.0
+
+[sub_resource type="Shader" id=16]
+code = "shader_type canvas_item;
+
+uniform float seed;
+
+void vertex(){
+	VERTEX.x += (sin(TIME * 1.5 * seed + (100.0 * seed * seed)) -0.5)	* 12.0;
+	VERTEX.y += (sin(TIME * 0.5 * seed + (100.0 * seed * seed)))	* 6.0;
+}"
+
+[sub_resource type="ShaderMaterial" id=17]
+shader = SubResource( 16 )
+shader_param/seed = 1.0
+
+[node name="MapEntity_Sprite" type="Sprite"]
+position = Vector2( 0, -64 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="leg1" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+region_rect = Rect2( 400, 0, 1000, 1000 )
+
+[node name="leg2" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="arm1" type="Sprite" parent="."]
+material = SubResource( 2 )
+position = Vector2( -230.681, -296.183 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 400, 700, 400, 400 )
+
+[node name="hand_l" type="Sprite" parent="arm1"]
+material = SubResource( 4 )
+position = Vector2( -173.723, 242.073 )
+texture = ExtResource( 4 )
+region_enabled = true
+region_rect = Rect2( 250, 1000, 350, 300 )
+
+[node name="arm2" type="Sprite" parent="."]
+material = SubResource( 5 )
+position = Vector2( 262.12, -245.882 )
+texture = ExtResource( 6 )
+region_enabled = true
+region_rect = Rect2( 900, 700, 400, 500 )
+
+[node name="hand_r" type="Sprite" parent="arm2"]
+material = SubResource( 7 )
+position = Vector2( 145.252, 120.775 )
+texture = ExtResource( 7 )
+region_enabled = true
+region_rect = Rect2( 1100, 950, 300, 250 )
+
+[node name="body" type="Sprite" parent="."]
+material = SubResource( 9 )
+texture = ExtResource( 8 )
+
+[node name="head" type="Sprite" parent="."]
+material = SubResource( 11 )
+texture = ExtResource( 9 )
+
+[node name="blush" type="Sprite" parent="head"]
+material = SubResource( 13 )
+texture = ExtResource( 10 )
+
+[node name="eyes" type="Sprite" parent="head"]
+material = SubResource( 15 )
+texture = ExtResource( 11 )
+
+[node name="eyes2" type="Sprite" parent="head"]
+texture = ExtResource( 12 )
+
+[node name="teeth" type="AnimatedSprite" parent="head"]
+material = SubResource( 17 )
+frames = ExtResource( 13 )
+animation = "teeth"
+frame = 1
+

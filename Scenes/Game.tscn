@@ -4,7 +4,7 @@
 [ext_resource path="res://Assets/Tiles/MapTilesLarge.tres" type="TileSet" id=2]
 [ext_resource path="res://Scripts/Prefab_Scripts/Map.gd" type="Script" id=3]
 [ext_resource path="res://Assets/shader/new_shadermaterial.tres" type="Material" id=4]
-[ext_resource path="res://Assets/Tiles/default_tile.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Images/buildings/building_default.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Prefabs/ItemMapEntity.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Prefabs/CharacterMapEntity.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/overlay.tscn" type="PackedScene" id=8]
@@ -62,4 +62,5 @@ editor_draw_limits = true
 
 [node name="overlay" parent="Camera2D/CanvasLayer" instance=ExtResource( 8 )]
 mouse_filter = 2
+
 [connection signal="build" from="Camera2D/CanvasLayer/overlay" to="." method="_on_overlay_build"]
