@@ -116,7 +116,7 @@
 		"battle-1": [
 			{
 				"state": "read",
-				"text": "hello",
+				"text": "Adventurers - Goblins have been spotted!",
 				"animation": "wizard",
 				"button_text": "Next",
 				"next_action": "next",
@@ -126,7 +126,7 @@
 			},
 			{
 				"state": "read",
-				"text": "u cunt",
+				"text": "Slaughter them all with the upmost haste!",
 				"animation": "wizard",
 				"button_text": "Start Battle!",
 				"next_action": "close",
@@ -138,7 +138,7 @@
 		"battle-2": [
 			{
 				"state": "read",
-				"text": "Battle 2",
+				"text": "Knights, to arms!",
 				"animation": "wizard",
 				"button_text": "Start Battle!",
 				"next_action": "close",
@@ -152,7 +152,7 @@
 				"state": "read",
 				"text": "Battle 3",
 				"animation": "wizard",
-				"button_text": "Start Battle!",
+				"button_text": "Will no one rid me of these turbulent goblins?!",
 				"next_action": "close",
 				"duration": "",
 				"text_speed": 0.03,
