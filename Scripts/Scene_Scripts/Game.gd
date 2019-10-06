@@ -135,8 +135,13 @@ func perform_contextual_action(character):
 func _unhandled_input(event: InputEvent):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_RIGHT and event.pressed:
+			stop_building()
 			get_tree().set_input_as_handled()
 			move_character(get_global_mouse_position())
+		if event.button_index == BUTTON_LEFT and event.pressed && building:
+			var cell = $Map/Navigation/Map.world_to_map(get_global_mouse_position())
+			$Map/Navigation/Map.build_building(cell, current_building)
+			build_can_color()
 
 func get_path_between_points(start, end):
 		return navigation.get_simple_path(start, end, false)
@@ -196,11 +201,7 @@ func _input(event):
 	if Input.is_action_just_released("middle_mouse"):
 		mousePos = null
 		
-	if Input.is_action_just_pressed("click") && building:
-		if current_building:
-			var cell = $Map/Navigation/Map.world_to_map(get_global_mouse_position())
-			$Map/Navigation/Map.build_building(cell, current_building)
-			print(current_building)
+	
 			
 	
 
@@ -237,6 +238,11 @@ func _process(delta):
 			
 		$Camera2D.position += (mousePos - get_global_mouse_position()) * delta * $Camera2D.zoom * 5.0
 		
+func stop_building():
+	building = false
+	$Map/Navigation/YSort/build_tool.visible = building
+	$Camera2D/CanvasLayer/overlay.no_build()
+	
 func _on_overlay_build(type, val):
 	building = val
 	current_building = type
@@ -250,7 +256,24 @@ func _on_overlay_build(type, val):
 			
 	
 	$Map/Navigation/YSort/build_tool.visible = building
-
+	$Map/Navigation/YSort/build_tool/Sprite/ColorRect/wood.text = str($Map/Navigation/Map.prices[current_building][ResourceManager.Resource.WOOD])
+	$Map/Navigation/YSort/build_tool/Sprite/ColorRect/stone.text = str($Map/Navigation/Map.prices[current_building][ResourceManager.Resource.STONE])
+	$Map/Navigation/YSort/build_tool/Sprite/ColorRect/gold.text = str($Map/Navigation/Map.prices[current_building][ResourceManager.Resource.GOLD])
+	build_can_color()
+	
+func build_can_color():
+	if ResourceManager.get_value(ResourceManager.Resource.WOOD) < $Map/Navigation/Map.prices[current_building][ResourceManager.Resource.WOOD]:
+			$Map/Navigation/YSort/build_tool/Sprite/ColorRect/wood.modulate = Color("ff0000")
+	else:
+		$Map/Navigation/YSort/build_tool/Sprite/ColorRect/wood.modulate = Color("ffffff")
+	if ResourceManager.get_value(ResourceManager.Resource.STONE) < $Map/Navigation/Map.prices[current_building][ResourceManager.Resource.STONE]:
+			$Map/Navigation/YSort/build_tool/Sprite/ColorRect/stone.modulate = Color("ff0000")
+	else:
+		$Map/Navigation/YSort/build_tool/Sprite/ColorRect/stone.modulate = Color("ffffff")
+	if ResourceManager.get_value(ResourceManager.Resource.GOLD) < $Map/Navigation/Map.prices[current_building][ResourceManager.Resource.GOLD]:
+			$Map/Navigation/YSort/build_tool/Sprite/ColorRect/gold.modulate = Color("ff0000")
+	else:
+		$Map/Navigation/YSort/build_tool/Sprite/ColorRect/gold.modulate = Color("ffffff")
 ################################################################################################
 # EVENT HANDLING
 ################################################################################################
