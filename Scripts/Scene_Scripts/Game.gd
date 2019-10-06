@@ -20,6 +20,7 @@ var mousePos = Vector2()
 
 func _ready():
 	GameManager.connect("spawn_items", self, "spawn_items")
+	GameManager.connect("night_started", self, "start_night")
 	#GameManager.connect("night_started", self, "remove_items_from_map")
 	
 	for character in $Map/Navigation/YSort/Characters.get_children():
@@ -31,9 +32,9 @@ func _ready():
 	#GameManager.start_dialog("tutorial")
 	map.setup($Map/Navigation/YSort/Items, $Map/Navigation/YSort/Characters, self)
 	GameManager.start_game()
-
+	
 ################################################################################################
-# ITEM SPAWNING
+# SPAWNING
 ################################################################################################
 var itemSpawningThread: Thread
 func spawn_items(items):
@@ -55,6 +56,9 @@ func remove_items_from_map():
 
 func _exit_tree():
 	itemSpawningThread.wait_to_finish()
+		
+func spawn_enemies(amount):
+	pass
 ################################################################################################
 # ENTITY SELECTION
 ################################################################################################
@@ -168,3 +172,14 @@ func _on_overlay_build(type, val):
 			
 	
 	$Map/Navigation/YSort/build_tool.visible = building
+
+################################################################################################
+# EVENT HANDLING
+################################################################################################
+func start_night(event):
+	remove_items_from_map()
+	if event != null:
+		GameManager.start_dialog(event["dialog"])
+		spawn_enemies(event["num_of_enemies"])
+	
+	
