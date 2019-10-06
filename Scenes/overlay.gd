@@ -58,6 +58,10 @@ func _on_quit_button_pressed():
 	SystemManager.save_player_data()
 	scene_transition.change_scene("menu")
 
+func no_build():
+	build = false
+	reset_build_buttons()
+
 func _on_build_button_pressed():
 	build = not build
 	reset_build_buttons()

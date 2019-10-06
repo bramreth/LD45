@@ -36,9 +36,11 @@ func _ready():
 	randomize()
 	p1[ResourceManager.Resource.WOOD] = 1
 	p1[ResourceManager.Resource.STONE] = 1
+	p1[ResourceManager.Resource.GOLD] = 0
 	
 	p2[ResourceManager.Resource.WOOD] = 2
 	p2[ResourceManager.Resource.STONE] = 4
+	p2[ResourceManager.Resource.GOLD] = 0
 	
 	prices["hut"] = p2
 	prices["blank"] = p1

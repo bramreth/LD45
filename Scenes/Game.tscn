@@ -1,14 +1,18 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scripts/Scene_Scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Tiles/MapTilesLarge.tres" type="TileSet" id=2]
 [ext_resource path="res://Scripts/Prefab_Scripts/Map.gd" type="Script" id=3]
 [ext_resource path="res://Assets/shader/new_shadermaterial.tres" type="Material" id=4]
 [ext_resource path="res://Assets/Images/buildings/building_default.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Prefabs/ItemMapEntity.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Assets/Prefabs/PlayerCharacterMapEntity.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Assets/Prefabs/GoblinCharacterMapEntity.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scenes/overlay.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Assets/Theme/goblin_theme.tres" type="Theme" id=6]
+[ext_resource path="res://Assets/Images/ui_icons/rock.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Images/ui_icons/wood.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Images/ui_icons/gold.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Prefabs/ItemMapEntity.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Assets/Prefabs/PlayerCharacterMapEntity.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Assets/Prefabs/GoblinCharacterMapEntity.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/overlay.tscn" type="PackedScene" id=13]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
@@ -35,17 +39,70 @@ visible = false
 material = ExtResource( 4 )
 texture = ExtResource( 5 )
 
+[node name="ColorRect" type="ColorRect" parent="Map/Navigation/YSort/build_tool/Sprite"]
+margin_left = 80.0
+margin_top = 20.0
+margin_right = 160.0
+margin_bottom = 140.0
+theme = ExtResource( 6 )
+color = Color( 0.117647, 0.117647, 0.117647, 0.588235 )
+
+[node name="Sprite3" type="TextureRect" parent="Map/Navigation/YSort/build_tool/Sprite/ColorRect"]
+margin_top = 40.0
+margin_right = 40.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 40, 40 )
+texture = ExtResource( 7 )
+expand = true
+
+[node name="wood" type="Label" parent="Map/Navigation/YSort/build_tool/Sprite/ColorRect"]
+margin_left = 50.0
+margin_top = 10.0
+margin_right = 90.0
+margin_bottom = 24.0
+text = "wood"
+
+[node name="stone" type="Label" parent="Map/Navigation/YSort/build_tool/Sprite/ColorRect"]
+margin_left = 50.0
+margin_top = 55.0
+margin_right = 90.0
+margin_bottom = 86.0
+text = "stone
+"
+
+[node name="gold" type="Label" parent="Map/Navigation/YSort/build_tool/Sprite/ColorRect"]
+margin_left = 50.0
+margin_top = 100.0
+margin_right = 90.0
+margin_bottom = 114.0
+text = "gold"
+
+[node name="Sprite2" type="TextureRect" parent="Map/Navigation/YSort/build_tool/Sprite/ColorRect"]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+texture = ExtResource( 8 )
+expand = true
+
+[node name="Sprite4" type="TextureRect" parent="Map/Navigation/YSort/build_tool/Sprite/ColorRect"]
+margin_top = 80.0
+margin_right = 40.0
+margin_bottom = 120.0
+rect_min_size = Vector2( 40, 40 )
+texture = ExtResource( 9 )
+expand = true
+
 [node name="Items" type="Node" parent="Map/Navigation/YSort"]
 
-[node name="MapEntity" parent="Map/Navigation/YSort/Items" instance=ExtResource( 6 )]
+[node name="MapEntity" parent="Map/Navigation/YSort/Items" instance=ExtResource( 10 )]
 position = Vector2( -132.85, 331.894 )
 
 [node name="Characters" type="Node" parent="Map/Navigation/YSort"]
 
-[node name="Player" parent="Map/Navigation/YSort/Characters" instance=ExtResource( 7 )]
+[node name="Player" parent="Map/Navigation/YSort/Characters" instance=ExtResource( 11 )]
 position = Vector2( 584.407, 475.318 )
 
-[node name="MapEntity" parent="Map/Navigation/YSort/Characters" instance=ExtResource( 8 )]
+[node name="MapEntity" parent="Map/Navigation/YSort/Characters" instance=ExtResource( 12 )]
 position = Vector2( 138.31, 346.748 )
 
 [node name="Building" type="Node" parent="Map/Navigation/YSort"]
@@ -63,7 +120,7 @@ editor_draw_limits = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
 
-[node name="overlay" parent="Camera2D/CanvasLayer" instance=ExtResource( 9 )]
+[node name="overlay" parent="Camera2D/CanvasLayer" instance=ExtResource( 13 )]
 mouse_filter = 2
 
 [connection signal="build" from="Camera2D/CanvasLayer/overlay" to="." method="_on_overlay_build"]
