@@ -60,7 +60,9 @@ func _unhandled_input(event):
 		if event.button_index == BUTTON_LEFT and event.pressed:
 			get_tree().set_input_as_handled()
 			emit_signal("selected", self)
-			$highlight/AnimationPlayer.play("unhighlight")
+
+func highlight():
+	$highlight/AnimationPlayer.play("unhighlight")
 
 func remove_highlight():
 	$highlight/AnimationPlayer.play("highlight")
