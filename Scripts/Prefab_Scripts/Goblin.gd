@@ -10,11 +10,14 @@ export var strength = 5
 
 # possible jobs
 var jobs = ["gather", "rest", "relax", "eat", "build", "fight", "wander"]
+var currentJob = "idle"
+var currentTarget = null
 
 func _ready():
 	._ready()
 	randomize()
 	type = GameManager.ENTITY_TYPE.CHARACTER
+	yield(get_tree().create_timer(randi()%3+1), "timeout")
 	start_job()
 
 func determine_jobs():
@@ -41,8 +44,7 @@ func determine_jobs():
 		return "eat"
 	else:
 		return "rest"
-	
-	
+
 func combat_in_proximity():
 	return false
 	
@@ -51,16 +53,23 @@ func build_in_proximity():
 	
 func start_job():
 	var job = determine_jobs()
-	print(job + " IS MY NEW JOB")
-	emit_signal("request_job_target", job)
+	currentJob = determine_jobs()
+	emit_signal("request_job_target", self, currentJob)
 
-func handle_job(job, path, target):
-	call(job, path, target)
+func handle_job(path, target):
+	currentTarget = target
+	call(currentJob, path, target)
 	drain_energy_and_food()
-	log_stats()
+	#log_stats()
+
+func job_movement_done():
+	if currentTarget == null:
+		finish_job()
 
 func finish_job():
-	yield(get_tree().create_timer(randi()%20 + 4), "timeout")
+	currentJob = "idle"
+	currentTarget = null
+	yield(get_tree().create_timer(randi()%5+1), "timeout")
 	start_job()
 
 func log_stats():
@@ -113,3 +122,19 @@ func wander(path, target):
 	
 func drain_energy_and_food():
 	adjust_stats(-2,-3,0)
+
+func _process(delta):
+	if !path:
+		isMoving = false
+		$AnimationPlayer.stop()
+		$Tween.interpolate_property($MapEntity_Sprite, "offset", $MapEntity_Sprite.offset, 0, 0.1, Tween.TRANS_CUBIC, Tween.EASE_IN)
+		$Tween.interpolate_property($MapEntity_Sprite, "rotation_degrees", $MapEntity_Sprite.rotation_degrees, 0, 0.1, Tween.TRANS_CUBIC, Tween.EASE_IN)
+		$Tween.start()
+		job_movement_done()
+		set_process(false)
+	if path.size() > 0:
+		var d: float = position.distance_to(path[0])
+		if d > 10:
+			position = position.linear_interpolate(path[0], (speed * delta)/d)
+		else:
+			path.remove(0)
