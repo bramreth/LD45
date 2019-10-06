@@ -1,44 +1,14 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scenes/Reusable_Scenes/dialog_display.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Theme/goblin_theme.tres" type="Theme" id=2]
-[ext_resource path="res://Assets/Images/goblin/Untitled_Artwork-8.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Images/ui_icons/population.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Images/ui_icons/food.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Images/goblin/Untitled_Artwork-9.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Images/goblin/Untitled_Artwork-10.png" type="Texture" id=7]
-[ext_resource path="res://Assets/Images/goblin/Untitled_Artwork-11.png" type="Texture" id=8]
-[ext_resource path="res://Assets/Images/goblin/Untitled_Artwork-12.png" type="Texture" id=9]
-[ext_resource path="res://Assets/Images/goblin/Untitled_Artwork-13.png" type="Texture" id=10]
-[ext_resource path="res://Assets/Images/goblin/Untitled_Artwork-14.png" type="Texture" id=11]
-[ext_resource path="res://Assets/Images/goblin/Untitled_Artwork-15.png" type="Texture" id=12]
-[ext_resource path="res://Assets/Images/goblin/Untitled_Artwork-16.png" type="Texture" id=13]
-[ext_resource path="res://Assets/Images/goblin/Untitled_Artwork-17.png" type="Texture" id=14]
-[ext_resource path="res://Assets/Images/goblin/Untitled_Artwork-18.png" type="Texture" id=15]
-[ext_resource path="res://Assets/Images/dialog/background_panel.png" type="Texture" id=16]
-[ext_resource path="res://Assets/Fonts/default.ttf" type="DynamicFontData" id=17]
-
-[sub_resource type="SpriteFrames" id=1]
-animations = [ {
-"frames": [  ],
-"loop": true,
-"name": "default",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 4 ), ExtResource( 5 ) ],
-"loop": true,
-"name": "wizard",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ) ],
-"loop": true,
-"name": "goblin",
-"speed": 5.0
-} ]
+[ext_resource path="res://Scenes/Reusable_Scenes/king.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Images/dialog/background_panel.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Fonts/default.ttf" type="DynamicFontData" id=5]
 
 [sub_resource type="DynamicFont" id=2]
 size = 32
-font_data = ExtResource( 17 )
+font_data = ExtResource( 5 )
 
 [node name="dialog_screen" type="Node2D"]
 script = ExtResource( 1 )
@@ -65,27 +35,16 @@ anchor_bottom = 0.5
 margin_top = -42.5
 margin_bottom = -42.5
 
-[node name="goblin_head_sprite" type="Sprite" parent="dialog_menu/dialog_image/sprite_container"]
-position = Vector2( 0, 50 )
-scale = Vector2( 0.4, 0.4 )
-texture = ExtResource( 3 )
-region_enabled = true
-region_rect = Rect2( 300, 200, 1000, 600 )
-
-[node name="animated_sprite" type="AnimatedSprite" parent="dialog_menu/dialog_image/sprite_container"]
+[node name="king" parent="dialog_menu/dialog_image/sprite_container" instance=ExtResource( 3 )]
 visible = false
-position = Vector2( 14.9999, 276 )
-scale = Vector2( 0.4, 0.4 )
-frames = SubResource( 1 )
-animation = "goblin"
-frame = 7
+position = Vector2( 0, 190 )
+scale = Vector2( 0.3, 0.3 )
 
 [node name="dialog_background" type="TextureRect" parent="dialog_menu"]
-show_behind_parent = true
 margin_top = 255.0
 margin_right = 1024.0
 margin_bottom = 555.0
-texture = ExtResource( 16 )
+texture = ExtResource( 4 )
 
 [node name="dialog_container" type="RichTextLabel" parent="dialog_menu/dialog_background"]
 anchor_left = 0.5
