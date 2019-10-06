@@ -94,7 +94,6 @@ func _unhandled_input(event: InputEvent):
 
 func move_character(target):
 	var path = navigation.get_simple_path(player.position, target, false)
-	$Map/Navigation/YSort/Line2D.points = path
 	player.move(path)
 
 #handle build tool
