@@ -53,15 +53,25 @@ func get_random_spot_in_the_town():
 	var randomSpot = Vector2((rand_range(0,townLimit)), int(rand_range(0,townLimit)))
 	return map_to_world(randomSpot) + Vector2(1, cell_size.y/2)
 	
-func check_can_build(tile):
+func check_can_build(tile, type):
 	var cell = get_cellv(tile)
-	if cell == 0 or cell == 1 or cell == 2 or cell == 5 or cell == -1:
+	if (cell == 0 or cell == 1 or cell == 2 or cell == 5 or cell == -1) :
+		return true
+	elif not can_afford(type):
 		return true
 	else:
-		false
+		return false
+		
+func can_afford(type):
+#	print(ResourceManager.get_value(ResourceManager.Resource.WOOD) > 2)
+	
+	if ResourceManager.get_value(ResourceManager.Resource.STONE) > 2:
+		return true
+	else:
+		return false
 	
 func build_building(tile, type):
-	if check_can_build(tile):
+	if check_can_build(tile, type):
 		return
 	set_cellv(tile, TILETYPE.BUILDING)
 	var newItem = buildEntity.instance()
