@@ -17,7 +17,7 @@
 [ext_resource path="res://Assets/Images/ui_icons/settings_cog.png" type="Texture" id=15]
 [ext_resource path="res://Scenes/Reusable_Scenes/dialog_display.tscn" type="PackedScene" id=16]
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=1]
 content_margin_top = 10.0
 content_margin_bottom = 10.0
 bg_color = Color( 0.235294, 0.129412, 0.0627451, 1 )
@@ -28,11 +28,11 @@ corner_radius_top_left = 2
 corner_radius_top_right = 2
 shadow_size = 3
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=2]
 size = 22
 font_data = ExtResource( 8 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=3]
 size = 32
 font_data = ExtResource( 8 )
 
@@ -81,7 +81,7 @@ margin_bottom = 64.0
 rect_min_size = Vector2( 600, 0 )
 size_flags_horizontal = 10
 size_flags_vertical = 3
-custom_styles/bg = SubResource( 3 )
+custom_styles/bg = SubResource( 1 )
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Container/details"]
 anchor_right = 1.0
@@ -96,14 +96,31 @@ margin_right = 590.0
 margin_bottom = 54.0
 size_flags_horizontal = 3
 
-[node name="name" type="Label" parent="VBoxContainer/Container/details/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/Container/details/MarginContainer/VBoxContainer"]
 margin_right = 590.0
-margin_bottom = 21.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="name" type="Label" parent="VBoxContainer/Container/details/MarginContainer/VBoxContainer/HBoxContainer2"]
+margin_top = 2.0
+margin_right = 293.0
+margin_bottom = 23.0
+size_flags_horizontal = 3
+text = "the name"
+align = 1
+
+[node name="job" type="Label" parent="VBoxContainer/Container/details/MarginContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 297.0
+margin_top = 2.0
+margin_right = 590.0
+margin_bottom = 23.0
+size_flags_horizontal = 3
 text = "the name"
 align = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Container/details/MarginContainer/VBoxContainer"]
-margin_top = 25.0
+margin_top = 29.0
 margin_right = 590.0
 margin_bottom = 54.0
 size_flags_horizontal = 3
@@ -111,7 +128,7 @@ size_flags_vertical = 3
 
 [node name="Tree" type="Tree" parent="VBoxContainer/Container/details/MarginContainer/VBoxContainer/HBoxContainer"]
 margin_right = 114.0
-margin_bottom = 29.0
+margin_bottom = 25.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/bg = ExtResource( 5 )
@@ -123,24 +140,24 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="health" type="Label" parent="VBoxContainer/Container/details/MarginContainer/VBoxContainer/HBoxContainer/Tree/HBoxContainer"]
-margin_top = 4.0
+margin_top = 2.0
 margin_right = 55.0
-margin_bottom = 25.0
+margin_bottom = 23.0
 size_flags_horizontal = 3
 text = "health:"
 
 [node name="health_val" type="Label" parent="VBoxContainer/Container/details/MarginContainer/VBoxContainer/HBoxContainer/Tree/HBoxContainer"]
 margin_left = 59.0
-margin_top = 4.0
+margin_top = 2.0
 margin_right = 114.0
-margin_bottom = 25.0
+margin_bottom = 23.0
 size_flags_horizontal = 3
 text = "xxx"
 
 [node name="Tree2" type="Tree" parent="VBoxContainer/Container/details/MarginContainer/VBoxContainer/HBoxContainer"]
 margin_left = 118.0
 margin_right = 232.0
-margin_bottom = 29.0
+margin_bottom = 25.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/bg = ExtResource( 5 )
@@ -152,24 +169,24 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="hunger" type="Label" parent="VBoxContainer/Container/details/MarginContainer/VBoxContainer/HBoxContainer/Tree2/HBoxContainer"]
-margin_top = 4.0
+margin_top = 2.0
 margin_right = 55.0
-margin_bottom = 25.0
+margin_bottom = 23.0
 size_flags_horizontal = 3
 text = "hunger:"
 
 [node name="hunger_val" type="Label" parent="VBoxContainer/Container/details/MarginContainer/VBoxContainer/HBoxContainer/Tree2/HBoxContainer"]
 margin_left = 59.0
-margin_top = 4.0
+margin_top = 2.0
 margin_right = 114.0
-margin_bottom = 25.0
+margin_bottom = 23.0
 size_flags_horizontal = 3
 text = "xxx"
 
 [node name="Tree3" type="Tree" parent="VBoxContainer/Container/details/MarginContainer/VBoxContainer/HBoxContainer"]
 margin_left = 236.0
 margin_right = 350.0
-margin_bottom = 29.0
+margin_bottom = 25.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/bg = ExtResource( 5 )
@@ -181,24 +198,24 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="energy" type="Label" parent="VBoxContainer/Container/details/MarginContainer/VBoxContainer/HBoxContainer/Tree3/HBoxContainer"]
-margin_top = 4.0
+margin_top = 2.0
 margin_right = 55.0
-margin_bottom = 25.0
+margin_bottom = 23.0
 size_flags_horizontal = 3
 text = "energy:"
 
 [node name="energy_val" type="Label" parent="VBoxContainer/Container/details/MarginContainer/VBoxContainer/HBoxContainer/Tree3/HBoxContainer"]
 margin_left = 59.0
-margin_top = 4.0
+margin_top = 2.0
 margin_right = 114.0
-margin_bottom = 25.0
+margin_bottom = 23.0
 size_flags_horizontal = 3
 text = "xxx"
 
 [node name="Tree4" type="Tree" parent="VBoxContainer/Container/details/MarginContainer/VBoxContainer/HBoxContainer"]
 margin_left = 354.0
 margin_right = 468.0
-margin_bottom = 29.0
+margin_bottom = 25.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/bg = ExtResource( 5 )
@@ -210,24 +227,24 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="happiness" type="Label" parent="VBoxContainer/Container/details/MarginContainer/VBoxContainer/HBoxContainer/Tree4/HBoxContainer"]
-margin_top = 4.0
+margin_top = 2.0
 margin_right = 79.0
-margin_bottom = 25.0
+margin_bottom = 23.0
 size_flags_horizontal = 3
 text = "happiness:"
 
 [node name="happiness_val" type="Label" parent="VBoxContainer/Container/details/MarginContainer/VBoxContainer/HBoxContainer/Tree4/HBoxContainer"]
 margin_left = 83.0
-margin_top = 4.0
+margin_top = 2.0
 margin_right = 114.0
-margin_bottom = 25.0
+margin_bottom = 23.0
 size_flags_horizontal = 3
 text = "xxx"
 
 [node name="Tree5" type="Tree" parent="VBoxContainer/Container/details/MarginContainer/VBoxContainer/HBoxContainer"]
 margin_left = 472.0
 margin_right = 590.0
-margin_bottom = 29.0
+margin_bottom = 25.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/bg = ExtResource( 5 )
@@ -239,17 +256,17 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="strength" type="Label" parent="VBoxContainer/Container/details/MarginContainer/VBoxContainer/HBoxContainer/Tree5/HBoxContainer"]
-margin_top = 4.0
+margin_top = 2.0
 margin_right = 63.0
-margin_bottom = 25.0
+margin_bottom = 23.0
 size_flags_horizontal = 3
 text = "strength:"
 
 [node name="strength_val" type="Label" parent="VBoxContainer/Container/details/MarginContainer/VBoxContainer/HBoxContainer/Tree5/HBoxContainer"]
 margin_left = 67.0
-margin_top = 4.0
+margin_top = 2.0
 margin_right = 118.0
-margin_bottom = 25.0
+margin_bottom = 23.0
 size_flags_horizontal = 3
 text = "xxx"
 
@@ -305,7 +322,7 @@ margin_left = 42.0
 margin_top = 2.0
 margin_right = 56.0
 margin_bottom = 30.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "0"
 
 [node name="Tree2" type="Tree" parent="VBoxContainer/bottom_menu/bottom_menu_list/resources"]
@@ -334,7 +351,7 @@ margin_left = 42.0
 margin_top = 2.0
 margin_right = 56.0
 margin_bottom = 30.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "0"
 
 [node name="Tree3" type="Tree" parent="VBoxContainer/bottom_menu/bottom_menu_list/resources"]
@@ -363,7 +380,7 @@ margin_left = 42.0
 margin_top = 2.0
 margin_right = 56.0
 margin_bottom = 30.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "0"
 
 [node name="Tree4" type="Tree" parent="VBoxContainer/bottom_menu/bottom_menu_list/resources"]
@@ -392,7 +409,7 @@ margin_left = 42.0
 margin_top = 2.0
 margin_right = 56.0
 margin_bottom = 30.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "0"
 
 [node name="Tree5" type="Tree" parent="VBoxContainer/bottom_menu/bottom_menu_list/resources"]
@@ -421,7 +438,7 @@ margin_left = 42.0
 margin_top = 2.0
 margin_right = 56.0
 margin_bottom = 30.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "0"
 
 [node name="slash" type="Label" parent="VBoxContainer/bottom_menu/bottom_menu_list/resources/Tree5/population"]
@@ -429,7 +446,7 @@ margin_left = 66.0
 margin_top = 2.0
 margin_right = 81.0
 margin_bottom = 30.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "/"
 
 [node name="max_value" type="Label" parent="VBoxContainer/bottom_menu/bottom_menu_list/resources/Tree5/population"]
@@ -437,7 +454,7 @@ margin_left = 91.0
 margin_top = 2.0
 margin_right = 105.0
 margin_bottom = 30.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "0"
 
 [node name="Tree6" type="Tree" parent="VBoxContainer/bottom_menu/bottom_menu_list/resources"]
@@ -466,7 +483,7 @@ margin_left = 42.0
 margin_top = 2.0
 margin_right = 56.0
 margin_bottom = 30.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "0"
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
@@ -520,7 +537,7 @@ margin_top = 84.0
 margin_right = 512.0
 margin_bottom = 145.0
 rect_min_size = Vector2( 0, 50 )
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "Resume"
 
 [node name="quit_button" type="Button" parent="options_menu"]
@@ -528,7 +545,7 @@ margin_top = 155.0
 margin_right = 512.0
 margin_bottom = 216.0
 rect_min_size = Vector2( 0, 50 )
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "Quit"
 
 [node name="dialog_screen" parent="." instance=ExtResource( 16 )]

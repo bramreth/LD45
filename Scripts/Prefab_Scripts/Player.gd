@@ -23,4 +23,4 @@ func _process(delta):
 			path.remove(0)
 			
 func get_details():
-	return[str(100), str(100), str(100), str(100), str(20), SystemManager.data["player_data"]["name"]]
+	return[str(100), str(100), str(100), str(100), str(20), SystemManager.data["player_data"]["name"], "just being you"]
