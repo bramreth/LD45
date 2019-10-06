@@ -105,6 +105,7 @@ func select_character(character):
 	if selectedCharacter:
 		selectedCharacter.remove_highlight()
 	selectedCharacter = character
+	selectedCharacter.highlight()
 	$Camera2D/CanvasLayer/overlay.show_goblin(character.get_details())
 
 func select_entity(entity):
@@ -143,6 +144,9 @@ func get_path_between_points(start, end):
 func move_character(target):
 	var path = get_path_between_points(player.position, target)
 	player.move(path)
+	if selectedCharacter != player:
+		select_character(player)
+	
 
 ################################################################################################
 # AI MOVEMENT

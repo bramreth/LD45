@@ -120,7 +120,8 @@ func show_goblin(details):
 	$VBoxContainer/Container/details/MarginContainer/VBoxContainer/HBoxContainer/Tree3/HBoxContainer/energy_val.text = details[2]
 	$VBoxContainer/Container/details/MarginContainer/VBoxContainer/HBoxContainer/Tree4/HBoxContainer/happiness_val.text = details[3]
 	$VBoxContainer/Container/details/MarginContainer/VBoxContainer/HBoxContainer/Tree5/HBoxContainer/strength_val.text = details[4]
-	$VBoxContainer/Container/details/MarginContainer/VBoxContainer/name.text = details[5]
+	$VBoxContainer/Container/details/MarginContainer/VBoxContainer/HBoxContainer2/name.text = "name: " + details[5]
+	$VBoxContainer/Container/details/MarginContainer/VBoxContainer/HBoxContainer2/job.text = "job: " + details[6]
 
 func hide_goblin():
 	$VBoxContainer/Container/details.hide()

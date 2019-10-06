@@ -145,4 +145,4 @@ func _process(delta):
 			path.remove(0)
 			
 func get_details():
-	return[str(health), str(hunger), str(energy), str(happiness), str(strength), str(gname)]
+	return[str(health), str(hunger), str(energy), str(happiness), str(strength), str(gname), currentJob]
