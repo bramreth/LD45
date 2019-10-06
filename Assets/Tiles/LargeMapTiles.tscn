@@ -1,6 +1,8 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Assets/Tiles/large_default.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Tiles/grass.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Tiles/forest.png" type="Texture" id=3]
 
 [sub_resource type="NavigationPolygon" id=1]
 vertices = PoolVector2Array( 256, 0, 0, 128, -256, 0, 0, -128 )
@@ -12,12 +14,12 @@ vertices = PoolVector2Array( -160, 48, -256, 0, 0, -128, 0, -32, 256, 0, 160, 48
 polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 2, 4, 5, 3 ) ]
 outlines = [ PoolVector2Array( -256, 0, 0, -128, 256, 0, 160, 48, 0, -32, -160, 48 ) ]
 
-[sub_resource type="NavigationPolygon" id=4]
+[sub_resource type="NavigationPolygon" id=3]
 vertices = PoolVector2Array( -256, 0, 0, -128, 256, 0, 0, 128 )
 polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 outlines = [ PoolVector2Array( -256, 0, 0, -128, 256, 0, 0, 128 ) ]
 
-[sub_resource type="NavigationPolygon" id=3]
+[sub_resource type="NavigationPolygon" id=4]
 vertices = PoolVector2Array( -256, 0, 0, -128, 256, 0, 0, 128 )
 polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 outlines = [ PoolVector2Array( -256, 0, 0, -128, 256, 0, 0, 128 ) ]
@@ -69,20 +71,18 @@ texture = ExtResource( 1 )
 navpoly = SubResource( 2 )
 
 [node name="Grass" type="Sprite" parent="."]
-modulate = Color( 0.529412, 0.803922, 0.54902, 1 )
 position = Vector2( 0, 256 )
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Grass"]
-navpoly = SubResource( 4 )
+navpoly = SubResource( 3 )
 
 [node name="Forest" type="Sprite" parent="."]
-modulate = Color( 0, 0.290196, 0.0196078, 1 )
 position = Vector2( 512, 256 )
-texture = ExtResource( 1 )
+texture = ExtResource( 3 )
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Forest"]
-navpoly = SubResource( 3 )
+navpoly = SubResource( 4 )
 
 [node name="Cave" type="Sprite" parent="."]
 modulate = Color( 0.192157, 0.156863, 0.0588235, 1 )

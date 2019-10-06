@@ -6,7 +6,12 @@ enum TILETYPE {
 	BUILDING = 2,
 	GRASS = 3,
 	FOREST = 4,
-	CAVE = 5
+	CAVE = 5,
+	HUMAN_WALL = 6,
+	HUMAN_STREET = 7,
+	HUMAN_BUILDING = 8,
+	HUMAN_THRONE_ROOM = 9,
+	THE_PAINTING = 10
 }
 
 var itemSpawnLocations = {
@@ -21,11 +26,31 @@ var entitiesNode
 var charactersNode
 var gameRoot
 
+func _ready():
+	randomize()
+
 func get_cell_size():
 	return cell_size
 	
 func get_cell_val(cell):
 	return get_cellv(cell)
+
+func get_town_reach():
+	var maxX = 10
+	var maxY = 10
+	
+	for cell in get_used_cells_by_id(TILETYPE.BUILDING):
+		if cell.x > maxX:
+			maxX = cell.x
+		if cell.y > maxY:
+			maxY = cell.y
+	
+	return Vector2(maxX, maxY)
+
+func get_random_spot_in_the_town():
+	var townLimit = get_town_reach()
+	var randomSpot = Vector2((rand_range(0,townLimit)), int(rand_range(0,townLimit)))
+	return map_to_world(randomSpot) + Vector2(1, cell_size.y/2)
 	
 
 # Called when the node enters the scene tree for the first time.

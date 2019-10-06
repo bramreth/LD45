@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/Scene_Scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Tiles/MapTilesLarge.tres" type="TileSet" id=2]
@@ -7,7 +7,8 @@
 [ext_resource path="res://Assets/Images/buildings/building_default.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Prefabs/ItemMapEntity.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Prefabs/PlayerCharacterMapEntity.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/overlay.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Assets/Prefabs/GoblinCharacterMapEntity.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/overlay.tscn" type="PackedScene" id=9]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
@@ -42,6 +43,10 @@ position = Vector2( -132.85, 331.894 )
 [node name="Characters" type="Node" parent="Map/Navigation/YSort"]
 
 [node name="Player" parent="Map/Navigation/YSort/Characters" instance=ExtResource( 7 )]
+position = Vector2( 584.407, 475.318 )
+
+[node name="MapEntity" parent="Map/Navigation/YSort/Characters" instance=ExtResource( 8 )]
+position = Vector2( 138.31, 346.748 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2( 512, 300 )
@@ -56,6 +61,6 @@ editor_draw_limits = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
 
-[node name="overlay" parent="Camera2D/CanvasLayer" instance=ExtResource( 8 )]
+[node name="overlay" parent="Camera2D/CanvasLayer" instance=ExtResource( 9 )]
 mouse_filter = 2
 [connection signal="build" from="Camera2D/CanvasLayer/overlay" to="." method="_on_overlay_build"]

@@ -1,5 +1,7 @@
 extends "res://Scripts/Prefab_Scripts/Character.gd"
 
+signal request_job_target()
+
 # goblin stats
 export var hunger = 100
 export var energy = 100
@@ -11,10 +13,12 @@ var jobs = ["gather", "rest", "relax", "eat", "build", "fight", "wander"]
 
 func _ready():
 	._ready()
+	randomize()
 	type = GameManager.ENTITY_TYPE.CHARACTER
-	handle_job()
+	start_job()
 
 func determine_jobs():
+	return "wander"
 	# essentials
 	if combat_in_proximity():
 		return "fight"
@@ -25,7 +29,7 @@ func determine_jobs():
 	if energy < 30:
 		return "rest"
 		
-	randomize()
+
 	var free_will = randi() % 100
 	if free_will <= 30:
 		return "gather"
@@ -45,101 +49,67 @@ func combat_in_proximity():
 func build_in_proximity():
 	return false
 	
-func handle_job():
+func start_job():
 	var job = determine_jobs()
-	match job:
-		"gather":
-			gather()
-		"rest":
-			rest()
-		"relax":
-			relax()
-		"eat":
-			eat()
-		"build":
-			build()
-		"fight":
-			fight()
-		"wander":
-			wander()
-	print(job)
+	print(job + " IS MY NEW JOB")
+	emit_signal("request_job_target", job)
+
+func handle_job(job, path, target):
+	call(job, path, target)
 	drain_energy_and_food()
 	log_stats()
+
+func finish_job():
 	yield(get_tree().create_timer(randi()%20 + 4), "timeout")
-	handle_job()
+	start_job()
 
 func log_stats():
 	print("hunger", hunger) 
 	print("energy", energy) 
 	print("happiness", happiness) 
-	print("hunger", hunger) 
-			
-func gather():
-	happiness -=10
-	if(happiness < 0):
-		happiness = 0
-	hunger -=10
-	if(hunger < 0):
+
+func adjust_stats(hun, ener, happ):
+	hunger += hun
+	energy += ener
+	happiness += happ
+	
+	if hunger < 0:
 		hunger = 0
-	energy -=10
-	if(energy < 0):
-		energy = 0
-	
-func rest():
-	energy +=50
-	if(energy > 100):
-		energy = 100
-	happiness +=10
-	if(happiness > 100):
-		happiness = 100
-	
-func relax():
-	energy +=10
-	if(energy > 100):
-		energy = 100
-	happiness +=50
-	if(happiness > 100):
-		happiness = 100
-	
-func eat():
-	hunger +=50
-	if(hunger > 100):
+	elif hunger > 100:
 		hunger = 100
-	happiness +=10
-	if(happiness > 100):
+	
+	if energy < 0:
+		energy = 0
+	elif energy > 100:
+		energy = 100
+	
+	if happiness < 0:
+		happiness = 0
+	elif happiness > 100:
 		happiness = 100
 
-func build():
-	happiness -=10
-	if(happiness < 0):
-		happiness = 0
-	hunger -=10
-	if(hunger < 0):
-		hunger = 0
-	energy -=10
-	if(energy < 0):
-		energy = 0
+func gather(path, target):
+	adjust_stats(-10,-10,-10)
+
+func rest(path, target):
+	adjust_stats(0,50,10)
+
+func relax(path, target):
+	adjust_stats(0,50,10)
 	
-func fight():
-	happiness -=10
-	if(happiness < 0):
-		happiness = 0
-	hunger -=10
-	if(hunger < 0):
-		hunger = 0
-	energy -=10
-	if(energy < 0):
-		energy = 0
+func eat(path, target):
+	adjust_stats(50,0,10)
+
+func build(path, target):
+	adjust_stats(-10,-10,-10)
 	
-func wander():
-	energy -=10
-	if(energy < 0):
-		energy = 0
-	happiness +=10
-	if(happiness > 100):
-		happiness = 100
+func fight(path, target):
+	adjust_stats(-10,-10,-10)
+
+func wander(path, target):
+	print("WANDERING")
+	adjust_stats(0,-10,10)
+	move(path)
 	
 func drain_energy_and_food():
-	hunger -= 2
-	energy -= 3
-	
+	adjust_stats(-2,-3,0)

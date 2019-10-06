@@ -25,6 +25,8 @@ func _ready():
 	for character in $Map/Navigation/YSort/Characters.get_children():
 		character.connect("selected", self, "select_character")
 		character.connect("movement_done", self, "perform_contextual_action")
+		if character.type == GameManager.ENTITY_TYPE.CHARACTER:
+			character.connect("request_job_target", self, "provide_movement_target")
 	for item in $Map/Navigation/YSort/Items.get_children():
 		item.connect("selected", self, "select_entity")
 	
@@ -84,7 +86,7 @@ func perform_contextual_action(character):
 			selectedEntity = null
 
 ################################################################################################
-# MOVEMENT
+# PLAYER MOVEMENT
 ################################################################################################
 func _unhandled_input(event: InputEvent):
 	if event is InputEventMouseButton:
@@ -92,10 +94,30 @@ func _unhandled_input(event: InputEvent):
 			get_tree().set_input_as_handled()
 			move_character(get_global_mouse_position())
 
+func get_path_between_points(start, end):
+		return navigation.get_simple_path(start, end, false)
+
 func move_character(target):
-	var path = navigation.get_simple_path(player.position, target, false)
+	var path = get_path_between_points(player.position, target)
 	player.move(path)
 
+################################################################################################
+# AI MOVEMENT
+################################################################################################
+
+func provide_movement_target(character, job):
+	print("PROVINDING TARGET")
+	call(("ai_" + job), character)
+
+func ai_wander(character):
+	print("ASSIGNING WANDER PATH")
+	print(character + " IS WANDERING")
+	var path = get_path_between_points(character.position, map.get_random_spot_in_the_town())
+	character.handle_job("wander", path, null)
+
+################################################################################################
+# CAMERA
+################################################################################################
 #handle build tool
 func _physics_process(delta):
 	if building:
