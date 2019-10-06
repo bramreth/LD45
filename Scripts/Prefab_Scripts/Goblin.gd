@@ -53,7 +53,7 @@ func build_in_proximity():
 	return false
 	
 func start_job():
-	var job = determine_jobs()
+	print("START WANDERING")
 	currentJob = determine_jobs()
 	emit_signal("request_job_target", self, currentJob)
 
@@ -70,6 +70,7 @@ func job_movement_done():
 func finish_job():
 	currentJob = "idle"
 	currentTarget = null
+	print("DONE WANDERING")
 	yield(get_tree().create_timer(randi()%5+1), "timeout")
 	start_job()
 

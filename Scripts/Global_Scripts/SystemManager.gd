@@ -34,3 +34,7 @@ func playSfx(track):
 	sfxPlayer.stream = load(sfx_dir + track)
 	print("playing_tune", sfxPlayer)
 	sfxPlayer.play()
+
+func print(string):
+	if debug:
+		print(string)

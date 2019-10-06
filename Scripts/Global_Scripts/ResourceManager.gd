@@ -39,6 +39,7 @@ func update_resource(resource, value):
 			ResourceManager.Resource.EGG:
 				SystemManager.data["player_data"]["resources"]["eggs"] += value
 				emit_signal("update_resource", Resource.EGG)
+		GameManager.update_goblin_spawn_rate()
 
 func get_value(resource):
 	match resource:
