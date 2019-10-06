@@ -7,8 +7,10 @@ const bgm_dir = "res://Assets/Music/"
 
 var data = JSON
 var dataPath = "res://GameData/data.json"
+var debug = false
 func _ready():
 	load_Player_data()	
+	debug = data["debug"] if typeof(data["debug"]) == TYPE_BOOL else false
 	self.add_child(musicPlayer)
 	self.add_child(sfxPlayer)
 	
