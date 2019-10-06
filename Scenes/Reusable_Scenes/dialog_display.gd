@@ -6,9 +6,9 @@ var dialog_index
 var current_dialog_name
 
 onready var dialog_image_animation= get_node("dialog_menu/dialog_image/sprite_container/animated_sprite")
-onready var dialog_container = get_node("dialog_menu/dialog_container")
-onready var text_input = get_node("dialog_menu/text_input")
-onready var action_button = get_node("action_button")
+onready var dialog_container = get_node("dialog_menu/dialog_background/dialog_container")
+onready var text_input = get_node("dialog_menu/MarginContainer/hbox/text_input")
+onready var action_button = get_node("dialog_menu/MarginContainer/hbox/action_button")
 
 onready var scene_to_open = null
 onready var lock_thread = false
