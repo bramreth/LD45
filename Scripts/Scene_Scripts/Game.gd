@@ -110,6 +110,8 @@ func _exit_tree():
 		buildingSpawningThread.wait_to_finish
 	if goblinSpawningThread != null:
 		goblinSpawningThread.wait_to_finish()
+	if enemySpawningThread != null:
+		enemySpawningThread.wait_to_finish()
 
 
 ################################################################################################
