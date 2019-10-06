@@ -9,6 +9,7 @@ enum Resource {
 	GOLD,
 	FOOD,
 	POPULATION,
+	MAX_POPULATION,
 	EGG
 }
 
@@ -30,9 +31,10 @@ func update_resource(resource, value):
 			ResourceManager.Resource.FOOD:
 				SystemManager.data["player_data"]["resources"]["food"] += value
 				emit_signal("update_resource", Resource.FOOD)
-			ResourceManager.Resource.POPULATION:
-				if typeof(value) == TYPE_ARRAY && value.size() == 2: 
-					SystemManager.data["player_data"]["resources"]["population"] = value
+			ResourceManager.Resource.POPULATION: 
+				SystemManager.data["player_data"]["resources"]["population"] += value
+			ResourceManager.Resource.MAX_POPULATION: 
+				SystemManager.data["player_data"]["resources"]["max_population"] += value
 				emit_signal("update_resource", Resource.POPULATION)
 			ResourceManager.Resource.EGG:
 				SystemManager.data["player_data"]["resources"]["eggs"] += value
@@ -50,5 +52,7 @@ func get_value(resource):
 				return SystemManager.data["player_data"]["resources"]["food"] 
 			ResourceManager.Resource.POPULATION:
 				return SystemManager.data["player_data"]["resources"]["population"] 
+			ResourceManager.Resource.MAX_POPULATION:
+				return SystemManager.data["player_data"]["resources"]["max_population"]
 			ResourceManager.Resource.EGG:
 				return SystemManager.data["player_data"]["resources"]["eggs"] 
