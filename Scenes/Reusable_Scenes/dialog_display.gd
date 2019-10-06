@@ -22,6 +22,7 @@ func _ready():
 	
 	
 func start_dialog(scene):
+	$dialog_menu/MarginContainer/hbox/action_button.grab_focus()
 	current_dialog_name = scene
 	dialog = StringManager.get_dialog(current_dialog_name)
 	if dialog != null:

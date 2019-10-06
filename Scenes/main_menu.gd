@@ -25,6 +25,7 @@ func _ready():
 	anim_player.play("open")
 	scene_transition.connect("loading_scene", self, "set_loading_total")
 	scene_transition.connect("loading_progress", self, "set_loading_progress")
+	$MarginContainer/VBoxContainer/play_button.grab_focus()
 
 func set_loading_total(total):
 	anim_player.play("close")
