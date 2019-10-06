@@ -134,7 +134,7 @@ func get_attractiveness():
 	return SystemManager.data["player_data"]["attractiveness"]
 	
 func update_goblin_spawn_rate():
-	SystemManager.data["player_data"]["goblin_spawn_rate"] = get_attractiveness() * (ResourceManager.get_value(Resource.POPULATION) / ResourceManager.get_value(Resource.POPULATION))
+	SystemManager.data["player_data"]["goblin_spawn_rate"] = get_attractiveness() * (ResourceManager.get_value(ResourceManager.Resource.POPULATION) / ResourceManager.get_value(ResourceManager.Resource.MAX_POPULATION))
 
 func get_goblin_spawn_rate():
 	return SystemManager.data["player_data"]["goblin_spawn_rate"]
