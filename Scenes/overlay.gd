@@ -14,7 +14,8 @@ func _ready():
 	init_resources()
 	ResourceManager.connect("update_resource", self, "update_resource")
 	GameManager.connect("gameplay_tick", self, "gameplay_tick")
-	GameManager.connect("update_attractiveness", self, "update_attractiveness")
+	GameManager.connect("update_attractiveness_image", self, "update_attractiveness")
+	GameManager.connect("update_moral_image", self, "update_moral")
 	
 	$options_menu.hide()
 	yield(get_tree().create_timer(randi()%20 + 4), "timeout")
@@ -114,9 +115,32 @@ func gameplay_tick():
 		rotation = 180/GameManager.NIGHT_LENGTH
 	clock.rect_rotation -= rotation
 
-func update_attractiveness():
-	attractive_meter
+func update_attractiveness(state):
+	match state:
+		GameManager.Attractiveness.LOW:
+			pass
+		GameManager.Attractiveness.MEDIUM:
+			pass
+		GameManager.Attractiveness.HIGH:
+			pass
+		GameManager.Attractiveness.VERY_HIGH:
+			pass
 
+func update_moral(state):
+	match state:
+		GameManager.Moral.PURE:
+			pass
+		GameManager.Moral.GOOD:
+			pass
+		GameManager.Moral.NICE:
+			pass
+		GameManager.Moral.MEAN:
+			pass
+		GameManager.Moral.BAD:
+			pass
+		GameManager.Moral.EVIL:
+			pass
+	
 func show_menu():
 	if !$dialog_screen.visible:
 		show_overlay()

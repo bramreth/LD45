@@ -36,6 +36,16 @@ enum Attractiveness {
 	HIGH,
 	REALLY_HIGH	
 }
+
+enum Moral {
+	PURE,
+	GOOD,
+	NICE,
+	MEAN,
+	BAD,
+	EVIL,	
+}
+
 func start_dialog(scene):
 	if scene != null && !scene.empty():
 		emit_signal("start_dialog", scene)
@@ -131,6 +141,28 @@ func debug_day_cycle_print():
 		if currentTick%(60*(DAY_LENGTH+NIGHT_LENGTH)) == 0:
 			SystemManager.print("NEW DAY: " + String(get_current_day()) + " <====================")
 
+
+
+func update_moral(value):
+	SystemManager.data["player_data"]["moral"] += value
+	if SystemManager.data["player_data"]["moral"] > 100: SystemManager.data["player_data"]["moral"] = 100
+	if SystemManager.data["player_data"]["moral"] < 0: SystemManager.data["player_data"]["moral"] = 0
+	var moral_state = Attractiveness.PURE
+	if SystemManager.data["player_data"]["moral"] >= 0 and SystemManager.data["player_data"]["moral"] < 16:
+		moral_state = Attractiveness.GOOD
+	if SystemManager.data["player_data"]["moral"] >= 16 and SystemManager.data["player_data"]["moral"] < 32:
+		moral_state = Attractiveness.NICE
+	if SystemManager.data["player_data"]["moral"] >= 32 and SystemManager.data["player_data"]["moral"] < 48:
+		moral_state = Attractiveness.MEAN
+	if SystemManager.data["player_data"]["moral"] >= 64 and SystemManager.data["player_data"]["moral"] < 80:
+		moral_state = Attractiveness.BAD
+	if SystemManager.data["player_data"]["moral"] >= 80:
+		moral_state = Attractiveness.EVIL
+	emit_signal("update_moral_image", moral_state)
+
+func get_moral():
+	return SystemManager.data["player_data"]["moral"]
+		
 func update_attractiveness(value):
 	SystemManager.data["player_data"]["attractiveness"] += value
 	if SystemManager.data["player_data"]["attractiveness"] > 100: SystemManager.data["player_data"]["attractiveness"] = 100
@@ -142,7 +174,7 @@ func update_attractiveness(value):
 		attract_state = Attractiveness.HIGH
 	if SystemManager.data["player_data"]["attractiveness"] >= 75 :
 		attract_state = Attractiveness.REALLY_HIGH
-	emit_signal("update_attractiveness", attract_state)
+	emit_signal("update_attractiveness_image", attract_state)
 	update_goblin_spawn_rate()
 	
 func get_attractiveness():
