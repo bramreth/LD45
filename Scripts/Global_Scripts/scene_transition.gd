@@ -4,7 +4,7 @@ signal loading_scene()
 signal loading_progress()
 
 var scene_list = {}
-var loadingThread
+var loadingThread: Thread
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -17,7 +17,7 @@ func change_scene(scene):
 
 # Loads the scene with the given name and also forgets to unload the previous one
 func background_load_scene(path):
-	loadingThread = Thread.new()
+	loadingThread  = Thread.new()
 	loadingThread.start(self, "background_load", scene_list[path]) #Starts loading the new scene on the loading thread
 
 func background_load(path):
@@ -51,8 +51,7 @@ func background_load(path):
 		call_deferred("background_load_done", gameScene)
 
 func background_load_done(scene):
-	#loadingThread.wait_to_finish() #wait for the thread to finish, requirement on windows
-	
+	loadingThread.wait_to_finish()
 	# Instantiate new scene
 	var sceneInstance = scene.instance()
 	

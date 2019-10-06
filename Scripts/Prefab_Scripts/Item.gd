@@ -1,13 +1,17 @@
 extends "res://Scripts/Prefab_Scripts/MapEntity.gd"
 
-export(ResourceManager.Resource) var resourceType := ResourceManager.Resource.WOOD
+export(ResourceManager.Resource) var resourceType
 export(int) var amount := 1
 var pickedUp = false
 
 func _ready():
 	._ready()
 	set_process(false)
+	setup(resourceType)
 	type = GameManager.ENTITY_TYPE.ITEM
+
+func setup(resource):
+	resourceType = resource
 	$MapEntity_Sprite.texture = AssetLoader.assets["resources"][resourceType]
 
 func pickup():
@@ -17,7 +21,7 @@ func pickup():
 		ResourceManager.update_resource(resourceType, amount)
 
 func _process(delta):
-	if !$Particles2D.emitting:
+	if !$Particles2D.emitting and pickedUp:
 		queue_free()
 
 func _unhandled_input(event):

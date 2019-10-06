@@ -14,6 +14,7 @@ var mousePos = Vector2()
 
 func _ready():
 	GameManager.connect("spawn_items", self, "spawn_items")
+	GameManager.connect("night_started", self, "remove_items_from_map")
 	for character in $Map/Navigation/YSort/Characters.get_children():
 		character.connect("selected", self, "select_character")
 		character.connect("movement_done", self, "perform_contextual_action")
@@ -27,11 +28,19 @@ func _ready():
 ################################################################################################
 # ITEM SPAWNING
 ################################################################################################
+var itemSpawningThread: Thread
 func spawn_items(items):
+	itemSpawningThread = Thread.new()
+	itemSpawningThread.start(self, "_thread_spawn_items", items)
+
+func _thread_spawn_items(items):
 	for item in items:
 		if(items[item] > 0):
-			map.spawn_items(item, items[item]) 
+			map.spawn_items(item, items[item])
 
+func remove_items_from_map():
+	for child in $Map/Navigation/YSort/Entities.get_children():
+		child.queue_free()
 ################################################################################################
 # ENTITY SELECTION
 ################################################################################################
