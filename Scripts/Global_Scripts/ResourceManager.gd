@@ -17,6 +17,8 @@ func _ready():
 	pass
 	
 func update_resource(resource, value):
+	SystemManager.print("r: " + String(resource))	
+	SystemManager.print("v: " + String(value))
 	if resource != null:
 		match resource:
 			ResourceManager.Resource.WOOD:
@@ -32,12 +34,14 @@ func update_resource(resource, value):
 				SystemManager.data["player_data"]["resources"]["food"] += value
 				emit_signal("update_resource", Resource.FOOD)
 			ResourceManager.Resource.POPULATION: 
+				SystemManager.print("UPDATE POP")
 				SystemManager.data["player_data"]["resources"]["population"] += value
+				emit_signal("update_resource", Resource.POPULATION)
 				GameManager.update_goblin_spawn_rate()
 			ResourceManager.Resource.MAX_POPULATION: 
 				SystemManager.data["player_data"]["resources"]["max_population"] += value
+				emit_signal("update_resource", Resource.MAX_POPULATION)
 				GameManager.update_goblin_spawn_rate()
-				emit_signal("update_resource", Resource.POPULATION)
 			ResourceManager.Resource.EGG:
 				SystemManager.data["player_data"]["resources"]["eggs"] += value
 				emit_signal("update_resource", Resource.EGG)

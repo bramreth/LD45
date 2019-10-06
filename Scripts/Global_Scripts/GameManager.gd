@@ -47,6 +47,7 @@ var spawn_items_list = {
 func _ready():
 	randomize()
 	set_physics_process(false)
+	update_goblin_spawn_rate()
 
 func start_game():
 	set_physics_process(true)
@@ -134,18 +135,19 @@ func get_attractiveness():
 	return SystemManager.data["player_data"]["attractiveness"]
 	
 func update_goblin_spawn_rate():
-	SystemManager.data["player_data"]["goblin_spawn_rate"] = get_attractiveness() * (ResourceManager.get_value(ResourceManager.Resource.POPULATION) / ResourceManager.get_value(ResourceManager.Resource.MAX_POPULATION))
+	SystemManager.data["player_data"]["goblin_spawn_rate"] = 120 - ((get_attractiveness() / 2) + (50 * (1 - (ResourceManager.get_value(ResourceManager.Resource.POPULATION) / ResourceManager.get_value(ResourceManager.Resource.MAX_POPULATION)))))
 
 func get_goblin_spawn_rate():
 	return SystemManager.data["player_data"]["goblin_spawn_rate"]
 
 onready var goblin_ticker = 0
 func check_for_goblin_spawn():
-	var sr = get_goblin_spawn_rate()
-	SystemManager.print("goblin ticker: " + String(goblin_ticker))
-	SystemManager.print("get_goblin_spawn_rate ticker: " + String(sr))
-	if goblin_ticker >= sr:
-		emit_signal("spawn_goblin")
-		goblin_ticker = 0
-	else:
-		goblin_ticker += 1
+	if ResourceManager.get_value(ResourceManager.Resource.POPULATION) < ResourceManager.get_value(ResourceManager.Resource.MAX_POPULATION):
+		var sr = get_goblin_spawn_rate()
+		SystemManager.print("goblin ticker: " + String(goblin_ticker))
+		SystemManager.print("get_goblin_spawn_rate ticker: " + String(sr))
+		if goblin_ticker >= sr:
+			emit_signal("spawn_goblin")
+			goblin_ticker = 0
+		else:
+			goblin_ticker += 1

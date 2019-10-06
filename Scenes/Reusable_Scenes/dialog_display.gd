@@ -79,12 +79,14 @@ func handle_dialog():
 	
 	
 func showAnimation(animation):
+	$dialog_menu/dialog_image/sprite_container/goblin.visible = false
+	$dialog_menu/dialog_image/sprite_container/wizard.visible = false
 	$dialog_menu/dialog_image/sprite_container/king.visible = false
 	match animation:
 		"goblin":
-			$dialog_menu/dialog_image/sprite_container/king.visible = true
+			$dialog_menu/dialog_image/sprite_container/goblin.visible = true
 		"wizard":
-			$dialog_menu/dialog_image/sprite_container/king.visible = true
+			$dialog_menu/dialog_image/sprite_container/wizard.visible = true
 		"king":
 			$dialog_menu/dialog_image/sprite_container/king.visible = true
 
