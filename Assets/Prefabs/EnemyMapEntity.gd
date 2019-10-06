@@ -8,7 +8,7 @@ export var speed := 125
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	type = GameManager.ENTITY_TYPE.CHARACTER
+	type = GameManager.ENTITY_TYPE.GOBLIN
 	set_process(false)
 
 func move(newPath: PoolVector2Array):

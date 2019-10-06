@@ -131,9 +131,9 @@ func spawn_goblin():
 	var newGoblin = goblinEntity.instance()
 	newGoblin.position = map_to_world(spawn) + Vector2(1, cell_size.y/2)
 	newGoblin.connect("selected", gameRoot, "select_character")
-	newGoblin.connect("request_job_target", self, "provide_movement_target")
+	newGoblin.connect("request_job_target", gameRoot, "provide_movement_target")
 	charactersNode.call_deferred("add_child", newGoblin)
-	newGoblin.call_deffered("join_clan")
+	newGoblin.call_deferred("join_clan")
 	
 
 func add_hut(cell: Vector2):

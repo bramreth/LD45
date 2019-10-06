@@ -26,7 +26,7 @@ func _ready():
 	#GameManager.connect("night_started", self, "remove_items_from_map")
 	
 	for character in $Map/Navigation/YSort/Characters.get_children():
-		if character.type == GameManager.ENTITY_TYPE.CHARACTER:
+		if character.type == GameManager.ENTITY_TYPE.GOBLIN:
 			character.connect("request_job_target", self, "provide_movement_target")
 		elif character.type == GameManager.ENTITY_TYPE.PLAYER:
 			character.connect("movement_done", self, "perform_contextual_action")
@@ -75,7 +75,7 @@ func spawn_goblin():
 	goblinSpawningThread = Thread.new()
 	goblinSpawningThread.start(self, "_thread_spawn_goblin")
 
-func _thread_spawn_goblin():
+func _thread_spawn_goblin(userdata):
 	map.spawn_goblin()
 	call_deferred("goblin_spawned")
 
@@ -156,7 +156,7 @@ func ai_wander(character):
 	character.handle_job(path, null)
 
 func ai_join(character):
-	SystemManager.print("GOBLIN SPAWNED AT: " + character.position)
+	SystemManager.print(" SPAWNED AT: " + String(character.position) + "+++++++++++++++++++++++++++++++++++++++++")
 
 ################################################################################################
 # CAMERA

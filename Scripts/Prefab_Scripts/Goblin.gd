@@ -17,7 +17,7 @@ var currentTarget = null
 func _ready():
 	._ready()
 	randomize()
-	type = GameManager.ENTITY_TYPE.CHARACTER
+	type = GameManager.ENTITY_TYPE.GOBLIN
 	yield(get_tree().create_timer(randi()%3+1), "timeout")
 	start_job()
 
