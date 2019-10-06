@@ -94,7 +94,7 @@ var construction = {}
 func build_building(tile, type):
 	if check_can_build(tile, type):
 		return
-	set_cellv(tile, TILETYPE.BUILDING)
+	set_cellv(tile, TILETYPE.CONSTRUCTION)
 	for item in prices[type].keys():
 		ResourceManager.update_resource(item, -prices[type][item])
 	
@@ -108,10 +108,11 @@ func build_building(tile, type):
 	
 	#the tile is empty, here we want to create a marker for a build event. we may want to change the tile to a new type
 	# type 15 construction plot, then on finish change it to building
-	finish_construction(tile)
+#	finish_construction(tile)
 	
 func finish_construction(tile):
 	print(construction)
+	set_cellv(tile, TILETYPE.BUILDING)
 	var newItem = buildEntity.instance()
 	newItem.setup(construction[tile])
 	construction.erase(tile)
