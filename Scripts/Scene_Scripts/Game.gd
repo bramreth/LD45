@@ -26,7 +26,7 @@ func _ready():
 	#GameManager.connect("night_started", self, "remove_items_from_map")
 	
 	for character in $Map/Navigation/YSort/Characters.get_children():
-		if character.type == GameManager.ENTITY_TYPE.CHARACTER:
+		if character.type == GameManager.ENTITY_TYPE.GOBLIN:
 			character.connect("request_job_target", self, "provide_movement_target")
 		elif character.type == GameManager.ENTITY_TYPE.PLAYER:
 			character.connect("movement_done", self, "perform_contextual_action")
@@ -70,6 +70,18 @@ func _thread_spawn_building(items):
 func building_spawned():
 	buildingSpawningThread.wait_to_finish()
 
+var goblinSpawningThread: Thread
+func spawn_goblin():
+	goblinSpawningThread = Thread.new()
+	goblinSpawningThread.start(self, "_thread_spawn_goblin")
+
+func _thread_spawn_goblin(userdata):
+	map.spawn_goblin()
+	call_deferred("goblin_spawned")
+
+func goblin_spawned():
+	goblinSpawningThread.wait_to_finish()
+
 func remove_items_from_map():
 	for child in $Map/Navigation/YSort/Items.get_children():
 		if not child.pickedUp:
@@ -79,14 +91,13 @@ func _exit_tree():
 	if itemSpawningThread != null:
 		itemSpawningThread.wait_to_finish()
 	if buildingSpawningThread != null:
-		buildingSpawningThread.wait_to_finish()
+		buildingSpawningThread.wait_to_finish
+	if goblinSpawningThread != null:
+		goblinSpawningThread.wait_to_finish()
 		
 func spawn_enemies(amount):
 	pass
-	
-func spawn_goblin():
-	SystemManager.print("spawn_goblin")
-	pass
+
 ################################################################################################
 # ENTITY SELECTION
 ################################################################################################
@@ -147,7 +158,10 @@ func provide_movement_target(character, job):
 func ai_wander(character):
 	var path = get_path_between_points(character.position, map.get_random_spot_in_the_town())
 	character.handle_job(path, null)
-	
+
+func ai_join(character):
+	SystemManager.print(" SPAWNED AT: " + String(character.position) + "+++++++++++++++++++++++++++++++++++++++++")
+
 ################################################################################################
 # CAMERA
 ################################################################################################

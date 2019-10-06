@@ -24,7 +24,7 @@ var currentGamePlayTick: int = 0 #Seconds since started
 var currentDay: int = 0 #number of day/night cycles since started
 
 enum ENTITY_TYPE {
-	CHARACTER,
+	GOBLIN,
 	ENEMY,
 	BUILDING,
 	ITEM,
