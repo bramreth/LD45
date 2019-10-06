@@ -16,8 +16,8 @@ var debug_flag = false
 
 onready var night_events = SystemManager.data["events"]["night"]
 
-const DAY_LENGTH = 80
-const NIGHT_LENGTH = 40
+const DAY_LENGTH = 10
+const NIGHT_LENGTH = 5
 
 var currentTick: int = 0 #1/60th seconds since started
 var currentGamePlayTick: int = 0 #Seconds since started
@@ -29,6 +29,30 @@ enum ENTITY_TYPE {
 	BUILDING,
 	ITEM,
 	PLAYER,
+}
+
+enum Building {
+	CAMP,
+	HUT,
+	SENTRY,
+	HATCHERY,
+	MESS
+}
+
+enum Attractiveness {
+	LOW,
+	MEDIUM,
+	HIGH,
+	REALLY_HIGH	
+}
+
+enum Moral {
+	PURE,
+	GOOD,
+	NICE,
+	MEAN,
+	BAD,
+	EVIL,	
 }
 
 func start_dialog(scene):
@@ -66,8 +90,8 @@ func _physics_process(delta):
 	
 	if currentTick%60 == 0:
 		emit_signal("gameplay_tick")
-		check_for_goblin_spawn()
 		if is_daytime():
+			check_for_goblin_spawn()
 			if(currentGamePlayTick%(DAY_LENGTH+NIGHT_LENGTH) == 0):
 				start_of_daytime_tick()
 			else:
@@ -126,9 +150,40 @@ func debug_day_cycle_print():
 		if currentTick%(60*(DAY_LENGTH+NIGHT_LENGTH)) == 0:
 			SystemManager.print("NEW DAY: " + String(get_current_day()) + " <====================")
 
+
+
+func update_moral(value):
+	SystemManager.data["player_data"]["moral"] += value
+	if SystemManager.data["player_data"]["moral"] > 100: SystemManager.data["player_data"]["moral"] = 100
+	if SystemManager.data["player_data"]["moral"] < 0: SystemManager.data["player_data"]["moral"] = 0
+	var moral_state = Attractiveness.PURE
+	if SystemManager.data["player_data"]["moral"] >= 0 and SystemManager.data["player_data"]["moral"] < 16:
+		moral_state = Attractiveness.GOOD
+	if SystemManager.data["player_data"]["moral"] >= 16 and SystemManager.data["player_data"]["moral"] < 32:
+		moral_state = Attractiveness.NICE
+	if SystemManager.data["player_data"]["moral"] >= 32 and SystemManager.data["player_data"]["moral"] < 48:
+		moral_state = Attractiveness.MEAN
+	if SystemManager.data["player_data"]["moral"] >= 64 and SystemManager.data["player_data"]["moral"] < 80:
+		moral_state = Attractiveness.BAD
+	if SystemManager.data["player_data"]["moral"] >= 80:
+		moral_state = Attractiveness.EVIL
+	emit_signal("update_moral_image", moral_state)
+
+func get_moral():
+	return SystemManager.data["player_data"]["moral"]
+		
 func update_attractiveness(value):
 	SystemManager.data["player_data"]["attractiveness"] += value
-	emit_signal("update_attractiveness")
+	if SystemManager.data["player_data"]["attractiveness"] > 100: SystemManager.data["player_data"]["attractiveness"] = 100
+	if SystemManager.data["player_data"]["attractiveness"] < 0: SystemManager.data["player_data"]["attractiveness"] = 0
+	var attract_state = Attractiveness.LOW
+	if SystemManager.data["player_data"]["attractiveness"] >= 25 and SystemManager.data["player_data"]["attractiveness"] < 50:
+		attract_state = Attractiveness.MEDIUM
+	if SystemManager.data["player_data"]["attractiveness"] >= 50 and SystemManager.data["player_data"]["attractiveness"] < 75:
+		attract_state = Attractiveness.HIGH
+	if SystemManager.data["player_data"]["attractiveness"] >= 75 :
+		attract_state = Attractiveness.REALLY_HIGH
+	emit_signal("update_attractiveness_image", attract_state)
 	update_goblin_spawn_rate()
 	
 func get_attractiveness():
@@ -144,8 +199,6 @@ onready var goblin_ticker = 0
 func check_for_goblin_spawn():
 	if ResourceManager.get_value(ResourceManager.Resource.POPULATION) < ResourceManager.get_value(ResourceManager.Resource.MAX_POPULATION):
 		var sr = get_goblin_spawn_rate()
-		SystemManager.print("goblin ticker: " + String(goblin_ticker))
-		SystemManager.print("get_goblin_spawn_rate ticker: " + String(sr))
 		if goblin_ticker >= sr:
 			emit_signal("spawn_goblin")
 			goblin_ticker = 0

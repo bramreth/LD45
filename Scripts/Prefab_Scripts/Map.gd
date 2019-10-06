@@ -11,7 +11,8 @@ enum TILETYPE {
 	HUMAN_STREET = 7,
 	HUMAN_BUILDING = 8,
 	HUMAN_THRONE_ROOM = 9,
-	THE_PAINTING = 10
+	THE_PAINTING = 10,
+	CONSTRUCTION = 11
 }
 
 var itemSpawnLocations = {
@@ -52,8 +53,8 @@ func get_cell_val(cell):
 	return get_cellv(cell)
 
 func get_town_reach():
-	var maxX = 10
-	var maxY = 10
+	var maxX = 7
+	var maxY = 7
 	
 	for cell in get_used_cells_by_id(TILETYPE.BUILDING):
 		if cell.x > maxX:
@@ -140,7 +141,7 @@ var hut = preload("res://Assets/Prefabs/BuildingMapEntity.tscn")
 var itemEntity = preload("res://Assets/Prefabs/ItemMapEntity.tscn")
 var buildEntity = preload("res://Assets/Prefabs/BuildingMapEntity.tscn")
 var goblinEntity = preload("res://Assets/Prefabs/GoblinCharacterMapEntity.tscn")
-
+var enemyEntity = preload("res://Assets/Prefabs/EnemyMapEntity.tscn")
 func draw_world():
 	for cell in get_used_cells_by_id(TILETYPE.BASE):
 		var noiseVal = WorldGenerator.get_noise_value(cell)
@@ -173,9 +174,17 @@ func spawn_goblin():
 	charactersNode.call_deferred("add_child", newGoblin)
 	newGoblin.call_deferred("join_clan")
 	
-
+func spawn_enemy():
+	var validSpawns = get_used_cells()
+	var spawn = validSpawns[randi()%validSpawns.size()]
+	var newEnemy = enemyEntity.instance()
+	newEnemy.position = map_to_world(spawn) + Vector2(1, cell_size.y/2)
+	newEnemy.connect("selected", gameRoot, "select_character")
+	charactersNode.call_deferred("add_child", newEnemy)
+	
 func add_hut(cell: Vector2):
 	var newHut = hut.instance()
-	entitiesNode.add_child(newHut)
+	newHut.setup(GameManager.Building.HUT)
+	buildingsNode.add_child(newHut)
 	newHut.position = map_to_world(cell) + Vector2(0, cell_size.y/2+10)
 	newHut.connect("selected", gameRoot, "select_entity")

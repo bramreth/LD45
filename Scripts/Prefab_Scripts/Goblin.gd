@@ -11,11 +11,20 @@ export var strength = 5
 
 # possible jobs
 var jobs = ["gather", "rest", "relax", "eat", "build", "fight", "wander"]
+#Gather - go to neareast item on the floor and pick up
+#Rest - go to neareast hut and sleep
+#Relax - go to the nearest campfire and relax
+#Eat - go to the nearest mess hall and attempt to eat 1-3 food
+#Build - go to the neareast construction site and help
+#Fight - for to the neareast combat node and join the fight
+#Wander - wander around the town
+
 var currentJob = "idle"
 var currentTarget = null
 
 func _ready():
 	._ready()
+	print("READY GOBLIN ++++++++++++++++++++++++++++")
 	randomize()
 	type = GameManager.ENTITY_TYPE.GOBLIN
 	yield(get_tree().create_timer(randi()%3+1), "timeout")
@@ -25,7 +34,7 @@ func join_clan():
 	emit_signal("request_job_target", self, "join")
 
 func determine_jobs():
-	return "wander"
+	return "rest"
 	# essentials
 	if combat_in_proximity():
 		return "fight"
@@ -56,24 +65,31 @@ func build_in_proximity():
 	return false
 	
 func start_job():
-	print("START WANDERING")
+	print("START JOB +++++++++++++++++++++++++++++++++++++++++++++++++")
 	currentJob = determine_jobs()
 	emit_signal("request_job_target", self, currentJob)
 
+#Gets a path to the job target and the target from the Game script
 func handle_job(path, target):
 	currentTarget = target
-	call(currentJob, path, target)
-	drain_energy_and_food()
-	#log_stats()
+	
+	if currentTarget != null:
+		if path != null:
+			move(path)
+		else:
+			job_movement_done()
+	else: 
+		print("NO TARGET +++++++++++++++++++++++++++++++++++++++++++++++++")
 
 func job_movement_done():
-	if currentTarget == null:
-		finish_job()
+	print("MOVEMENT DONE +++++++++++++++++++++++++++++++++++++++++++++++++")
+	drain_energy_and_food()
+	call(currentJob)
 
 func finish_job():
+	print("FINISH JOB +++++++++++++++++++++++++++++++++++++++++++++++++")
 	currentJob = "idle"
 	currentTarget = null
-	print("DONE WANDERING")
 	yield(get_tree().create_timer(randi()%5+1), "timeout")
 	start_job()
 
@@ -102,29 +118,31 @@ func adjust_stats(hun, ener, happ):
 	elif happiness > 100:
 		happiness = 100
 
-func gather(path, target):
+func gather():
 	adjust_stats(-10,-10,-10)
 
-func rest(path, target):
+func rest():
 	adjust_stats(0,50,10)
-
-func relax(path, target):
+	var success = currentTarget.use_building(self)
+	if !success: #House is full :(
+		emit_signal("request_job_target", self, currentJob)
+	
+func relax():
 	adjust_stats(0,50,10)
 	
-func eat(path, target):
+func eat():
 	adjust_stats(50,0,10)
 
-func build(path, target):
+func build():
 	adjust_stats(-10,-10,-10)
 	
-func fight(path, target):
+func fight():
 	adjust_stats(-10,-10,-10)
 
-func wander(path, target):
-	print("WANDERING")
+func wander():
 	adjust_stats(0,-10,10)
-	move(path)
-	
+	finish_job()
+
 func drain_energy_and_food():
 	adjust_stats(-2,-3,0)
 

@@ -82,6 +82,22 @@ func _thread_spawn_goblin(userdata):
 func goblin_spawned():
 	goblinSpawningThread.wait_to_finish()
 
+
+var enemySpawningThread: Thread
+func spawn_enemies(amount):
+	print("spawning enemies: " + String(amount))
+	enemySpawningThread = Thread.new()
+	enemySpawningThread.start(self, "_thread_spawn_enemies", amount)
+	
+
+func _thread_spawn_enemies(amount):
+	for i in range(amount):
+		map.spawn_enemy()
+	call_deferred("enemy_spawned")
+
+func enemy_spawned():
+	enemySpawningThread.wait_to_finish()
+	
 func remove_items_from_map():
 	for child in $Map/Navigation/YSort/Items.get_children():
 		if not child.pickedUp:
@@ -94,9 +110,7 @@ func _exit_tree():
 		buildingSpawningThread.wait_to_finish
 	if goblinSpawningThread != null:
 		goblinSpawningThread.wait_to_finish()
-		
-func spawn_enemies(amount):
-	pass
+
 
 ################################################################################################
 # ENTITY SELECTION
@@ -163,6 +177,20 @@ func provide_movement_target(character, job):
 func ai_wander(character):
 	var path = get_path_between_points(character.position, map.get_random_spot_in_the_town())
 	character.handle_job(path, null)
+
+func ai_rest(character):
+	var restStop = get_closest_building_by_type(GameManager.Building.HUT, character.position)
+	var path = get_path_between_points(character.position, restStop.get_position())
+	character.handle_job(path, restStop)
+
+func get_closest_building_by_type(type, position):
+	var distance = null
+	var closestBuilding = null
+	for build in $Map/Navigation/YSort/Building.get_children():
+		if build.building_type == type:
+			if distance == null or position.distance_to(build.get_position) < distance:
+				closestBuilding = build
+	return closestBuilding
 
 func ai_join(character):
 	match character.type:
