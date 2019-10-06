@@ -110,11 +110,14 @@ func _on_hut_button_pressed():
 
 func gameplay_tick():
 	var rotation
+	var tween = $clock/Tween
 	if GameManager.is_daytime():
 		rotation = 180/GameManager.DAY_LENGTH
 	else:
 		rotation = 180/GameManager.NIGHT_LENGTH
-	clock.rect_rotation -= rotation
+	tween.interpolate_property(clock, "rect_rotation", clock.rect_rotation, clock.rect_rotation - rotation, 1.0, Tween.TRANS_LINEAR,Tween.EASE_IN)
+	tween.start()
+#	clock.rect_rotation -= rotation
 
 func update_attractiveness(state):
 	match state:
