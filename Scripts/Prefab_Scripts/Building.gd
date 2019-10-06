@@ -31,11 +31,16 @@ func setup(resource):
 		GameManager.Building.HUT:
 			ResourceManager.update_resource(ResourceManager.Resource.MAX_POPULATION, 5)
 			print("hut built!!", ResourceManager.get_value(ResourceManager.Resource.MAX_POPULATION))
-	
+
 func _ready():
 	._ready()
 	type = GameManager.ENTITY_TYPE.BUILDING
 	GameManager.connect("gameplay_tick", self, "gameplay_tick")
+
+func is_at_capacity():
+	if occupants.size() >= buildingStats["capacity"][building_type]:
+		return true
+	return false
 
 func use_building(character):
 	if occupants.size() < buildingStats["capacity"][building_type]:
