@@ -10,8 +10,6 @@ signal day_started()
 signal night_started(event)
 signal gameplay_tick()
 
-signal update_attractiveness()
-
 var debug_flag = false
 
 onready var night_events = SystemManager.data["events"]["night"]
@@ -172,20 +170,6 @@ func update_moral(value):
 
 func get_moral():
 	return SystemManager.data["player_data"]["moral"]
-		
-func update_attractiveness(value):
-	SystemManager.data["player_data"]["attractiveness"] += value
-	if SystemManager.data["player_data"]["attractiveness"] > 100: SystemManager.data["player_data"]["attractiveness"] = 100
-	if SystemManager.data["player_data"]["attractiveness"] < 0: SystemManager.data["player_data"]["attractiveness"] = 0
-	var attract_state = Attractiveness.LOW
-	if SystemManager.data["player_data"]["attractiveness"] >= 25 and SystemManager.data["player_data"]["attractiveness"] < 50:
-		attract_state = Attractiveness.MEDIUM
-	if SystemManager.data["player_data"]["attractiveness"] >= 50 and SystemManager.data["player_data"]["attractiveness"] < 75:
-		attract_state = Attractiveness.HIGH
-	if SystemManager.data["player_data"]["attractiveness"] >= 75 :
-		attract_state = Attractiveness.REALLY_HIGH
-	emit_signal("update_attractiveness_image", attract_state)
-	update_goblin_spawn_rate()
 	
 func get_attractiveness():
 	return SystemManager.data["player_data"]["attractiveness"]

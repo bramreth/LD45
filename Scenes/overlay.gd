@@ -15,7 +15,6 @@ func _ready():
 	init_resources()
 	ResourceManager.connect("update_resource", self, "update_resource")
 	GameManager.connect("gameplay_tick", self, "gameplay_tick")
-	GameManager.connect("update_attractiveness_image", self, "update_attractiveness")
 	GameManager.connect("update_moral_image", self, "update_moral")
 	
 	$options_menu.hide()
@@ -118,17 +117,6 @@ func gameplay_tick():
 	tween.interpolate_property(clock, "rect_rotation", clock.rect_rotation, clock.rect_rotation - rotation, 1.0, Tween.TRANS_LINEAR,Tween.EASE_IN)
 	tween.start()
 #	clock.rect_rotation -= rotation
-
-func update_attractiveness(state):
-	match state:
-		GameManager.Attractiveness.LOW:
-			pass
-		GameManager.Attractiveness.MEDIUM:
-			pass
-		GameManager.Attractiveness.HIGH:
-			pass
-		GameManager.Attractiveness.VERY_HIGH:
-			pass
 
 func update_moral(state):
 	match state:
