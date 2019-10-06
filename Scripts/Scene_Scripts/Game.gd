@@ -162,14 +162,3 @@ func _on_overlay_build(type, val):
 			
 	
 	$Map/Navigation/YSort/build_tool.visible = building
-	
-
-
-func _on_MapEntity3_req_path():
-	var me = $Map/Navigation/YSort/Characters/MapEntity3
-	print($Map/Navigation/Map.world_to_map(me.position))
-	var target = $Map/Navigation/Map.world_to_map(me.position)
-	target.x += randi() % 2 - 1
-	target.y += randi() % 2 - 1
-	var path = navigation.get_simple_path($Map/Navigation/Map.world_to_map(me.position), target, false)
-	me.move(path)
