@@ -11,7 +11,8 @@ enum TILETYPE {
 	HUMAN_STREET = 7,
 	HUMAN_BUILDING = 8,
 	HUMAN_THRONE_ROOM = 9,
-	THE_PAINTING = 10
+	THE_PAINTING = 10,
+	CONSTRUCTION = 11
 }
 
 var itemSpawnLocations = {
@@ -52,8 +53,8 @@ func get_cell_val(cell):
 	return get_cellv(cell)
 
 func get_town_reach():
-	var maxX = 10
-	var maxY = 10
+	var maxX = 7
+	var maxY = 7
 	
 	for cell in get_used_cells_by_id(TILETYPE.BUILDING):
 		if cell.x > maxX:
