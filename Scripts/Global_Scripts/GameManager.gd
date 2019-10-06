@@ -98,7 +98,7 @@ func start_of_nighttime_tick():
 	var event = {}
 	var finished_search
 	for night_event in night_events:
-		if night_event["min-population"] <= ResourceManager.get_value(ResourceManager.Resource.POPULATION)[0] && !prev_events.has(night_event):
+		if night_event["min-population"] <= ResourceManager.get_value(ResourceManager.Resource.POPULATION) && !prev_events.has(night_event):
 			event = night_event
 			prev_events.append(night_event)
 			break
