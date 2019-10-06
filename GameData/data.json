@@ -141,12 +141,12 @@
 			{
 				"state": "read",
 				"text": "Little goblins, prepare yourself for battle!",
-				"animation": "wizard",
+				"animation": "goblin",
 				"button_text": "Start Battle!",
 				"next_action": "close",
 				"duration": "",
 				"text_speed": 0.03,
-				"sfx": "pre_combat_horn.wav"
+				"sfx": ""
 			}
 		],
 		"battle-2": [
@@ -168,7 +168,7 @@
 				"next_action": "close",
 				"duration": "",
 				"text_speed": 0.03,
-				"sfx": "pre_combat_horn.wav"
+				"sfx": ""
 			}
 		],
 		"battle-3": [

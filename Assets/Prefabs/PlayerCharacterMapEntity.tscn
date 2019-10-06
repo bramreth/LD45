@@ -4,7 +4,6 @@
 [ext_resource path="res://Scripts/Prefab_Scripts/Player.gd" type="Script" id=2]
 
 [node name="MapEntity" instance=ExtResource( 1 )]
+scale = Vector2( 1.25, 1.25 )
 script = ExtResource( 2 )
 
-[node name="head" parent="MapEntity_Sprite" index="5"]
-modulate = Color( 1, 0, 0, 1 )
