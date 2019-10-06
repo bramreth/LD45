@@ -1,14 +1,16 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scenes/Reusable_Scenes/dialog_display.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Theme/goblin_theme.tres" type="Theme" id=2]
 [ext_resource path="res://Scenes/Reusable_Scenes/king.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Assets/Images/dialog/background_panel.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Fonts/default.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://Scenes/Reusable_Scenes/talking_gob.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Reusable_Scenes/wizard.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/Images/dialog/background_panel.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Fonts/default.ttf" type="DynamicFontData" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
-font_data = ExtResource( 5 )
+font_data = ExtResource( 7 )
 
 [node name="dialog_screen" type="Node2D"]
 script = ExtResource( 1 )
@@ -40,11 +42,21 @@ visible = false
 position = Vector2( 0, 190 )
 scale = Vector2( 0.3, 0.3 )
 
+[node name="goblin" parent="dialog_menu/dialog_image/sprite_container" instance=ExtResource( 4 )]
+visible = false
+position = Vector2( 10, 200 )
+scale = Vector2( 0.25, 0.25 )
+
+[node name="wizard" parent="dialog_menu/dialog_image/sprite_container" instance=ExtResource( 5 )]
+visible = false
+position = Vector2( 0, 151.387 )
+scale = Vector2( 0.216351, 0.207213 )
+
 [node name="dialog_background" type="TextureRect" parent="dialog_menu"]
 margin_top = 255.0
 margin_right = 1024.0
 margin_bottom = 555.0
-texture = ExtResource( 4 )
+texture = ExtResource( 6 )
 
 [node name="dialog_container" type="RichTextLabel" parent="dialog_menu/dialog_background"]
 anchor_left = 0.5

@@ -165,7 +165,10 @@ func ai_wander(character):
 	character.handle_job(path, null)
 
 func ai_join(character):
-	SystemManager.print(" SPAWNED AT: " + String(character.position) + "+++++++++++++++++++++++++++++++++++++++++")
+	match character.type:
+		GameManager.ENTITY_TYPE.GOBLIN:
+			SystemManager.print("GOBLIN SPAWNED AT: " + String(character.position))
+			ResourceManager.update_resource(ResourceManager.Resource.POPULATION, 1)
 
 ################################################################################################
 # CAMERA
