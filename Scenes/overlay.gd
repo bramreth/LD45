@@ -11,6 +11,7 @@ var music_swap = true
 onready var clock = get_node("clock")
 onready var attractive_meter = get_node("attractive_meter")
 func _ready():
+	$attractiveness_meter.value = GameManager.get_attractiveness()
 	reset_build_buttons()
 	init_resources()
 	ResourceManager.connect("update_resource", self, "update_resource")
@@ -72,13 +73,13 @@ func no_build():
 func _on_build_button_pressed():
 	build = not build
 	reset_build_buttons()
-	if current != "blank":
+	if current != "mess":
 		build = true
-		current = "blank"
+		current = "mess"
 	if build:
-		$VBoxContainer/Container/build_button.modulate = Color(1.0,1.0,1.0,1.0)
+		$VBoxContainer/Container/mess_button.modulate = Color(1.0,1.0,1.0,1.0)
 	
-	#emit_signal("build", "blank", build)
+	emit_signal("build", GameManager.Building.MESS, build)
 
 
 func play_music():
@@ -116,7 +117,10 @@ func gameplay_tick():
 	else:
 		rotation = 180/GameManager.NIGHT_LENGTH
 	tween.interpolate_property(clock, "rect_rotation", clock.rect_rotation, clock.rect_rotation - rotation, 1.0, Tween.TRANS_LINEAR,Tween.EASE_IN)
+	tween.interpolate_property($attractiveness_meter, "value", $attractiveness_meter.value, GameManager.get_attractiveness(), 0.2, Tween.TRANS_BACK, Tween.EASE_OUT)
 	tween.start()
+	
+	 
 #	clock.rect_rotation -= rotation
 
 func update_attractiveness(state):
@@ -173,3 +177,14 @@ func show_goblin(details):
 
 func hide_goblin():
 	$VBoxContainer/Container/details.hide()
+
+func _on_camp_button_pressed():
+	build = not build
+	reset_build_buttons()
+	if current != "mess":
+		build = true
+		current = "mess"
+	if build:
+		$VBoxContainer/Container/camp_button.modulate = Color(1.0,1.0,1.0,1.0)
+	
+	emit_signal("build", GameManager.Building.CAMP, build)

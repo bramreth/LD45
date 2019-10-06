@@ -26,6 +26,7 @@ var itemSpawnLocations = {
 var prices = {}
 var p1 = {}
 var p2 ={}
+var p3 ={}
 	
 
 var entitiesNode
@@ -36,15 +37,21 @@ var gameRoot
 func _ready():
 	randomize()
 	p1[ResourceManager.Resource.WOOD] = 1
-	p1[ResourceManager.Resource.STONE] = 1
+	p1[ResourceManager.Resource.STONE] = 2
 	p1[ResourceManager.Resource.GOLD] = 0
 	
 	p2[ResourceManager.Resource.WOOD] = 2
-	p2[ResourceManager.Resource.STONE] = 4
-	p2[ResourceManager.Resource.GOLD] = 0
+	p2[ResourceManager.Resource.STONE] = 0
+	p2[ResourceManager.Resource.GOLD] = 1
+	
+	p3[ResourceManager.Resource.WOOD] = 2
+	p3[ResourceManager.Resource.STONE] = 1
+	p3[ResourceManager.Resource.GOLD] = 0
 	
 	prices[GameManager.Building.HUT] = p1
-	#prices[GameManager.Building.RUBBLE] = p1
+	prices[GameManager.Building.CAMP] = p2
+	prices[GameManager.Building.MESS] = p3
+	
 
 func get_cell_size():
 	return cell_size
