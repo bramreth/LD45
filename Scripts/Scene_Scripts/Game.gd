@@ -26,8 +26,12 @@ func _ready():
 	#GameManager.connect("night_started", self, "remove_items_from_map")
 	
 	for character in $Map/Navigation/YSort/Characters.get_children():
+		if character.type == GameManager.ENTITY_TYPE.CHARACTER:
+			character.connect("request_job_target", self, "provide_movement_target")
+		elif character.type == GameManager.ENTITY_TYPE.PLAYER:
+			character.connect("movement_done", self, "perform_contextual_action")
 		character.connect("selected", self, "select_character")
-		character.connect("movement_done", self, "perform_contextual_action")
+		
 	for item in $Map/Navigation/YSort/Items.get_children():
 		item.connect("selected", self, "select_entity")
 	
@@ -68,11 +72,14 @@ func building_spawned():
 
 func remove_items_from_map():
 	for child in $Map/Navigation/YSort/Items.get_children():
-		child.queue_free()
+		if not child.pickedUp:
+			child.queue_free()
 
 func _exit_tree():
-	itemSpawningThread.wait_to_finish()
-	buildingSpawningThread.wait_to_finish()
+	if itemSpawningThread != null:
+		itemSpawningThread.wait_to_finish()
+	if buildingSpawningThread != null:
+		buildingSpawningThread.wait_to_finish()
 		
 func spawn_enemies(amount):
 	pass
@@ -109,7 +116,7 @@ func perform_contextual_action(character):
 			selectedEntity = null
 
 ################################################################################################
-# MOVEMENT
+# PLAYER MOVEMENT
 ################################################################################################
 func _unhandled_input(event: InputEvent):
 	if event is InputEventMouseButton:
@@ -117,10 +124,28 @@ func _unhandled_input(event: InputEvent):
 			get_tree().set_input_as_handled()
 			move_character(get_global_mouse_position())
 
+func get_path_between_points(start, end):
+		return navigation.get_simple_path(start, end, false)
+
 func move_character(target):
-	var path = navigation.get_simple_path(player.position, target, false)
+	var path = get_path_between_points(player.position, target)
 	player.move(path)
 
+################################################################################################
+# AI MOVEMENT
+################################################################################################
+
+func provide_movement_target(character, job):
+	call(("ai_" + job), character)
+
+func ai_wander(character):
+	var path = get_path_between_points(character.position, map.get_random_spot_in_the_town())
+	$Map/Navigation/YSort/Line2D.points = path
+	character.handle_job(path, null)
+
+################################################################################################
+# CAMERA
+################################################################################################
 #handle build tool
 func _physics_process(delta):
 	if building:
@@ -129,7 +154,7 @@ func _physics_process(delta):
 		var tile = $Map/Navigation/Map.world_to_map(mouse_pos)
 		$Map/Navigation/YSort/build_tool.position =  $Map/Navigation/Map.map_to_world(tile) +Vector2(0, ($Map/Navigation/Map.cell_size.y/2)-172)
 		var cell = $Map/Navigation/Map.get_cell_val(tile)
-		if $Map/Navigation/Map.check_can_build(tile):
+		if $Map/Navigation/Map.check_can_build(tile, current_building):
 			$Map/Navigation/YSort/build_tool/Sprite.get_material().set_shader_param("color", Color("8c980101"))
 		else:
 			$Map/Navigation/YSort/build_tool/Sprite.get_material().set_shader_param("color", Color("8c299801"))	

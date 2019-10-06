@@ -6,7 +6,12 @@ enum TILETYPE {
 	BUILDING = 2,
 	GRASS = 3,
 	FOREST = 4,
-	CAVE = 5
+	CAVE = 5,
+	HUMAN_WALL = 6,
+	HUMAN_STREET = 7,
+	HUMAN_BUILDING = 8,
+	HUMAN_THRONE_ROOM = 9,
+	THE_PAINTING = 10
 }
 
 var itemSpawnLocations = {
@@ -22,21 +27,51 @@ var charactersNode
 var buildingsNode
 var gameRoot
 
+func _ready():
+	randomize()
+
 func get_cell_size():
 	return cell_size
 	
 func get_cell_val(cell):
 	return get_cellv(cell)
+
+func get_town_reach():
+	var maxX = 10
+	var maxY = 10
 	
-func check_can_build(tile):
+	for cell in get_used_cells_by_id(TILETYPE.BUILDING):
+		if cell.x > maxX:
+			maxX = cell.x
+		if cell.y > maxY:
+			maxY = cell.y
+	
+	return Vector2(maxX, maxY)
+
+func get_random_spot_in_the_town():
+	var townLimit = get_town_reach()
+	var randomSpot = Vector2(int(rand_range(0,townLimit.x)), int(rand_range(0,townLimit.y)))
+	return map_to_world(randomSpot) + Vector2(1, cell_size.y/2)
+	
+func check_can_build(tile, type):
 	var cell = get_cellv(tile)
-	if cell == 0 or cell == 1 or cell == 2 or cell == 5 or cell == -1:
+	if (cell == 0 or cell == 1 or cell == 2 or cell == 5 or cell == -1) :
+		return true
+	elif not can_afford(type):
 		return true
 	else:
-		false
+		return false
+		
+func can_afford(type):
+#	print(ResourceManager.get_value(ResourceManager.Resource.WOOD) > 2)
+	
+	if ResourceManager.get_value(ResourceManager.Resource.STONE) > 2:
+		return true
+	else:
+		return false
 	
 func build_building(tile, type):
-	if check_can_build(tile):
+	if check_can_build(tile, type):
 		return
 	set_cellv(tile, TILETYPE.BUILDING)
 	var newItem = buildEntity.instance()
