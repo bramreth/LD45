@@ -28,7 +28,7 @@ func setup(resource):
 	print(resource)
 #	$MapEntity_Sprite.texture = AssetLoader.assets["resources"][resourceType]
 	match building_type:
-		"hut":
+		GameManager.Building.HUT:
 			ResourceManager.update_resource(ResourceManager.Resource.MAX_POPULATION, 5)
 			print("hut built!!", ResourceManager.get_value(ResourceManager.Resource.MAX_POPULATION))
 	
