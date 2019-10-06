@@ -50,7 +50,7 @@ func get_town_reach():
 
 func get_random_spot_in_the_town():
 	var townLimit = get_town_reach()
-	var randomSpot = Vector2((rand_range(0,townLimit)), int(rand_range(0,townLimit)))
+	var randomSpot = Vector2(int(rand_range(0,townLimit.x)), int(rand_range(0,townLimit.y)))
 	return map_to_world(randomSpot) + Vector2(1, cell_size.y/2)
 	
 func check_can_build(tile, type):

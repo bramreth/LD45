@@ -25,10 +25,10 @@ func _ready():
 	#GameManager.connect("night_started", self, "remove_items_from_map")
 	
 	for character in $Map/Navigation/YSort/Characters.get_children():
-		character.connect("selected", self, "select_character")
-		character.connect("movement_done", self, "perform_contextual_action")
 		if character.type == GameManager.ENTITY_TYPE.CHARACTER:
 			character.connect("request_job_target", self, "provide_movement_target")
+		character.connect("selected", self, "select_character")
+		character.connect("movement_done", self, "perform_contextual_action")
 	for item in $Map/Navigation/YSort/Items.get_children():
 		item.connect("selected", self, "select_entity")
 	
@@ -73,8 +73,10 @@ func remove_items_from_map():
 			child.queue_free()
 
 func _exit_tree():
-	itemSpawningThread.wait_to_finish()
-	buildingSpawningThread.wait_to_finish()
+	if itemSpawningThread != null:
+		itemSpawningThread.wait_to_finish()
+	if buildingSpawningThread != null:
+		buildingSpawningThread.wait_to_finish()
 		
 func spawn_enemies(amount):
 	pass
@@ -132,7 +134,7 @@ func provide_movement_target(character, job):
 
 func ai_wander(character):
 	print("ASSIGNING WANDER PATH")
-	print(character + " IS WANDERING")
+	print(" IS WANDERING")
 	var path = get_path_between_points(character.position, map.get_random_spot_in_the_town())
 	character.handle_job("wander", path, null)
 
