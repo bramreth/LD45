@@ -103,6 +103,7 @@ position = Vector2( -132.85, 331.894 )
 position = Vector2( 584.407, 475.318 )
 
 [node name="MapEntity" parent="Map/Navigation/YSort/Characters" instance=ExtResource( 12 )]
+visible = false
 position = Vector2( 138.31, 346.748 )
 
 [node name="Building" type="Node" parent="Map/Navigation/YSort"]
@@ -121,6 +122,8 @@ editor_draw_limits = true
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
 
 [node name="overlay" parent="Camera2D/CanvasLayer" instance=ExtResource( 13 )]
+margin_top = -0.774048
+margin_bottom = -0.774048
 mouse_filter = 2
 
 [connection signal="build" from="Camera2D/CanvasLayer/overlay" to="." method="_on_overlay_build"]
