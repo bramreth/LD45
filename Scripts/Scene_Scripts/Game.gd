@@ -105,6 +105,7 @@ func select_character(character):
 	if selectedCharacter:
 		selectedCharacter.remove_highlight()
 	selectedCharacter = character
+	$Camera2D/CanvasLayer/overlay.show_goblin(character.get_details())
 
 func select_entity(entity):
 	selectedEntity = entity 

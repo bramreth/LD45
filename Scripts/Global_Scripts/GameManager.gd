@@ -16,8 +16,8 @@ var debug_flag = false
 
 onready var night_events = SystemManager.data["events"]["night"]
 
-const DAY_LENGTH = 500
-const NIGHT_LENGTH = 2
+const DAY_LENGTH = 80
+const NIGHT_LENGTH = 40
 
 var currentTick: int = 0 #1/60th seconds since started
 var currentGamePlayTick: int = 0 #Seconds since started
@@ -134,7 +134,7 @@ func get_attractiveness():
 	return SystemManager.data["player_data"]["attractiveness"]
 	
 func update_goblin_spawn_rate():
-	SystemManager.data["player_data"]["goblin_spawn_rate"] = get_attractiveness() * (ResourceManager.get_value(Resource.POPULATION) / ResourceManager.get_value(Resource.POPULATION))
+	SystemManager.data["player_data"]["goblin_spawn_rate"] = get_attractiveness() * (ResourceManager.get_value(ResourceManager.Resource.POPULATION) / ResourceManager.get_value(ResourceManager.Resource.MAX_POPULATION))
 
 func get_goblin_spawn_rate():
 	return SystemManager.data["player_data"]["goblin_spawn_rate"]

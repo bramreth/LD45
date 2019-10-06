@@ -21,3 +21,6 @@ func _process(delta):
 			position = position.linear_interpolate(path[0], (speed * delta)/d)
 		else:
 			path.remove(0)
+			
+func get_details():
+	return[str(100), str(100), str(100), str(100), str(20), SystemManager.data["player_data"]["name"]]
