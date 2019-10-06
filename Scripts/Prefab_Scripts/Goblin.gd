@@ -34,7 +34,7 @@ func join_clan():
 	emit_signal("request_job_target", self, "join")
 
 func determine_jobs():
-	return "rest"
+	return "wander"
 	# essentials
 	if combat_in_proximity():
 		return "fight"
@@ -65,7 +65,6 @@ func build_in_proximity():
 	return false
 	
 func start_job():
-	print("START JOB +++++++++++++++++++++++++++++++++++++++++++++++++")
 	currentJob = determine_jobs()
 	emit_signal("request_job_target", self, currentJob)
 
@@ -73,21 +72,16 @@ func start_job():
 func handle_job(path, target):
 	currentTarget = target
 	
-	if currentTarget != null:
-		if path != null:
-			move(path)
-		else:
-			job_movement_done()
-	else: 
-		print("NO TARGET +++++++++++++++++++++++++++++++++++++++++++++++++")
+	if path != null:
+		move(path)
+	else:
+		job_movement_done()
 
 func job_movement_done():
-	print("MOVEMENT DONE +++++++++++++++++++++++++++++++++++++++++++++++++")
 	drain_energy_and_food()
 	call(currentJob)
 
 func finish_job():
-	print("FINISH JOB +++++++++++++++++++++++++++++++++++++++++++++++++")
 	currentJob = "idle"
 	currentTarget = null
 	yield(get_tree().create_timer(randi()%5+1), "timeout")
@@ -122,11 +116,14 @@ func gather():
 	adjust_stats(-10,-10,-10)
 
 func rest():
-	adjust_stats(0,50,10)
-	var success = currentTarget.use_building(self)
-	if !success: #House is full :(
-		emit_signal("request_job_target", self, currentJob)
-	
+	if currentTarget != null:
+		adjust_stats(0,50,10)
+		var success = currentTarget.use_building(self)
+		if !success: #House is full :(
+			emit_signal("request_job_target", self, currentJob)
+	else :
+		finish_job()
+
 func relax():
 	adjust_stats(0,50,10)
 	

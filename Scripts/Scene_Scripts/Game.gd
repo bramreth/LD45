@@ -180,7 +180,9 @@ func ai_wander(character):
 
 func ai_rest(character):
 	var restStop = get_closest_building_by_type(GameManager.Building.HUT, character.position)
-	var path = get_path_between_points(character.position, restStop.get_position())
+	var path = null
+	if restStop != null:
+		path = get_path_between_points(character.position, restStop.get_position())
 	character.handle_job(path, restStop)
 
 func get_closest_building_by_type(type, position):
