@@ -132,7 +132,7 @@
 				"next_action": "close",
 				"duration": "",
 				"text_speed": 0.03,
-				"sfx": ""
+				"sfx": "pre_combat_horn.wav"
 			}
 		],
 		"battle-2": [
@@ -144,7 +144,7 @@
 				"next_action": "close",
 				"duration": "",
 				"text_speed": 0.03,
-				"sfx": ""
+				"sfx": "pre_combat_horn.wav"
 			}
 		],
 		"battle-3": [
@@ -156,7 +156,7 @@
 				"next_action": "close",
 				"duration": "",
 				"text_speed": 0.03,
-				"sfx": ""
+				"sfx": "pre_combat_horn.wav"
 			}
 		]
 	}

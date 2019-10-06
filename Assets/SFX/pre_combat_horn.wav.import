@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/pre_combat_horn.wav-a238dc8cc48a2085ec9ed50c8d10ce00.sample"
+
+[deps]
+
+source_file="res://Assets/SFX/pre_combat_horn.wav"
+dest_files=[ "res://.import/pre_combat_horn.wav-a238dc8cc48a2085ec9ed50c8d10ce00.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

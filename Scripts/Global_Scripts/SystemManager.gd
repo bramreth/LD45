@@ -9,6 +9,8 @@ var data = JSON
 var dataPath = "res://GameData/data.json"
 func _ready():
 	load_Player_data()	
+	self.add_child(musicPlayer)
+	self.add_child(sfxPlayer)
 	
 func load_Player_data():
 	var file = File.new()
@@ -28,4 +30,5 @@ func changeBackgroundMusic(track):
 
 func playSfx(track):
 	sfxPlayer.stream = load(sfx_dir + track)
+	print("playing_tune", sfxPlayer)
 	sfxPlayer.play()
