@@ -1,21 +1,22 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Assets/Theme/goblin_theme.tres" type="Theme" id=1]
 [ext_resource path="res://Scenes/overlay.gd" type="Script" id=2]
-[ext_resource path="res://Assets/Images/en_craft_9.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Images/debug_hut.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Theme/dark_tree.tres" type="StyleBox" id=5]
-[ext_resource path="res://Assets/Theme/bigger_tree.tres" type="StyleBox" id=6]
-[ext_resource path="res://Assets/Images/ui_icons/wood.png" type="Texture" id=7]
-[ext_resource path="res://Assets/Fonts/default.ttf" type="DynamicFontData" id=8]
-[ext_resource path="res://Assets/Images/ui_icons/rock.png" type="Texture" id=9]
-[ext_resource path="res://Assets/Images/ui_icons/gold.png" type="Texture" id=10]
-[ext_resource path="res://Assets/Images/ui_icons/food.png" type="Texture" id=11]
-[ext_resource path="res://Assets/Images/ui_icons/population.png" type="Texture" id=12]
-[ext_resource path="res://Assets/Images/ui_icons/egg.png" type="Texture" id=13]
-[ext_resource path="res://Assets/Music/main_theme.wav" type="AudioStream" id=14]
-[ext_resource path="res://Assets/Images/ui_icons/settings_cog.png" type="Texture" id=15]
-[ext_resource path="res://Scenes/Reusable_Scenes/dialog_display.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Assets/Images/ui_icons/clock.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Images/en_craft_9.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Images/debug_hut.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Theme/dark_tree.tres" type="StyleBox" id=6]
+[ext_resource path="res://Assets/Theme/bigger_tree.tres" type="StyleBox" id=7]
+[ext_resource path="res://Assets/Images/ui_icons/wood.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Fonts/default.ttf" type="DynamicFontData" id=9]
+[ext_resource path="res://Assets/Images/ui_icons/rock.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Images/ui_icons/gold.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Images/ui_icons/food.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Images/ui_icons/population.png" type="Texture" id=13]
+[ext_resource path="res://Assets/Images/ui_icons/egg.png" type="Texture" id=14]
+[ext_resource path="res://Assets/Music/main_theme.wav" type="AudioStream" id=15]
+[ext_resource path="res://Assets/Images/ui_icons/settings_cog.png" type="Texture" id=16]
+[ext_resource path="res://Scenes/Reusable_Scenes/dialog_display.tscn" type="PackedScene" id=17]
 
 [sub_resource type="StyleBoxFlat" id=1]
 content_margin_top = 10.0
@@ -30,11 +31,11 @@ shadow_size = 3
 
 [sub_resource type="DynamicFont" id=2]
 size = 22
-font_data = ExtResource( 8 )
+font_data = ExtResource( 9 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 32
-font_data = ExtResource( 8 )
+font_data = ExtResource( 9 )
 
 [node name="overlay" type="Control"]
 anchor_right = 1.0
@@ -46,7 +47,18 @@ margin_bottom = 0.225952
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
 
+[node name="clock" type="TextureRect" parent="."]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 116.0
+margin_bottom = 116.0
+rect_min_size = Vector2( 96, 96 )
+rect_pivot_offset = Vector2( 48, 48 )
+texture = ExtResource( 3 )
+expand = true
+
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
+editor/display_folded = true
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -64,14 +76,14 @@ rect_min_size = Vector2( 60, 60 )
 hint_tooltip = "build"
 size_flags_horizontal = 0
 size_flags_vertical = 0
-texture_normal = ExtResource( 3 )
+texture_normal = ExtResource( 4 )
 expand = true
 
 [node name="hut_button" type="TextureButton" parent="VBoxContainer/Container"]
 margin_left = 64.0
 margin_right = 128.0
 margin_bottom = 64.0
-texture_normal = ExtResource( 4 )
+texture_normal = ExtResource( 5 )
 
 [node name="details" type="Tree" parent="VBoxContainer/Container"]
 visible = false
@@ -131,7 +143,7 @@ margin_right = 114.0
 margin_bottom = 25.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/bg = ExtResource( 5 )
+custom_styles/bg = ExtResource( 6 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Container/details/MarginContainer/VBoxContainer/HBoxContainer/Tree"]
 anchor_right = 1.0
@@ -160,7 +172,7 @@ margin_right = 232.0
 margin_bottom = 25.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/bg = ExtResource( 5 )
+custom_styles/bg = ExtResource( 6 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Container/details/MarginContainer/VBoxContainer/HBoxContainer/Tree2"]
 anchor_right = 1.0
@@ -189,7 +201,7 @@ margin_right = 350.0
 margin_bottom = 25.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/bg = ExtResource( 5 )
+custom_styles/bg = ExtResource( 6 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Container/details/MarginContainer/VBoxContainer/HBoxContainer/Tree3"]
 anchor_right = 1.0
@@ -218,7 +230,7 @@ margin_right = 468.0
 margin_bottom = 25.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/bg = ExtResource( 5 )
+custom_styles/bg = ExtResource( 6 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Container/details/MarginContainer/VBoxContainer/HBoxContainer/Tree4"]
 anchor_right = 1.0
@@ -247,7 +259,7 @@ margin_right = 590.0
 margin_bottom = 25.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/bg = ExtResource( 5 )
+custom_styles/bg = ExtResource( 6 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Container/details/MarginContainer/VBoxContainer/HBoxContainer/Tree5"]
 anchor_right = 1.0
@@ -278,7 +290,7 @@ rect_min_size = Vector2( 0, 57 )
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/bg = ExtResource( 6 )
+custom_styles/bg = ExtResource( 7 )
 
 [node name="bottom_menu_list" type="VBoxContainer" parent="VBoxContainer/bottom_menu"]
 anchor_left = 0.5
@@ -314,7 +326,7 @@ custom_constants/separation = 10
 margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 7 )
+texture = ExtResource( 8 )
 expand = true
 
 [node name="value" type="Label" parent="VBoxContainer/bottom_menu/bottom_menu_list/resources/Tree/wood"]
@@ -343,7 +355,7 @@ custom_constants/separation = 10
 margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 9 )
+texture = ExtResource( 10 )
 expand = true
 
 [node name="value" type="Label" parent="VBoxContainer/bottom_menu/bottom_menu_list/resources/Tree2/stone"]
@@ -372,7 +384,7 @@ custom_constants/separation = 10
 margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 10 )
+texture = ExtResource( 11 )
 expand = true
 
 [node name="value" type="Label" parent="VBoxContainer/bottom_menu/bottom_menu_list/resources/Tree3/gold"]
@@ -401,7 +413,7 @@ custom_constants/separation = 10
 margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 11 )
+texture = ExtResource( 12 )
 expand = true
 
 [node name="value" type="Label" parent="VBoxContainer/bottom_menu/bottom_menu_list/resources/Tree4/food"]
@@ -430,7 +442,7 @@ custom_constants/separation = 10
 margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 12 )
+texture = ExtResource( 13 )
 expand = true
 
 [node name="value" type="Label" parent="VBoxContainer/bottom_menu/bottom_menu_list/resources/Tree5/population"]
@@ -475,7 +487,7 @@ custom_constants/separation = 10
 margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 13 )
+texture = ExtResource( 14 )
 expand = true
 
 [node name="value" type="Label" parent="VBoxContainer/bottom_menu/bottom_menu_list/resources/Tree6/eggs"]
@@ -487,7 +499,7 @@ custom_fonts/font = SubResource( 2 )
 text = "0"
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 14 )
+stream = ExtResource( 15 )
 
 [node name="background_filter" type="ColorRect" parent="."]
 visible = false
@@ -507,14 +519,15 @@ margin_bottom = 42.0
 [node name="top_menu" type="HBoxContainer" parent="MarginContainer"]
 margin_right = 984.0
 margin_bottom = 32.0
+custom_constants/separation = 25
 alignment = 2
 
-[node name="settings_button" type="TextureButton" parent="MarginContainer/top_menu"]
+[node name="settings_button2" type="TextureButton" parent="MarginContainer/top_menu"]
 margin_left = 952.0
 margin_right = 984.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
-texture_normal = ExtResource( 15 )
+texture_normal = ExtResource( 16 )
 expand = true
 
 [node name="options_menu" type="VBoxContainer" parent="."]
@@ -548,17 +561,17 @@ rect_min_size = Vector2( 0, 50 )
 custom_fonts/font = SubResource( 3 )
 text = "Quit"
 
-[node name="dialog_screen" parent="." instance=ExtResource( 16 )]
+[node name="dialog_screen" parent="." instance=ExtResource( 17 )]
 visible = false
 position = Vector2( 75, 0 )
 scale = Vector2( 0.85, 0.85 )
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 14 )
+stream = ExtResource( 15 )
 
 [connection signal="pressed" from="VBoxContainer/Container/build_button" to="." method="_on_build_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Container/hut_button" to="." method="_on_hut_button_pressed"]
 [connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_AudioStreamPlayer2D_finished"]
-[connection signal="pressed" from="MarginContainer/top_menu/settings_button" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="MarginContainer/top_menu/settings_button2" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="options_menu/resume_button" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="options_menu/quit_button" to="." method="_on_quit_button_pressed"]

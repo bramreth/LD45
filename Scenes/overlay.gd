@@ -7,13 +7,18 @@ var s1 = preload("res://Assets/Music/ambient.wav")
 var s2 = preload("res://Assets/Music/main_theme.wav")
 var current = null
 
+onready var clock = get_node("clock")
+
 func _ready():
 	reset_build_buttons()
 	init_resources()
 	ResourceManager.connect("update_resource", self, "update_resource")
+	GameManager.connect("gameplay_tick", self, "gameplay_tick")
+	
 	$options_menu.hide()
 	yield(get_tree().create_timer(randi()%20 + 4), "timeout")
 	$AudioStreamPlayer2D.play()
+
 func init_resources():
 	update_resource(ResourceManager.Resource.WOOD)
 	update_resource(ResourceManager.Resource.STONE)
@@ -96,6 +101,13 @@ func _on_hut_button_pressed():
 		$VBoxContainer/Container/hut_button.modulate = Color(1.0,1.0,1.0,1.0)
 	emit_signal("build", "hut", build)
 
+func gameplay_tick():
+	var rotation
+	if GameManager.is_daytime():
+		rotation = 180/GameManager.DAY_LENGTH
+	else:
+		rotation = 180/GameManager.NIGHT_LENGTH
+	clock.rect_rotation -= rotation
 
 func show_menu():
 	if !$dialog_screen.visible:

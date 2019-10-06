@@ -16,8 +16,8 @@ var debug_flag = false
 
 onready var night_events = SystemManager.data["events"]["night"]
 
-const DAY_LENGTH = 80
-const NIGHT_LENGTH = 40
+const DAY_LENGTH = 800
+const NIGHT_LENGTH = 400
 
 var currentTick: int = 0 #1/60th seconds since started
 var currentGamePlayTick: int = 0 #Seconds since started
@@ -66,8 +66,8 @@ func _physics_process(delta):
 	
 	if currentTick%60 == 0:
 		emit_signal("gameplay_tick")
-		check_for_goblin_spawn()
 		if is_daytime():
+			check_for_goblin_spawn()
 			if(currentGamePlayTick%(DAY_LENGTH+NIGHT_LENGTH) == 0):
 				start_of_daytime_tick()
 			else:
