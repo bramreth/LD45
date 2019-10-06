@@ -1,6 +1,6 @@
 extends "res://Scripts/Prefab_Scripts/MapEntity.gd"
 
-export(ResourceManager.Resource) var resourceType
+export(ResourceManager.Resource) var resourceType := ResourceManager.Resource.WOOD
 export(int) var amount := 1
 var pickedUp = false
 
@@ -17,6 +17,7 @@ func setup(resource):
 func pickup():
 	if !pickedUp:
 		$Particles2D.emitting = true
+		pickedUp = true
 		set_process(true)
 		ResourceManager.update_resource(resourceType, amount)
 

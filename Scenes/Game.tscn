@@ -34,14 +34,18 @@ visible = false
 material = ExtResource( 4 )
 texture = ExtResource( 5 )
 
-[node name="Entities" type="Node" parent="Map/Navigation/YSort"]
+[node name="Items" type="Node" parent="Map/Navigation/YSort"]
 
-[node name="MapEntity" parent="Map/Navigation/YSort/Entities" instance=ExtResource( 6 )]
-position = Vector2( -131.742, 330.786 )
+[node name="MapEntity" parent="Map/Navigation/YSort/Items" instance=ExtResource( 6 )]
+position = Vector2( -132.85, 331.894 )
 
 [node name="Characters" type="Node" parent="Map/Navigation/YSort"]
 
-[node name="MapEntity" parent="Map/Navigation/YSort/Characters" instance=ExtResource( 7 )]
+[node name="Player" parent="Map/Navigation/YSort/Characters" instance=ExtResource( 7 )]
+position = Vector2( 381.827, 427.254 )
+isPlayer = true
+
+[node name="Goblin" parent="Map/Navigation/YSort/Characters" instance=ExtResource( 7 )]
 position = Vector2( 250.459, 163.29 )
 
 [node name="MapEntity2" parent="Map/Navigation/YSort/Characters" instance=ExtResource( 7 )]
