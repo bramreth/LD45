@@ -8,6 +8,11 @@ var selectedCharacter = null
 var selectedEntity = null
 var selectedItem = null
 
+#build tool sprites
+
+var hut = preload("res://Assets/Images/debug_hut.png")
+var blank = preload("res://Assets/Images/buildings/building_default.png")
+
 onready var map = $Map/Navigation/Map
 
 var mousePos = Vector2()
@@ -145,6 +150,16 @@ func _process(delta):
 			
 		$Camera2D.position += (mousePos - get_global_mouse_position()) * delta * $Camera2D.zoom * 5.0
 		
-func _on_overlay_build(val):
+func _on_overlay_build(type, val):
 	building = val
+	match type:
+		"hut":
+			$Map/Navigation/YSort/build_tool/Sprite.texture = hut
+			print("hut!")
+		"blank":
+			print("none")
+			$Map/Navigation/YSort/build_tool/Sprite.texture = blank
+			
+	
 	$Map/Navigation/YSort/build_tool.visible = building
+	
