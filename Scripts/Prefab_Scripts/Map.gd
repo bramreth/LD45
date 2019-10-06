@@ -71,7 +71,7 @@ func get_random_spot_in_the_town():
 	
 func check_can_build(tile, type):
 	var cell = get_cellv(tile)
-	if (cell == 0 or cell == 1 or cell == 2 or cell == 5 or cell == -1) :
+	if (cell == 0 or cell == 1 or cell == 2 or cell == 5 or cell == -1 or cell == 11) :
 		return true
 	elif not can_afford(type):
 		return true
