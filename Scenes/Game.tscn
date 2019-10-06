@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/Scene_Scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Tiles/MapTilesLarge.tres" type="TileSet" id=2]
@@ -7,7 +7,8 @@
 [ext_resource path="res://Assets/Images/buildings/building_default.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Prefabs/ItemMapEntity.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Prefabs/CharacterMapEntity.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/overlay.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Assets/Prefabs/EnemyMapEntity.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/overlay.tscn" type="PackedScene" id=9]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
@@ -47,6 +48,9 @@ position = Vector2( 250.459, 163.29 )
 [node name="MapEntity2" parent="Map/Navigation/YSort/Characters" instance=ExtResource( 7 )]
 position = Vector2( 381.827, 427.254 )
 
+[node name="MapEntity3" parent="Map/Navigation/YSort/Characters" instance=ExtResource( 8 )]
+position = Vector2( -767.721, 1301.06 )
+
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2( 512, 300 )
 current = true
@@ -60,7 +64,8 @@ editor_draw_limits = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
 
-[node name="overlay" parent="Camera2D/CanvasLayer" instance=ExtResource( 8 )]
+[node name="overlay" parent="Camera2D/CanvasLayer" instance=ExtResource( 9 )]
 mouse_filter = 2
 
+[connection signal="req_path" from="Map/Navigation/YSort/Characters/MapEntity3" to="." method="_on_MapEntity3_req_path"]
 [connection signal="build" from="Camera2D/CanvasLayer/overlay" to="." method="_on_overlay_build"]
