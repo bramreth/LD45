@@ -167,3 +167,4 @@ outlines = [ PoolVector2Array( -256, 0, 0, -128, 256, 0, 192, 32, 0, -16, -192, 
 10/navigation = SubResource( 2 )
 10/shapes = [  ]
 10/z_index = 0
+
