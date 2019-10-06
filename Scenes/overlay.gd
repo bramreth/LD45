@@ -6,6 +6,7 @@ var build = false
 var s1 = preload("res://Assets/Music/ambient.wav")
 var s2 = preload("res://Assets/Music/main_theme.wav")
 var current = null
+var music_swap = true
 
 onready var clock = get_node("clock")
 onready var attractive_meter = get_node("attractive_meter")
@@ -18,8 +19,7 @@ func _ready():
 	GameManager.connect("update_moral_image", self, "update_moral")
 	
 	$options_menu.hide()
-	yield(get_tree().create_timer(randi()%20 + 4), "timeout")
-	$AudioStreamPlayer2D.play()
+	play_music()
 
 func init_resources():
 	update_resource(ResourceManager.Resource.WOOD)
@@ -81,14 +81,15 @@ func _on_build_button_pressed():
 	emit_signal("build", "blank", build)
 
 
-func _on_AudioStreamPlayer2D_finished():
+func play_music():
 	randomize()
-	yield(get_tree().create_timer(randi()%20 + 4), "timeout")
-	if $AudioStreamPlayer2D.stream == s2:
-		 $AudioStreamPlayer2D.stream = s1
+	if music_swap:
+		 SystemManager.changeBackgroundMusic("main_theme.wav")
 	else:
-		$AudioStreamPlayer2D.stream = s2
-	$AudioStreamPlayer2D.play()
+		SystemManager.changeBackgroundMusic("ambient.wav")
+	music_swap = not music_swap
+	yield(get_tree().create_timer(randi()%60 + 60), "timeout")
+	play_music()
 
 
 func reset_build_buttons():

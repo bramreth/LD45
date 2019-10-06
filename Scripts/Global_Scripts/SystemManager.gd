@@ -1,7 +1,7 @@
 extends Node
 
-onready var musicPlayer = AudioStreamPlayer2D.new()
-onready var sfxPlayer = AudioStreamPlayer2D.new()
+onready var musicPlayer = AudioStreamPlayer.new()
+onready var sfxPlayer = AudioStreamPlayer.new()
 const sfx_dir = "res://Assets/SFX/"
 const bgm_dir = "res://Assets/Music/"
 
