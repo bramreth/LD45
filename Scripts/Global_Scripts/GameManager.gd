@@ -7,10 +7,12 @@ signal spawn_friendly_goblins()
 signal spawn_enemies()
 
 signal day_started()
-signal night_started()
+signal night_started(event)
 signal gameplay_tick()
 
 var debug_flag = false
+
+onready var night_events = SystemManager.data["events"]["night"]
 
 const DAY_LENGTH = 5
 const NIGHT_LENGTH = 2
@@ -24,6 +26,10 @@ enum ENTITY_TYPE {
 	BUILDING,
 	ITEM
 }
+
+onready var population = 0
+onready var attractiveness = 0
+
 
 func start_dialog(scene):
 	if scene != null && !scene.empty():
@@ -87,8 +93,21 @@ func daytime_tick():
 	pass
 	#TODO - ADD FUNCTIONALITY TO HAPPEN DURING DAYTIME
 
+
+var prev_events = []
 func start_of_nighttime_tick():
-	emit_signal("night_started")
+	var event = {}
+	var finished_search
+	for night_event in night_events:
+		if night_event["min-population"] <= population && !prev_events.has(night_event):
+			event = night_event
+			prev_events.append(night_event)
+			break
+	if !event.empty():
+			emit_signal("night_started", event)
+	else:
+		prev_events = []
+		start_of_nighttime_tick()
 	print("Night Started " + String(currentGamePlayTick))
 
 func nighttime_tick():
@@ -104,3 +123,10 @@ func debug_day_cycle_print():
 				print("Night: " + String(currentGamePlayTick))
 		if currentTick%(60*(DAY_LENGTH+NIGHT_LENGTH)) == 0:
 			print("NEW DAY: " + String(get_current_day()) + " <====================")
+			
+			
+func update_population(value):
+	population += value
+	
+func update_attractiveness(value):
+	attractiveness += value

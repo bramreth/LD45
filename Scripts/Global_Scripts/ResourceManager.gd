@@ -20,20 +20,34 @@ func update_resource(resource, value):
 		match resource:
 			ResourceManager.Resource.WOOD:
 				emit_signal("update_resource", Resource.WOOD, value)
-				SystemManager.playerData["resources"]["wood"] += value
+				SystemManager.data["player_data"]["resources"]["wood"] += value
 			ResourceManager.Resource.STONE:
 				emit_signal("update_resource", Resource.STONE, value)
-				SystemManager.playerData["resources"]["stone"] += value
+				SystemManager.data["player_data"]["resources"]["stone"] += value
 			ResourceManager.Resource.GOLD:
 				emit_signal("update_resource", Resource.GOLD, value)
-				SystemManager.playerData["resources"]["gold"] += value
+				SystemManager.data["player_data"]["resources"]["gold"] += value
 			ResourceManager.Resource.FOOD:
 				emit_signal("update_resource", Resource.FOOD, value)
-				SystemManager.playerData["resources"]["food"] += value
+				SystemManager.data["player_data"]["resources"]["food"] += value
 			ResourceManager.Resource.POPULATION:
 				emit_signal("update_resource", Resource.POPULATION, value)
-				SystemManager.playerData["resources"]["population"] += value
+				SystemManager.data["player_data"]["resources"]["population"] += value
 			ResourceManager.Resource.EGG:
 				emit_signal("update_resource", Resource.EGG, value)
-				SystemManager.playerData["resources"]["eggs"] += value
+				SystemManager.data["player_data"]["resources"]["eggs"] += value
 
+func get_value(resource):
+	match resource:
+			ResourceManager.Resource.WOOD:
+				return SystemManager.data["player_data"]["resources"]["wood"] 
+			ResourceManager.Resource.STONE:
+				return SystemManager.data["player_data"]["resources"]["stone"] 
+			ResourceManager.Resource.GOLD:
+				return SystemManager.data["player_data"]["resources"]["gold"] 
+			ResourceManager.Resource.FOOD:
+				return SystemManager.data["player_data"]["resources"]["food"] 
+			ResourceManager.Resource.POPULATION:
+				return SystemManager.data["player_data"]["resources"]["population"] 
+			ResourceManager.Resource.EGG:
+				return SystemManager.data["player_data"]["resources"]["eggs"] 
