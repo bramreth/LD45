@@ -1,5 +1,20 @@
 extends "res://Scripts/Prefab_Scripts/MapEntity.gd"
 
+enum Building {
+	CAMP,
+	HUT,
+	SENTRY,
+	HATCHERY,
+	MESS
+}
+
+var building_type
+
+func setup(resource):
+	building_type = resource
+	print(resource)
+#	$MapEntity_Sprite.texture = AssetLoader.assets["resources"][resourceType]
+	
 func _ready():
 	._ready()
 	type = GameManager.ENTITY_TYPE.BUILDING

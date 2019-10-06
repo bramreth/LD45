@@ -3,6 +3,7 @@ extends Node2D
 onready var navigation: Navigation2D = $Map/Navigation
 
 var building = false
+var current_building = null
 
 var selectedCharacter = null
 var selectedEntity = null
@@ -30,7 +31,7 @@ func _ready():
 		item.connect("selected", self, "select_entity")
 	
 	#GameManager.start_dialog("tutorial")
-	map.setup($Map/Navigation/YSort/Items, $Map/Navigation/YSort/Characters, self)
+	map.setup($Map/Navigation/YSort/Items, $Map/Navigation/YSort/Characters, $Map/Navigation/YSort/Building,  self)
 	GameManager.start_game()
 	
 ################################################################################################
@@ -49,6 +50,20 @@ func _thread_spawn_items(items):
 
 func items_spawned():
 	itemSpawningThread.wait_to_finish()
+	
+var buildingSpawningThread: Thread
+func spawn_buildings(items):
+	buildingSpawningThread = Thread.new()
+	buildingSpawningThread.start(self, "_thread_spawn_items", items)
+
+func _thread_spawn_building(items):
+	for item in items:
+		if(items[item] > 0):
+			map.spawn_items(item, items[item])
+	call_deferred("items_spawned")
+
+func building_spawned():
+	buildingSpawningThread.wait_to_finish()
 
 func remove_items_from_map():
 	for child in $Map/Navigation/YSort/Items.get_children():
@@ -56,6 +71,7 @@ func remove_items_from_map():
 
 func _exit_tree():
 	itemSpawningThread.wait_to_finish()
+	buildingSpawningThread.wait_to_finish()
 		
 func spawn_enemies(amount):
 	pass
@@ -107,7 +123,8 @@ func _physics_process(delta):
 		
 		var tile = $Map/Navigation/Map.world_to_map(mouse_pos)
 		$Map/Navigation/YSort/build_tool.position =  $Map/Navigation/Map.map_to_world(tile) +Vector2(0, ($Map/Navigation/Map.cell_size.y/2)-172)
-		if $Map/Navigation/Map.get_cell_val(tile) == 0 or $Map/Navigation/Map.get_cell_val(tile) == 1:
+		var cell = $Map/Navigation/Map.get_cell_val(tile)
+		if $Map/Navigation/Map.check_can_build(tile):
 			$Map/Navigation/YSort/build_tool/Sprite.get_material().set_shader_param("color", Color("8c980101"))
 		else:
 			$Map/Navigation/YSort/build_tool/Sprite.get_material().set_shader_param("color", Color("8c299801"))	
@@ -126,6 +143,14 @@ func _input(event):
 		mousePos = get_global_mouse_position()
 	if Input.is_action_just_released("middle_mouse"):
 		mousePos = null
+		
+	if Input.is_action_just_pressed("click") && building:
+		if current_building:
+			var cell = $Map/Navigation/Map.world_to_map(get_global_mouse_position())
+			$Map/Navigation/Map.build_building(cell, current_building)
+			print(current_building)
+			
+	
 
 const leftLimit: int = -3300*4
 const rightLimit: int = 3100*4
@@ -162,6 +187,7 @@ func _process(delta):
 		
 func _on_overlay_build(type, val):
 	building = val
+	current_building = type
 	match type:
 		"hut":
 			$Map/Navigation/YSort/build_tool/Sprite.texture = hut
