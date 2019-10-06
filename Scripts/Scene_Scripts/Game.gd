@@ -219,7 +219,7 @@ func _physics_process(delta):
 # handle basic inputs	
 func _input(event):
 	if Input.is_action_just_pressed("scroll_out"):
-		if $Camera2D.zoom.x < 2.0:
+		if $Camera2D.zoom.x < 3.0:
 			$Camera2D.zoom +=  Vector2(0.1, 0.1)
 		
 	if Input.is_action_just_pressed("scroll_up"):
