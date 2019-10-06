@@ -3,12 +3,14 @@ extends Node
 signal start_dialog(scene)
 
 signal spawn_items()
-signal spawn_friendly_goblins()
+signal spawn_goblin()
 signal spawn_enemies()
 
 signal day_started()
 signal night_started(event)
 signal gameplay_tick()
+
+signal update_attractiveness()
 
 var debug_flag = false
 
@@ -59,11 +61,11 @@ func get_current_day():
 
 func _physics_process(delta):
 	currentGamePlayTick = currentTick/60
-	
 	debug_day_cycle_print()
 	
 	if currentTick%60 == 0:
 		emit_signal("gameplay_tick")
+		check_for_goblin_spawn()
 		if is_daytime():
 			if(currentGamePlayTick%(DAY_LENGTH+NIGHT_LENGTH) == 0):
 				start_of_daytime_tick()
@@ -79,14 +81,14 @@ func _physics_process(delta):
 
 func start_of_daytime_tick():
 	emit_signal("day_started")
-	print("Day Started " + String(currentGamePlayTick))
+	SystemManager.print("Day Started " + String(currentGamePlayTick))
 	spawn_items_list[ResourceManager.Resource.EGG] = randi()%2
 	spawn_items_list[ResourceManager.Resource.FOOD] = randi()%4+1
 	spawn_items_list[ResourceManager.Resource.GOLD] = randi()%4
 	spawn_items_list[ResourceManager.Resource.STONE] = randi()%6+1
 	spawn_items_list[ResourceManager.Resource.WOOD] = randi()%6+1
 	emit_signal("spawn_items", spawn_items_list)
-	print(spawn_items_list)
+	SystemManager.print(spawn_items_list)
 
 func daytime_tick():
 	pass
@@ -107,7 +109,7 @@ func start_of_nighttime_tick():
 	else:
 		prev_events = []
 		start_of_nighttime_tick()
-	print("Night Started " + String(currentGamePlayTick))
+	SystemManager.print("Night Started " + String(currentGamePlayTick))
 
 func nighttime_tick():
 	pass
@@ -117,12 +119,33 @@ func debug_day_cycle_print():
 	if debug_flag:
 		if currentTick%60 == 0:
 			if is_daytime():
-				print("Day: " + String(currentGamePlayTick))
+				SystemManager.print("Day: " + String(currentGamePlayTick))
 			else:
-				print("Night: " + String(currentGamePlayTick))
+				SystemManager.print("Night: " + String(currentGamePlayTick))
 		if currentTick%(60*(DAY_LENGTH+NIGHT_LENGTH)) == 0:
-			print("NEW DAY: " + String(get_current_day()) + " <====================")
-			
-				
+			SystemManager.print("NEW DAY: " + String(get_current_day()) + " <====================")
+
 func update_attractiveness(value):
 	SystemManager.data["player_data"]["attractiveness"] += value
+	emit_signal("update_attractiveness")
+	update_goblin_spawn_rate()
+	
+func get_attractiveness():
+	return SystemManager.data["player_data"]["attractiveness"]
+	
+func update_goblin_spawn_rate():
+	SystemManager.data["player_data"]["goblin_spawn_rate"] = get_attractiveness() * (ResourceManager.get_value(Resource.POPULATION) / ResourceManager.get_value(Resource.POPULATION))
+
+func get_goblin_spawn_rate():
+	return SystemManager.data["player_data"]["goblin_spawn_rate"]
+
+onready var goblin_ticker = 0
+func check_for_goblin_spawn():
+	var sr = get_goblin_spawn_rate()
+	SystemManager.print("goblin ticker: " + String(goblin_ticker))
+	SystemManager.print("get_goblin_spawn_rate ticker: " + String(sr))
+	if goblin_ticker >= sr:
+		emit_signal("spawn_goblin")
+		goblin_ticker = 0
+	else:
+		goblin_ticker += 1

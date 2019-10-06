@@ -47,18 +47,17 @@ func handle_dialog():
 	var duration = current_dialog_item["duration"]
 	var text_speed = current_dialog_item["text_speed"] if TYPE_REAL == typeof(current_dialog_item["text_speed"]) else 0.03
 	var sfx = current_dialog_item["sfx"]
-	if SystemManager.debug:
-		print("handling dialog------------------")
-		print("current_dialog_item: " + String(dialog_index))
-		print("state: " + String(state))
-		print("text: " + String(text))
-		print("animation: " + String(animation))
-		print("button_text: " + String(button_text))
-		print("next_action: " + String(next_action))
-		print("duration: " + String(duration))
-		print("text_speed: " + String(text_speed))
-		print("sfx: " + String(sfx))
-		print("---------------------------------")
+	SystemManager.print("handling dialog------------------")
+	SystemManager.print("current_dialog_item: " + String(dialog_index))
+	SystemManager.print("state: " + String(state))
+	SystemManager.print("text: " + String(text))
+	SystemManager.print("animation: " + String(animation))
+	SystemManager.print("button_text: " + String(button_text))
+	SystemManager.print("next_action: " + String(next_action))
+	SystemManager.print("duration: " + String(duration))
+	SystemManager.print("text_speed: " + String(text_speed))
+	SystemManager.print("sfx: " + String(sfx))
+	SystemManager.print("---------------------------------")
 	
 	match state:
 		"read":	

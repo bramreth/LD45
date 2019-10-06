@@ -21,6 +21,7 @@ var mousePos = Vector2()
 
 func _ready():
 	GameManager.connect("spawn_items", self, "spawn_items")
+	GameManager.connect("spawn_goblin", self, "spawn_goblin")
 	GameManager.connect("night_started", self, "start_night")
 	#GameManager.connect("night_started", self, "remove_items_from_map")
 	
@@ -74,6 +75,10 @@ func _exit_tree():
 	buildingSpawningThread.wait_to_finish()
 		
 func spawn_enemies(amount):
+	pass
+	
+func spawn_goblin():
+	SystemManager.print("spawn_goblin")
 	pass
 ################################################################################################
 # ENTITY SELECTION
