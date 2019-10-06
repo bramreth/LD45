@@ -6,3 +6,6 @@
 [node name="MapEntity" index="0" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
+[node name="blush" parent="MapEntity_Sprite/head" index="0"]
+visible = false
+
