@@ -24,14 +24,15 @@ var currentCapacity = 0
 
 func setup(resource):
 	building_type = resource
-	print("BRAM MARKER")
-	print(resource)
-#	$MapEntity_Sprite.texture = AssetLoader.assets["resources"][resourceType]
+	$MapEntity_Sprite.texture = AssetLoader.assets["resources"][building_type]
+	print($MapEntity_Sprite.texture)
 	match building_type:
 		GameManager.Building.HUT:
 			ResourceManager.update_resource(ResourceManager.Resource.MAX_POPULATION, 5)
 			print("hut built!!", ResourceManager.get_value(ResourceManager.Resource.MAX_POPULATION))
-
+		GameManager.Building.RUBBLE:
+			print("rubble built")
+	
 func _ready():
 	._ready()
 	type = GameManager.ENTITY_TYPE.BUILDING

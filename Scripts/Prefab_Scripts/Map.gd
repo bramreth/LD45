@@ -98,7 +98,13 @@ func build_building(tile, type):
 	for item in prices[type].keys():
 		ResourceManager.update_resource(item, -prices[type][item])
 	
-	construction[tile] = type
+
+	
+	var newItem = buildEntity.instance()
+	construction[tile] = [type, newItem]
+	newItem.setup(GameManager.Building.RUBBLE)
+	newItem.position = map_to_world(tile) + Vector2(1, cell_size.y/2)
+	buildingsNode.call_deferred("add_child", newItem)
 	
 	# we need this to create a construction tile that saves the texture and stats of the building
 	# we want. then once a build is completed applies all of it's bonuses.
@@ -111,19 +117,12 @@ func build_building(tile, type):
 #	finish_construction(tile)
 	
 func finish_construction(tile):
+	construction.erase(tile)
 	print(construction)
 	set_cellv(tile, TILETYPE.BUILDING)
-	var newItem = buildEntity.instance()
-	newItem.setup(construction[tile])
-	construction.erase(tile)
-	newItem.position = map_to_world(tile) + Vector2(1, cell_size.y/2)
-	buildingsNode.call_deferred("add_child", newItem)
-
-
+	construction[tile][1].setup(construction[tile][0])
 	print(construction)
 
-
-	
 
 # Called when the node enters the scene tree for the first time.
 func setup(entities, characters, buildings, root):
@@ -143,6 +142,7 @@ var itemEntity = preload("res://Assets/Prefabs/ItemMapEntity.tscn")
 var buildEntity = preload("res://Assets/Prefabs/BuildingMapEntity.tscn")
 var goblinEntity = preload("res://Assets/Prefabs/GoblinCharacterMapEntity.tscn")
 var enemyEntity = preload("res://Assets/Prefabs/EnemyMapEntity.tscn")
+
 func draw_world():
 	for cell in get_used_cells_by_id(TILETYPE.BASE):
 		var noiseVal = WorldGenerator.get_noise_value(cell)

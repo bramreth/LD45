@@ -36,7 +36,8 @@ enum Building {
 	HUT,
 	SENTRY,
 	HATCHERY,
-	MESS
+	MESS,
+	RUBBLE
 }
 
 enum Attractiveness {

@@ -12,3 +12,7 @@ func load_resource_icons():
 	assets["resources"][ResourceManager.Resource.GOLD] = load("res://Assets/Images/ui_icons/gold.png")
 	assets["resources"][ResourceManager.Resource.STONE] = load("res://Assets/Images/ui_icons/rock.png")
 	assets["resources"][ResourceManager.Resource.WOOD] = load("res://Assets/Images/ui_icons/wood.png")
+	assets["resources"][ResourceManager.Resource.WOOD] = load("res://Assets/Images/ui_icons/wood.png")
+	assets["resources"][GameManager.Building.HUT] = load("res://Assets/Images/debug_hut.png")
+	assets["resources"][GameManager.Building.RUBBLE] = load("res://Assets/Images/ui_icons/rock.png")
+	
