@@ -89,6 +89,7 @@ func select_character(character):
 	if selectedCharacter:
 		selectedCharacter.remove_highlight()
 	selectedCharacter = character
+	$Camera2D/CanvasLayer/overlay.show_goblin(character.get_details())
 
 func select_entity(entity):
 	selectedEntity = entity 
@@ -135,7 +136,7 @@ func provide_movement_target(character, job):
 
 func ai_wander(character):
 	var path = get_path_between_points(character.position, map.get_random_spot_in_the_town())
-	$Map/Navigation/YSort/Line2D.points = path
+#	$Map/Navigation/YSort/Line2D.points = path
 	character.handle_job(path, null)
 
 ################################################################################################

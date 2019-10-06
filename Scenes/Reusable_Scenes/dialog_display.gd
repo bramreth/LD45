@@ -129,7 +129,7 @@ func _on_action_button_pressed():
 			next_dialog()
 		"submit_name":
 			if !text_input.text.empty():
-				SystemManager.data["name"] = text_input.text
+				SystemManager.data["player_data"]["name"] = text_input.text
 				next_dialog()
 		"close":
 			kill_dialog()

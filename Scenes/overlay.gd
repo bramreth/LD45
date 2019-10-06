@@ -82,7 +82,8 @@ func _on_AudioStreamPlayer2D_finished():
 
 func reset_build_buttons():
 	for item in $VBoxContainer/Container.get_children():
-		item.modulate = Color(0.4,0.4,0.4,1.0)
+		if item.name != "details":
+			item.modulate = Color(0.4,0.4,0.4,1.0)	
 		
 
 func _on_hut_button_pressed():
@@ -111,3 +112,15 @@ func show_overlay():
 	
 func hide_overlay():
 	$background_filter.hide()
+
+func show_goblin(details):
+	$VBoxContainer/Container/details.show()
+	$VBoxContainer/Container/details/MarginContainer/VBoxContainer/HBoxContainer/Tree/HBoxContainer/health_val.text = details[0]
+	$VBoxContainer/Container/details/MarginContainer/VBoxContainer/HBoxContainer/Tree2/HBoxContainer/hunger_val.text = details[1]
+	$VBoxContainer/Container/details/MarginContainer/VBoxContainer/HBoxContainer/Tree3/HBoxContainer/energy_val.text = details[2]
+	$VBoxContainer/Container/details/MarginContainer/VBoxContainer/HBoxContainer/Tree4/HBoxContainer/happiness_val.text = details[3]
+	$VBoxContainer/Container/details/MarginContainer/VBoxContainer/HBoxContainer/Tree5/HBoxContainer/strength_val.text = details[4]
+	$VBoxContainer/Container/details/MarginContainer/VBoxContainer/name.text = details[5]
+
+func hide_goblin():
+	$VBoxContainer/Container/details.hide()
