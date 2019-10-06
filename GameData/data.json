@@ -10,7 +10,7 @@
 			"stone": 2,
 			"gold":  2,
 			"food":  2,
-			"population":  2,
+			"population":  1,
 			"max_population": 5,
 			"eggs":  2,
 		}
