@@ -7,7 +7,8 @@
 				"button_text": "Next",
 				"next_action": "next",
 				"duration": "",
-				"text_speed": 0.01
+				"text_speed": 0.01,
+				"sfx": ""
 			},
 			{
 				"state": "read",
@@ -16,7 +17,8 @@
 				"button_text": "Next",
 				"next_action": "next",
 				"duration": "",
-				"text_speed": 0.09
+				"text_speed": 0.01,
+				"sfx": ""
 			},
 			{
 				"state": "read_input",
@@ -25,7 +27,8 @@
 				"button_text": "Confirm",
 				"next_action": "submit_name",
 				"duration": "",
-				"text_speed": 0.03
+				"text_speed": 0.01,
+				"sfx": ""
 			},
 			{
 				"state": "cutscene",
@@ -34,7 +37,8 @@
 				"button_text": "",
 				"next_action": "",
 				"duration": 3,
-				"text_speed": 0.03
+				"text_speed": 0.01,
+				"sfx": ""
 			},
 			{
 				"state": "read",
@@ -43,7 +47,8 @@
 				"button_text": "Next",
 				"next_action": "next",
 				"duration": "",
-				"text_speed": 0.03
+				"text_speed": 0.01,
+				"sfx": ""
 			},
 			{
 				"state": "read",
@@ -52,7 +57,8 @@
 				"button_text": "Next",
 				"next_action": "next",
 				"duration": "",
-				"text_speed": 0.03
+				"text_speed": 0.01,
+				"sfx": ""
 			},
 			{
 				"state": "read",
@@ -61,7 +67,8 @@
 				"button_text": "Next",
 				"next_action": "next",
 				"duration": "",
-				"text_speed": 0.03
+				"text_speed": 0.01,
+				"sfx": ""
 			},
 			{
 				"state": "read",
@@ -70,7 +77,8 @@
 				"button_text": "Next",
 				"next_action": "close",
 				"duration": "",
-				"text_speed": 0.03
+				"text_speed": 0.01,
+				"sfx": ""
 			}
 		]
 	}

@@ -5,10 +5,9 @@ var current_dialog = {}
 var dialog_index
 var current_dialog_name
 
-onready var dialog_image_animation= get_node("dialog_menu/dialog_image/sprite_container/animated_sprite")
-onready var dialog_container = get_node("dialog_menu/dialog_container")
-onready var text_input = get_node("dialog_menu/text_input")
-onready var action_button = get_node("action_button")
+onready var dialog_container = get_node("dialog_menu/dialog_background/dialog_container")
+onready var text_input = get_node("dialog_menu/MarginContainer/hbox/text_input")
+onready var action_button = get_node("dialog_menu/MarginContainer/hbox/action_button")
 
 onready var scene_to_open = null
 onready var lock_thread = false
@@ -43,7 +42,7 @@ func handle_dialog():
 	next_action = current_dialog_item["next_action"]
 	var duration = current_dialog_item["duration"]
 	var text_speed = current_dialog_item["text_speed"] if TYPE_REAL == typeof(current_dialog_item["text_speed"]) else 0.03
-	
+	var sfx = current_dialog_item["sfx"]
 	print("handling dialog------------------")
 	print("current_dialog_item: " + String(dialog_index))
 	print("state: " + String(state))
@@ -53,37 +52,43 @@ func handle_dialog():
 	print("next_action: " + String(next_action))
 	print("duration: " + String(duration))
 	print("text_speed: " + String(text_speed))
+	print("sfx: " + String(sfx))
 	print("---------------------------------")
 	
 	match state:
 		"read":	
 			text_input.visible = false
-			startImageAnimation(animation)
-			startDialog(text, text_speed)
+			showAnimation(animation)
+			startDialog(text, text_speed, sfx)
 			startButton(button_text)
 		"input":
-			startImageAnimation(animation)
+			showAnimation(animation)
 			startInput()
 			startButton(button_text)
 		"read_input":
-			startImageAnimation(animation)
-			startDialog(text, text_speed)
+			showAnimation(animation)
+			startDialog(text, text_speed, sfx)
 			startInput()
 			startButton(button_text)
 		"cutscene":
 			startCutScene(duration)
 	
 	
-func startImageAnimation(animation):
-	if animation.empty(): 
-		return
-	dialog_image_animation.animation = animation
-	dialog_image_animation.playing = true
-	
-			
-			
-func startDialog(text, text_speed):
+func showAnimation(animation):
+	$dialog_menu/dialog_image/sprite_container/king.visible = false
+	match animation:
+		"goblin":
+			$dialog_menu/dialog_image/sprite_container/king.visible = true
+		"wizard":
+			$dialog_menu/dialog_image/sprite_container/king.visible = true
+		"king":
+			$dialog_menu/dialog_image/sprite_container/king.visible = true
+
+
+func startDialog(text, text_speed, sfx):
 	var para = text if !text.empty() else ""
+	if !sfx.empty():
+		SystemManager.playSfx(sfx)
 	dialog_container.visible = true	
 	dialog_container.text = ""
 	print(para)

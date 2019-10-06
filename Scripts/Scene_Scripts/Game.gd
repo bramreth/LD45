@@ -8,6 +8,11 @@ var selectedCharacter = null
 var selectedEntity = null
 var selectedItem = null
 
+#build tool sprites
+
+var hut = preload("res://Assets/Images/debug_hut.png")
+var blank = preload("res://Assets/Images/buildings/building_default.png")
+
 onready var map = $Map/Navigation/Map
 onready var player = $Map/Navigation/YSort/Characters/Player
 
@@ -98,7 +103,7 @@ func _physics_process(delta):
 		var mouse_pos = get_global_mouse_position()
 		
 		var tile = $Map/Navigation/Map.world_to_map(mouse_pos)
-		$Map/Navigation/YSort/build_tool.position =  $Map/Navigation/Map.map_to_world(tile) +Vector2(0, $Map/Navigation/Map.cell_size.y/2)
+		$Map/Navigation/YSort/build_tool.position =  $Map/Navigation/Map.map_to_world(tile) +Vector2(0, ($Map/Navigation/Map.cell_size.y/2)-172)
 		if $Map/Navigation/Map.get_cell_val(tile) == 0 or $Map/Navigation/Map.get_cell_val(tile) == 1:
 			$Map/Navigation/YSort/build_tool/Sprite.get_material().set_shader_param("color", Color("8c980101"))
 		else:
@@ -152,6 +157,26 @@ func _process(delta):
 			
 		$Camera2D.position += (mousePos - get_global_mouse_position()) * delta * $Camera2D.zoom * 5.0
 		
-func _on_overlay_build(val):
+func _on_overlay_build(type, val):
 	building = val
+	match type:
+		"hut":
+			$Map/Navigation/YSort/build_tool/Sprite.texture = hut
+			print("hut!")
+		"blank":
+			print("none")
+			$Map/Navigation/YSort/build_tool/Sprite.texture = blank
+			
+	
 	$Map/Navigation/YSort/build_tool.visible = building
+	
+
+
+func _on_MapEntity3_req_path():
+	var me = $Map/Navigation/YSort/Characters/MapEntity3
+	print($Map/Navigation/Map.world_to_map(me.position))
+	var target = $Map/Navigation/Map.world_to_map(me.position)
+	target.x += randi() % 2 - 1
+	target.y += randi() % 2 - 1
+	var path = navigation.get_simple_path($Map/Navigation/Map.world_to_map(me.position), target, false)
+	me.move(path)

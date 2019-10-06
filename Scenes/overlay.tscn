@@ -1,24 +1,21 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Assets/Theme/goblin_theme.tres" type="Theme" id=1]
 [ext_resource path="res://Scenes/overlay.gd" type="Script" id=2]
-[ext_resource path="res://Assets/Images/ui_icons/settings_cog.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Fonts/default.ttf" type="DynamicFontData" id=4]
-[ext_resource path="res://Assets/Images/en_craft_9.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Images/ui_icons/wood.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Images/en_craft_9.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Images/debug_hut.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Images/ui_icons/wood.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Fonts/default.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://Assets/Images/ui_icons/rock.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Images/ui_icons/gold.png" type="Texture" id=8]
 [ext_resource path="res://Assets/Images/ui_icons/food.png" type="Texture" id=9]
 [ext_resource path="res://Assets/Images/ui_icons/population.png" type="Texture" id=10]
 [ext_resource path="res://Assets/Images/ui_icons/egg.png" type="Texture" id=11]
-[ext_resource path="res://Scenes/Reusable_Scenes/dialog_display.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Assets/Music/main_theme.wav" type="AudioStream" id=13]
+[ext_resource path="res://Assets/Music/main_theme.wav" type="AudioStream" id=12]
+[ext_resource path="res://Scenes/Reusable_Scenes/dialog_display.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Assets/Images/ui_icons/settings_cog.png" type="Texture" id=14]
 
-[sub_resource type="DynamicFont" id=1]
-size = 32
-font_data = ExtResource( 4 )
-
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=1]
 content_margin_top = 10.0
 content_margin_bottom = 10.0
 bg_color = Color( 0.32549, 0.168627, 0.0705882, 1 )
@@ -28,9 +25,13 @@ corner_radius_top_left = 2
 corner_radius_top_right = 2
 shadow_size = 3
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=2]
 size = 22
-font_data = ExtResource( 4 )
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 32
+font_data = ExtResource( 6 )
 
 [node name="overlay" type="Control"]
 anchor_right = 1.0
@@ -42,75 +43,41 @@ margin_bottom = 0.225952
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
 
-[node name="top_menu" type="HBoxContainer" parent="."]
-editor/display_folded = true
-anchor_right = 1.0
-alignment = 2
-
-[node name="settings_button" type="TextureButton" parent="top_menu"]
-margin_left = 992.0
-margin_right = 1024.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 32, 32 )
-texture_normal = ExtResource( 3 )
-expand = true
-
-[node name="options_menu" type="VBoxContainer" parent="."]
-editor/display_folded = true
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -256.0
-margin_top = -150.0
-margin_right = 256.0
-margin_bottom = 150.0
-rect_min_size = Vector2( 512, 300 )
-custom_constants/separation = 10
-alignment = 1
-
-[node name="resume_button" type="Button" parent="options_menu"]
-margin_top = 84.0
-margin_right = 512.0
-margin_bottom = 145.0
-rect_min_size = Vector2( 0, 50 )
-custom_fonts/font = SubResource( 1 )
-text = "Resume"
-
-[node name="quit_button" type="Button" parent="options_menu"]
-margin_top = 155.0
-margin_right = 512.0
-margin_bottom = 216.0
-rect_min_size = Vector2( 0, 50 )
-custom_fonts/font = SubResource( 1 )
-text = "Quit"
-
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-editor/display_folded = true
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -121.0
 
-[node name="build_button" type="TextureButton" parent="VBoxContainer"]
+[node name="Container" type="HBoxContainer" parent="VBoxContainer"]
+margin_right = 1024.0
+margin_bottom = 64.0
+
+[node name="build_button" type="TextureButton" parent="VBoxContainer/Container"]
 margin_right = 60.0
 margin_bottom = 60.0
 rect_min_size = Vector2( 60, 60 )
 hint_tooltip = "build"
 size_flags_horizontal = 0
 size_flags_vertical = 0
-texture_normal = ExtResource( 5 )
+texture_normal = ExtResource( 3 )
 expand = true
 
+[node name="hut_button" type="TextureButton" parent="VBoxContainer/Container"]
+margin_left = 64.0
+margin_right = 128.0
+margin_bottom = 64.0
+texture_normal = ExtResource( 4 )
+
 [node name="bottom_menu" type="Tree" parent="VBoxContainer"]
-margin_top = 64.0
+margin_top = 68.0
 margin_right = 1024.0
-margin_bottom = 121.0
+margin_bottom = 125.0
 rect_min_size = Vector2( 0, 57 )
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/bg = SubResource( 2 )
+custom_styles/bg = SubResource( 1 )
 
 [node name="bottom_menu_list" type="VBoxContainer" parent="VBoxContainer/bottom_menu"]
 anchor_left = 0.5
@@ -146,7 +113,7 @@ custom_constants/separation = 10
 margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
-texture = ExtResource( 6 )
+texture = ExtResource( 5 )
 expand = true
 
 [node name="value" type="Label" parent="VBoxContainer/bottom_menu/bottom_menu_list/resources/Tree/wood"]
@@ -154,7 +121,7 @@ margin_left = 42.0
 margin_top = 2.0
 margin_right = 56.0
 margin_bottom = 30.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 text = "0"
 
 [node name="Tree2" type="Tree" parent="VBoxContainer/bottom_menu/bottom_menu_list/resources"]
@@ -183,7 +150,7 @@ margin_left = 42.0
 margin_top = 2.0
 margin_right = 56.0
 margin_bottom = 30.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 text = "0"
 
 [node name="Tree3" type="Tree" parent="VBoxContainer/bottom_menu/bottom_menu_list/resources"]
@@ -212,7 +179,7 @@ margin_left = 42.0
 margin_top = 2.0
 margin_right = 56.0
 margin_bottom = 30.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 text = "0"
 
 [node name="Tree4" type="Tree" parent="VBoxContainer/bottom_menu/bottom_menu_list/resources"]
@@ -241,7 +208,7 @@ margin_left = 42.0
 margin_top = 2.0
 margin_right = 56.0
 margin_bottom = 30.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 text = "0"
 
 [node name="Tree5" type="Tree" parent="VBoxContainer/bottom_menu/bottom_menu_list/resources"]
@@ -270,7 +237,7 @@ margin_left = 42.0
 margin_top = 2.0
 margin_right = 56.0
 margin_bottom = 30.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 text = "0"
 
 [node name="Tree6" type="Tree" parent="VBoxContainer/bottom_menu/bottom_menu_list/resources"]
@@ -299,19 +266,73 @@ margin_left = 42.0
 margin_top = 2.0
 margin_right = 56.0
 margin_bottom = 30.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 text = "0"
 
-[node name="dialog_screen" parent="." instance=ExtResource( 12 )]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 12 )
+
+[node name="dialog_screen2" parent="." instance=ExtResource( 13 )]
 visible = false
-position = Vector2( 75, 50 )
+show_behind_parent = true
+position = Vector2( 75, 0 )
 scale = Vector2( 0.85, 0.85 )
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 13 )
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+margin_left = 20.0
+margin_top = 10.0
+margin_right = -20.0
+margin_bottom = 32.0
 
-[connection signal="pressed" from="top_menu/settings_button" to="." method="_on_settings_button_pressed"]
+[node name="top_menu" type="HBoxContainer" parent="MarginContainer"]
+margin_right = 984.0
+margin_bottom = 32.0
+alignment = 2
+
+[node name="settings_button" type="TextureButton" parent="MarginContainer/top_menu"]
+margin_left = 952.0
+margin_right = 984.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+texture_normal = ExtResource( 14 )
+expand = true
+
+[node name="options_menu" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -256.0
+margin_top = -150.0
+margin_right = 256.0
+margin_bottom = 150.0
+rect_min_size = Vector2( 512, 300 )
+custom_constants/separation = 10
+alignment = 1
+
+[node name="resume_button" type="Button" parent="options_menu"]
+margin_top = 84.0
+margin_right = 512.0
+margin_bottom = 145.0
+rect_min_size = Vector2( 0, 50 )
+custom_fonts/font = SubResource( 3 )
+text = "Resume"
+
+[node name="quit_button" type="Button" parent="options_menu"]
+margin_top = 155.0
+margin_right = 512.0
+margin_bottom = 216.0
+rect_min_size = Vector2( 0, 50 )
+custom_fonts/font = SubResource( 3 )
+text = "Quit"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 12 )
+
+[connection signal="pressed" from="VBoxContainer/Container/build_button" to="." method="_on_build_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Container/hut_button" to="." method="_on_hut_button_pressed"]
+[connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_AudioStreamPlayer2D_finished"]
+[connection signal="pressed" from="MarginContainer/top_menu/settings_button" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="options_menu/resume_button" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="options_menu/quit_button" to="." method="_on_quit_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/build_button" to="." method="_on_build_button_pressed"]
-[connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_AudioStreamPlayer2D_finished"]
