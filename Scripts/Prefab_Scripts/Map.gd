@@ -28,22 +28,25 @@ func get_cell_size():
 func get_cell_val(cell):
 	return get_cellv(cell)
 	
-func check_can_build(tile):
+func check_can_build(tile, type):
 	var cell = get_cellv(tile)
-	if (cell == 0 or cell == 1 or cell == 2 or cell == 5 or cell == -1) and can_afford():
+	if (cell == 0 or cell == 1 or cell == 2 or cell == 5 or cell == -1) :
+		return true
+	elif not can_afford(type):
 		return true
 	else:
-		false
+		return false
 		
-func can_afford():
-	print(ResourceManager.get_value(ResourceManager.Resource.WOOD))
-	if ResourceManager.get_value(ResourceManager.Resource.WOOD) > 2:
+func can_afford(type):
+#	print(ResourceManager.get_value(ResourceManager.Resource.WOOD) > 2)
+	
+	if ResourceManager.get_value(ResourceManager.Resource.STONE) > 2:
 		return true
 	else:
-		false
+		return false
 	
 func build_building(tile, type):
-	if check_can_build(tile):
+	if check_can_build(tile, type):
 		return
 	set_cellv(tile, TILETYPE.BUILDING)
 	var newItem = buildEntity.instance()
