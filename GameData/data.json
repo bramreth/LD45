@@ -1,14 +1,14 @@
 {
 	"player_data": {
 		"name": "Sir Goblin",
-		"attractiveness": 0,
+		"attractiveness": 2,
 	    "resources": {
-			"wood":  0,
-			"stone":  0,
-			"gold":  0,
-			"food":  0,
-			"population":  [0, 5],
-			"eggs":  0,
+			"wood":  2,
+			"stone": 2,
+			"gold":  2,
+			"food":  2,
+			"population":  [2, 5],
+			"eggs":  2,
 		}
 	},
 	"events": {
@@ -25,7 +25,7 @@
 			}, 
 			{
 				"dialog":"battle-3",
-				"min-population": 5,
+				"min-population": 5		,
 				"num_of_enemies": 10
 			},
 		] 
