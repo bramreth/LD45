@@ -29,13 +29,10 @@ enum ENTITY_TYPE {
 	PLAYER,
 }
 
-onready var population = 0
-onready var attractiveness = 0
-
-
 func start_dialog(scene):
 	if scene != null && !scene.empty():
 		emit_signal("start_dialog", scene)
+		
 
 var spawn_items_list = {
 	ResourceManager.Resource.EGG: 0,
@@ -101,7 +98,7 @@ func start_of_nighttime_tick():
 	var event = {}
 	var finished_search
 	for night_event in night_events:
-		if night_event["min-population"] <= population && !prev_events.has(night_event):
+		if night_event["min-population"] <= ResourceManager.get_value(ResourceManager.Resource.POPULATION)[0] && !prev_events.has(night_event):
 			event = night_event
 			prev_events.append(night_event)
 			break
@@ -126,9 +123,6 @@ func debug_day_cycle_print():
 		if currentTick%(60*(DAY_LENGTH+NIGHT_LENGTH)) == 0:
 			print("NEW DAY: " + String(get_current_day()) + " <====================")
 			
-			
-func update_population(value):
-	population += value
-	
+				
 func update_attractiveness(value):
-	attractiveness += value
+	SystemManager.data["player_data"]["attractiveness"] += value

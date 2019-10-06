@@ -19,23 +19,24 @@ func update_resource(resource, value):
 	if resource != null:
 		match resource:
 			ResourceManager.Resource.WOOD:
-				emit_signal("update_resource", Resource.WOOD, value)
 				SystemManager.data["player_data"]["resources"]["wood"] += value
+				emit_signal("update_resource", Resource.WOOD)
 			ResourceManager.Resource.STONE:
-				emit_signal("update_resource", Resource.STONE, value)
 				SystemManager.data["player_data"]["resources"]["stone"] += value
+				emit_signal("update_resource", Resource.STONE)
 			ResourceManager.Resource.GOLD:
-				emit_signal("update_resource", Resource.GOLD, value)
 				SystemManager.data["player_data"]["resources"]["gold"] += value
+				emit_signal("update_resource", Resource.GOLD)
 			ResourceManager.Resource.FOOD:
-				emit_signal("update_resource", Resource.FOOD, value)
 				SystemManager.data["player_data"]["resources"]["food"] += value
+				emit_signal("update_resource", Resource.FOOD)
 			ResourceManager.Resource.POPULATION:
-				emit_signal("update_resource", Resource.POPULATION, value)
-				SystemManager.data["player_data"]["resources"]["population"] += value
+				if typeof(value) == TYPE_ARRAY && value.size() == 2: 
+					SystemManager.data["player_data"]["resources"]["population"] = value
+				emit_signal("update_resource", Resource.POPULATION)
 			ResourceManager.Resource.EGG:
-				emit_signal("update_resource", Resource.EGG, value)
 				SystemManager.data["player_data"]["resources"]["eggs"] += value
+				emit_signal("update_resource", Resource.EGG)
 
 func get_value(resource):
 	match resource:
