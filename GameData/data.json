@@ -1,4 +1,5 @@
 {
+	"debug":true,
 	"player_data": {
 		"name": "Sir Goblin",
 		"attractiveness": 2,
@@ -7,7 +8,8 @@
 			"stone": 2,
 			"gold":  2,
 			"food":  2,
-			"population":  [2, 5],
+			"population":  2,
+			"max_population": 5,
 			"eggs":  2,
 		}
 	},

@@ -15,12 +15,12 @@ func _ready():
 	yield(get_tree().create_timer(randi()%20 + 4), "timeout")
 	$AudioStreamPlayer2D.play()
 func init_resources():
-	print(SystemManager.data["player_data"])
 	update_resource(ResourceManager.Resource.WOOD)
 	update_resource(ResourceManager.Resource.STONE)
 	update_resource(ResourceManager.Resource.GOLD)
 	update_resource(ResourceManager.Resource.FOOD) 
 	update_resource(ResourceManager.Resource.POPULATION)
+	update_resource(ResourceManager.Resource.MAX_POPULATION)
 	update_resource(ResourceManager.Resource.EGG)
 
 
@@ -37,9 +37,9 @@ func update_resource(resource):
 			ResourceManager.Resource.FOOD:
 				$VBoxContainer/bottom_menu/bottom_menu_list/resources/Tree4/food/value.text = String(ResourceManager.get_value(ResourceManager.Resource.FOOD))
 			ResourceManager.Resource.POPULATION:
-				var population = ResourceManager.get_value(ResourceManager.Resource.POPULATION)
-				print(population)
-				$VBoxContainer/bottom_menu/bottom_menu_list/resources/Tree5/population/value.text = String(population[0]) +"/"+ String(population[1])
+				$VBoxContainer/bottom_menu/bottom_menu_list/resources/Tree5/population/value.text =  String(ResourceManager.get_value(ResourceManager.Resource.POPULATION))
+			ResourceManager.Resource.MAX_POPULATION:
+				$VBoxContainer/bottom_menu/bottom_menu_list/resources/Tree5/population/max_value.text =  String(ResourceManager.get_value(ResourceManager.Resource.MAX_POPULATION))
 			ResourceManager.Resource.EGG:
 				 $VBoxContainer/bottom_menu/bottom_menu_list/resources/Tree6/eggs/value.text = String(ResourceManager.get_value(ResourceManager.Resource.EGG))
 
