@@ -182,8 +182,7 @@ void vertex(){
 shader = SubResource( 21 )
 shader_param/mask_texture = ExtResource( 19 )
 
-[node name="MapEntity" index="0" instance=ExtResource( 1 )]
-scale = Vector2( 0.5, 0.5 )
+[node name="MapEntity" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
 [node name="highlight" type="Sprite" parent="." index="0"]
@@ -277,4 +276,3 @@ texture = ExtResource( 20 )
 anims/waddle = ExtResource( 21 )
 
 [node name="Tween" type="Tween" parent="." index="5"]
-

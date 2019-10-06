@@ -57,13 +57,13 @@ func spawn_items(item, amount):
 		validSpawns += get_used_cells_by_id(cellType)
 	
 	for i in range(amount):
-		var newItem = itemEntity.instance()
 		var spawn = validSpawns[randi()%validSpawns.size()]
-		var spawnPosition = map_to_world(spawn) + Vector2(0, cell_size.y/2)
+		var newItem = itemEntity.instance()
 		newItem.setup(item)
-		newItem.position = spawnPosition
+		newItem.position = map_to_world(spawn) + Vector2(1, cell_size.y/2)
+		#newItem.position += Vector2(0, cell_size.y/2)
 		newItem.connect("selected", gameRoot, "select_entity")
-		entitiesNode.add_child(newItem)
+		entitiesNode.call_deferred("add_child", newItem)
 
 func add_hut(cell: Vector2):
 	var newHut = hut.instance()

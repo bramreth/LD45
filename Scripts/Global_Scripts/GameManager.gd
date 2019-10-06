@@ -21,8 +21,10 @@ var currentDay: int = 0 #number of day/night cycles since started
 
 enum ENTITY_TYPE {
 	CHARACTER,
+	ENEMY,
 	BUILDING,
-	ITEM
+	ITEM,
+	PLAYER,
 }
 
 func start_dialog(scene):
