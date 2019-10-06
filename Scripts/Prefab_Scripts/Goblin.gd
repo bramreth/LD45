@@ -3,6 +3,7 @@ extends "res://Scripts/Prefab_Scripts/Character.gd"
 signal request_job_target()
 
 # goblin stats
+export var gname = "goblin"
 export var hunger = 100
 export var energy = 100
 export var happiness = 100
@@ -16,9 +17,12 @@ var currentTarget = null
 func _ready():
 	._ready()
 	randomize()
-	type = GameManager.ENTITY_TYPE.CHARACTER
+	type = GameManager.ENTITY_TYPE.GOBLIN
 	yield(get_tree().create_timer(randi()%3+1), "timeout")
 	start_job()
+
+func join_clan():
+	emit_signal("request_job_target", self, "join")
 
 func determine_jobs():
 	return "wander"
@@ -139,3 +143,6 @@ func _process(delta):
 			position = position.linear_interpolate(path[0], (speed * delta)/d)
 		else:
 			path.remove(0)
+			
+func get_details():
+	return[str(health), str(hunger), str(energy), str(happiness), str(strength), str(gname), currentJob]
