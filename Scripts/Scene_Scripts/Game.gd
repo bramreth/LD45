@@ -8,23 +8,29 @@ var selectedCharacter = null
 var selectedEntity = null
 var selectedItem = null
 
+#build tool sprites
+
+var hut = preload("res://Assets/Images/debug_hut.png")
+var blank = preload("res://Assets/Images/buildings/building_default.png")
+
 onready var map = $Map/Navigation/Map
+onready var player = $Map/Navigation/YSort/Characters/Player
 
 var mousePos = Vector2()
 
 func _ready():
 	GameManager.connect("spawn_items", self, "spawn_items")
 	GameManager.connect("night_started", self, "start_night")
-	GameManager.connect("update_popularity", self, "update_popularity")
-	GameManager.connect("update_attractiveness", self, "update_attractiveness")
+	#GameManager.connect("night_started", self, "remove_items_from_map")
+	
 	for character in $Map/Navigation/YSort/Characters.get_children():
 		character.connect("selected", self, "select_character")
 		character.connect("movement_done", self, "perform_contextual_action")
-	for entity in $Map/Navigation/YSort/Entities.get_children():
-		entity.connect("selected", self, "select_entity")
+	for item in $Map/Navigation/YSort/Items.get_children():
+		item.connect("selected", self, "select_entity")
 	
 	#GameManager.start_dialog("tutorial")
-	map.setup($Map/Navigation/YSort/Entities, $Map/Navigation/YSort/Characters, self)
+	map.setup($Map/Navigation/YSort/Items, $Map/Navigation/YSort/Characters, self)
 	GameManager.start_game()
 	
 ################################################################################################
@@ -39,10 +45,17 @@ func _thread_spawn_items(items):
 	for item in items:
 		if(items[item] > 0):
 			map.spawn_items(item, items[item])
+	call_deferred("items_spawned")
+
+func items_spawned():
+	itemSpawningThread.wait_to_finish()
 
 func remove_items_from_map():
-	for child in $Map/Navigation/YSort/Entities.get_children():
+	for child in $Map/Navigation/YSort/Items.get_children():
 		child.queue_free()
+
+func _exit_tree():
+	itemSpawningThread.wait_to_finish()
 		
 func spawn_enemies(amount):
 	pass
@@ -65,13 +78,14 @@ func select_item(item):
 	selectedItem = item
 	move_character(selectedItem.position)
 
-func perform_contextual_action():
+func perform_contextual_action(character):
 	if selectedEntity != null:
-		if selectedEntity.type == GameManager.ENTITY_TYPE.BUILDING:
-			pass
-		elif selectedEntity.type == GameManager.ENTITY_TYPE.ITEM:
-			selectedEntity.pickup()
-		selectedEntity = null
+		if character.type == GameManager.ENTITY_TYPE.PLAYER:
+			if selectedEntity.type == GameManager.ENTITY_TYPE.BUILDING:
+				pass
+			elif selectedEntity.type == GameManager.ENTITY_TYPE.ITEM:
+				selectedEntity.pickup()
+			selectedEntity = null
 
 ################################################################################################
 # MOVEMENT
@@ -79,15 +93,13 @@ func perform_contextual_action():
 func _unhandled_input(event: InputEvent):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_RIGHT and event.pressed:
+			get_tree().set_input_as_handled()
 			move_character(get_global_mouse_position())
 
 func move_character(target):
-	print(target)
-	if selectedCharacter != null:
-		var path = navigation.get_simple_path(selectedCharacter.position, target, false)
-		selectedCharacter.move(path)
-		
-		
+	var path = navigation.get_simple_path(player.position, target, false)
+	player.move(path)
+
 #handle build tool
 func _physics_process(delta):
 	if building:
@@ -103,12 +115,10 @@ func _physics_process(delta):
 # handle basic inputs	
 func _input(event):
 	if Input.is_action_just_pressed("scroll_out"):
-		print("scroll")
 		if $Camera2D.zoom.x < 2.0:
 			$Camera2D.zoom +=  Vector2(0.1, 0.1)
 		
 	if Input.is_action_just_pressed("scroll_up"):
-		print("scroll")
 		if $Camera2D.zoom.x > 0.3:
 			$Camera2D.zoom -=  Vector2(0.1, 0.1)
 	
@@ -150,8 +160,17 @@ func _process(delta):
 			
 		$Camera2D.position += (mousePos - get_global_mouse_position()) * delta * $Camera2D.zoom * 5.0
 		
-func _on_overlay_build(val):
+func _on_overlay_build(type, val):
 	building = val
+	match type:
+		"hut":
+			$Map/Navigation/YSort/build_tool/Sprite.texture = hut
+			print("hut!")
+		"blank":
+			print("none")
+			$Map/Navigation/YSort/build_tool/Sprite.texture = blank
+			
+	
 	$Map/Navigation/YSort/build_tool.visible = building
 
 ################################################################################################

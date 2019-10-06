@@ -1,12 +1,14 @@
 extends Control
 
-signal build(val)
+signal build(type, val)
 
 var build = false
 var s1 = preload("res://Assets/Music/ambient.wav")
 var s2 = preload("res://Assets/Music/main_theme.wav")
-
+var current = null
 func _ready():
+	
+	reset_build_buttons()
 	init_resources()
 	ResourceManager.connect("update_resource", self, "update_resource")
 	$options_menu.hide()
@@ -59,11 +61,14 @@ func _on_quit_button_pressed():
 
 func _on_build_button_pressed():
 	build = not build
+	reset_build_buttons()
+	if current != "blank":
+		build = true
+		current = "blank"
 	if build:
-		$VBoxContainer/build_button.modulate = Color(0.4,0.4,0.4,1.0)
-	else:
-		$VBoxContainer/build_button.modulate = Color(1.0,1.0,1.0,1.0)
-	emit_signal("build", build)
+		$VBoxContainer/Container/build_button.modulate = Color(1.0,1.0,1.0,1.0)
+	
+	emit_signal("build", "blank", build)
 
 
 func _on_AudioStreamPlayer2D_finished():
@@ -74,3 +79,19 @@ func _on_AudioStreamPlayer2D_finished():
 	else:
 		$AudioStreamPlayer2D.stream = s2
 	$AudioStreamPlayer2D.play()
+
+
+func reset_build_buttons():
+	for item in $VBoxContainer/Container.get_children():
+		item.modulate = Color(0.4,0.4,0.4,1.0)
+		
+
+func _on_hut_button_pressed():
+	build = not build
+	reset_build_buttons()
+	if current != "hut":
+		build = true
+		current = "hut"
+	if build:
+		$VBoxContainer/Container/hut_button.modulate = Color(1.0,1.0,1.0,1.0)
+	emit_signal("build", "hut", build)

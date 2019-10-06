@@ -6,7 +6,7 @@
 [ext_resource path="res://Assets/shader/new_shadermaterial.tres" type="Material" id=4]
 [ext_resource path="res://Assets/Images/buildings/building_default.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Prefabs/ItemMapEntity.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Assets/Prefabs/CharacterMapEntity.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/Prefabs/PlayerCharacterMapEntity.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/overlay.tscn" type="PackedScene" id=8]
 
 [node name="Game" type="Node2D"]
@@ -34,18 +34,14 @@ visible = false
 material = ExtResource( 4 )
 texture = ExtResource( 5 )
 
-[node name="Entities" type="Node" parent="Map/Navigation/YSort"]
+[node name="Items" type="Node" parent="Map/Navigation/YSort"]
 
-[node name="MapEntity" parent="Map/Navigation/YSort/Entities" instance=ExtResource( 6 )]
-position = Vector2( -131.742, 330.786 )
+[node name="MapEntity" parent="Map/Navigation/YSort/Items" instance=ExtResource( 6 )]
+position = Vector2( -132.85, 331.894 )
 
 [node name="Characters" type="Node" parent="Map/Navigation/YSort"]
 
-[node name="MapEntity" parent="Map/Navigation/YSort/Characters" instance=ExtResource( 7 )]
-position = Vector2( 250.459, 163.29 )
-
-[node name="MapEntity2" parent="Map/Navigation/YSort/Characters" instance=ExtResource( 7 )]
-position = Vector2( 381.827, 427.254 )
+[node name="Player" parent="Map/Navigation/YSort/Characters" instance=ExtResource( 7 )]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2( 512, 300 )
@@ -62,5 +58,4 @@ editor_draw_limits = true
 
 [node name="overlay" parent="Camera2D/CanvasLayer" instance=ExtResource( 8 )]
 mouse_filter = 2
-
 [connection signal="build" from="Camera2D/CanvasLayer/overlay" to="." method="_on_overlay_build"]

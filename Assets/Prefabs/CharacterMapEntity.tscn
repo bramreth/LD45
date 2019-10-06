@@ -31,7 +31,7 @@ height = 1000
 seamless = true
 noise = SubResource( 1 )
 
-[sub_resource type="Shader" id=17]
+[sub_resource type="Shader" id=3]
 code = "shader_type canvas_item;
 
 uniform float seed = 1.1;
@@ -41,11 +41,29 @@ void vertex(){
 	VERTEX.y += (sin(TIME * 0.5 * seed + (100.0 * seed * seed)))	* 6.0;
 }"
 
-[sub_resource type="ShaderMaterial" id=8]
-shader = SubResource( 17 )
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 3 )
 shader_param/seed = 1.0
 
-[sub_resource type="Shader" id=18]
+[sub_resource type="Shader" id=5]
+code = "shader_type canvas_item;
+
+uniform float seed = 1.1;
+
+void vertex(){
+	VERTEX.x += (sin(TIME * 1.5 * seed + (100.0 * seed * seed)) -0.5)	* 12.0;
+	VERTEX.y += (sin(TIME * 0.5 * seed + (100.0 * seed * seed)))	* 6.0;
+}"
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = SubResource( 5 )
+shader_param/seed = 1.0
+
+[sub_resource type="ShaderMaterial" id=7]
+shader = ExtResource( 10 )
+shader_param/seed = 1.0
+
+[sub_resource type="Shader" id=8]
 code = "shader_type canvas_item;
 
 uniform float seed = 1.1;
@@ -56,14 +74,10 @@ void vertex(){
 }"
 
 [sub_resource type="ShaderMaterial" id=9]
-shader = SubResource( 18 )
+shader = SubResource( 8 )
 shader_param/seed = 1.0
 
-[sub_resource type="ShaderMaterial" id=19]
-shader = ExtResource( 10 )
-shader_param/seed = 1.0
-
-[sub_resource type="Shader" id=20]
+[sub_resource type="Shader" id=10]
 code = "shader_type canvas_item;
 
 uniform float seed = 1.1;
@@ -74,24 +88,10 @@ void vertex(){
 }"
 
 [sub_resource type="ShaderMaterial" id=11]
-shader = SubResource( 20 )
+shader = SubResource( 10 )
 shader_param/seed = 1.0
 
-[sub_resource type="Shader" id=21]
-code = "shader_type canvas_item;
-
-uniform float seed = 1.1;
-
-void vertex(){
-	VERTEX.x += (sin(TIME * 1.5 * seed + (100.0 * seed * seed)) -0.5)	* 12.0;
-	VERTEX.y += (sin(TIME * 0.5 * seed + (100.0 * seed * seed)))	* 6.0;
-}"
-
-[sub_resource type="ShaderMaterial" id=12]
-shader = SubResource( 21 )
-shader_param/seed = 1.0
-
-[sub_resource type="Shader" id=22]
+[sub_resource type="Shader" id=12]
 code = "shader_type canvas_item;
 
 uniform float seed = 1.1;
@@ -102,24 +102,10 @@ void vertex(){
 }"
 
 [sub_resource type="ShaderMaterial" id=13]
-shader = SubResource( 22 )
+shader = SubResource( 12 )
 shader_param/seed = 1.0
 
-[sub_resource type="Shader" id=23]
-code = "shader_type canvas_item;
-
-uniform float seed = 1.1;
-
-void vertex(){
-	VERTEX.x += (sin(TIME * 1.5 * seed + (100.0 * seed * seed)) -0.5)	* 12.0;
-	VERTEX.y += (sin(TIME * 0.5 * seed + (100.0 * seed * seed)))	* 6.0;
-}"
-
-[sub_resource type="ShaderMaterial" id=14]
-shader = SubResource( 23 )
-shader_param/seed = 1.0
-
-[sub_resource type="Shader" id=24]
+[sub_resource type="Shader" id=14]
 code = "shader_type canvas_item;
 
 uniform float seed = 1.1;
@@ -130,10 +116,24 @@ void vertex(){
 }"
 
 [sub_resource type="ShaderMaterial" id=15]
-shader = SubResource( 24 )
+shader = SubResource( 14 )
 shader_param/seed = 1.0
 
-[sub_resource type="Shader" id=25]
+[sub_resource type="Shader" id=16]
+code = "shader_type canvas_item;
+
+uniform float seed = 1.1;
+
+void vertex(){
+	VERTEX.x += (sin(TIME * 1.5 * seed + (100.0 * seed * seed)) -0.5)	* 12.0;
+	VERTEX.y += (sin(TIME * 0.5 * seed + (100.0 * seed * seed)))	* 6.0;
+}"
+
+[sub_resource type="ShaderMaterial" id=17]
+shader = SubResource( 16 )
+shader_param/seed = 1.0
+
+[sub_resource type="Shader" id=18]
 code = "shader_type canvas_item;
 
 uniform float seed;
@@ -143,15 +143,15 @@ void vertex(){
 	VERTEX.y += (sin(TIME * 0.5 * seed + (100.0 * seed * seed)))	* 6.0;
 }"
 
-[sub_resource type="ShaderMaterial" id=16]
-shader = SubResource( 25 )
+[sub_resource type="ShaderMaterial" id=19]
+shader = SubResource( 18 )
 shader_param/seed = 1.0
 
-[sub_resource type="CapsuleShape2D" id=5]
+[sub_resource type="CapsuleShape2D" id=20]
 radius = 32.0
 height = 96.0
 
-[sub_resource type="Shader" id=6]
+[sub_resource type="Shader" id=21]
 code = "shader_type canvas_item;
 
 uniform sampler2D mask_texture;
@@ -178,12 +178,11 @@ void vertex(){
 	VERTEX.g += sin(TIME* 4.0)* 20.0;
 }"
 
-[sub_resource type="ShaderMaterial" id=7]
-shader = SubResource( 6 )
+[sub_resource type="ShaderMaterial" id=22]
+shader = SubResource( 21 )
 shader_param/mask_texture = ExtResource( 19 )
 
-[node name="MapEntity" index="0" instance=ExtResource( 1 )]
-scale = Vector2( 0.5, 0.5 )
+[node name="MapEntity" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
 [node name="highlight" type="Sprite" parent="." index="0"]
@@ -211,35 +210,35 @@ region_rect = Rect2( 400, 0, 1000, 1000 )
 texture = ExtResource( 7 )
 
 [node name="arm1" type="Sprite" parent="MapEntity_Sprite" index="2"]
-material = SubResource( 8 )
+material = SubResource( 4 )
 position = Vector2( -230.681, -296.183 )
 texture = ExtResource( 8 )
 region_enabled = true
 region_rect = Rect2( 400, 700, 400, 400 )
 
 [node name="hand_l" type="Sprite" parent="MapEntity_Sprite/arm1" index="0"]
-material = SubResource( 9 )
+material = SubResource( 6 )
 position = Vector2( -173.723, 242.073 )
 texture = ExtResource( 9 )
 region_enabled = true
 region_rect = Rect2( 250, 1000, 350, 300 )
 
 [node name="arm2" type="Sprite" parent="MapEntity_Sprite" index="3"]
-material = SubResource( 19 )
+material = SubResource( 7 )
 position = Vector2( 262.12, -245.882 )
 texture = ExtResource( 11 )
 region_enabled = true
 region_rect = Rect2( 900, 700, 400, 500 )
 
 [node name="hand_r" type="Sprite" parent="MapEntity_Sprite/arm2" index="0"]
-material = SubResource( 11 )
+material = SubResource( 9 )
 position = Vector2( 145.252, 120.775 )
 texture = ExtResource( 12 )
 region_enabled = true
 region_rect = Rect2( 1100, 950, 300, 250 )
 
 [node name="body" type="Sprite" parent="MapEntity_Sprite" index="4"]
-material = SubResource( 12 )
+material = SubResource( 11 )
 texture = ExtResource( 13 )
 
 [node name="head" type="Sprite" parent="MapEntity_Sprite" index="5"]
@@ -247,18 +246,18 @@ material = SubResource( 13 )
 texture = ExtResource( 14 )
 
 [node name="blush" type="Sprite" parent="MapEntity_Sprite/head" index="0"]
-material = SubResource( 14 )
+material = SubResource( 15 )
 texture = ExtResource( 15 )
 
 [node name="eyes" type="Sprite" parent="MapEntity_Sprite/head" index="1"]
-material = SubResource( 15 )
+material = SubResource( 17 )
 texture = ExtResource( 16 )
 
 [node name="eyes2" type="Sprite" parent="MapEntity_Sprite/head" index="2"]
 texture = ExtResource( 17 )
 
 [node name="teeth" type="AnimatedSprite" parent="MapEntity_Sprite/head" index="3"]
-material = SubResource( 16 )
+material = SubResource( 19 )
 frames = ExtResource( 18 )
 animation = "teeth"
 frame = 3
@@ -266,10 +265,10 @@ frame = 3
 [node name="CollisionShape2D" parent="Click_Area" index="0"]
 visible = false
 position = Vector2( 0, -64 )
-shape = SubResource( 5 )
+shape = SubResource( 20 )
 
 [node name="Sprite" type="Sprite" parent="." index="3"]
-material = SubResource( 7 )
+material = SubResource( 22 )
 scale = Vector2( 1e-005, 1e-005 )
 texture = ExtResource( 20 )
 
@@ -277,4 +276,3 @@ texture = ExtResource( 20 )
 anims/waddle = ExtResource( 21 )
 
 [node name="Tween" type="Tween" parent="." index="5"]
-
