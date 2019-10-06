@@ -27,8 +27,10 @@ func _ready():
 	for character in $Map/Navigation/YSort/Characters.get_children():
 		if character.type == GameManager.ENTITY_TYPE.CHARACTER:
 			character.connect("request_job_target", self, "provide_movement_target")
+		elif character.type == GameManager.ENTITY_TYPE.PLAYER:
+			character.connect("movement_done", self, "perform_contextual_action")
 		character.connect("selected", self, "select_character")
-		character.connect("movement_done", self, "perform_contextual_action")
+		
 	for item in $Map/Navigation/YSort/Items.get_children():
 		item.connect("selected", self, "select_entity")
 	
@@ -129,14 +131,12 @@ func move_character(target):
 ################################################################################################
 
 func provide_movement_target(character, job):
-	print("PROVINDING TARGET")
 	call(("ai_" + job), character)
 
 func ai_wander(character):
-	print("ASSIGNING WANDER PATH")
-	print(" IS WANDERING")
 	var path = get_path_between_points(character.position, map.get_random_spot_in_the_town())
-	character.handle_job("wander", path, null)
+	$Map/Navigation/YSort/Line2D.points = path
+	character.handle_job(path, null)
 
 ################################################################################################
 # CAMERA
