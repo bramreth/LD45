@@ -1,5 +1,9 @@
 extends Node2D
 
+
+signal show_overlay()
+signal hide_overlay()
+
 var dialog = {}
 var current_dialog = {}
 var dialog_index
@@ -19,9 +23,10 @@ func _ready():
 	
 func start_dialog(scene):
 	current_dialog_name = scene
-	dialog = StringManager.strings["dialog"][current_dialog_name]
+	dialog = StringManager.get_dialog(current_dialog_name)
 	if dialog != null:
 		dialog_index = 0
+		get_parent().show_overlay()
 		self.visible = true
 		handle_dialog()
 	else:
@@ -29,8 +34,7 @@ func start_dialog(scene):
 		print("Error loading dialog " + current_dialog_name)
 
 func kill_dialog():
-	if(current_dialog_name == "tutorial"):
-		GameManager.start_game()
+	get_parent().hide_overlay()
 	self.visible = false
 
 func handle_dialog():
@@ -124,7 +128,7 @@ func _on_action_button_pressed():
 			next_dialog()
 		"submit_name":
 			if !text_input.text.empty():
-				SystemManager.playerData["name"] = text_input.text
+				SystemManager.data["name"] = text_input.text
 				next_dialog()
 		"close":
 			kill_dialog()

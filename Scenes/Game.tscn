@@ -48,6 +48,8 @@ position = Vector2( 584.407, 475.318 )
 [node name="MapEntity" parent="Map/Navigation/YSort/Characters" instance=ExtResource( 8 )]
 position = Vector2( 138.31, 346.748 )
 
+[node name="Building" type="Node" parent="Map/Navigation/YSort"]
+
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2( 512, 300 )
 current = true
@@ -63,4 +65,5 @@ editor_draw_limits = true
 
 [node name="overlay" parent="Camera2D/CanvasLayer" instance=ExtResource( 9 )]
 mouse_filter = 2
+
 [connection signal="build" from="Camera2D/CanvasLayer/overlay" to="." method="_on_overlay_build"]

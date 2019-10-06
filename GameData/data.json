@@ -1,4 +1,36 @@
 {
+	"player_data": {
+		"name": "Sir Goblin",
+		"attractiveness": 2,
+	    "resources": {
+			"wood":  2,
+			"stone": 2,
+			"gold":  2,
+			"food":  2,
+			"population":  [2, 5],
+			"eggs":  2,
+		}
+	},
+	"events": {
+		"night":[
+			{
+		 		"dialog":"battle-1",
+				"min-population": 0,
+				"num_of_enemies": 3
+			}, 
+			{
+				"dialog":"battle-2",
+				"min-population": 0,
+				"num_of_enemies": 3
+			}, 
+			{
+				"dialog":"battle-3",
+				"min-population": 5		,
+				"num_of_enemies": 10
+			},
+		] 
+		
+	},
 	"dialog": {
 		"tutorial": [{
 				"state": "read",
@@ -79,6 +111,52 @@
 				"duration": "",
 				"text_speed": 0.01,
 				"sfx": ""
+			}
+		],
+		"battle-1": [
+			{
+				"state": "read",
+				"text": "Adventurers - Goblins have been spotted!",
+				"animation": "wizard",
+				"button_text": "Next",
+				"next_action": "next",
+				"duration": "",
+				"text_speed": 0.03,
+				"sfx": ""
+			},
+			{
+				"state": "read",
+				"text": "Slaughter them all with the upmost haste!",
+				"animation": "wizard",
+				"button_text": "Start Battle!",
+				"next_action": "close",
+				"duration": "",
+				"text_speed": 0.03,
+				"sfx": "pre_combat_horn.wav"
+			}
+		],
+		"battle-2": [
+			{
+				"state": "read",
+				"text": "Knights, to arms!",
+				"animation": "wizard",
+				"button_text": "Start Battle!",
+				"next_action": "close",
+				"duration": "",
+				"text_speed": 0.03,
+				"sfx": "pre_combat_horn.wav"
+			}
+		],
+		"battle-3": [
+			{
+				"state": "read",
+				"text": "Battle 3",
+				"animation": "wizard",
+				"button_text": "Will no one rid me of these turbulent goblins?!",
+				"next_action": "close",
+				"duration": "",
+				"text_speed": 0.03,
+				"sfx": "pre_combat_horn.wav"
 			}
 		]
 	}

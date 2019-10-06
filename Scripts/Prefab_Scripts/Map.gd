@@ -24,6 +24,7 @@ var itemSpawnLocations = {
 
 var entitiesNode
 var charactersNode
+var buildingsNode
 var gameRoot
 
 func _ready():
@@ -52,11 +53,33 @@ func get_random_spot_in_the_town():
 	var randomSpot = Vector2((rand_range(0,townLimit)), int(rand_range(0,townLimit)))
 	return map_to_world(randomSpot) + Vector2(1, cell_size.y/2)
 	
+func check_can_build(tile):
+	var cell = get_cellv(tile)
+	if cell == 0 or cell == 1 or cell == 2 or cell == 5 or cell == -1:
+		return true
+	else:
+		false
+	
+func build_building(tile, type):
+	if check_can_build(tile):
+		return
+	set_cellv(tile, TILETYPE.BUILDING)
+	var newItem = buildEntity.instance()
+	newItem.setup(type)
+	newItem.position = map_to_world(tile) + Vector2(1, cell_size.y/2)
+	#newItem.position += Vector2(0, cell_size.y/2)
+#	newItem.connect("selected", gameRoot, "select_entity")
+	buildingsNode.call_deferred("add_child", newItem)
+
+
+
+	
 
 # Called when the node enters the scene tree for the first time.
-func setup(entities, characters, root):
+func setup(entities, characters, buildings, root):
 	entitiesNode = entities
 	charactersNode = characters
+	buildingsNode = buildings
 	gameRoot = root
 	
 	WorldGenerator.generate_world(get_used_cells().max())
@@ -67,6 +90,7 @@ func setup(entities, characters, root):
 
 var hut = preload("res://Assets/Prefabs/BuildingMapEntity.tscn")
 var itemEntity = preload("res://Assets/Prefabs/ItemMapEntity.tscn")
+var buildEntity = preload("res://Assets/Prefabs/BuildingMapEntity.tscn")
 
 func draw_world():
 	for cell in get_used_cells_by_id(TILETYPE.BASE):
