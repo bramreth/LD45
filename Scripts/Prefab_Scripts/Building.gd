@@ -1,14 +1,26 @@
 extends "res://Scripts/Prefab_Scripts/MapEntity.gd"
 
-enum Building {
-	CAMP,
-	HUT,
-	SENTRY,
-	HATCHERY,
-	MESS
+var buildingStats = {
+	"capacity": {
+		GameManager.Building.CAMP: 10,
+		GameManager.Building.HUT: 5,
+		GameManager.Building.SENTRY: 2,
+		GameManager.Building.HATCHERY: 10,
+		GameManager.Building.MESS: 10
+	},
+	"usage_time": {
+		GameManager.Building.CAMP: 10,
+		GameManager.Building.HUT: 3,
+		GameManager.Building.SENTRY: 10,
+		GameManager.Building.HATCHERY: 10,
+		GameManager.Building.MESS: 10
+	}
 }
 
-var building_type
+var occupants = {}
+
+export(GameManager.Building) var building_type := GameManager.Building.HUT
+var currentCapacity = 0
 
 func setup(resource):
 	building_type = resource
@@ -18,6 +30,22 @@ func setup(resource):
 func _ready():
 	._ready()
 	type = GameManager.ENTITY_TYPE.BUILDING
+	GameManager.connect("gameplay_tick", self, "gameplay_tick")
+
+func use_building(character):
+	if occupants.size() < buildingStats["capacity"][building_type]:
+		occupants[character] = GameManager.currentGamePlayTick
+		character.hide()
+		return true
+	else:
+		return false
+
+func gameplay_tick():
+	for occupant in occupants:
+		if (GameManager.currentGamePlayTick - occupants[occupant] > buildingStats["usage_time"][building_type]):
+			occupant.show()
+			occupants.erase(occupant)
+			occupant.finish_job()
 
 func get_position():
 	return position + $Entrance.position

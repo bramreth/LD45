@@ -165,6 +165,7 @@ func spawn_enemy():
 	
 func add_hut(cell: Vector2):
 	var newHut = hut.instance()
-	entitiesNode.add_child(newHut)
+	newHut.setup(GameManager.Building.HUT)
+	buildingsNode.add_child(newHut)
 	newHut.position = map_to_world(cell) + Vector2(0, cell_size.y/2+10)
 	newHut.connect("selected", gameRoot, "select_entity")

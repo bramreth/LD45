@@ -30,6 +30,15 @@ enum ENTITY_TYPE {
 	ITEM,
 	PLAYER,
 }
+
+enum Building {
+	CAMP,
+	HUT,
+	SENTRY,
+	HATCHERY,
+	MESS
+}
+
 enum Attractiveness {
 	LOW,
 	MEDIUM,

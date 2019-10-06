@@ -178,6 +178,20 @@ func ai_wander(character):
 	var path = get_path_between_points(character.position, map.get_random_spot_in_the_town())
 	character.handle_job(path, null)
 
+func ai_rest(character):
+	var restStop = get_closest_building_by_type(GameManager.Building.HUT, character.position)
+	var path = get_path_between_points(character.position, restStop.get_position())
+	character.handle_job(path, restStop)
+
+func get_closest_building_by_type(type, position):
+	var distance = null
+	var closestBuilding = null
+	for build in $Map/Navigation/YSort/Building.get_children():
+		if build.building_type == type:
+			if distance == null or position.distance_to(build.get_position) < distance:
+				closestBuilding = build
+	return closestBuilding
+
 func ai_join(character):
 	match character.type:
 		GameManager.ENTITY_TYPE.GOBLIN:
