@@ -120,7 +120,7 @@
 			{
 				"state": "read",
 				"text": "Adventurers - Goblins have been spotted!",
-				"animation": "wizard",
+				"animation": "king",
 				"button_text": "Next",
 				"next_action": "next",
 				"duration": "",
@@ -130,6 +130,16 @@
 			{
 				"state": "read",
 				"text": "Slaughter them all with the upmost haste!",
+				"animation": "king",
+				"button_text": "next",
+				"next_action": "next",
+				"duration": "",
+				"text_speed": 0.03,
+				"sfx": "pre_combat_horn.wav"
+			},
+			{
+				"state": "read",
+				"text": "Little goblins, prepare yourself for battle!",
 				"animation": "wizard",
 				"button_text": "Start Battle!",
 				"next_action": "close",
@@ -142,7 +152,17 @@
 			{
 				"state": "read",
 				"text": "Knights, to arms!",
-				"animation": "wizard",
+				"animation": "king",
+				"button_text": "next",
+				"next_action": "next",
+				"duration": "",
+				"text_speed": 0.03,
+				"sfx": "pre_combat_horn.wav"
+			},
+			{
+				"state": "read",
+				"text": "You're going down!",
+				"animation": "goblin",
 				"button_text": "Start Battle!",
 				"next_action": "close",
 				"duration": "",
@@ -154,7 +174,7 @@
 			{
 				"state": "read",
 				"text": "Battle 3",
-				"animation": "wizard",
+				"animation": "king",
 				"button_text": "Will no one rid me of these turbulent goblins?!",
 				"next_action": "close",
 				"duration": "",

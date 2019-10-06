@@ -16,8 +16,8 @@ var debug_flag = false
 
 onready var night_events = SystemManager.data["events"]["night"]
 
-const DAY_LENGTH = 800
-const NIGHT_LENGTH = 400
+const DAY_LENGTH = 10
+const NIGHT_LENGTH = 5
 
 var currentTick: int = 0 #1/60th seconds since started
 var currentGamePlayTick: int = 0 #Seconds since started
@@ -39,6 +39,12 @@ enum Building {
 	MESS
 }
 
+enum Attractiveness {
+	LOW,
+	MEDIUM,
+	HIGH,
+	REALLY_HIGH	
+}
 func start_dialog(scene):
 	if scene != null && !scene.empty():
 		emit_signal("start_dialog", scene)
@@ -136,7 +142,16 @@ func debug_day_cycle_print():
 
 func update_attractiveness(value):
 	SystemManager.data["player_data"]["attractiveness"] += value
-	emit_signal("update_attractiveness")
+	if SystemManager.data["player_data"]["attractiveness"] > 100: SystemManager.data["player_data"]["attractiveness"] = 100
+	if SystemManager.data["player_data"]["attractiveness"] < 0: SystemManager.data["player_data"]["attractiveness"] = 0
+	var attract_state = Attractiveness.LOW
+	if SystemManager.data["player_data"]["attractiveness"] >= 25 and SystemManager.data["player_data"]["attractiveness"] < 50:
+		attract_state = Attractiveness.MEDIUM
+	if SystemManager.data["player_data"]["attractiveness"] >= 50 and SystemManager.data["player_data"]["attractiveness"] < 75:
+		attract_state = Attractiveness.HIGH
+	if SystemManager.data["player_data"]["attractiveness"] >= 75 :
+		attract_state = Attractiveness.REALLY_HIGH
+	emit_signal("update_attractiveness", attract_state)
 	update_goblin_spawn_rate()
 	
 func get_attractiveness():
@@ -152,8 +167,6 @@ onready var goblin_ticker = 0
 func check_for_goblin_spawn():
 	if ResourceManager.get_value(ResourceManager.Resource.POPULATION) < ResourceManager.get_value(ResourceManager.Resource.MAX_POPULATION):
 		var sr = get_goblin_spawn_rate()
-		SystemManager.print("goblin ticker: " + String(goblin_ticker))
-		SystemManager.print("get_goblin_spawn_rate ticker: " + String(sr))
 		if goblin_ticker >= sr:
 			emit_signal("spawn_goblin")
 			goblin_ticker = 0

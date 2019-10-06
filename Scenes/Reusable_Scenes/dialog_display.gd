@@ -27,6 +27,7 @@ func start_dialog(scene):
 	if dialog != null:
 		dialog_index = 0
 		get_parent().show_overlay()
+		GameManager.set_physics_process(false)
 		self.visible = true
 		handle_dialog()
 	else:
@@ -35,6 +36,7 @@ func start_dialog(scene):
 
 func kill_dialog():
 	get_parent().hide_overlay()
+	GameManager.set_physics_process(true)
 	self.visible = false
 
 func handle_dialog():

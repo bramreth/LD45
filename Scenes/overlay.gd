@@ -8,12 +8,13 @@ var s2 = preload("res://Assets/Music/main_theme.wav")
 var current = null
 
 onready var clock = get_node("clock")
-
+onready var attractive_meter = get_node("attractive_meter")
 func _ready():
 	reset_build_buttons()
 	init_resources()
 	ResourceManager.connect("update_resource", self, "update_resource")
 	GameManager.connect("gameplay_tick", self, "gameplay_tick")
+	GameManager.connect("update_attractiveness", self, "update_attractiveness")
 	
 	$options_menu.hide()
 	yield(get_tree().create_timer(randi()%20 + 4), "timeout")
@@ -112,6 +113,9 @@ func gameplay_tick():
 	else:
 		rotation = 180/GameManager.NIGHT_LENGTH
 	clock.rect_rotation -= rotation
+
+func update_attractiveness():
+	attractive_meter
 
 func show_menu():
 	if !$dialog_screen.visible:

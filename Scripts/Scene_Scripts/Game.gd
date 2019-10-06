@@ -82,6 +82,22 @@ func _thread_spawn_goblin(userdata):
 func goblin_spawned():
 	goblinSpawningThread.wait_to_finish()
 
+
+var enemySpawningThread: Thread
+func spawn_enemies(amount):
+	print("spawning enemies: " + String(amount))
+	enemySpawningThread = Thread.new()
+	enemySpawningThread.start(self, "_thread_spawn_enemies", amount)
+	
+
+func _thread_spawn_enemies(amount):
+	for i in range(amount):
+		map.spawn_enemy()
+	call_deferred("enemy_spawned")
+
+func enemy_spawned():
+	enemySpawningThread.wait_to_finish()
+	
 func remove_items_from_map():
 	for child in $Map/Navigation/YSort/Items.get_children():
 		if not child.pickedUp:
@@ -94,9 +110,7 @@ func _exit_tree():
 		buildingSpawningThread.wait_to_finish
 	if goblinSpawningThread != null:
 		goblinSpawningThread.wait_to_finish()
-		
-func spawn_enemies(amount):
-	pass
+
 
 ################################################################################################
 # ENTITY SELECTION
