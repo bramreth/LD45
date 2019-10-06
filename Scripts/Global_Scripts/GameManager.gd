@@ -16,7 +16,7 @@ var debug_flag = false
 
 onready var night_events = SystemManager.data["events"]["night"]
 
-const DAY_LENGTH = 10
+const DAY_LENGTH = 1000
 const NIGHT_LENGTH = 5
 
 var currentTick: int = 0 #1/60th seconds since started

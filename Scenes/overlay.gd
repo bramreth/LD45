@@ -78,7 +78,7 @@ func _on_build_button_pressed():
 	if build:
 		$VBoxContainer/Container/build_button.modulate = Color(1.0,1.0,1.0,1.0)
 	
-	emit_signal("build", "blank", build)
+	#emit_signal("build", "blank", build)
 
 
 func _on_AudioStreamPlayer2D_finished():
@@ -105,7 +105,7 @@ func _on_hut_button_pressed():
 		current = "hut"
 	if build:
 		$VBoxContainer/Container/hut_button.modulate = Color(1.0,1.0,1.0,1.0)
-	emit_signal("build", "hut", build)
+	emit_signal("build", GameManager.Building.HUT, build)
 
 func gameplay_tick():
 	var rotation

@@ -127,7 +127,7 @@ func select_character(character):
 func select_entity(entity):
 	selectedEntity = entity 
 	if selectedEntity.type == GameManager.ENTITY_TYPE.BUILDING:
-		move_character(selectedEntity.get_position())
+		move_character(selectedEntity.get_building_position())
 	elif selectedEntity.type == GameManager.ENTITY_TYPE.ITEM:
 		move_character(selectedEntity.position)
 
@@ -172,6 +172,26 @@ func move_character(target):
 ################################################################################################
 # AI MOVEMENT
 ################################################################################################
+func get_closest_building_by_type(type, position):
+	var distance = null
+	var closestBuilding = null
+	for build in $Map/Navigation/YSort/Building.get_children():
+		if build.building_type == type and !build.is_at_capacity() and !build.underConstruction:
+			if distance == null or position.distance_to(build.get_position) < distance:
+				closestBuilding = build
+	return closestBuilding
+
+func get_closest_construction_site(position):
+	var distance = null
+	var closestBuilding = null
+	for build in $Map/Navigation/YSort/Building.get_children():
+		if !build.is_at_capacity() and build.underConstruction:
+			if distance == null or position.distance_to(build.get_position) < distance:
+				closestBuilding = build
+	return closestBuilding
+
+func get_closest_combat(position):
+	return null
 
 func provide_movement_target(character, job):
 	call(("ai_" + job), character)
@@ -184,17 +204,15 @@ func ai_rest(character):
 	var restStop = get_closest_building_by_type(GameManager.Building.HUT, character.position)
 	var path = null
 	if restStop != null:
-		path = get_path_between_points(character.position, restStop.get_position())
+		path = get_path_between_points(character.position, restStop.get_building_position())
 	character.handle_job(path, restStop)
 
-func get_closest_building_by_type(type, position):
-	var distance = null
-	var closestBuilding = null
-	for build in $Map/Navigation/YSort/Building.get_children():
-		if build.building_type == type and !build.is_at_capacity():
-			if distance == null or position.distance_to(build.get_position) < distance:
-				closestBuilding = build
-	return closestBuilding
+func ai_build(character):
+	var buildSite = get_closest_construction_site(character.position)
+	var path = null
+	if buildSite != null:
+		path = get_path_between_points(character.position, buildSite.get_building_position())
+	character.handle_job(path, buildSite)
 
 func ai_join(character):
 	match character.type:
@@ -279,12 +297,12 @@ func _on_overlay_build(type, val):
 	building = val
 	current_building = type
 	match type:
-		"hut":
+		GameManager.Building.HUT:
 			$Map/Navigation/YSort/build_tool/Sprite.texture = hut
 			print("hut!")
-		"blank":
-			print("none")
-			$Map/Navigation/YSort/build_tool/Sprite.texture = blank
+#		"blank":
+#			print("none")
+#			$Map/Navigation/YSort/build_tool/Sprite.texture = blank
 			
 	
 	$Map/Navigation/YSort/build_tool.visible = building

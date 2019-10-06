@@ -43,8 +43,8 @@ func _ready():
 	p2[ResourceManager.Resource.STONE] = 4
 	p2[ResourceManager.Resource.GOLD] = 0
 	
-	prices["hut"] = p2
-	prices["blank"] = p1
+	prices[GameManager.Building.HUT] = p1
+	#prices[GameManager.Building.RUBBLE] = p1
 
 func get_cell_size():
 	return cell_size
@@ -98,13 +98,13 @@ func build_building(tile, type):
 	for item in prices[type].keys():
 		ResourceManager.update_resource(item, -prices[type][item])
 	
-
-	
 	var newItem = buildEntity.instance()
 	construction[tile] = [type, newItem]
-	newItem.setup(GameManager.Building.RUBBLE)
+	newItem.setup(type, true)
 	newItem.position = map_to_world(tile) + Vector2(1, cell_size.y/2)
 	buildingsNode.call_deferred("add_child", newItem)
+	for goblin in get_tree().get_nodes_in_group("goblin"):
+			goblin.construction_update(1)
 	
 	# we need this to create a construction tile that saves the texture and stats of the building
 	# we want. then once a build is completed applies all of it's bonuses.
@@ -116,12 +116,12 @@ func build_building(tile, type):
 	# type 15 construction plot, then on finish change it to building
 #	finish_construction(tile)
 	
-func finish_construction(tile):
-	construction.erase(tile)
-	print(construction)
-	set_cellv(tile, TILETYPE.BUILDING)
-	construction[tile][1].setup(construction[tile][0])
-	print(construction)
+#func finish_construction(tile):
+#	construction.erase(tile)
+#	print(construction)
+#	set_cellv(tile, TILETYPE.BUILDING)
+#	construction[tile][1].setup(construction[tile][0])
+#	print(construction)
 
 
 # Called when the node enters the scene tree for the first time.
@@ -182,10 +182,13 @@ func spawn_enemy():
 	newEnemy.position = map_to_world(spawn) + Vector2(1, cell_size.y/2)
 	newEnemy.connect("selected", gameRoot, "select_character")
 	charactersNode.call_deferred("add_child", newEnemy)
-	
+
+#
+#DEBUG BUILDING TESTING
+#
 func add_hut(cell: Vector2):
 	var newHut = hut.instance()
-	newHut.setup(GameManager.Building.HUT)
+	newHut.setup(GameManager.Building.HUT, false)
 	buildingsNode.add_child(newHut)
 	newHut.position = map_to_world(cell) + Vector2(0, cell_size.y/2+10)
 	newHut.connect("selected", gameRoot, "select_entity")

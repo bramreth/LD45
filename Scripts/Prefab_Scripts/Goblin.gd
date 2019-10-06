@@ -21,6 +21,9 @@ var jobs = ["gather", "rest", "relax", "eat", "build", "fight", "wander"]
 
 var currentJob = "idle"
 var currentTarget = null
+var constructionsInProgress = 0
+var combatsInProgress = 0
+
 
 func _ready():
 	._ready()
@@ -31,13 +34,14 @@ func _ready():
 
 func join_clan():
 	emit_signal("request_job_target", self, "join")
+	start_specific_job("wander")
 
 func determine_jobs():
-	return "rest"
+	return "build"
 	# essentials
-	if combat_in_proximity():
+	if constructionsInProgress > 0:
 		return "fight"
-	if build_in_proximity():
+	if combatsInProgress > 0:
 		return "build"
 	if hunger < 40:
 		return "eat"
@@ -57,14 +61,18 @@ func determine_jobs():
 	else:
 		return "rest"
 
-func combat_in_proximity():
-	return false
+func combat_update(change):
+	combatsInProgress += change
 	
-func build_in_proximity():
-	return false
+func construction_update(change):
+	constructionsInProgress += change
 	
 func start_job():
 	currentJob = determine_jobs()
+	emit_signal("request_job_target", self, currentJob)
+
+func start_specific_job(job):
+	currentJob = job
 	emit_signal("request_job_target", self, currentJob)
 
 #Gets a path to the job target and the target from the Game script
@@ -133,7 +141,15 @@ func eat():
 	adjust_stats(50,0,10)
 
 func build():
-	adjust_stats(-10,-10,-10)
+	print("BUILDING")
+	if currentTarget != null:
+		adjust_stats(-10,-10,-10)
+		var success = currentTarget.use_building(self)
+		if !success: #Construction wip
+			finish_job()
+	else :
+		finish_job()
+	
 	
 func fight():
 	adjust_stats(-10,-10,-10)
