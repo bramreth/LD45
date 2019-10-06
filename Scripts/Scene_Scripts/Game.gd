@@ -67,7 +67,8 @@ func building_spawned():
 
 func remove_items_from_map():
 	for child in $Map/Navigation/YSort/Items.get_children():
-		child.queue_free()
+		if not child.pickedUp:
+			child.queue_free()
 
 func _exit_tree():
 	itemSpawningThread.wait_to_finish()

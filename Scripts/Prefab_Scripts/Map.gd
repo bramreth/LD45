@@ -30,7 +30,14 @@ func get_cell_val(cell):
 	
 func check_can_build(tile):
 	var cell = get_cellv(tile)
-	if cell == 0 or cell == 1 or cell == 2 or cell == 5 or cell == -1:
+	if (cell == 0 or cell == 1 or cell == 2 or cell == 5 or cell == -1) and can_afford():
+		return true
+	else:
+		false
+		
+func can_afford():
+	print(ResourceManager.get_value(ResourceManager.Resource.WOOD))
+	if ResourceManager.get_value(ResourceManager.Resource.WOOD) > 2:
 		return true
 	else:
 		false
