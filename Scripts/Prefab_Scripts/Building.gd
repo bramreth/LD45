@@ -12,8 +12,13 @@ var building_type
 
 func setup(resource):
 	building_type = resource
+	print("BRAM MARKER")
 	print(resource)
 #	$MapEntity_Sprite.texture = AssetLoader.assets["resources"][resourceType]
+	match building_type:
+		"hut":
+			ResourceManager.update_resource(ResourceManager.Resource.MAX_POPULATION, 5)
+			print("hut built!!", ResourceManager.get_value(ResourceManager.Resource.MAX_POPULATION))
 	
 func _ready():
 	._ready()

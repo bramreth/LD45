@@ -81,25 +81,44 @@ func can_afford(type):
 #	print(ResourceManager.get_value(ResourceManager.Resource.WOOD) > 2)
 	
 	for item in prices[type].keys():
-		print(item)
 		if ResourceManager.get_value(item) < prices[type][item]:
 			return false
 
 	return true
 	
+	
+# a dictionary containing plots of land that need building
+var construction = {}
+
 func build_building(tile, type):
 	if check_can_build(tile, type):
 		return
 	set_cellv(tile, TILETYPE.BUILDING)
 	for item in prices[type].keys():
 		ResourceManager.update_resource(item, -prices[type][item])
+	
+	construction[tile] = type
+	
+	# we need this to create a construction tile that saves the texture and stats of the building
+	# we want. then once a build is completed applies all of it's bonuses.
+	
+	# as a temporary measure I will make it so that construction happens immediately and predefined bonuses are
+	# applied
+	
+	#the tile is empty, here we want to create a marker for a build event. we may want to change the tile to a new type
+	# type 15 construction plot, then on finish change it to building
+	finish_construction(tile)
+	
+func finish_construction(tile):
+	print(construction)
 	var newItem = buildEntity.instance()
-	newItem.setup(type)
+	newItem.setup(construction[tile])
+	construction.erase(tile)
 	newItem.position = map_to_world(tile) + Vector2(1, cell_size.y/2)
-	#newItem.position += Vector2(0, cell_size.y/2)
-#	newItem.connect("selected", gameRoot, "select_entity")
 	buildingsNode.call_deferred("add_child", newItem)
 
+
+	print(construction)
 
 
 	
