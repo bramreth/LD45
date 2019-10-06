@@ -189,7 +189,7 @@ func get_closest_building_by_type(type, position):
 	var distance = null
 	var closestBuilding = null
 	for build in $Map/Navigation/YSort/Building.get_children():
-		if build.building_type == type:
+		if build.building_type == type and !build.is_at_capacity():
 			if distance == null or position.distance_to(build.get_position) < distance:
 				closestBuilding = build
 	return closestBuilding

@@ -38,6 +38,11 @@ func _ready():
 	type = GameManager.ENTITY_TYPE.BUILDING
 	GameManager.connect("gameplay_tick", self, "gameplay_tick")
 
+func is_at_capacity():
+	if occupants.size() >= buildingStats["capacity"][building_type]:
+		return true
+	return false
+
 func use_building(character):
 	if occupants.size() < buildingStats["capacity"][building_type]:
 		occupants[character] = GameManager.currentGamePlayTick

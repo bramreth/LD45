@@ -24,7 +24,6 @@ var currentTarget = null
 
 func _ready():
 	._ready()
-	print("READY GOBLIN ++++++++++++++++++++++++++++")
 	randomize()
 	type = GameManager.ENTITY_TYPE.GOBLIN
 	yield(get_tree().create_timer(randi()%3+1), "timeout")
@@ -34,12 +33,12 @@ func join_clan():
 	emit_signal("request_job_target", self, "join")
 
 func determine_jobs():
-	return "wander"
+	return "rest"
 	# essentials
 	if combat_in_proximity():
 		return "fight"
 	if build_in_proximity():
-		return "fight"
+		return "build"
 	if hunger < 40:
 		return "eat"
 	if energy < 30:
@@ -116,12 +115,15 @@ func gather():
 	adjust_stats(-10,-10,-10)
 
 func rest():
+	print("RESTING")
 	if currentTarget != null:
 		adjust_stats(0,50,10)
 		var success = currentTarget.use_building(self)
 		if !success: #House is full :(
 			emit_signal("request_job_target", self, currentJob)
 	else :
+		yield(get_tree().create_timer(10), "timeout")
+		adjust_stats(0,10,0)
 		finish_job()
 
 func relax():
