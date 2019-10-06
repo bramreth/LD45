@@ -102,6 +102,7 @@ func select_item(item):
 	move_character(selectedItem.position)
 
 func perform_contextual_action(character):
+	print("THIS SHOULDNT HAPPEN")
 	if selectedEntity != null:
 		if character.type == GameManager.ENTITY_TYPE.PLAYER:
 			if selectedEntity.type == GameManager.ENTITY_TYPE.BUILDING:
@@ -135,7 +136,6 @@ func provide_movement_target(character, job):
 
 func ai_wander(character):
 	var path = get_path_between_points(character.position, map.get_random_spot_in_the_town())
-	$Map/Navigation/YSort/Line2D.points = path
 	character.handle_job(path, null)
 
 ################################################################################################
