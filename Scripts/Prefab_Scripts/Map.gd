@@ -22,6 +22,11 @@ var itemSpawnLocations = {
 	ResourceManager.Resource.WOOD: [TILETYPE.BASE, TILETYPE.FOREST]
 }
 
+var prices = {}
+var p1 = {}
+var p2 ={}
+	
+
 var entitiesNode
 var charactersNode
 var buildingsNode
@@ -29,6 +34,14 @@ var gameRoot
 
 func _ready():
 	randomize()
+	p1[ResourceManager.Resource.WOOD] = 1
+	p1[ResourceManager.Resource.STONE] = 1
+	
+	p2[ResourceManager.Resource.WOOD] = 2
+	p2[ResourceManager.Resource.STONE] = 4
+	
+	prices["hut"] = p2
+	prices["blank"] = p1
 
 func get_cell_size():
 	return cell_size
@@ -65,15 +78,19 @@ func check_can_build(tile, type):
 func can_afford(type):
 #	print(ResourceManager.get_value(ResourceManager.Resource.WOOD) > 2)
 	
-	if ResourceManager.get_value(ResourceManager.Resource.STONE) > 2:
-		return true
-	else:
-		return false
+	for item in prices[type].keys():
+		print(item)
+		if ResourceManager.get_value(item) < prices[type][item]:
+			return false
+
+	return true
 	
 func build_building(tile, type):
 	if check_can_build(tile, type):
 		return
 	set_cellv(tile, TILETYPE.BUILDING)
+	for item in prices[type].keys():
+		ResourceManager.update_resource(item, -prices[type][item])
 	var newItem = buildEntity.instance()
 	newItem.setup(type)
 	newItem.position = map_to_world(tile) + Vector2(1, cell_size.y/2)
