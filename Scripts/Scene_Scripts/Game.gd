@@ -76,7 +76,7 @@ func select_item(item):
 
 func perform_contextual_action(character):
 	if selectedEntity != null:
-		if character.isPlayer:
+		if character.type == GameManager.ENTITY_TYPE.PLAYER:
 			if selectedEntity.type == GameManager.ENTITY_TYPE.BUILDING:
 				pass
 			elif selectedEntity.type == GameManager.ENTITY_TYPE.ITEM:
