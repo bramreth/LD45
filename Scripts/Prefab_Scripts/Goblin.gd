@@ -20,6 +20,9 @@ func _ready():
 	yield(get_tree().create_timer(randi()%3+1), "timeout")
 	start_job()
 
+func join_clan():
+	emit_signal("request_job_target", self, "join")
+
 func determine_jobs():
 	return "wander"
 	# essentials

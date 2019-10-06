@@ -101,6 +101,7 @@ func setup(entities, characters, buildings, root):
 var hut = preload("res://Assets/Prefabs/BuildingMapEntity.tscn")
 var itemEntity = preload("res://Assets/Prefabs/ItemMapEntity.tscn")
 var buildEntity = preload("res://Assets/Prefabs/BuildingMapEntity.tscn")
+var goblinEntity = preload("res://Assets/Prefabs/GoblinCharacterMapEntity.tscn")
 
 func draw_world():
 	for cell in get_used_cells_by_id(TILETYPE.BASE):
@@ -123,6 +124,17 @@ func spawn_items(item, amount):
 		#newItem.position += Vector2(0, cell_size.y/2)
 		newItem.connect("selected", gameRoot, "select_entity")
 		entitiesNode.call_deferred("add_child", newItem)
+
+func spawn_goblin():
+	var validSpawns = get_used_cells()
+	var spawn = validSpawns[randi()%validSpawns.size()]
+	var newGoblin = goblinEntity.instance()
+	newGoblin.position = map_to_world(spawn) + Vector2(1, cell_size.y/2)
+	newGoblin.connect("selected", gameRoot, "select_character")
+	newGoblin.connect("request_job_target", self, "provide_movement_target")
+	charactersNode.call_deferred("add_child", newGoblin)
+	newGoblin.call_deffered("join_clan")
+	
 
 func add_hut(cell: Vector2):
 	var newHut = hut.instance()

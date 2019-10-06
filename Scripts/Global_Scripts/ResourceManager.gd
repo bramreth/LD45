@@ -33,13 +33,14 @@ func update_resource(resource, value):
 				emit_signal("update_resource", Resource.FOOD)
 			ResourceManager.Resource.POPULATION: 
 				SystemManager.data["player_data"]["resources"]["population"] += value
+				GameManager.update_goblin_spawn_rate()
 			ResourceManager.Resource.MAX_POPULATION: 
 				SystemManager.data["player_data"]["resources"]["max_population"] += value
+				GameManager.update_goblin_spawn_rate()
 				emit_signal("update_resource", Resource.POPULATION)
 			ResourceManager.Resource.EGG:
 				SystemManager.data["player_data"]["resources"]["eggs"] += value
 				emit_signal("update_resource", Resource.EGG)
-		GameManager.update_goblin_spawn_rate()
 
 func get_value(resource):
 	match resource:
