@@ -4,6 +4,7 @@ var path: PoolVector2Array
 var isMoving: bool = false
 export var speed := 125
 export var health := 20
+export var strength := 5
 
 func _ready():
 	._ready()

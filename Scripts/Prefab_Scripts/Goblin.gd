@@ -7,7 +7,6 @@ export var gname = "goblin"
 export var hunger = 100
 export var energy = 100
 export var happiness = 100
-export var strength = 5
 
 # possible jobs
 var jobs = ["gather", "rest", "relax", "eat", "build", "fight", "wander"]
@@ -26,6 +25,8 @@ func _ready():
 	._ready()
 	randomize()
 	type = GameManager.ENTITY_TYPE.GOBLIN
+	strength = 3
+	health = 15
 	yield(get_tree().create_timer(randf()*3+1), "timeout")
 	start_job()
 
@@ -58,7 +59,9 @@ func determine_jobs():
 	return "wander"
 
 func check_for_combat():
-	false
+	if get_tree().get_nodes_in_group("combat_sites").size() > 0:
+		return true
+	return false
 	
 func check_for_construction():
 	for site in get_tree().get_nodes_in_group("construction_sites"):
@@ -169,11 +172,16 @@ func build():
 	adjust_stats(-10,-10,-10)
 
 func fight():
+	currentTarget.enter_combat(self)
 	adjust_stats(-10,-10,-10)
 
 func wander():
 	adjust_stats(0,-10,10)
 	finish_job()
+
+func die():
+	start_specific_job("wander")
+	$MapEntity_Sprite.modulate = Color.red
 
 func drain_energy_and_food():
 	adjust_stats(-2,-3,0)
