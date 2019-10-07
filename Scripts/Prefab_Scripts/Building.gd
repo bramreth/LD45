@@ -45,7 +45,6 @@ func finish_construction():
 	$MapEntity_Sprite.texture = AssetLoader.assets["resources"][building_type]
 	$MapEntity_Sprite/UnderConstruction.hide()
 	building = building_type
-	print($MapEntity_Sprite.texture)
 	match building_type:
 		GameManager.Building.HUT:
 			ResourceManager.update_resource(ResourceManager.Resource.MAX_POPULATION, 5)

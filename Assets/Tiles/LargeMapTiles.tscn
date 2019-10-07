@@ -135,3 +135,7 @@ texture = ExtResource( 2 )
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Construction"]
 navpoly = SubResource( 10 )
+
+[node name="Impassable" type="Sprite" parent="."]
+position = Vector2( 1536, 0 )
+texture = ExtResource( 3 )

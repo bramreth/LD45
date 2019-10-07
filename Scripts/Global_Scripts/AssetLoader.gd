@@ -8,6 +8,9 @@ func _ready():
 func load_resource_icons():
 	assets["resources"] = {}
 	assets["items"] = {}
+	assets["grass"] = {}
+	assets["grass"]["grass"] = [load("res://Assets/Images/buildings/grass_1.png"), load("res://Assets/Images/buildings/grass_2.png"), load("res://Assets/Images/buildings/grass_3.png")]
+	assets["grass"]["tree"] = load("res://Assets/Images/buildings/tree.png")
 	assets["items"][ResourceManager.Resource.EGG] = load("res://Assets/Images/ui_icons/egg.png")
 	assets["items"][ResourceManager.Resource.FOOD] = load("res://Assets/Images/ui_icons/food.png")
 	assets["items"][ResourceManager.Resource.GOLD] = load("res://Assets/Images/ui_icons/gold.png")
@@ -19,4 +22,5 @@ func load_resource_icons():
 	assets["resources"][GameManager.Building.HATCHERY] = load("res://Assets/Images/buildings/hatchery.png")
 	assets["resources"][GameManager.Building.HUMAN_HUT] = load("res://Assets/Images/buildings/human_hut.png")	
 	assets["resources"][GameManager.Building.RUBBLE] = load("res://Assets/Images/buildings/rubble_bg.png")
+	assets["resources"][GameManager.Building.THRONE_ROOM] = load("res://Assets/Images/buildings/throne_room.png")
 	

@@ -158,7 +158,7 @@
 			},
 			{
 				"state": "read_building_actions",
-				"text": "Select a building you would like to erect, and place it one the map the cost of resource is displayed.",
+				"text": "Select a building you would like to erect, and place it on the map the cost of resource is displayed.",
 				"animation": "wizard",
 				"button_text": "Next",
 				"next_action": "next",
@@ -168,7 +168,7 @@
 			},
 			{
 				"state": "read_attractiveness",
-				"text": "The more attrctive your home the more wild goblins will be drawn to join you in your efforts to survive.",
+				"text": "The more attractive your home the more wild goblins will be drawn to join you in your efforts to survive.",
 				"animation": "wizard",
 				"button_text": "Next",
 				"next_action": "next",
@@ -178,7 +178,7 @@
 			},
 			{
 				"state": "read_population",
-				"text": "This indicates your current and max population, max population can increase as you're village grows.",
+				"text": "This indicates your current and max population, max population can increase as you build huts.",
 				"animation": "wizard",
 				"button_text": "Next",
 				"next_action": "next",
@@ -188,7 +188,7 @@
 			},
 			{
 				"state": "read_eggs",
-				"text": "This indicates your current egg hatchery, these will hatch into goblins babbies.",
+				"text": "This indicates your current egg count, these will hatch into goblins babbies.",
 				"animation": "wizard",
 				"button_text": "Next",
 				"next_action": "next",
@@ -218,7 +218,7 @@
 			},
 			{
 				"state": "read",
-				"text": "To move a goblin select him with left click, and then choose a place to mvoe with right click. Goodluck little one!",
+				"text": "You can move yourself with a right click and your camera by dragging with a middle mouse click. Goodluck little one!",
 				"animation": "wizard",
 				"button_text": "Next",
 				"next_action": "next",

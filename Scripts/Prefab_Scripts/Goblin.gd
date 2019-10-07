@@ -200,7 +200,7 @@ func die():
 	
 	for enemy in get_tree().get_nodes_in_group("enemies"):
 		enemy.is_this_current_target(self)
-	
+	$death.play("death")
 	yield(get_tree().create_timer(3), "timeout")
 	queue_free()
 
