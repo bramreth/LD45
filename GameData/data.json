@@ -369,7 +369,7 @@
 				"next_action": "close",
 				"duration": "",
 				"text_speed": 0.03,
-				"sfx": ""
+				"sfx": "goblin2.wav"
 			}
 		],
 		"battle-2": [
@@ -403,7 +403,7 @@
 				"next_action": "next",
 				"duration": "",
 				"text_speed": 0.03,
-				"sfx": "pre_combat_horn-3.wav"
+				"sfx": "pre_combat_horn.wav"
 			},
 			{
 				"state": "read",
@@ -519,7 +519,7 @@
 				"next_action": "next",
 				"duration": "",
 				"text_speed": 0.03,
-				"sfx": "king5.wav"
+				"sfx": "pre_combat_horn.wav"
 			},
 			{
 				"state": "read",
