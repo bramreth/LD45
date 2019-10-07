@@ -99,7 +99,7 @@
 			{
 				"state": "read",
 				"text": "If you are going to survive the wrath of nasty king Clement you'll need all the help you can get.",
-				"animation": "",
+				"animation": "wizard",
 				"button_text": "Next",
 				"next_action": "next",
 				"duration": "",
@@ -108,8 +108,8 @@
 			},
 			{
 				"state": "read",
-				"text": "goblin",
-				"animation": "Are you here to help me?!",
+				"text": "Are you here to help me?!",
+				"animation": "goblin",
 				"button_text": "Next",
 				"next_action": "next",
 				"duration": "",
@@ -128,8 +128,8 @@
 			},
 			{
 				"state": "read",
-				"text": "goblin",
-				"animation": "Oh but you're a wizard, surely you can just defeat him?",
+				"text": "Oh but you're a wizard, surely you can just kill him?",
+				"animation": "goblin",
 				"button_text": "Next",
 				"next_action": "next",
 				"duration": "",
@@ -138,8 +138,8 @@
 			},
 			{
 				"state": "read",
-				"text": "wizard",
-				"animation": "HA HA HA. Where's the fun in that [GOBLIN_NAME]",
+				"text": "HA HA HA. Where's the fun in that [GOBLIN_NAME].",
+				"animation": "wizard",
 				"button_text": "Next",
 				"next_action": "next",
 				"duration": "",
@@ -148,7 +148,7 @@
 			},
 			{
 				"state": "read_building_resources",
-				"text": "In order to construct buildings, you need wood, stone and gold. These are resources that you and you're goblins can collect.",
+				"text": "Now! In order to construct buildings, you need wood, stone and gold. These are resources that you and you're goblins can collect.",
 				"animation": "wizard",
 				"button_text": "Next",
 				"next_action": "next",
@@ -230,12 +230,32 @@
 				"state": "read",
 				"text": "Gee, thanks!",
 				"animation": "goblin",
+				"button_text": "next",
+				"next_action": "Next",
+				"duration": "",
+				"text_speed": 0.03,
+				"sfx": ""
+			},
+			{
+				"state": "read_food",
+				"text": "Oh one more thing, make sure you have food. If you don't, your goblins will starve and then eventually die.",
+				"animation": "wizard",
+				"button_text": "Next",
+				"next_action": "next",
+				"duration": "",
+				"text_speed": 0.03,
+				"sfx": ""
+			},
+			{
+				"state": "read",
+				"text": "Well duh!",
+				"animation": "goblin",
 				"button_text": "Start Game",
 				"next_action": "close",
 				"duration": "",
 				"text_speed": 0.03,
 				"sfx": ""
-			}
+			},
 		],
 		"hut": [
 			{

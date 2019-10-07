@@ -38,6 +38,13 @@ func kill_dialog():
 	self.visible = false
 
 func handle_dialog():
+	get_parent().resource_arrows.hide()
+	get_parent().attract_arrow.hide()
+	get_parent().food_arrow.hide()
+	get_parent().population_arrow.hide()
+	get_parent().eggs_arrow.hide()
+	get_parent().time_arrow.hide()
+	get_parent().building_arrows.hide()
 	var current_dialog_item = dialog[dialog_index]
 	var state = current_dialog_item["state"]
 	var text = current_dialog_item["text"]
@@ -77,7 +84,41 @@ func handle_dialog():
 			startButton(button_text)
 		"cutscene":
 			startCutScene(duration)
-	
+		"read_building_resources":
+			get_parent().resource_arrows.show()
+			showAnimation(animation)
+			startDialog(text, text_speed, sfx)
+			startButton(button_text)
+		"read_building_actions":
+			get_parent().building_arrows.show()
+			showAnimation(animation)
+			startDialog(text, text_speed, sfx)
+			startButton(button_text)
+		"read_foood":
+			get_parent().food_arrow.show()
+			showAnimation(animation)
+			startDialog(text, text_speed, sfx)
+			startButton(button_text)
+		"read_attractiveness":
+			get_parent().attract_arrow.show()
+			showAnimation(animation)
+			startDialog(text, text_speed, sfx)
+			startButton(button_text)
+		"read_population":
+			get_parent().population_arrow.show()
+			showAnimation(animation)
+			startDialog(text, text_speed, sfx)
+			startButton(button_text)
+		"read_eggs":
+			get_parent().eggs_arrow.show()
+			showAnimation(animation)
+			startDialog(text, text_speed, sfx)
+			startButton(button_text)
+		"read_clock":
+			get_parent().time_arrow.show()
+			showAnimation(animation)
+			startDialog(text, text_speed, sfx)
+			startButton(button_text)
 	
 func showAnimation(animation):
 	$dialog_menu/dialog_image/sprite_container/goblin.visible = false

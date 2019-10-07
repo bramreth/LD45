@@ -10,6 +10,14 @@ var music_swap = true
 
 onready var clock = get_node("clock")
 onready var attractive_meter = get_node("attractive_meter")
+
+onready var resource_arrows = get_node("arrows")
+onready var attract_arrow = get_node("arrows2")
+onready var food_arrow = get_node("arrows3")
+onready var population_arrow = get_node("arrows4")
+onready var eggs_arrow = get_node("arrows5")
+onready var time_arrow = get_node("arrows6")
+onready var building_arrows = get_node("arrows7")
 func _ready():
 	$attractiveness_meter.value = GameManager.get_attractiveness()
 	reset_build_buttons()
@@ -189,3 +197,5 @@ func _on_hatch_button_pressed():
 		$VBoxContainer/Container/hatch_button.modulate = Color(1.0,1.0,1.0,1.0)
 	
 	emit_signal("build", GameManager.Building.HATCHERY, build)
+	
+
