@@ -153,9 +153,28 @@ func setup(root, sorter):
 		add_building(cell)
 	for cell in get_used_cells_by_id(TILETYPE.HUMAN_THRONE_ROOM):
 		add_palace(cell)
+	
+	for cell in get_used_cells_by_id(TILETYPE.GRASS):
+		add_grass(cell,false)
+	for cell in get_used_cells_by_id(TILETYPE.FOREST):
+		add_grass(cell,true)
+
+var grass = preload("res://Assets/Prefabs/Grass.tscn")
+
+func add_grass(cell, g):
+	var newGrass = grass.instance()
+	newGrass.position = map_to_world(cell) + Vector2(0, cell_size.y/2)
+	newGrass.position += Vector2(rand_range(-100, 100), rand_range(-50, 500))
+	ySort.add_child(newGrass)
+	newGrass.setup(g)
 
 var hWall = preload("res://Assets/Prefabs/Wall.tscn")
 var hHouse = preload("res://Assets/Prefabs/Human_House.tscn")
+var hut = preload("res://Assets/Prefabs/BuildingMapEntity.tscn")
+var itemEntity = preload("res://Assets/Prefabs/ItemMapEntity.tscn")
+var buildEntity = preload("res://Assets/Prefabs/BuildingMapEntity.tscn")
+var goblinEntity = preload("res://Assets/Prefabs/GoblinCharacterMapEntity.tscn")
+var enemyEntity = preload("res://Assets/Prefabs/HumanEnemyMapEntity.tscn")
 
 func add_wall(cell):
 	var newWall = hWall.instance()
@@ -170,13 +189,11 @@ func add_building(cell):
 	ySort.add_child(newBuilding)
 
 func add_palace(cell):
-	pass
-
-var hut = preload("res://Assets/Prefabs/BuildingMapEntity.tscn")
-var itemEntity = preload("res://Assets/Prefabs/ItemMapEntity.tscn")
-var buildEntity = preload("res://Assets/Prefabs/BuildingMapEntity.tscn")
-var goblinEntity = preload("res://Assets/Prefabs/GoblinCharacterMapEntity.tscn")
-var enemyEntity = preload("res://Assets/Prefabs/HumanEnemyMapEntity.tscn")
+	var newHut = hut.instance()
+	newHut.setup(GameManager.Building.THRONE_ROOM, false)
+	ySort.add_child(newHut)
+	newHut.position = map_to_world(cell) + Vector2(0, cell_size.y/2+10)
+	newHut.connect("selected", gameRoot, "select_entity")
 
 func draw_world():
 	for cell in get_used_cells_by_id(TILETYPE.BASE):
