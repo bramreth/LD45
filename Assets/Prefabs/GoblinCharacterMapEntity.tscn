@@ -4,7 +4,7 @@
 [ext_resource path="res://Scripts/Prefab_Scripts/Goblin.gd" type="Script" id=2]
 [ext_resource path="res://Assets/SFX/walk.wav" type="AudioStream" id=3]
 
-[node name="MapEntity" index="0" groups=[
+[node name="MapEntity" groups=[
 "goblins",
 ] instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -15,5 +15,5 @@ visible = false
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." index="6"]
 stream = ExtResource( 3 )
 volume_db = -7.0
-
+attenuation = 4.43828
 [connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_AudioStreamPlayer2D_finished"]

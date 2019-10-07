@@ -10,6 +10,10 @@ func _ready():
 	randomize()
 	GameManager.connect("gameplay_tick", self, "gameplay_tick")
 
+func start_combat(combatents):
+	for combatent in combatents:
+		enter_combat(combatent)
+
 func enter_combat(character):
 	if character.type == GameManager.ENTITY_TYPE.GOBLIN or character.type == GameManager.ENTITY_TYPE.PLAYER:
 		friendlies.append(character)
@@ -35,8 +39,12 @@ func combat_over():
 	queue_free()
 
 func gameplay_tick():
+	if friendlies.size() < 1 or enemies.size() < 1:
+		combat_over()
+		return
+	
 	var friendlyDamage = 0
-	var enemyDamage = 10
+	var enemyDamage = 0
 	
 	for combatent in friendlies:
 		friendlyDamage += randi()%(combatent.strength+1)+1
@@ -47,19 +55,18 @@ func gameplay_tick():
 	assign_damage(friendlyDamage, enemyDamage)
 
 func assign_damage(friendlyDamage, enemyDamage):
-	if friendlies.size() > 0 and enemies.size() > 0:
-		#FRIENDLIES
-		var perUnitDamage = enemyDamage/friendlies.size()
-		friendlies[0].health -= enemyDamage%friendlies.size()
-		for combatent in friendlies:
-			combatent.health -= enemyDamage
-			print(combatent.health)
-			if combatent.health <= 0:
-				leave_combat(combatent)
-		#ENEMIES
-		perUnitDamage = friendlyDamage/enemies.size()
-		enemies[0].health -= friendlyDamage%enemies.size()
-		for combatent in enemies:
-			combatent.health -= friendlyDamage
-			if combatent.health <= 0:
-				leave_combat(combatent)
+	#FRIENDLIES
+	var perUnitDamage = enemyDamage/friendlies.size()
+	friendlies[0].health -= enemyDamage%friendlies.size()
+	for combatent in friendlies:
+		combatent.health -= enemyDamage
+		print(combatent.health)
+		if combatent.health <= 0:
+			leave_combat(combatent)
+	#ENEMIES
+	perUnitDamage = friendlyDamage/enemies.size()
+	enemies[0].health -= friendlyDamage%enemies.size()
+	for combatent in enemies:
+		combatent.health -= friendlyDamage
+		if combatent.health <= 0:
+			leave_combat(combatent)

@@ -14,8 +14,8 @@ var debug_flag = false
 
 onready var night_events = SystemManager.data["events"]["night"]
 
-const DAY_LENGTH = 1000
-const NIGHT_LENGTH = 5
+const DAY_LENGTH = 120
+const NIGHT_LENGTH = 60
 
 var currentTick: int = 0 #1/60th seconds since started
 var currentGamePlayTick: int = 0 #Seconds since started
@@ -117,7 +117,7 @@ func start_of_daytime_tick():
 	spawn_items_list[ResourceManager.Resource.GOLD] = randi()%4
 	spawn_items_list[ResourceManager.Resource.STONE] = randi()%6+1
 	spawn_items_list[ResourceManager.Resource.WOOD] = randi()%6+1
-#	emit_signal("spawn_items", spawn_items_list)
+	emit_signal("spawn_items", spawn_items_list)
 	#print(spawn_items_list)
 
 func daytime_tick():
@@ -191,7 +191,7 @@ func get_happiness():
 		return 100
 	var hap = 0
 	for item in get_tree().get_nodes_in_group("goblins"):
-		print(item)
+		#print(item)
 		hap += item.happiness
 	return int(hap/leng)
 

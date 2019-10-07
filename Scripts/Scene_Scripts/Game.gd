@@ -15,7 +15,7 @@ var hut = preload("res://Assets/Images/debug_hut.png")
 var blank = preload("res://Assets/Images/buildings/building_default.png")
 
 onready var map = $Map/Navigation/Map
-onready var player = $Map/Navigation/YSort/Characters/Player
+onready var player = $Map/Navigation/YSort/Player
 
 var mousePos = Vector2()
 
@@ -25,21 +25,27 @@ func _ready():
 	GameManager.connect("night_started", self, "start_night")
 	GameManager.connect("night_started", self, "remove_items_from_map")
 	
-	for character in $Map/Navigation/YSort/Characters.get_children():
-		if character.type == GameManager.ENTITY_TYPE.GOBLIN:
-			character.connect("request_job_target", self, "provide_movement_target")
-		elif character.type == GameManager.ENTITY_TYPE.PLAYER:
-			character.connect("movement_done", self, "perform_contextual_action")
+	for character in get_tree().get_nodes_in_group("goblins"):
+		character.connect("request_job_target", self, "provide_movement_target")
 		character.connect("selected", self, "select_character")
 		
-	for item in $Map/Navigation/YSort/Items.get_children():
+	for character in get_tree().get_nodes_in_group("enemies"):
+		character.connect("request_job_target", self, "provide_movement_target")
+		character.connect("selected", self, "select_character")
+		character.connect("start_combat", self, "start_combat")
+	
+	for building in get_tree().get_nodes_in_group("buildings"):
+		building.connect("selected", self, "select_entity")
+		
+	for item in get_tree().get_nodes_in_group("items"):
 		item.connect("selected", self, "select_entity")
 	
-	for building in $Map/Navigation/YSort/Building.get_children():
-		building.connect("selected", self, "select_entity")
+	player.connect("movement_done", self, "perform_contextual_action")
+	player.connect("selected", self, "select_character")
 	
-	GameManager.start_dialog("tutorial")
-	map.setup($Map/Navigation/YSort/Items, $Map/Navigation/YSort/Characters, $Map/Navigation/YSort/Building,  self)
+	
+	#GameManager.start_dialog("tutorial")
+	map.setup(self, $Map/Navigation/YSort)
 	GameManager.start_game()
 	
 ################################################################################################
@@ -98,7 +104,23 @@ func _thread_spawn_enemies(amount):
 
 func enemy_spawned():
 	enemySpawningThread.wait_to_finish()
-	
+
+var combatSpawningThread:Thread
+var combat = preload("res://Assets/Prefabs/CombatMapEntity.tscn")
+func start_combat(target, attacker):
+	combatSpawningThread = Thread.new()
+	combatSpawningThread.start(self, "_thread_spawn_combat", [target, attacker])
+
+func _thread_spawn_combat(startingCombatents):
+	var newCombat = combat.instance()
+	newCombat.start_combat(startingCombatents)
+	newCombat.position = startingCombatents[1].position
+	$Map/Navigation/YSort.call_deferred("add_child", newCombat)
+	call_deferred("combat_spawned")
+
+func combat_spawned():
+	combatSpawningThread.wait_to_finish()
+
 func remove_items_from_map():
 	for child in $Map/Navigation/YSort/Items.get_children():
 		if not child.pickedUp:
@@ -113,6 +135,8 @@ func _exit_tree():
 		goblinSpawningThread.wait_to_finish()
 	if enemySpawningThread != null:
 		enemySpawningThread.wait_to_finish()
+	if combatSpawningThread != null:
+		combatSpawningThread.wait_to_finish()
 
 ################################################################################################
 # ENTITY SELECTION
@@ -122,7 +146,8 @@ func select_character(character):
 		selectedCharacter.remove_highlight()
 	selectedCharacter = character
 	selectedCharacter.highlight()
-	$Camera2D/CanvasLayer/overlay.show_goblin(character.get_details())
+	if selectedCharacter.type == GameManager.ENTITY_TYPE.GOBLIN or  selectedCharacter.type == GameManager.ENTITY_TYPE.PLAYER:
+		$Camera2D/CanvasLayer/overlay.show_goblin(character.get_details())
 
 func select_entity(entity):
 	stop_construction()
@@ -180,7 +205,7 @@ func move_character(target):
 func get_closest_building_by_type(type, position):
 	var distance = null
 	var closestBuilding = null
-	for build in $Map/Navigation/YSort/Building.get_children():
+	for build in get_tree().get_nodes_in_group("buildings"):
 		if build.building_type == type and !build.is_at_capacity() and !build.underConstruction:
 			if distance == null or position.distance_to(build.get_building_position()) < distance:
 				distance = position.distance_to(build.get_building_position())
@@ -190,7 +215,7 @@ func get_closest_building_by_type(type, position):
 func get_closest_construction_site(position):
 	var distance = null
 	var closestBuilding = null
-	for build in $Map/Navigation/YSort/Building.get_children():
+	for build in get_tree().get_nodes_in_group("buildings"):
 		if !build.is_at_capacity() and build.underConstruction:
 			if distance == null or position.distance_to(build.get_building_position()) < distance:
 				distance = position.distance_to(build.get_building_position())
@@ -206,10 +231,19 @@ func get_closest_combat(position):
 			closestCombat = combat
 	return closestCombat
 
+func get_closest_goblin(position):
+	var distance = null
+	var closestGoblin = null
+	for goblin in get_tree().get_nodes_in_group("goblins"):
+		if distance == null or position.distance_to(goblin.position) < distance:
+			distance = position.distance_to(goblin.position)
+			closestGoblin = goblin
+	return closestGoblin
+
 func get_closest_item(position):
 	var distance = null
 	var closestItem = null
-	for item in $Map/Navigation/YSort/Items.get_children():
+	for item in get_tree().get_nodes_in_group("items"):
 		if !item.pickedUp:
 			if distance == null or position.distance_to(item.position) < distance:
 				distance = position.distance_to(item.position)
@@ -271,6 +305,13 @@ func ai_join(character):
 			SystemManager.print("GOBLIN SPAWNED AT: " + String(character.position))
 			ResourceManager.update_resource(ResourceManager.Resource.POPULATION, 1)
 
+func ai_attack(character):
+	var goblin = get_closest_goblin(character.position)
+	var path = null
+	if goblin != null:
+		goblin.stun()
+		path = get_path_between_points(character.position, goblin.position)
+	character.handle_job(path, goblin)
 ################################################################################################
 # CAMERA
 ################################################################################################

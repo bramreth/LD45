@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Assets/Theme/goblin_theme.tres" type="Theme" id=1]
 [ext_resource path="res://Scenes/overlay.gd" type="Script" id=2]
@@ -21,6 +21,8 @@
 [ext_resource path="res://Assets/Images/texture_fill/attractive_meter_frame.png" type="Texture" id=19]
 [ext_resource path="res://Assets/Images/texture_fill/attractive_meter_fill.png" type="Texture" id=20]
 [ext_resource path="res://Assets/Images/attractive_meter_frame.png" type="Texture" id=21]
+[ext_resource path="res://Assets/shader/arrow.tres" type="Material" id=22]
+[ext_resource path="res://Assets/Images/Untitled_Artwork (1).png" type="Texture" id=23]
 
 [sub_resource type="StyleBoxFlat" id=1]
 content_margin_top = 10.0
@@ -607,6 +609,101 @@ scale = Vector2( 0.15, 0.15 )
 texture = ExtResource( 21 )
 region_enabled = true
 region_rect = Rect2( 710, 520, 310, 1200 )
+
+[node name="arrows" type="Node2D" parent="."]
+visible = false
+
+[node name="wood" type="Sprite" parent="arrows"]
+material = ExtResource( 22 )
+position = Vector2( 164.838, 529.561 )
+scale = Vector2( 0.15, 0.15 )
+texture = ExtResource( 23 )
+
+[node name="gold" type="Sprite" parent="arrows"]
+material = ExtResource( 22 )
+position = Vector2( 429.165, 528.913 )
+scale = Vector2( 0.15, 0.15 )
+texture = ExtResource( 23 )
+
+[node name="stone" type="Sprite" parent="arrows"]
+material = ExtResource( 22 )
+position = Vector2( 297.81, 528.59 )
+scale = Vector2( 0.15, 0.15 )
+texture = ExtResource( 23 )
+
+[node name="arrows2" type="Node2D" parent="."]
+visible = false
+
+[node name="attractiveness" type="Sprite" parent="arrows2"]
+material = ExtResource( 22 )
+position = Vector2( 47.764, 276.598 )
+scale = Vector2( 0.15, 0.15 )
+texture = ExtResource( 23 )
+
+[node name="arrows3" type="Node2D" parent="."]
+visible = false
+
+[node name="food" type="Sprite" parent="arrows3"]
+material = ExtResource( 22 )
+position = Vector2( 561.634, 526.216 )
+scale = Vector2( 0.15, 0.15 )
+texture = ExtResource( 23 )
+
+[node name="arrows4" type="Node2D" parent="."]
+visible = false
+
+[node name="pop" type="Sprite" parent="arrows4"]
+material = ExtResource( 22 )
+position = Vector2( 719.684, 526.634 )
+scale = Vector2( 0.15, 0.15 )
+texture = ExtResource( 23 )
+
+[node name="arrows5" type="Node2D" parent="."]
+visible = false
+
+[node name="eggs" type="Sprite" parent="arrows5"]
+material = ExtResource( 22 )
+position = Vector2( 825.468, 525.797 )
+scale = Vector2( 0.15, 0.15 )
+texture = ExtResource( 23 )
+
+[node name="arrows6" type="Node2D" parent="."]
+visible = false
+
+[node name="time" type="Sprite" parent="arrows6"]
+material = ExtResource( 22 )
+position = Vector2( 48.6002, 122.311 )
+rotation = 3.14159
+scale = Vector2( 0.15, 0.15 )
+texture = ExtResource( 23 )
+
+[node name="arrows7" type="Node2D" parent="."]
+visible = false
+position = Vector2( -133.943, -65.3538 )
+
+[node name="hut" type="Sprite" parent="arrows7"]
+material = ExtResource( 22 )
+position = Vector2( 164.838, 529.561 )
+scale = Vector2( 0.15, 0.15 )
+texture = ExtResource( 23 )
+
+[node name="camp" type="Sprite" parent="arrows7"]
+material = ExtResource( 22 )
+position = Vector2( 222.103, 529.884 )
+scale = Vector2( 0.15, 0.15 )
+texture = ExtResource( 23 )
+
+[node name="mess" type="Sprite" parent="arrows7"]
+material = ExtResource( 22 )
+position = Vector2( 291.663, 528.59 )
+scale = Vector2( 0.15, 0.15 )
+texture = ExtResource( 23 )
+
+[node name="hatchery" type="Sprite" parent="arrows7"]
+material = ExtResource( 22 )
+position = Vector2( 359.281, 530.855 )
+scale = Vector2( 0.15, 0.15 )
+texture = ExtResource( 23 )
 
 [connection signal="pressed" from="VBoxContainer/Container/hut_button" to="." method="_on_hut_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Container/camp_button" to="." method="_on_camp_button_pressed"]
