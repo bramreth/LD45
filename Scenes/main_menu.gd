@@ -41,6 +41,7 @@ func set_loading_progress(progress):
 	$ColorRect/VBoxContainer/Progress.text = "Loading: " + String(int((float(progress)/float(loadingTotal))*100)) + "%"
 
 func _on_play_button_pressed():
+	GameManager.set_tutorial(true)
 	scene_transition.background_load_scene("game")
 
 func _on_quit_button_pressed():
@@ -51,4 +52,5 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		SystemManager.changeBackgroundMusic("ambient.wav")
 
 func _on_test_button_pressed():
-	scene_transition.change_scene("game")
+	GameManager.set_tutorial(false)
+	scene_transition.background_load_scene("game")

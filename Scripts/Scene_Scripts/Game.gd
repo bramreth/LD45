@@ -43,10 +43,10 @@ func _ready():
 	player.connect("movement_done", self, "perform_contextual_action")
 	player.connect("selected", self, "select_character")
 	
-
 	map.setup(self, $Map/Navigation/YSort)
-	GameManager.start_game()
-	GameManager.start_dialog("tutorial")
+	GameManager.start_game()	
+	if GameManager.get_tutorial():
+		GameManager.start_dialog("tutorial")
 	
 ################################################################################################
 # SPAWNING
@@ -122,7 +122,8 @@ func combat_spawned():
 	combatSpawningThread.wait_to_finish()
 
 func remove_items_from_map():
-	for child in $Map/Navigation/YSort/Items.get_children():
+	
+	for child in get_tree().get_nodes_in_group("items"):
 		if not child.pickedUp:
 			child.queue_free()
 

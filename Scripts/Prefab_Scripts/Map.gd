@@ -207,7 +207,8 @@ func spawn_goblin():
 	newGoblin.position = map_to_world(spawn) + Vector2(1, cell_size.y/2)
 	newGoblin.connect("selected", gameRoot, "select_character")
 	newGoblin.connect("request_job_target", gameRoot, "provide_movement_target")
-	charactersNode.call_deferred("add_child", newGoblin)
+	ySort.call_deferred("add_child", newGoblin)
+	
 	ySort.call_deferred("join_clan")
 	
 func spawn_enemy():
