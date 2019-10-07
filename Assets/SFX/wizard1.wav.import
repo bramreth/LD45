@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/wizard1.wav-9532f0193c218ca20d65fb3c2d211839.sample"
+
+[deps]
+
+source_file="res://Assets/SFX/wizard1.wav"
+dest_files=[ "res://.import/wizard1.wav-9532f0193c218ca20d65fb3c2d211839.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

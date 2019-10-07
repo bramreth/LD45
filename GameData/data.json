@@ -99,7 +99,7 @@
 				"next_action": "next",
 				"duration": "",
 				"text_speed": 0.03,
-				"sfx": ""
+				"sfx": "wizard1.wav"
 			},
 			{
 				"state": "read",
@@ -109,7 +109,7 @@
 				"next_action": "next",
 				"duration": "",
 				"text_speed": 0.03,
-				"sfx": ""
+				"sfx": "goblin1.wav"
 			},
 			{
 				"state": "read",
@@ -119,7 +119,7 @@
 				"next_action": "next",
 				"duration": "",
 				"text_speed": 0.03,
-				"sfx": ""
+				"sfx": "wizard2.wav"
 			},
 			{
 				"state": "read",
@@ -127,9 +127,9 @@
 				"animation": "goblin",
 				"button_text": "Next",
 				"next_action": "next",
-				"duration": "",
+				"duration": "goblin2.wav",
 				"text_speed": 0.03,
-				"sfx": ""
+				"sfx": "goblin2.wav"
 			},
 			{
 				"state": "read",
@@ -139,7 +139,7 @@
 				"next_action": "next",
 				"duration": "",
 				"text_speed": 0.03,
-				"sfx": ""
+				"sfx": "wizard3.wav"
 			},
 			{
 				"state": "read",
@@ -149,7 +149,7 @@
 				"next_action": "next",
 				"duration": "",
 				"text_speed": 0.03,
-				"sfx": ""
+				"sfx": "goblin3.wav"
 			},
 			{
 				"state": "read",
@@ -157,9 +157,9 @@
 				"animation": "wizard",
 				"button_text": "Next",
 				"next_action": "next",
-				"duration": "",
+				"duration": "wizard4.wav",
 				"text_speed": 0.03,
-				"sfx": ""
+				"sfx": "wizard4.wav"
 			},
 			{
 				"state": "read_building_resources",
@@ -167,9 +167,9 @@
 				"animation": "wizard",
 				"button_text": "Next",
 				"next_action": "next",
-				"duration": "",
+				"duration": "wizard5.wav",
 				"text_speed": 0.03,
-				"sfx": ""
+				"sfx": "wizard5.wav"
 			},
 			{
 				"state": "read_building_actions",
@@ -179,7 +179,7 @@
 				"next_action": "next",
 				"duration": "",
 				"text_speed": 0.03,
-				"sfx": ""
+				"sfx": "wizard6.wav"
 			},
 			{
 				"state": "read_attractiveness",
@@ -189,7 +189,7 @@
 				"next_action": "next",
 				"duration": "",
 				"text_speed": 0.03,
-				"sfx": ""
+				"sfx": "wizard1.wav"
 			},
 			{
 				"state": "read_population",
@@ -199,7 +199,7 @@
 				"next_action": "next",
 				"duration": "",
 				"text_speed": 0.03,
-				"sfx": ""
+				"sfx": "wizard2.wav"
 			},
 			{
 				"state": "read_eggs",
@@ -209,7 +209,7 @@
 				"next_action": "next",
 				"duration": "",
 				"text_speed": 0.03,
-				"sfx": ""
+				"sfx": "wizard3.wav"
 			},
 			{
 				"state": "read",
@@ -219,7 +219,7 @@
 				"next_action": "next",
 				"duration": "",
 				"text_speed": 0.03,
-				"sfx": ""
+				"sfx": "wizard4.wav"
 			},
 			{
 				"state": "read_clock",
@@ -229,7 +229,7 @@
 				"next_action": "next",
 				"duration": "",
 				"text_speed": 0.03,
-				"sfx": ""
+				"sfx": "wizard5.wav"
 			},
 			{
 				"state": "read",
@@ -239,7 +239,7 @@
 				"next_action": "next",
 				"duration": "",
 				"text_speed": 0.03,
-				"sfx": ""
+				"sfx": "wizard6.wav"
 			},
 			{
 				"state": "read",
@@ -249,7 +249,7 @@
 				"next_action": "next",
 				"duration": "",
 				"text_speed": 0.03,
-				"sfx": ""
+				"sfx": "goblin4.wav"
 			},
 			{
 				"state": "read_food",
@@ -259,7 +259,7 @@
 				"next_action": "next",
 				"duration": "",
 				"text_speed": 0.03,
-				"sfx": ""
+				"sfx": "wizard1.wav"
 			},
 			{
 				"state": "read",
@@ -269,55 +269,55 @@
 				"next_action": "close",
 				"duration": "",
 				"text_speed": 0.03,
-				"sfx": ""
+				"sfx": "goblin5.wav"
 			},
 		],
 		"hut": [
 			{
 				"state": "read",
-				"text": "goblins can sleep there if low on energy also increases max pop",
+				"text": "Goblins can sleep in huts if low on energy, they also increase max pop",
 				"animation": "wizard",
 				"button_text": "Got it",
 				"next_action": "Close",
 				"duration": "",
 				"text_speed": 0.03,
-				"sfx": ""
+				"sfx": "wizard1.wav"
 			}
 		],
 		"mess": [
 			{
 				"state": "read",
-				"text": "goblins eat there when hungry increases attractiveness for new goblins",
+				"text": "Goblins eat where when they're hungry, this increases attractiveness for new goblins.",
 				"animation": "wizard",
 				"button_text": "Got it",
 				"next_action": "Close",
 				"duration": "",
 				"text_speed": 0.03,
-				"sfx": ""
+				"sfx": "wizard2.wav"
 			}
 		],
 		"camp": [
 			{
 				"state": "read",
-				"text": "increases attractivenees when goblins are unhappy they can relax here",
+				"text": "Camp's increases attractivenees, when goblins are unhappy they can relax here.",
 				"animation": "wizard",
 				"button_text": "Got it.",
 				"next_action": "Close",
 				"duration": "",
 				"text_speed": 0.03,
-				"sfx": ""
+				"sfx": "wizard3.wav"
 			}
 		],
 		"hatchery": [
 			{
 				"state": "read",
-				"text": "regularly hatches eggs into a new goblin",
+				"text": "Hatchery contains eggs, which hatch into a new goblin.",
 				"animation": "wizard",
 				"button_text": "Got it",
 				"next_action": "Close",
 				"duration": "",
 				"text_speed": 0.03,
-				"sfx": ""
+				"sfx": "wizard4.wav"
 			}
 		],
 		"battle-1": [
@@ -339,27 +339,27 @@
 				"next_action": "next",
 				"duration": "",
 				"text_speed": 0.03,
-				"sfx": ""
+				"sfx": "king1.wav"
 			},
 			{
 				"state": "read",
 				"text": "Prepare your troops [GOBLIN_NAME], it's time to defend yourself from Clement's men.",
-				"animation": "king",
+				"animation": "wizard",
 				"button_text": "Next",
 				"next_action": "next",
 				"duration": "",
 				"text_speed": 0.03,
-				"sfx": ""
+				"sfx": "wizard5.wav"
 			},
 			{
 				"state": "read",
-				"text": "Men! Slaughter them all with the upmost haste!",
+				"text": "Shut up you...",
 				"animation": "king",
 				"button_text": "next",
 				"next_action": "next",
 				"duration": "",
 				"text_speed": 0.03,
-				"sfx": "	"
+				"sfx": "king3.wav"
 			},
 			{
 				"state": "read",
@@ -381,7 +381,7 @@
 				"next_action": "next",
 				"duration": "",
 				"text_speed": 0.03,
-				"sfx": "pre_combat_horn.wav"
+				"sfx": "king4.wav"
 			},
 			{
 				"state": "read",
@@ -391,7 +391,7 @@
 				"next_action": "close",
 				"duration": "",
 				"text_speed": 0.03,
-				"sfx": ""
+				"sfx": "goblin4.wav"
 			}
 		],
 		"battle-3": [
@@ -399,47 +399,115 @@
 				"state": "read",
 				"text": "Will no one rid me of these turbulent goblins?!",
 				"animation": "king",
-				"button_text": "next",
-				"next_action": "close",
+				"button_text": "Next",
+				"next_action": "next",
 				"duration": "",
 				"text_speed": 0.03,
-				"sfx": "pre_combat_horn.wav"
-			}
-		],
-		"battle-4": [
+				"sfx": "pre_combat_horn-3.wav"
+			},
 			{
 				"state": "read",
-				"text": "Men, to arms!",
+				"text": "Wizard! After I anihilate these goblins you're next.",
 				"animation": "king",
-				"button_text": "next",
-				"next_action": "close",
+				"button_text": "Next",
+				"next_action": "next",
 				"duration": "",
 				"text_speed": 0.03,
-				"sfx": "pre_combat_horn.wav"
-			}
-		],
-		"battle-5": [
+				"sfx": "king2.wav"
+			},
 			{
 				"state": "read",
-				"text": "Damn nasty green creatures, I'll be happy to see the last of you!",
-				"animation": "king",
-				"button_text": "next",
+				"text": "Your words don't intimidate me.",
+				"animation": "wizard",
+				"button_text": "Next",
+				"next_action": "next",
+				"duration": "",
+				"text_speed": 0.03,
+				"sfx": "wizard1.wav"
+			},
+			{
+				"state": "read",
+				"text": "Alright goblins, let's give it our all!",
+				"animation": "goblin",
+				"button_text": "Start Battle!",
 				"next_action": "close",
 				"duration": "",
 				"text_speed": 0.03,
-				"sfx": "pre_combat_horn.wav"
+				"sfx": "wizard1.wav"
 			}
 		],
 		"battle-6": [
 			{
 				"state": "read",
-				"text": "Clementine horde, CHARGE!",
+				"text": "Goblins, you will be dead by dawn!!",
 				"animation": "king",
-				"button_text": "next",
-				"next_action": "close",
+				"button_text": "Next",
+				"next_action": "next",
 				"duration": "",
 				"text_speed": 0.03,
 				"sfx": "pre_combat_horn.wav"
+			},
+			{
+				"state": "read",
+				"text": "Ah nice pop culture reference.",
+				"animation": "king",
+				"button_text": "Next",
+				"next_action": "next",
+				"duration": "",
+				"text_speed": 0.03,
+				"sfx": "goblin4.wav"
+			},
+			{
+				"state": "read",
+				"text": "What do you mean weakling?!",
+				"animation": "king",
+				"button_text": "Next",
+				"next_action": "next",
+				"duration": "",
+				"text_speed": 0.03,
+				"sfx": "king4.wav"
+			},
+			{
+				"state": "read",
+				"text": "Oh, nevermind.",
+				"animation": "goblin",
+				"button_text": "Close",
+				"next_action": "close",
+				"duration": "",
+				"text_speed": 0.03,
+				"sfx": "king4.wav"
+			}
+		],
+		"battle-4": [
+			{
+				"state": "read",
+				"text": "Clement's men are on their way!",
+				"animation": "wizard",
+				"button_text": "Next",
+				"next_action": "next",
+				"duration": "",
+				"text_speed": 0.03,
+				"sfx": "wizard5.wav"
+			},
+			{
+				"state": "read",
+				"text": "No surprise, we are ready.",
+				"animation": "goblin",
+				"button_text": "Next",
+				"next_action": "next",
+				"duration": "",
+				"text_speed": 0.03,
+				"sfx": "goblin4.wav"
+			},
+			{
+				"state": "read",
+				"text": "I wouldn't be so confident.",
+				"animation": "king",
+				"button_text": "Close",
+				"next_action": "close",
+				"duration": "",
+				"text_speed": 0.03,
+				"sfx": "king4.wav"
 			}
 		]
 	}
