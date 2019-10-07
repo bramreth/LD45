@@ -34,7 +34,7 @@ var entitiesNode
 var charactersNode
 var buildingsNode
 var gameRoot
-var decorations
+var ySort
 
 func _ready():
 	randomize()
@@ -117,7 +117,7 @@ func build_building(tile, type):
 	newItem.position = map_to_world(tile) + Vector2(1, cell_size.y/2)
 	newItem.setup(type, true)
 	newItem.connect("selected", gameRoot, "select_entity")
-	buildingsNode.call_deferred("add_child", newItem)
+	ySort.call_deferred("add_child", newItem)
 #	for goblin in get_tree().get_nodes_in_group("goblin"):
 #			goblin.construction_update(1)
 	
@@ -140,12 +140,9 @@ func build_building(tile, type):
 
 
 # Called when the node enters the scene tree for the first time.
-func setup(entities, characters, buildings, root, deco):
-	entitiesNode = entities
-	charactersNode = characters
-	buildingsNode = buildings
+func setup(root, sorter):
 	gameRoot = root
-	decorations = deco
+	ySort = sorter
 	
 	WorldGenerator.generate_world(get_used_cells().max())
 	draw_world()
@@ -163,14 +160,14 @@ var hHouse = preload("res://Assets/Prefabs/Human_House.tscn")
 func add_wall(cell):
 	var newWall = hWall.instance()
 	newWall.position = map_to_world(cell) + Vector2(0, cell_size.y/2)
-	decorations.add_child(newWall)
+	ySort.add_child(newWall)
 
 func add_building(cell):
 	var newBuilding = hHouse.instance()
 	newBuilding.position = map_to_world(cell) + Vector2(0, cell_size.y/2)
 	if(get_cellv(cell-Vector2(0,1)) == TILETYPE.HUMAN_WALL):
 		newBuilding.get_child(0).flip_h = true
-	decorations.add_child(newBuilding)
+	ySort.add_child(newBuilding)
 
 func add_palace(cell):
 	pass
@@ -201,7 +198,7 @@ func spawn_items(item, amount):
 		newItem.position = map_to_world(spawn) + Vector2(1, cell_size.y/2)
 		#newItem.position += Vector2(0, cell_size.y/2)
 		newItem.connect("selected", gameRoot, "select_entity")
-		entitiesNode.call_deferred("add_child", newItem)
+		ySort.call_deferred("add_child", newItem)
 
 func spawn_goblin():
 	var validSpawns = get_used_cells()
@@ -211,7 +208,7 @@ func spawn_goblin():
 	newGoblin.connect("selected", gameRoot, "select_character")
 	newGoblin.connect("request_job_target", gameRoot, "provide_movement_target")
 	charactersNode.call_deferred("add_child", newGoblin)
-	newGoblin.call_deferred("join_clan")
+	ySort.call_deferred("join_clan")
 	
 func spawn_enemy():
 	var validSpawns = get_used_cells()
@@ -219,7 +216,7 @@ func spawn_enemy():
 	var newEnemy = enemyEntity.instance()
 	newEnemy.position = map_to_world(spawn) + Vector2(1, cell_size.y/2)
 	newEnemy.connect("selected", gameRoot, "select_character")
-	charactersNode.call_deferred("add_child", newEnemy)
+	ySort.call_deferred("add_child", newEnemy)
 
 #
 #DEBUG BUILDING TESTING
@@ -227,6 +224,6 @@ func spawn_enemy():
 func add_hut(cell: Vector2):
 	var newHut = hut.instance()
 	newHut.setup(GameManager.Building.HUT, false)
-	buildingsNode.add_child(newHut)
+	ySort.add_child(newHut)
 	newHut.position = map_to_world(cell) + Vector2(0, cell_size.y/2+10)
 	newHut.connect("selected", gameRoot, "select_entity")

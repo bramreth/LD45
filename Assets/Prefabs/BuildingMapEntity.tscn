@@ -37,7 +37,9 @@ texture = ExtResource( 6 )
 visible = false
 texture = ExtResource( 7 )
 
-[node name="CollisionShape2D" parent="Click_Area" index="0"]
+[node name="CollisionShape2D" parent="Click_Area" index="0" groups=[
+"buildings",
+]]
 position = Vector2( 0, -178 )
 shape = SubResource( 2 )
 

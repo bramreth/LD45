@@ -15,7 +15,7 @@ var hut = preload("res://Assets/Images/debug_hut.png")
 var blank = preload("res://Assets/Images/buildings/building_default.png")
 
 onready var map = $Map/Navigation/Map
-onready var player = $Map/Navigation/YSort/Characters/Player
+onready var player = $Map/Navigation/YSort/Player
 
 var mousePos = Vector2()
 
@@ -25,24 +25,27 @@ func _ready():
 	GameManager.connect("night_started", self, "start_night")
 	GameManager.connect("night_started", self, "remove_items_from_map")
 	
-	for character in $Map/Navigation/YSort/Characters.get_children():
-		if character.type == GameManager.ENTITY_TYPE.GOBLIN:
-			character.connect("request_job_target", self, "provide_movement_target")
-		elif character.type == GameManager.ENTITY_TYPE.PLAYER:
-			character.connect("movement_done", self, "perform_contextual_action")
-		elif character.type == GameManager.ENTITY_TYPE.ENEMY:
-			character.connect("request_job_target", self, "provide_movement_target")
-			character.connect("start_combat", self, "start_combat")
+	for character in get_tree().get_nodes_in_group("goblins"):
+		character.connect("request_job_target", self, "provide_movement_target")
 		character.connect("selected", self, "select_character")
 		
-	for item in $Map/Navigation/YSort/Items.get_children():
+	for character in get_tree().get_nodes_in_group("enemies"):
+		character.connect("request_job_target", self, "provide_movement_target")
+		character.connect("selected", self, "select_character")
+		character.connect("start_combat", self, "start_combat")
+	
+	for building in get_tree().get_nodes_in_group("buildings"):
+		building.connect("selected", self, "select_entity")
+		
+	for item in get_tree().get_nodes_in_group("items"):
 		item.connect("selected", self, "select_entity")
 	
-	for building in $Map/Navigation/YSort/Building.get_children():
-		building.connect("selected", self, "select_entity")
+	player.connect("movement_done", self, "perform_contextual_action")
+	player.connect("selected", self, "select_character")
+	
 	
 	#GameManager.start_dialog("tutorial")
-	map.setup($Map/Navigation/YSort/Items, $Map/Navigation/YSort/Characters, $Map/Navigation/YSort/Building,  self, $Map/Navigation/YSort)
+	map.setup(self, $Map/Navigation/YSort)
 	GameManager.start_game()
 	
 ################################################################################################
@@ -202,7 +205,7 @@ func move_character(target):
 func get_closest_building_by_type(type, position):
 	var distance = null
 	var closestBuilding = null
-	for build in $Map/Navigation/YSort/Building.get_children():
+	for build in get_tree().get_nodes_in_group("buildings"):
 		if build.building_type == type and !build.is_at_capacity() and !build.underConstruction:
 			if distance == null or position.distance_to(build.get_building_position()) < distance:
 				distance = position.distance_to(build.get_building_position())
@@ -212,7 +215,7 @@ func get_closest_building_by_type(type, position):
 func get_closest_construction_site(position):
 	var distance = null
 	var closestBuilding = null
-	for build in $Map/Navigation/YSort/Building.get_children():
+	for build in get_tree().get_nodes_in_group("buildings"):
 		if !build.is_at_capacity() and build.underConstruction:
 			if distance == null or position.distance_to(build.get_building_position()) < distance:
 				distance = position.distance_to(build.get_building_position())
@@ -240,7 +243,7 @@ func get_closest_goblin(position):
 func get_closest_item(position):
 	var distance = null
 	var closestItem = null
-	for item in $Map/Navigation/YSort/Items.get_children():
+	for item in get_tree().get_nodes_in_group("items"):
 		if !item.pickedUp:
 			if distance == null or position.distance_to(item.position) < distance:
 				distance = position.distance_to(item.position)

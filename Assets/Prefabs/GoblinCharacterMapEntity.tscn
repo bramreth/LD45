@@ -16,5 +16,4 @@ visible = false
 stream = ExtResource( 3 )
 volume_db = -7.0
 attenuation = 4.43828
-
 [connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_AudioStreamPlayer2D_finished"]

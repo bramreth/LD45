@@ -31,6 +31,7 @@ script = ExtResource( 3 )
 [node name="YSort" type="YSort" parent="Map/Navigation"]
 
 [node name="build_tool" type="Node2D" parent="Map/Navigation/YSort"]
+editor/display_folded = true
 visible = false
 
 [node name="Sprite" type="Sprite" parent="Map/Navigation/YSort/build_tool"]
@@ -91,16 +92,8 @@ rect_min_size = Vector2( 40, 40 )
 texture = ExtResource( 9 )
 expand = true
 
-[node name="Items" type="Node" parent="Map/Navigation/YSort"]
-
-[node name="Characters" type="Node" parent="Map/Navigation/YSort"]
-
-[node name="Player" parent="Map/Navigation/YSort/Characters" instance=ExtResource( 10 )]
+[node name="Player" parent="Map/Navigation/YSort" instance=ExtResource( 10 )]
 position = Vector2( 584.407, 475.318 )
-
-[node name="Building" type="Node" parent="Map/Navigation/YSort"]
-
-[node name="Decorations" type="Node" parent="Map/Navigation/YSort"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2( 512, 300 )
