@@ -3,16 +3,16 @@
 	"player_data": {
 		"name": "Sir Goblin",
 		"moral": 2,
-		"attractiveness": 2,
+		"attractiveness": 0,
 		"goblin_spawn_rate": 100,
 	    "resources": {
-			"wood":  2,
-			"stone": 2,
-			"gold":  2,
-			"food":  2,
+			"wood":  0,
+			"stone": 0,
+			"gold":  0,
+			"food":  0,
 			"population":  1,
 			"max_population": 5,
-			"eggs":  2,
+			"eggs":  0,
 		}
 	},
 	"events": {

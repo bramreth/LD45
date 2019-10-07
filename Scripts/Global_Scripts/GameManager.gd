@@ -75,10 +75,10 @@ func _ready():
 	update_goblin_spawn_rate()
 
 func start_game():
-	ResourceManager.update_resource(ResourceManager.Resource.WOOD, 30)
-	ResourceManager.update_resource(ResourceManager.Resource.STONE, 30)
-	ResourceManager.update_resource(ResourceManager.Resource.GOLD, 30)
-	ResourceManager.update_resource(ResourceManager.Resource.FOOD, 30)
+#	ResourceManager.update_resource(ResourceManager.Resource.WOOD, 30)
+#	ResourceManager.update_resource(ResourceManager.Resource.STONE, 30)
+#	ResourceManager.update_resource(ResourceManager.Resource.GOLD, 30)
+#	ResourceManager.update_resource(ResourceManager.Resource.FOOD, 30)
 	set_physics_process(true)
 
 func is_daytime():
@@ -202,6 +202,8 @@ onready var goblin_ticker = 0
 func check_for_goblin_spawn():
 	if ResourceManager.get_value(ResourceManager.Resource.POPULATION) < ResourceManager.get_value(ResourceManager.Resource.MAX_POPULATION):
 		var sr = get_goblin_spawn_rate()
+		print(sr)
+		print(goblin_ticker)
 		if goblin_ticker >= sr:
 			emit_signal("spawn_goblin")
 			goblin_ticker = 0

@@ -122,7 +122,8 @@ func combat_spawned():
 	combatSpawningThread.wait_to_finish()
 
 func remove_items_from_map():
-	for child in $Map/Navigation/YSort/Items.get_children():
+	
+	for child in get_tree().get_nodes_in_group("items"):
 		if not child.pickedUp:
 			child.queue_free()
 
