@@ -29,6 +29,7 @@ bg_color = Color( 0, 0, 0, 1 )
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
 
@@ -86,7 +87,6 @@ size_flags_vertical = 8
 text = "quit"
 
 [node name="ColorRect" type="ColorRect" parent="."]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
