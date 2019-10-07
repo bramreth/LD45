@@ -30,6 +30,9 @@ func _ready():
 			character.connect("request_job_target", self, "provide_movement_target")
 		elif character.type == GameManager.ENTITY_TYPE.PLAYER:
 			character.connect("movement_done", self, "perform_contextual_action")
+		elif character.type == GameManager.ENTITY_TYPE.ENEMY:
+			character.connect("request_job_target", self, "provide_movement_target")
+			character.connect("start_combat", self, "start_combat")
 		character.connect("selected", self, "select_character")
 		
 	for item in $Map/Navigation/YSort/Items.get_children():
@@ -98,7 +101,23 @@ func _thread_spawn_enemies(amount):
 
 func enemy_spawned():
 	enemySpawningThread.wait_to_finish()
-	
+
+var combatSpawningThread:Thread
+var combat = preload("res://Assets/Prefabs/CombatMapEntity.tscn")
+func start_combat(target, attacker):
+	combatSpawningThread = Thread.new()
+	combatSpawningThread.start(self, "_thread_spawn_combat", [target, attacker])
+
+func _thread_spawn_combat(startingCombatents):
+	var newCombat = combat.instance()
+	newCombat.start_combat(startingCombatents)
+	newCombat.position = startingCombatents[1].position
+	$Map/Navigation/YSort.call_deferred("add_child", newCombat)
+	call_deferred("combat_spawned")
+
+func combat_spawned():
+	combatSpawningThread.wait_to_finish()
+
 func remove_items_from_map():
 	for child in $Map/Navigation/YSort/Items.get_children():
 		if not child.pickedUp:
@@ -113,6 +132,8 @@ func _exit_tree():
 		goblinSpawningThread.wait_to_finish()
 	if enemySpawningThread != null:
 		enemySpawningThread.wait_to_finish()
+	if combatSpawningThread != null:
+		combatSpawningThread.wait_to_finish()
 
 ################################################################################################
 # ENTITY SELECTION
@@ -122,7 +143,8 @@ func select_character(character):
 		selectedCharacter.remove_highlight()
 	selectedCharacter = character
 	selectedCharacter.highlight()
-	$Camera2D/CanvasLayer/overlay.show_goblin(character.get_details())
+	if selectedCharacter.type == GameManager.ENTITY_TYPE.GOBLIN or  selectedCharacter.type == GameManager.ENTITY_TYPE.PLAYER:
+		$Camera2D/CanvasLayer/overlay.show_goblin(character.get_details())
 
 func select_entity(entity):
 	stop_construction()
@@ -206,6 +228,15 @@ func get_closest_combat(position):
 			closestCombat = combat
 	return closestCombat
 
+func get_closest_goblin(position):
+	var distance = null
+	var closestGoblin = null
+	for goblin in get_tree().get_nodes_in_group("goblins"):
+		if distance == null or position.distance_to(goblin.position) < distance:
+			distance = position.distance_to(goblin.position)
+			closestGoblin = goblin
+	return closestGoblin
+
 func get_closest_item(position):
 	var distance = null
 	var closestItem = null
@@ -271,6 +302,13 @@ func ai_join(character):
 			SystemManager.print("GOBLIN SPAWNED AT: " + String(character.position))
 			ResourceManager.update_resource(ResourceManager.Resource.POPULATION, 1)
 
+func ai_attack(character):
+	var goblin = get_closest_goblin(character.position)
+	goblin.stun()
+	var path = null
+	if goblin != null:
+		path = get_path_between_points(character.position, goblin.position)
+	character.handle_job(path, goblin)
 ################################################################################################
 # CAMERA
 ################################################################################################

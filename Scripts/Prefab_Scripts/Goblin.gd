@@ -18,7 +18,7 @@ var jobs = ["gather", "rest", "relax", "eat", "build", "fight", "wander"]
 #Fight - for to the neareast combat node and join the fight
 #Wander - wander around the town
 
-var currentJob = "idle"
+var currentJob = "wander"
 var currentTarget = null
 
 func _ready():
@@ -35,9 +35,6 @@ func join_clan():
 	start_specific_job("wander")
 
 func determine_jobs():
-	
-	print(check_for_construction())
-	
 	# essentials
 	if check_for_combat():
 		return "fight"
@@ -108,7 +105,7 @@ func job_movement_done():
 	call(currentJob)
 
 func finish_job():
-	currentJob = "idle"
+	currentJob = "wander"
 	currentTarget = null
 	yield(get_tree().create_timer(randf()*10+1), "timeout")
 	start_job()
@@ -117,9 +114,18 @@ func is_this_current_target(target):
 	if currentTarget == target:
 		cancel_job()
 
+func stun():
+	set_process(false)
+	$AnimationPlayer.stop()
+	$Tween.interpolate_property($MapEntity_Sprite, "offset", $MapEntity_Sprite.offset, 0, 0.1, Tween.TRANS_CUBIC, Tween.EASE_IN)
+	$Tween.interpolate_property($MapEntity_Sprite, "rotation_degrees", $MapEntity_Sprite.rotation_degrees, 0, 0.1, Tween.TRANS_CUBIC, Tween.EASE_IN)
+	$Tween.start()
+	currentJob = "wander"
+	currentTarget = null
+
 func cancel_job():
 	set_process(false)
-	currentJob = "idle"
+	currentJob = "wander"
 	currentTarget = null
 	adjust_stats(-2,-2,-2)
 	yield(get_tree().create_timer(randf()*3+1), "timeout")

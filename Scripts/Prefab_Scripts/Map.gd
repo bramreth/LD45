@@ -149,7 +149,7 @@ var hut = preload("res://Assets/Prefabs/BuildingMapEntity.tscn")
 var itemEntity = preload("res://Assets/Prefabs/ItemMapEntity.tscn")
 var buildEntity = preload("res://Assets/Prefabs/BuildingMapEntity.tscn")
 var goblinEntity = preload("res://Assets/Prefabs/GoblinCharacterMapEntity.tscn")
-var enemyEntity = preload("res://Assets/Prefabs/EnemyMapEntity.tscn")
+var enemyEntity = preload("res://Assets/Prefabs/HumanEnemyMapEntity.tscn")
 
 func draw_world():
 	for cell in get_used_cells_by_id(TILETYPE.BASE):

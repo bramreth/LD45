@@ -191,7 +191,7 @@ func get_happiness():
 		return 100
 	var hap = 0
 	for item in get_tree().get_nodes_in_group("goblins"):
-		print(item)
+		#print(item)
 		hap += item.happiness
 	return int(hap/leng)
 
