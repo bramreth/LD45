@@ -2,20 +2,20 @@ extends "res://Scripts/Prefab_Scripts/MapEntity.gd"
 
 var buildingStats = {
 	"capacity": {
-		GameManager.Building.CAMP: 2,
-		GameManager.Building.HUT: 2,
-		GameManager.Building.SENTRY: 2,
-		GameManager.Building.HATCHERY: 10,
-		GameManager.Building.MESS: 10,
-		GameManager.Building.RUBBLE: 3
+		GameManager.Building.CAMP: 1,
+		GameManager.Building.HUT: 1,
+		GameManager.Building.SENTRY: 2, #UNUSED
+		GameManager.Building.HATCHERY: 10,#UNUSED
+		GameManager.Building.MESS: 1,
+		GameManager.Building.RUBBLE: 2
 	},
 	"usage_time": {
-		GameManager.Building.CAMP: 10,
-		GameManager.Building.HUT: 1,
-		GameManager.Building.SENTRY: 10,
-		GameManager.Building.HATCHERY: 10,
-		GameManager.Building.MESS: 10,
-		GameManager.Building.RUBBLE: 3
+		GameManager.Building.CAMP: 3,
+		GameManager.Building.HUT: 3,
+		GameManager.Building.SENTRY: 10, #UNUSED
+		GameManager.Building.HATCHERY: 10, #UNUSED
+		GameManager.Building.MESS: 3,
+		GameManager.Building.RUBBLE: 10
 	}
 }
 
@@ -94,7 +94,7 @@ func gameplay_tick():
 		var buildProgress = 0
 		for occupant in occupants:
 			buildProgress += GameManager.currentGamePlayTick - occupants[occupant]
-		print(String(building_type) + ": " + String(occupants.size()) + " - " + String(buildProgress) + "/" + String(buildingStats["usage_time"][GameManager.Building.RUBBLE]))
+		#print(String(building_type) + ": " + String(occupants.size()) + " - " + String(buildProgress) + "/" + String(buildingStats["usage_time"][GameManager.Building.RUBBLE]))
 		if buildProgress > buildingStats["usage_time"][GameManager.Building.RUBBLE]:
 			finish_construction()
 			inform_goblins_this_is_no_longer_valid_target_for_job()

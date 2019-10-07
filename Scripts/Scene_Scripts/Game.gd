@@ -127,8 +127,6 @@ func select_character(character):
 func select_entity(entity):
 	stop_construction()
 	
-	print(String(GameManager.ENTITY_TYPE.BUILDING) + " - " + String(entity.type))
-	
 	selectedEntity = entity 
 	if selectedEntity.type == GameManager.ENTITY_TYPE.BUILDING:
 		move_character(selectedEntity.get_building_position())
@@ -148,10 +146,8 @@ func perform_contextual_action(character):
 
 func stop_construction():
 	if selectedEntity != null:
-		print(String(selectedEntity.type) + "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
 		if selectedEntity.type == GameManager.ENTITY_TYPE.BUILDING:
 			if selectedEntity.underConstruction:
-				print("STOP CONSTRUCTION")
 				selectedEntity.occupants.erase(player)
 ################################################################################################
 # PLAYER MOVEMENT
@@ -341,7 +337,6 @@ func _on_overlay_build(type, val):
 	match type:
 		GameManager.Building.HUT:
 			$Map/Navigation/YSort/build_tool/Sprite.texture = blank
-			print("hut!")
 		GameManager.Building.CAMP:
 			$Map/Navigation/YSort/build_tool/Sprite.texture = blank
 		GameManager.Building.MESS:

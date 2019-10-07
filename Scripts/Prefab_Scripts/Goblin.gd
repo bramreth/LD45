@@ -22,7 +22,6 @@ var jobs = ["gather", "rest", "relax", "eat", "build", "fight", "wander"]
 var currentJob = "idle"
 var currentTarget = null
 
-
 func _ready():
 	._ready()
 	randomize()
@@ -47,21 +46,16 @@ func determine_jobs():
 		return "eat"
 	if energy < 30:
 		return "rest"
+	if happiness < 30:
+		return "relax"
 	
 	var free_will = randi() % 100
-	if free_will <= 30:
+	if free_will <= 49:
 		if GameManager.is_daytime():
 			return "gather"
 		else:
 			return "rest"
-	elif free_will <= 60:
-		return "relax"
-	elif free_will <= 80:
-		return "wander"
-	elif free_will <= 90:
-		return "eat"
-	else:
-		return "rest"
+	return "wander"
 
 func check_for_combat():
 	false
@@ -80,29 +74,26 @@ func start_specific_job(job):
 	currentJob = job
 	emit_signal("request_job_target", self, currentJob)
 
-#Gets a path to the job target and the target from the Game script
-#func ahandle_job(path, target):
-#	if currentJob == "gather" and target != null:
-#		currentTarget = weakref(target)
-#	else:
-#		currentTarget = target
-#
-#	if currentJob == "gather" and currentTarget == null:
-#		finish_job()
-#	else:
-#		if path != null:
-#			move(path)
-#		else:
-#			job_movement_done()
-
 func handle_job(path, target):
 	#wander doesn't need a target
 	if currentJob == "wander" and path != null:
 		move(path)
 		return
 	
-	#target is null if none were found
-	if target == null:
+	#Eat, rest and relax can be done without a target on te spot
+	if target == null and (currentJob in ["eat", "rest", "relax"]):
+		yield(get_tree().create_timer(10), "timeout")
+		match currentJob:
+			"eat": 
+				adjust_stats(10,0,5)
+			"rest":
+				adjust_stats(0,10,5)
+			"relax":
+				adjust_stats(0,5,10)
+		finish_job()
+		return
+	#Other jobs require a target and will just end
+	elif target == null:
 		finish_job()
 		return
 	
@@ -183,6 +174,29 @@ func fight():
 func wander():
 	adjust_stats(0,-10,10)
 	finish_job()
+
+func drain_energy_and_food():
+	adjust_stats(-2,-3,0)
+
+func _process(delta):
+	if !path:
+		isMoving = false
+		$AnimationPlayer.stop()
+		$Tween.interpolate_property($MapEntity_Sprite, "offset", $MapEntity_Sprite.offset, 0, 0.1, Tween.TRANS_CUBIC, Tween.EASE_IN)
+		$Tween.interpolate_property($MapEntity_Sprite, "rotation_degrees", $MapEntity_Sprite.rotation_degrees, 0, 0.1, Tween.TRANS_CUBIC, Tween.EASE_IN)
+		$Tween.start()
+		set_process(false)
+		job_movement_done()
+	if path.size() > 0:
+		var d: float = position.distance_to(path[0])
+		if d > 20:
+			position = position.linear_interpolate(path[0], (speed * delta)/d)
+		else:
+			path.remove(0)
+
+func get_details():
+	return[str(health), str(hunger), str(energy), str(happiness), str(strength), str(gname), currentJob]
+
 #
 #func gather():
 #	print("GATHERING")
@@ -260,24 +274,17 @@ func wander():
 #	else :
 #		finish_job()
 
-func drain_energy_and_food():
-	adjust_stats(-2,-3,0)
-
-func _process(delta):
-	if !path:
-		isMoving = false
-		$AnimationPlayer.stop()
-		$Tween.interpolate_property($MapEntity_Sprite, "offset", $MapEntity_Sprite.offset, 0, 0.1, Tween.TRANS_CUBIC, Tween.EASE_IN)
-		$Tween.interpolate_property($MapEntity_Sprite, "rotation_degrees", $MapEntity_Sprite.rotation_degrees, 0, 0.1, Tween.TRANS_CUBIC, Tween.EASE_IN)
-		$Tween.start()
-		set_process(false)
-		job_movement_done()
-	if path.size() > 0:
-		var d: float = position.distance_to(path[0])
-		if d > 20:
-			position = position.linear_interpolate(path[0], (speed * delta)/d)
-		else:
-			path.remove(0)
-			
-func get_details():
-	return[str(health), str(hunger), str(energy), str(happiness), str(strength), str(gname), currentJob]
+#Gets a path to the job target and the target from the Game script
+#func ahandle_job(path, target):
+#	if currentJob == "gather" and target != null:
+#		currentTarget = weakref(target)
+#	else:
+#		currentTarget = target
+#
+#	if currentJob == "gather" and currentTarget == null:
+#		finish_job()
+#	else:
+#		if path != null:
+#			move(path)
+#		else:
+#			job_movement_done()
