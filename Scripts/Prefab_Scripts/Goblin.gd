@@ -29,7 +29,7 @@ func _ready():
 	._ready()
 	randomize()
 	type = GameManager.ENTITY_TYPE.GOBLIN
-	yield(get_tree().create_timer(randi()%3+1), "timeout")
+	yield(get_tree().create_timer(randf()*3+1), "timeout")
 	start_job()
 
 func join_clan():
@@ -37,7 +37,7 @@ func join_clan():
 	start_specific_job("wander")
 
 func determine_jobs():
-	return "gather"
+	return "rest"
 	# essentials
 	if constructionsInProgress > 0:
 		return "fight"
@@ -88,6 +88,7 @@ func handle_job(path, target):
 		finish_job()
 	else:
 		if path != null:
+			print("PATH: " + String(path.size()))
 			move(path)
 		else:
 			job_movement_done()
@@ -99,7 +100,7 @@ func job_movement_done():
 func finish_job():
 	currentJob = "idle"
 	currentTarget = null
-	yield(get_tree().create_timer(randi()%10+1), "timeout")
+	yield(get_tree().create_timer(randf()*10+1), "timeout")
 	start_job()
 
 func log_stats():
@@ -164,10 +165,32 @@ func rest():
 		finish_job()
 
 func relax():
-	adjust_stats(0,30,50)
-	
+	print("RELAXING")
+	if currentTarget != null:
+		var success = currentTarget.use_building(self)
+		if !success: #Fire is full
+			adjust_stats(-2,-2,-2)
+			emit_signal("request_job_target", self, currentJob)
+		else:
+			adjust_stats(0,30,50)
+	else :
+		yield(get_tree().create_timer(10), "timeout")
+		adjust_stats(0,5,10)
+		finish_job()
+
 func eat():
-	adjust_stats(50,0,30)
+	print("EATING")
+	if currentTarget != null:
+		var success = currentTarget.use_building(self)
+		if !success: #Mess is full
+			adjust_stats(-2,-2,-2)
+			emit_signal("request_job_target", self, currentJob)
+		else:
+			adjust_stats(50,0,30)
+	else :
+		yield(get_tree().create_timer(10), "timeout")
+		adjust_stats(10,0,5)
+		finish_job()
 
 func build():
 	print("BUILDING")
@@ -180,8 +203,7 @@ func build():
 			adjust_stats(-10,-10,-10)
 	else :
 		finish_job()
-	
-	
+
 func fight():
 	adjust_stats(-10,-10,-10)
 
@@ -199,11 +221,11 @@ func _process(delta):
 		$Tween.interpolate_property($MapEntity_Sprite, "offset", $MapEntity_Sprite.offset, 0, 0.1, Tween.TRANS_CUBIC, Tween.EASE_IN)
 		$Tween.interpolate_property($MapEntity_Sprite, "rotation_degrees", $MapEntity_Sprite.rotation_degrees, 0, 0.1, Tween.TRANS_CUBIC, Tween.EASE_IN)
 		$Tween.start()
-		job_movement_done()
 		set_process(false)
+		job_movement_done()
 	if path.size() > 0:
 		var d: float = position.distance_to(path[0])
-		if d > 10:
+		if d > 20:
 			position = position.linear_interpolate(path[0], (speed * delta)/d)
 		else:
 			path.remove(0)

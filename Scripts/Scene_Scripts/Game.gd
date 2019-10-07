@@ -214,6 +214,20 @@ func ai_rest(character):
 		path = get_path_between_points(character.position, restStop.get_building_position())
 	character.handle_job(path, restStop)
 
+func ai_relax(character):
+	var camp = get_closest_building_by_type(GameManager.Building.CAMP, character.position)
+	var path = null
+	if camp != null:
+		path = get_path_between_points(character.position, camp.get_building_position())
+	character.handle_job(path, camp)
+
+func ai_eat(character):
+	var mess = get_closest_building_by_type(GameManager.Building.MESS, character.position)
+	var path = null
+	if mess != null:
+		path = get_path_between_points(character.position, mess.get_building_position())
+	character.handle_job(path, mess)
+
 func ai_build(character):
 	var buildSite = get_closest_construction_site(character.position)
 	var path = null

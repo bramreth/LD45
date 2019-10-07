@@ -50,6 +50,7 @@ func _ready():
 	print(r_seed)
 
 func move(newPath: PoolVector2Array):
+	newPath.remove(0)
 	path = newPath
 	isMoving = true
 	$AnimationPlayer.play("waddle")

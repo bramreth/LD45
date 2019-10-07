@@ -2,8 +2,8 @@ extends "res://Scripts/Prefab_Scripts/MapEntity.gd"
 
 var buildingStats = {
 	"capacity": {
-		GameManager.Building.CAMP: 10,
-		GameManager.Building.HUT: 5,
+		GameManager.Building.CAMP: 2,
+		GameManager.Building.HUT: 2,
 		GameManager.Building.SENTRY: 2,
 		GameManager.Building.HATCHERY: 10,
 		GameManager.Building.MESS: 10,
@@ -11,7 +11,7 @@ var buildingStats = {
 	},
 	"usage_time": {
 		GameManager.Building.CAMP: 10,
-		GameManager.Building.HUT: 3,
+		GameManager.Building.HUT: 1,
 		GameManager.Building.SENTRY: 10,
 		GameManager.Building.HATCHERY: 10,
 		GameManager.Building.MESS: 10,
@@ -71,10 +71,16 @@ func use_building(character):
 			return false
 	else:
 		match building_type:
-			GameManager.Building.HUT:
+			GameManager.Building.HUT, GameManager.Building.MESS:
 				if occupants.size() < buildingStats["capacity"][building_type]:
 					occupants[character] = GameManager.currentGamePlayTick
 					character.hide()
+					return true
+				else:
+					return false
+			GameManager.Building.CAMP:
+				if occupants.size() < buildingStats["capacity"][building_type]:
+					occupants[character] = GameManager.currentGamePlayTick
 					return true
 				else:
 					return false

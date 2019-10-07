@@ -28,12 +28,12 @@ func save_player_data():
 		
 func changeBackgroundMusic(track):	
 	musicPlayer.stream = load(bgm_dir + track)
-	musicPlayer.play()
+	#musicPlayer.play()
 
 func playSfx(track):
 	sfxPlayer.stream = load(sfx_dir + track)
 	print("playing_tune", sfxPlayer)
-	sfxPlayer.play()
+	#sfxPlayer.play()
 
 func print(string):
 	if debug:
