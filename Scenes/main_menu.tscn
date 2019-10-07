@@ -136,7 +136,9 @@ stretch_mode = 6
 show_behind_parent = true
 margin_right = 1024.0
 margin_bottom = 600.0
+mouse_filter = 2
 custom_styles/panel = SubResource( 4 )
+
 [connection signal="pressed" from="MarginContainer/VBoxContainer/play_button" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/test_button" to="." method="_on_test_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/quit_button" to="." method="_on_quit_button_pressed"]
