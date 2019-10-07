@@ -17,6 +17,8 @@ _global_script_class_icons={
 
 config/name="LD45"
 run/main_scene="res://Scenes/main_menu.tscn"
+boot_splash/image="res://Assets/Images/menu.png"
+boot_splash/bg_color=Color( 0, 0, 0, 1 )
 config/icon="res://Assets/Images/ui_icons/population.png"
 
 [autoload]
