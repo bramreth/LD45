@@ -129,6 +129,7 @@ show_behind_parent = true
 margin_right = 1024.0
 margin_bottom = 600.0
 rect_min_size = Vector2( 1024, 600 )
+mouse_filter = 2
 texture = ExtResource( 7 )
 expand = true
 stretch_mode = 6
