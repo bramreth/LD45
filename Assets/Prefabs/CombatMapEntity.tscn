@@ -33,7 +33,9 @@ animations = [ {
 "speed": 3.0
 } ]
 
-[node name="MapEntity" index="0" instance=ExtResource( 1 )]
+[node name="MapEntity" groups=[
+"combat_sites",
+] instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
 [node name="combat_anim" type="Sprite" parent="." index="2"]

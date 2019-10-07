@@ -198,7 +198,13 @@ func get_closest_construction_site(position):
 	return closestBuilding
 
 func get_closest_combat(position):
-	return null
+	var distance = null
+	var closestCombat = null
+	for combat in get_tree().get_nodes_in_group("combat_sites"):
+		if distance == null or position.distance_to(combat.position) < distance:
+			distance = position.distance_to(combat.position)
+			closestCombat = combat
+	return closestCombat
 
 func get_closest_item(position):
 	var distance = null
@@ -212,6 +218,13 @@ func get_closest_item(position):
 
 func provide_movement_target(character, job):
 	call(("ai_" + job), character)
+
+func ai_fight(character):
+	var combat = get_closest_combat(character.position)
+	var path = null
+	if combat != null:
+		path = get_path_between_points(character.position, combat.position)
+	character.handle_job(path, combat)
 
 func ai_wander(character):
 	var path = get_path_between_points(character.position, map.get_random_spot_in_the_town())
