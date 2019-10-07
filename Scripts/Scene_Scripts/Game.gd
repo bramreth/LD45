@@ -43,8 +43,8 @@ func _ready():
 	player.connect("movement_done", self, "perform_contextual_action")
 	player.connect("selected", self, "select_character")
 	
-	
-	GameManager.start_dialog("tutorial")
+	if GameManager.get_tutorial():
+		GameManager.start_dialog("tutorial")
 	map.setup(self, $Map/Navigation/YSort)
 	GameManager.start_game()
 	

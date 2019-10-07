@@ -21,6 +21,14 @@ var currentTick: int = 0 #1/60th seconds since started
 var currentGamePlayTick: int = 0 #Seconds since started
 var currentDay: int = 0 #number of day/night cycles since started
 
+var tutorial = true
+
+func set_tutorial(t_in):
+	tutorial = t_in
+
+func get_tutorial():
+	return tutorial
+
 enum ENTITY_TYPE {
 	GOBLIN,
 	ENEMY,
