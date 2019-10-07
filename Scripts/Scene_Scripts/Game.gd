@@ -42,7 +42,7 @@ func _ready():
 		building.connect("selected", self, "select_entity")
 	
 	#GameManager.start_dialog("tutorial")
-	map.setup($Map/Navigation/YSort/Items, $Map/Navigation/YSort/Characters, $Map/Navigation/YSort/Building,  self)
+	map.setup($Map/Navigation/YSort/Items, $Map/Navigation/YSort/Characters, $Map/Navigation/YSort/Building,  self, $Map/Navigation/YSort)
 	GameManager.start_game()
 	
 ################################################################################################

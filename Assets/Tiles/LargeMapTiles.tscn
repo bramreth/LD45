@@ -98,9 +98,8 @@ texture = ExtResource( 5 )
 navpoly = SubResource( 5 )
 
 [node name="Human_Wall" type="Sprite" parent="."]
-modulate = Color( 0.160784, 0.160784, 0.160784, 1 )
 position = Vector2( 0, 512 )
-texture = ExtResource( 1 )
+texture = ExtResource( 6 )
 
 [node name="Human_Street" type="Sprite" parent="."]
 position = Vector2( 512, 512 )
@@ -110,17 +109,15 @@ texture = ExtResource( 6 )
 navpoly = SubResource( 6 )
 
 [node name="Human_Building" type="Sprite" parent="."]
-modulate = Color( 0.607843, 0.501961, 0.937255, 1 )
 position = Vector2( 1024, 512 )
-texture = ExtResource( 1 )
+texture = ExtResource( 6 )
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Human_Building"]
 navpoly = SubResource( 7 )
 
 [node name="Human_Throne_Room" type="Sprite" parent="."]
-modulate = Color( 0.333333, 0, 0.580392, 1 )
 position = Vector2( 0, 768 )
-texture = ExtResource( 1 )
+texture = ExtResource( 6 )
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Human_Throne_Room"]
 navpoly = SubResource( 8 )

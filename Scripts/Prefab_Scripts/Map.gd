@@ -34,6 +34,7 @@ var entitiesNode
 var charactersNode
 var buildingsNode
 var gameRoot
+var decorations
 
 func _ready():
 	randomize()
@@ -139,17 +140,40 @@ func build_building(tile, type):
 
 
 # Called when the node enters the scene tree for the first time.
-func setup(entities, characters, buildings, root):
+func setup(entities, characters, buildings, root, deco):
 	entitiesNode = entities
 	charactersNode = characters
 	buildingsNode = buildings
 	gameRoot = root
+	decorations = deco
 	
 	WorldGenerator.generate_world(get_used_cells().max())
 	draw_world()
 	
-	for cell in get_used_cells_by_id(TILETYPE.BUILDING):
-		add_hut(cell)
+	for cell in get_used_cells_by_id(TILETYPE.HUMAN_WALL):
+		add_wall(cell)
+	for cell in get_used_cells_by_id(TILETYPE.HUMAN_BUILDING):
+		add_building(cell)
+	for cell in get_used_cells_by_id(TILETYPE.HUMAN_THRONE_ROOM):
+		add_palace(cell)
+
+var hWall = preload("res://Assets/Prefabs/Wall.tscn")
+var hHouse = preload("res://Assets/Prefabs/Human_House.tscn")
+
+func add_wall(cell):
+	var newWall = hWall.instance()
+	newWall.position = map_to_world(cell) + Vector2(0, cell_size.y/2)
+	decorations.add_child(newWall)
+
+func add_building(cell):
+	var newBuilding = hHouse.instance()
+	newBuilding.position = map_to_world(cell) + Vector2(0, cell_size.y/2)
+	if(get_cellv(cell-Vector2(0,1)) == TILETYPE.HUMAN_WALL):
+		newBuilding.get_child(0).flip_h = true
+	decorations.add_child(newBuilding)
+
+func add_palace(cell):
+	pass
 
 var hut = preload("res://Assets/Prefabs/BuildingMapEntity.tscn")
 var itemEntity = preload("res://Assets/Prefabs/ItemMapEntity.tscn")
