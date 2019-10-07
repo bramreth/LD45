@@ -82,6 +82,7 @@ func building_spawned():
 
 var goblinSpawningThread: Thread
 func spawn_goblin():
+	ResourceManager.update_resource(ResourceManager.Resource.POPULATION, 1)
 	goblinSpawningThread = Thread.new()
 	goblinSpawningThread.start(self, "_thread_spawn_goblin")
 
