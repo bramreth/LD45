@@ -158,9 +158,9 @@ func hide_goblin():
 func _on_camp_button_pressed():
 	build = not build
 	reset_build_buttons()
-	if current != "mess":
+	if current != "camp":
 		build = true
-		current = "mess"
+		current = "camp"
 	if build:
 		$VBoxContainer/Container/camp_button.modulate = Color(1.0,1.0,1.0,1.0)
 	
@@ -182,9 +182,9 @@ func _on_mess_button_pressed():
 func _on_hatch_button_pressed():
 	build = not build
 	reset_build_buttons()
-	if current != "mess":
+	if current != "hatch":
 		build = true
-		current = "mess"
+		current = "hatch"
 	if build:
 		$VBoxContainer/Container/hatch_button.modulate = Color(1.0,1.0,1.0,1.0)
 	
