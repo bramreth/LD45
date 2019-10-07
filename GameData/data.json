@@ -436,7 +436,7 @@
 				"sfx": "wizard1.wav"
 			}
 		],
-		"battle-6": [
+		"battle-4": [
 			{
 				"state": "read",
 				"text": "Goblins, you will be dead by dawn!!",
@@ -449,7 +449,7 @@
 			},
 			{
 				"state": "read",
-				"text": "Ah nice pop culture reference.",
+				"text": "HAh! I like the pop culture reference.",
 				"animation": "king",
 				"button_text": "Next",
 				"next_action": "next",
@@ -471,14 +471,14 @@
 				"state": "read",
 				"text": "Oh, nevermind.",
 				"animation": "goblin",
-				"button_text": "Close",
+				"button_text": "Start Battle!",
 				"next_action": "close",
 				"duration": "",
 				"text_speed": 0.03,
 				"sfx": "king4.wav"
 			}
 		],
-		"battle-4": [
+		"battle-5": [
 			{
 				"state": "read",
 				"text": "Clement's men are on their way!",
@@ -491,7 +491,7 @@
 			},
 			{
 				"state": "read",
-				"text": "No surprise, we are ready.",
+				"text": "I'm not surprise, we were waiting.",
 				"animation": "goblin",
 				"button_text": "Next",
 				"next_action": "next",
@@ -503,12 +503,45 @@
 				"state": "read",
 				"text": "I wouldn't be so confident.",
 				"animation": "king",
-				"button_text": "Close",
+				"button_text": "Start Battle!",
 				"next_action": "close",
 				"duration": "",
 				"text_speed": 0.03,
 				"sfx": "king4.wav"
 			}
+		],
+		"battle-6": [
+			{
+				"state": "read",
+				"text": "This time I can't loose! You're going down, for once and for all!",
+				"animation": "king",
+				"button_text": "Next",
+				"next_action": "next",
+				"duration": "",
+				"text_speed": 0.03,
+				"sfx": "king5.wav"
+			},
+			{
+				"state": "read",
+				"text": "I'm pretty sure you've said that already...",
+				"animation": "goblin",
+				"button_text": "Next",
+				"next_action": "next",
+				"duration": "",
+				"text_speed": 0.03,
+				"sfx": "goblin5.wav"
+			},
+			{
+				"state": "read",
+				"text": "He's getting annoyed, keep it up [GOBLIN_NAME]!",
+				"animation": "wizard",
+				"button_text": "Start Battle!",
+				"next_action": "close",
+				"duration": "",
+				"text_speed": 0.03,
+				"sfx": "wizard5.wav"
+			},
 		]
+
 	}
 }
