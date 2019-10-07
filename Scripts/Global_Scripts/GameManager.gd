@@ -15,7 +15,7 @@ var debug_flag = false
 onready var night_events = SystemManager.data["events"]["night"]
 
 const DAY_LENGTH = 120
-const NIGHT_LENGTH = 60
+const NIGHT_LENGTH = 40
 
 var currentTick: int = 0 #1/60th seconds since started
 var currentGamePlayTick: int = 0 #Seconds since started
@@ -81,8 +81,10 @@ func _ready():
 	randomize()
 	set_physics_process(false)
 	update_goblin_spawn_rate()
+	
 
 func start_game():
+	
 #	ResourceManager.update_resource(ResourceManager.Resource.WOOD, 30)
 #	ResourceManager.update_resource(ResourceManager.Resource.STONE, 30)
 #	ResourceManager.update_resource(ResourceManager.Resource.GOLD, 30)
@@ -120,11 +122,11 @@ func _physics_process(delta):
 func start_of_daytime_tick():
 	emit_signal("day_started")
 	#print("Day Started " + String(currentGamePlayTick))
-	spawn_items_list[ResourceManager.Resource.EGG] = randi()%2
-	spawn_items_list[ResourceManager.Resource.FOOD] = randi()%4+1
-	spawn_items_list[ResourceManager.Resource.GOLD] = randi()%4
-	spawn_items_list[ResourceManager.Resource.STONE] = randi()%6+1
-	spawn_items_list[ResourceManager.Resource.WOOD] = randi()%6+1
+	spawn_items_list[ResourceManager.Resource.EGG] = randi()%32
+	spawn_items_list[ResourceManager.Resource.FOOD] = randi()%35
+	spawn_items_list[ResourceManager.Resource.GOLD] = randi()%24
+	spawn_items_list[ResourceManager.Resource.STONE] = randi()%36+1
+	spawn_items_list[ResourceManager.Resource.WOOD] = randi()%36+1
 	emit_signal("spawn_items", spawn_items_list)
 	#print(spawn_items_list)
 

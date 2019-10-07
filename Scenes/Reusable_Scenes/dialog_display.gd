@@ -24,8 +24,7 @@ func start_dialog(scene):
 	dialog = StringManager.get_dialog(current_dialog_name)
 	if dialog != null:
 		dialog_index = 0
-		if scene != "tutorial":
-			get_parent().show_overlay()
+		get_parent().show_overlay()
 		GameManager.set_physics_process(false)
 		self.visible = true
 		handle_dialog()

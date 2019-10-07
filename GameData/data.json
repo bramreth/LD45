@@ -29,8 +29,23 @@
 			}, 
 			{
 				"dialog":"battle-3",
-				"min-population": 5		,
+				"min-population": 5,
+				"num_of_enemies": 5
+			},
+			{
+				"dialog":"battle-4",
+				"min-population": 15,
 				"num_of_enemies": 10
+			},
+			{
+				"dialog":"battle-5",
+				"min-population": 30,
+				"num_of_enemies": 20
+			},
+			{
+				"dialog":"battle-6",
+				"min-population": 50,
+				"num_of_enemies": 50
 			},
 		] 
 		
@@ -338,16 +353,6 @@
 			},
 			{
 				"state": "read",
-				"text": "Shut up you... You're not even a real wizard!",
-				"animation": "king",
-				"button_text": "next",
-				"next_action": "next",
-				"duration": "",
-				"text_speed": 0.03,
-				"sfx": "	"
-			},
-			{
-				"state": "read",
 				"text": "Men! Slaughter them all with the upmost haste!",
 				"animation": "king",
 				"button_text": "next",
@@ -380,16 +385,6 @@
 			},
 			{
 				"state": "read",
-				"text": "Wizard !",
-				"animation": "king",
-				"button_text": "next",
-				"next_action": "next",
-				"duration": "",
-				"text_speed": 0.03,
-				"sfx": "pre_combat_horn.wav"
-			},
-			{
-				"state": "read",
 				"text": "You're going down!",
 				"animation": "goblin",
 				"button_text": "Start Battle!",
@@ -402,9 +397,45 @@
 		"battle-3": [
 			{
 				"state": "read",
-				"text": "Battle 3",
+				"text": "Will no one rid me of these turbulent goblins?!",
 				"animation": "king",
-				"button_text": "Will no one rid me of these turbulent goblins?!",
+				"button_text": "next",
+				"next_action": "close",
+				"duration": "",
+				"text_speed": 0.03,
+				"sfx": "pre_combat_horn.wav"
+			}
+		],
+		"battle-4": [
+			{
+				"state": "read",
+				"text": "Men, to arms!",
+				"animation": "king",
+				"button_text": "next",
+				"next_action": "close",
+				"duration": "",
+				"text_speed": 0.03,
+				"sfx": "pre_combat_horn.wav"
+			}
+		],
+		"battle-5": [
+			{
+				"state": "read",
+				"text": "Damn nasty green creatures, I'll be happy to see the last of you!",
+				"animation": "king",
+				"button_text": "next",
+				"next_action": "close",
+				"duration": "",
+				"text_speed": 0.03,
+				"sfx": "pre_combat_horn.wav"
+			}
+		],
+		"battle-6": [
+			{
+				"state": "read",
+				"text": "Clementine horde, CHARGE!",
+				"animation": "king",
+				"button_text": "next",
 				"next_action": "close",
 				"duration": "",
 				"text_speed": 0.03,
