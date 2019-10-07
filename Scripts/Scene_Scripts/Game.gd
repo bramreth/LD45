@@ -313,8 +313,12 @@ func _on_overlay_build(type, val):
 	current_building = type
 	match type:
 		GameManager.Building.HUT:
-			$Map/Navigation/YSort/build_tool/Sprite.texture = hut
+			$Map/Navigation/YSort/build_tool/Sprite.texture = blank
 			print("hut!")
+		GameManager.Building.CAMP:
+			$Map/Navigation/YSort/build_tool/Sprite.texture = blank
+		GameManager.Building.MESS:
+			$Map/Navigation/YSort/build_tool/Sprite.texture = blank
 #		"blank":
 #			print("none")
 #			$Map/Navigation/YSort/build_tool/Sprite.texture = blank

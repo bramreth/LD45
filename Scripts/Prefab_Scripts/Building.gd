@@ -40,9 +40,17 @@ func finish_construction():
 	match building_type:
 		GameManager.Building.HUT:
 			ResourceManager.update_resource(ResourceManager.Resource.MAX_POPULATION, 5)
-			print("hut built!!", ResourceManager.get_value(ResourceManager.Resource.MAX_POPULATION))
+			GameManager.update_attractiveness(5)
 		GameManager.Building.RUBBLE:
 			print("rubble built")
+		GameManager.Building.MESS:
+			print("build mess")
+			GameManager.update_attractiveness(5)
+			# increase attractiveness
+		GameManager.Building.CAMP:
+			GameManager.update_attractiveness(10)
+			print("build camp")
+			#increase attractiveness
 
 func _ready():
 	._ready()
