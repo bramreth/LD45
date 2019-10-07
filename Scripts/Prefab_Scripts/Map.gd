@@ -118,6 +118,7 @@ func build_building(tile, type):
 	newItem.setup(type, true)
 	newItem.connect("selected", gameRoot, "select_entity")
 	ySort.call_deferred("add_child", newItem)
+	remove_foliage(newItem.position)
 #	for goblin in get_tree().get_nodes_in_group("goblin"):
 #			goblin.construction_update(1)
 	
@@ -138,6 +139,7 @@ func build_building(tile, type):
 #	construction[tile][1].setup(construction[tile][0])
 #	print(construction)
 
+var foliageCells = {}
 
 # Called when the node enters the scene tree for the first time.
 func setup(root, sorter):
@@ -167,6 +169,7 @@ func add_grass(cell, g):
 	newGrass.position += Vector2(rand_range(-100, 100), rand_range(-50, 500))
 	ySort.add_child(newGrass)
 	newGrass.setup(g)
+	foliageCells[cell] = newGrass 
 
 var hWall = preload("res://Assets/Prefabs/Wall.tscn")
 var hHouse = preload("res://Assets/Prefabs/Human_House.tscn")
@@ -235,6 +238,11 @@ func spawn_enemy():
 	newEnemy.position = map_to_world(spawn) + Vector2(1, cell_size.y/2)
 	newEnemy.connect("selected", gameRoot, "select_character")
 	ySort.call_deferred("add_child", newEnemy)
+
+func remove_foliage(pos):
+	var cell = world_to_map(pos)
+	if foliageCells.has(cell):
+		foliageCells[cell].hide()
 
 #
 #DEBUG BUILDING TESTING
