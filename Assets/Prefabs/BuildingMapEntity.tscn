@@ -1,18 +1,52 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Assets/Prefabs/MapEntity.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Prefab_Scripts/Building.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Images/buildings/rubble_bg.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Images/buildings/rubble_fg.png" type="Texture" id=4]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 256, 300 )
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+uniform bool on;
 
-[node name="MapEntity" instance=ExtResource( 1 )]
+void fragment(){
+	if(on){
+		if (UV.y < 0.58 && UV.x > 0.35){
+			float t = TIME * 2.0;
+		    vec2 uv = UV;
+		    float uv_x_deform = cos( t*15.0) * 0.002;
+			float uv_y_deform = 0.001 * clamp(tan(t* 3.0), 0.0, 2.0);
+		    vec2 offs_uv = vec2(0.0,0.0);//vec2(sin(t), sin(t*5.0));//vec2(cos(t + uv.y ) * 0.5 + sin(t + uv.x) * 0.5 , cos(t + uv.x)* 0.5+ sin(t + uv.y) * 0.5) * 0.01;
+		
+		    vec4 img = texture(TEXTURE, uv + vec2(uv_x_deform, uv_y_deform));
+		    COLOR = img;
+		}else{
+			COLOR =texture(TEXTURE, UV);
+		}
+	}else{
+		COLOR =texture(TEXTURE, UV);
+	}
+}
+
+void vertex(){
+	if (VERTEX.y < 0.5)
+		VERTEX.y += sin(TIME * 3.0) * 10.00;
+	
+	}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/on = null
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 32, 32 )
+
+[node name="MapEntity" index="0" instance=ExtResource( 1 )]
 scale = Vector2( 0.8, 0.8 )
 script = ExtResource( 2 )
 
 [node name="MapEntity_Sprite" parent="." index="0"]
+material = SubResource( 2 )
 position = Vector2( 0, -178 )
 texture = ExtResource( 3 )
 
@@ -22,7 +56,8 @@ texture = ExtResource( 4 )
 
 [node name="CollisionShape2D" parent="Click_Area" index="0"]
 position = Vector2( 0, -178 )
-shape = SubResource( 1 )
+shape = SubResource( 3 )
 
 [node name="Entrance" type="Node2D" parent="." index="2"]
 position = Vector2( 0, 10 )
+
