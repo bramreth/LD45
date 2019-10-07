@@ -48,7 +48,6 @@ position = Vector2( 10, 200 )
 scale = Vector2( 0.25, 0.25 )
 
 [node name="wizard" parent="dialog_menu/dialog_image/sprite_container" instance=ExtResource( 5 )]
-visible = false
 position = Vector2( 0, 151.387 )
 scale = Vector2( 0.216351, 0.207213 )
 
