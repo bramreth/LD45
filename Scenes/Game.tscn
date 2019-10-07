@@ -35,6 +35,7 @@ visible = false
 
 [node name="Sprite" type="Sprite" parent="Map/Navigation/YSort/build_tool"]
 material = ExtResource( 4 )
+scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 5 )
 
 [node name="ColorRect" type="ColorRect" parent="Map/Navigation/YSort/build_tool/Sprite"]
@@ -116,4 +117,5 @@ editor_draw_limits = true
 margin_top = -0.774048
 margin_bottom = -0.774048
 mouse_filter = 2
+
 [connection signal="build" from="Camera2D/CanvasLayer/overlay" to="." method="_on_overlay_build"]
