@@ -118,8 +118,6 @@ func _exit_tree():
 # ENTITY SELECTION
 ################################################################################################
 func select_character(character):
-	stop_construction()
-		
 	if selectedCharacter:
 		selectedCharacter.remove_highlight()
 	selectedCharacter = character
@@ -128,6 +126,8 @@ func select_character(character):
 
 func select_entity(entity):
 	stop_construction()
+	
+	print(String(GameManager.ENTITY_TYPE.BUILDING) + " - " + String(entity.type))
 	
 	selectedEntity = entity 
 	if selectedEntity.type == GameManager.ENTITY_TYPE.BUILDING:
@@ -140,30 +140,28 @@ func perform_contextual_action(character):
 		if character.type == GameManager.ENTITY_TYPE.PLAYER:
 			if selectedEntity.type == GameManager.ENTITY_TYPE.BUILDING:
 				if selectedEntity.underConstruction:
-					print("CONSTRUCTING")
 					selectedEntity.use_building(player)
 				else:
 					print("Occupants: " + String(selectedEntity.use_building(player)))
 			elif selectedEntity.type == GameManager.ENTITY_TYPE.ITEM:
 				selectedEntity.pickup()
-			selectedEntity = null
 
 func stop_construction():
-	print("STOP CONSTRUCTING")
 	if selectedEntity != null:
+		print(String(selectedEntity.type) + "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
 		if selectedEntity.type == GameManager.ENTITY_TYPE.BUILDING:
 			if selectedEntity.underConstruction:
+				print("STOP CONSTRUCTION")
 				selectedEntity.occupants.erase(player)
 ################################################################################################
 # PLAYER MOVEMENT
 ################################################################################################
 func _unhandled_input(event: InputEvent):
 	if event is InputEventMouseButton:
-		
-		stop_construction()
-		
 		if event.button_index == BUTTON_RIGHT and event.pressed:
 			stop_building()
+			stop_construction()
+			selectedEntity = null
 			get_tree().set_input_as_handled()
 			move_character(get_global_mouse_position())
 		if event.button_index == BUTTON_LEFT and event.pressed && building:
@@ -177,6 +175,7 @@ func get_path_between_points(start, end):
 func move_character(target):
 	var path = get_path_between_points(player.position, target)
 	player.move(path)
+	stop_construction()
 	if selectedCharacter != player:
 		select_character(player)
 ################################################################################################

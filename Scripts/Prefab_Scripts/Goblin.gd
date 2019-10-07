@@ -81,20 +81,33 @@ func start_specific_job(job):
 	emit_signal("request_job_target", self, currentJob)
 
 #Gets a path to the job target and the target from the Game script
+#func ahandle_job(path, target):
+#	if currentJob == "gather" and target != null:
+#		currentTarget = weakref(target)
+#	else:
+#		currentTarget = target
+#
+#	if currentJob == "gather" and currentTarget == null:
+#		finish_job()
+#	else:
+#		if path != null:
+#			move(path)
+#		else:
+#			job_movement_done()
+
 func handle_job(path, target):
-	if currentJob == "gather" and target != null:
-		currentTarget = weakref(target)
-	else:
-		currentTarget = target
+	#wander doesn't need a target
+	if currentJob == "wander" and path != null:
+		move(path)
+		return
 	
-	if currentJob == "gather" and currentTarget == null:
+	#target is null if none were found
+	if target == null:
 		finish_job()
-	else:
-		if path != null:
-			print("PATH: " + String(path.size()))
-			move(path)
-		else:
-			job_movement_done()
+		return
+	
+	currentTarget = target
+	move(path)
 
 func job_movement_done():
 	drain_energy_and_food()
@@ -104,6 +117,18 @@ func finish_job():
 	currentJob = "idle"
 	currentTarget = null
 	yield(get_tree().create_timer(randf()*10+1), "timeout")
+	start_job()
+
+func is_this_current_target(target):
+	if currentTarget == target:
+		cancel_job()
+
+func cancel_job():
+	set_process(false)
+	currentJob = "idle"
+	currentTarget = null
+	adjust_stats(-2,-2,-2)
+	yield(get_tree().create_timer(randf()*3+1), "timeout")
 	start_job()
 
 func log_stats():
@@ -132,80 +157,25 @@ func adjust_stats(hun, ener, happ):
 		happiness = 100
 
 func gather():
-	print("GATHERING")
-	if GameManager.is_daytime():
-		if !currentTarget.get_ref():
-			adjust_stats(-2,-2,-2)
-			finish_job()
-		else: 
-			currentTarget = currentTarget.get_ref()
-			if currentTarget != null:
-				if !currentTarget.pickedUp:
-					currentTarget.pickup()
-					adjust_stats(-10,-10,-10)
-					finish_job()
-				else:
-					adjust_stats(-2,-2,-2)
-					emit_signal("request_job_target", self, currentJob)
-			else :
-				adjust_stats(-2,-2,-2)
-				finish_job()
-	else:
-		finish_job()
+	currentTarget.pickup()
+	adjust_stats(-10,-10,-10)
+	finish_job()
 
 func rest():
-	print("RESTING")
-	if currentTarget != null:
-		var success = currentTarget.use_building(self)
-		if !success: #House is full :(
-			adjust_stats(-2,-2,-2)
-			emit_signal("request_job_target", self, currentJob)
-		else:
-			adjust_stats(0,50,30)
-	else :
-		yield(get_tree().create_timer(10), "timeout")
-		adjust_stats(0,10,5)
-		finish_job()
+	currentTarget.use_building(self)
+	adjust_stats(0,50,30)
 
 func relax():
-	print("RELAXING")
-	if currentTarget != null:
-		var success = currentTarget.use_building(self)
-		if !success: #Fire is full
-			adjust_stats(-2,-2,-2)
-			emit_signal("request_job_target", self, currentJob)
-		else:
-			adjust_stats(0,30,50)
-	else :
-		yield(get_tree().create_timer(10), "timeout")
-		adjust_stats(0,5,10)
-		finish_job()
+	currentTarget.use_building(self)
+	adjust_stats(0,30,50)
 
 func eat():
-	print("EATING")
-	if currentTarget != null:
-		var success = currentTarget.use_building(self)
-		if !success: #Mess is full
-			adjust_stats(-2,-2,-2)
-			emit_signal("request_job_target", self, currentJob)
-		else:
-			adjust_stats(50,0,30)
-	else :
-		yield(get_tree().create_timer(10), "timeout")
-		adjust_stats(10,0,5)
-		finish_job()
+	currentTarget.use_building(self)
+	adjust_stats(50,0,30)
 
 func build():
-	print("BUILDING")
-	if currentTarget != null:
-		var success = currentTarget.use_building(self)
-		if !success: #Construction
-			adjust_stats(-2,-2,-2)
-			finish_job()
-		else:
-			adjust_stats(-10,-10,-10)
-	else :
-		finish_job()
+	currentTarget.use_building(self)
+	adjust_stats(-10,-10,-10)
 
 func fight():
 	adjust_stats(-10,-10,-10)
@@ -213,6 +183,82 @@ func fight():
 func wander():
 	adjust_stats(0,-10,10)
 	finish_job()
+#
+#func gather():
+#	print("GATHERING")
+#	if GameManager.is_daytime():
+#		if !currentTarget.get_ref():
+#			adjust_stats(-2,-2,-2)
+#			finish_job()
+#		else: 
+#			currentTarget = currentTarget.get_ref()
+#			if currentTarget != null:
+#				if !currentTarget.pickedUp:
+#					currentTarget.pickup()
+#					adjust_stats(-10,-10,-10)
+#					finish_job()
+#				else:
+#					adjust_stats(-2,-2,-2)
+#					emit_signal("request_job_target", self, currentJob)
+#			else :
+#				adjust_stats(-2,-2,-2)
+#				finish_job()
+#	else:
+#		finish_job()
+#
+#func rest():
+#	print("RESTING")
+#	if currentTarget != null:
+#		var success = currentTarget.use_building(self)
+#		if !success: #House is full :(
+#			adjust_stats(-2,-2,-2)
+#			emit_signal("request_job_target", self, currentJob)
+#		else:
+#			adjust_stats(0,50,30)
+#	else :
+#		yield(get_tree().create_timer(10), "timeout")
+#		adjust_stats(0,10,5)
+#		finish_job()
+#
+#func relax():
+#	print("RELAXING")
+#	if currentTarget != null:
+#		var success = currentTarget.use_building(self)
+#		if !success: #Fire is full
+#			adjust_stats(-2,-2,-2)
+#			emit_signal("request_job_target", self, currentJob)
+#		else:
+#			adjust_stats(0,30,50)
+#	else :
+#		yield(get_tree().create_timer(10), "timeout")
+#		adjust_stats(0,5,10)
+#		finish_job()
+#
+#func eat():
+#	print("EATING")
+#	if currentTarget != null:
+#		var success = currentTarget.use_building(self)
+#		if !success: #Mess is full
+#			adjust_stats(-2,-2,-2)
+#			emit_signal("request_job_target", self, currentJob)
+#		else:
+#			adjust_stats(50,0,30)
+#	else :
+#		yield(get_tree().create_timer(10), "timeout")
+#		adjust_stats(10,0,5)
+#		finish_job()
+#
+#func build():
+#	print("BUILDING")
+#	if currentTarget != null:
+#		var success = currentTarget.use_building(self)
+#		if !success: #Construction
+#			adjust_stats(-2,-2,-2)
+#			finish_job()
+#		else:
+#			adjust_stats(-10,-10,-10)
+#	else :
+#		finish_job()
 
 func drain_energy_and_food():
 	adjust_stats(-2,-3,0)

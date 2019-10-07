@@ -75,6 +75,10 @@ func _ready():
 	update_goblin_spawn_rate()
 
 func start_game():
+	ResourceManager.update_resource(ResourceManager.Resource.WOOD, 30)
+	ResourceManager.update_resource(ResourceManager.Resource.STONE, 30)
+	ResourceManager.update_resource(ResourceManager.Resource.GOLD, 30)
+	ResourceManager.update_resource(ResourceManager.Resource.FOOD, 30)
 	set_physics_process(true)
 
 func is_daytime():

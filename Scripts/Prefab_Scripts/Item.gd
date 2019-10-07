@@ -16,6 +16,8 @@ func setup(resource):
 
 func pickup():
 	if !pickedUp:
+		for goblin in get_tree().get_nodes_in_group("goblin"):
+			goblin.is_this_current_target(self)
 		$Particles2D.emitting = true
 		pickedUp = true
 		set_process(true)

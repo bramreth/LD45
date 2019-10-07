@@ -15,10 +15,10 @@ enum Resource {
 
 func _ready():
 	pass
-	
+
 func update_resource(resource, value):
-	SystemManager.print("r: " + String(resource))	
-	SystemManager.print("v: " + String(value))
+#	SystemManager.print("r: " + String(resource))	
+#	SystemManager.print("v: " + String(value))
 	if resource != null:
 		match resource:
 			ResourceManager.Resource.WOOD:
