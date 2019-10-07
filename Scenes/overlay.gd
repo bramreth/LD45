@@ -116,7 +116,7 @@ func gameplay_tick():
 	else:
 		rotation = 180/GameManager.NIGHT_LENGTH
 	tween.interpolate_property(clock, "rect_rotation", clock.rect_rotation, clock.rect_rotation - rotation, 1.0, Tween.TRANS_LINEAR,Tween.EASE_IN)
-	tween.interpolate_property($attractiveness_meter, "value", $attractiveness_meter.value, GameManager.get_attractiveness(), 0.2, Tween.TRANS_BACK, Tween.EASE_OUT)
+	tween.interpolate_property($attractiveness_meter, "value", $attractiveness_meter.value, (GameManager.get_attractiveness() / 3) + (GameManager.get_happiness()/3) + (33 * (1 - (ResourceManager.get_value(ResourceManager.Resource.POPULATION) / ResourceManager.get_value(ResourceManager.Resource.MAX_POPULATION)))), 0.2, Tween.TRANS_BACK, Tween.EASE_OUT)
 	tween.start()
 	
 	 

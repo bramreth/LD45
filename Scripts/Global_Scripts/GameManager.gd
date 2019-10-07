@@ -175,13 +175,25 @@ func get_moral():
 	return SystemManager.data["player_data"]["moral"]
 
 func update_attractiveness(val):
-	SystemManager.data["player_data"]["attractiveness"] + val
+	SystemManager.data["player_data"]["attractiveness"] += val
+	if SystemManager.data["player_data"]["attractiveness"] > 100:
+		SystemManager.data["player_data"]["attractiveness"] = 100
 
 func get_attractiveness():
 	return SystemManager.data["player_data"]["attractiveness"]
 	
 func update_goblin_spawn_rate():
-	SystemManager.data["player_data"]["goblin_spawn_rate"] = 120 - ((get_attractiveness() / 2) + (50 * (1 - (ResourceManager.get_value(ResourceManager.Resource.POPULATION) / ResourceManager.get_value(ResourceManager.Resource.MAX_POPULATION)))))
+	SystemManager.data["player_data"]["goblin_spawn_rate"] = 120 - ((get_attractiveness() / 3) + (get_happiness() / 3) + (33 * (1 - (ResourceManager.get_value(ResourceManager.Resource.POPULATION) / ResourceManager.get_value(ResourceManager.Resource.MAX_POPULATION)))))
+
+func get_happiness():
+	var leng = len(get_tree().get_nodes_in_group("goblins"))
+	if leng < 1:
+		return 100
+	var hap = 0
+	for item in get_tree().get_nodes_in_group("goblins"):
+		print(item)
+		hap += item.happiness
+	return int(hap/leng)
 
 func get_goblin_spawn_rate():
 	return SystemManager.data["player_data"]["goblin_spawn_rate"]
