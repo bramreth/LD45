@@ -12,7 +12,7 @@ func _ready():
 
 func setup(resource):
 	resourceType = resource
-	$MapEntity_Sprite.texture = AssetLoader.assets["resources"][resourceType]
+	$MapEntity_Sprite.texture = AssetLoader.assets["items"][resourceType]
 
 func pickup():
 	if !pickedUp:

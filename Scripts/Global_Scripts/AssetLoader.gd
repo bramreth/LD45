@@ -7,11 +7,12 @@ func _ready():
 
 func load_resource_icons():
 	assets["resources"] = {}
-	assets["resources"][ResourceManager.Resource.EGG] = load("res://Assets/Images/ui_icons/egg.png")
-	assets["resources"][ResourceManager.Resource.FOOD] = load("res://Assets/Images/ui_icons/food.png")
-	assets["resources"][ResourceManager.Resource.GOLD] = load("res://Assets/Images/ui_icons/gold.png")
-	assets["resources"][ResourceManager.Resource.STONE] = load("res://Assets/Images/ui_icons/rock.png")
-	assets["resources"][ResourceManager.Resource.WOOD] = load("res://Assets/Images/ui_icons/wood.png")
+	assets["items"] = {}
+	assets["items"][ResourceManager.Resource.EGG] = load("res://Assets/Images/ui_icons/egg.png")
+	assets["items"][ResourceManager.Resource.FOOD] = load("res://Assets/Images/ui_icons/food.png")
+	assets["items"][ResourceManager.Resource.GOLD] = load("res://Assets/Images/ui_icons/gold.png")
+	assets["items"][ResourceManager.Resource.STONE] = load("res://Assets/Images/ui_icons/rock.png")
+	assets["items"][ResourceManager.Resource.WOOD] = load("res://Assets/Images/ui_icons/wood.png")
 	assets["resources"][GameManager.Building.HUT] = load("res://Assets/Images/buildings/hut.png")
 	assets["resources"][GameManager.Building.MESS] = load("res://Assets/Images/buildings/mess.png")
 	assets["resources"][GameManager.Building.CAMP] = load("res://Assets/Images/buildings/camp.png")
