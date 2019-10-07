@@ -20,6 +20,7 @@ onready var player = $Map/Navigation/YSort/Player
 var mousePos = Vector2()
 
 func _ready():
+	GameManager.start_of_daytime_tick()
 	GameManager.connect("spawn_items", self, "spawn_items")
 	GameManager.connect("spawn_goblin", self, "spawn_goblin")
 	GameManager.connect("night_started", self, "start_night")
