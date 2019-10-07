@@ -78,7 +78,8 @@ margin_bottom = 60.0
 margin_right = 60.0
 margin_bottom = 60.0
 rect_min_size = Vector2( 60, 60 )
-hint_tooltip = "mess"
+hint_tooltip = "hut
+"
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture_normal = ExtResource( 4 )
@@ -100,7 +101,7 @@ margin_left = 128.0
 margin_right = 188.0
 margin_bottom = 60.0
 rect_min_size = Vector2( 60, 60 )
-hint_tooltip = "hut"
+hint_tooltip = "mess"
 texture_normal = ExtResource( 6 )
 expand = true
 
@@ -109,7 +110,7 @@ margin_left = 192.0
 margin_right = 252.0
 margin_bottom = 60.0
 rect_min_size = Vector2( 60, 60 )
-hint_tooltip = "hut"
+hint_tooltip = "hatchery"
 texture_normal = ExtResource( 7 )
 expand = true
 
