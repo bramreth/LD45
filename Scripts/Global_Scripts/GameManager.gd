@@ -175,7 +175,7 @@ func get_moral():
 	return SystemManager.data["player_data"]["moral"]
 
 func update_attractiveness(val):
-	SystemManager.data["player_data"]["attractiveness"] + val
+	SystemManager.data["player_data"]["attractiveness"] += val
 
 func get_attractiveness():
 	return SystemManager.data["player_data"]["attractiveness"]
