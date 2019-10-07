@@ -231,7 +231,7 @@
 				"text": "Gee, thanks!",
 				"animation": "goblin",
 				"button_text": "next",
-				"next_action": "Next",
+				"next_action": "next",
 				"duration": "",
 				"text_speed": 0.03,
 				"sfx": ""
@@ -308,7 +308,17 @@
 		"battle-1": [
 			{
 				"state": "read",
-				"text": "Adventurers - Goblins have been spotted!",
+				"text": "Hah! I found you little goblin!",
+				"animation": "king",
+				"button_text": "Next",
+				"next_action": "next",
+				"duration": "",
+				"text_speed": 0.03,
+				"sfx": "pre_combat_horn.wav"
+			},
+			{
+				"state": "read",
+				"text": "oh come on! That was quick!",
 				"animation": "king",
 				"button_text": "Next",
 				"next_action": "next",
@@ -318,17 +328,37 @@
 			},
 			{
 				"state": "read",
-				"text": "Slaughter them all with the upmost haste!",
+				"text": "Prepare your troops [GOBLIN_NAME], it's time to defend yourself from Clement's men.",
+				"animation": "king",
+				"button_text": "Next",
+				"next_action": "next",
+				"duration": "",
+				"text_speed": 0.03,
+				"sfx": ""
+			},
+			{
+				"state": "read",
+				"text": "Shut up you... You're not even a real wizard!",
 				"animation": "king",
 				"button_text": "next",
 				"next_action": "next",
 				"duration": "",
 				"text_speed": 0.03,
-				"sfx": "pre_combat_horn.wav"
+				"sfx": "	"
 			},
 			{
 				"state": "read",
-				"text": "Little goblins, prepare yourself for battle!",
+				"text": "Men! Slaughter them all with the upmost haste!",
+				"animation": "king",
+				"button_text": "next",
+				"next_action": "next",
+				"duration": "",
+				"text_speed": 0.03,
+				"sfx": "	"
+			},
+			{
+				"state": "read",
+				"text": "Oh boy! Here we go again.",
 				"animation": "goblin",
 				"button_text": "Start Battle!",
 				"next_action": "close",
@@ -341,6 +371,16 @@
 			{
 				"state": "read",
 				"text": "Knights, to arms!",
+				"animation": "king",
+				"button_text": "next",
+				"next_action": "next",
+				"duration": "",
+				"text_speed": 0.03,
+				"sfx": "pre_combat_horn.wav"
+			},
+			{
+				"state": "read",
+				"text": "Wizard !",
 				"animation": "king",
 				"button_text": "next",
 				"next_action": "next",
