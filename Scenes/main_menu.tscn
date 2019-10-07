@@ -62,7 +62,8 @@ text = "play"
 margin_top = 94.0
 margin_right = 624.0
 margin_bottom = 135.0
-text = "jump_to_gameplay"
+hint_tooltip = "no tutorial"
+text = "quickplay"
 
 [node name="quit_button" type="Button" parent="MarginContainer/VBoxContainer"]
 margin_top = 139.0

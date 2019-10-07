@@ -3,16 +3,16 @@
 	"player_data": {
 		"name": "Sir Goblin",
 		"moral": 2,
-		"attractiveness": 2,
+		"attractiveness": 0,
 		"goblin_spawn_rate": 100,
 	    "resources": {
-			"wood":  2,
-			"stone": 2,
-			"gold":  2,
-			"food":  2,
+			"wood":  0,
+			"stone": 0,
+			"gold":  0,
+			"food":  0,
 			"population":  1,
 			"max_population": 5,
-			"eggs":  2,
+			"eggs":  0,
 		}
 	},
 	"events": {
@@ -39,81 +39,269 @@
 		"tutorial": [{
 				"state": "read",
 				"text": "You are one of the last goblins left, hunted to near extinction by the nasty human king Clement",
-				"animation": "wizard",
+				"animation": "",
 				"button_text": "Next",
 				"next_action": "next",
 				"duration": "",
-				"text_speed": 0.01,
+				"text_speed": 0.03,
 				"sfx": ""
 			},
 			{
 				"state": "read",
-				"text": "you have nothing left, is this the end for you?",
-				"animation": "wizard",
+				"text": "You have nothing left, is this the end for you?",
+				"animation": "",
 				"button_text": "Next",
 				"next_action": "next",
 				"duration": "",
-				"text_speed": 0.01,
+				"text_speed": 0.03,
 				"sfx": ""
 			},
 			{
 				"state": "read_input",
-				"text": "you need to choose a name little goblin.",
-				"animation": "wizard",
+				"text": "You need to choose a name little goblin.",
+				"animation": "",
 				"button_text": "Confirm",
 				"next_action": "submit_name",
 				"duration": "",
-				"text_speed": 0.01,
+				"text_speed": 0.03,
 				"sfx": ""
 			},
 			{
-				"state": "cutscene",
-				"text": "",
+				"state": "read",
+				"text": "Good luck, [GOBLIN_NAME]...",
 				"animation": "",
-				"button_text": "",
-				"next_action": "",
-				"duration": 3,
-				"text_speed": 0.01,
+				"button_text": "next",
+				"next_action": "next",
+				"duration": "",
+				"text_speed": 0.03,
 				"sfx": ""
 			},
 			{
 				"state": "read",
 				"text": "A goblin! what a rarity. Greetings, I am Higgledy Piggledy the Wiggley merchant wizard at your service!",
-				"animation": "",
+				"animation": "wizard",
 				"button_text": "Next",
 				"next_action": "next",
 				"duration": "",
-				"text_speed": 0.01,
+				"text_speed": 0.03,
+				"sfx": ""
+			},
+			{
+				"state": "read",
+				"text": "Hi I'm [GOBLIN_NAME], king Clement killed my people and he's coming after me.",
+				"animation": "goblin",
+				"button_text": "Next",
+				"next_action": "next",
+				"duration": "",
+				"text_speed": 0.03,
 				"sfx": ""
 			},
 			{
 				"state": "read",
 				"text": "If you are going to survive the wrath of nasty king Clement you'll need all the help you can get.",
-				"animation": "",
-				"button_text": "Next",
-				"next_action": "next",
-				"duration": "",
-				"text_speed": 0.01,
-				"sfx": ""
-			},
-			{
-				"state": "read",
-				"text": "If you build a camp here you will attract local straggler goblins to join you!",
 				"animation": "wizard",
 				"button_text": "Next",
 				"next_action": "next",
 				"duration": "",
-				"text_speed": 0.01,
+				"text_speed": 0.03,
 				"sfx": ""
 			},
 			{
 				"state": "read",
-				"text": "The more ATTRACTIVE your home the more wild goblins will be drawn to join you in your efforts to survive.",
-				"animation": "",
+				"text": "Are you here to help me?!",
+				"animation": "goblin",
 				"button_text": "Next",
+				"next_action": "next",
+				"duration": "",
+				"text_speed": 0.03,
+				"sfx": ""
+			},
+			{
+				"state": "read",
+				"text": "No no no.... but! If you build a village here you will attract local straggler goblins to join you!",
+				"animation": "wizard",
+				"button_text": "Next",
+				"next_action": "next",
+				"duration": "",
+				"text_speed": 0.03,
+				"sfx": ""
+			},
+			{
+				"state": "read",
+				"text": "Oh but you're a wizard, surely you can just kill him?",
+				"animation": "goblin",
+				"button_text": "Next",
+				"next_action": "next",
+				"duration": "",
+				"text_speed": 0.03,
+				"sfx": ""
+			},
+			{
+				"state": "read",
+				"text": "HA HA HA. Where's the fun in that [GOBLIN_NAME].",
+				"animation": "wizard",
+				"button_text": "Next",
+				"next_action": "next",
+				"duration": "",
+				"text_speed": 0.03,
+				"sfx": ""
+			},
+			{
+				"state": "read_building_resources",
+				"text": "Now! In order to construct buildings, you need wood, stone and gold. These are resources that you and you're goblins can collect.",
+				"animation": "wizard",
+				"button_text": "Next",
+				"next_action": "next",
+				"duration": "",
+				"text_speed": 0.03,
+				"sfx": ""
+			},
+			{
+				"state": "read_building_actions",
+				"text": "Select a building you would like to erect, and place it on the map the cost of resource is displayed.",
+				"animation": "wizard",
+				"button_text": "Next",
+				"next_action": "next",
+				"duration": "",
+				"text_speed": 0.03,
+				"sfx": ""
+			},
+			{
+				"state": "read_attractiveness",
+				"text": "The more attractive your home the more wild goblins will be drawn to join you in your efforts to survive.",
+				"animation": "wizard",
+				"button_text": "Next",
+				"next_action": "next",
+				"duration": "",
+				"text_speed": 0.03,
+				"sfx": ""
+			},
+			{
+				"state": "read_population",
+				"text": "This indicates your current and max population, max population can increase as you build huts.",
+				"animation": "wizard",
+				"button_text": "Next",
+				"next_action": "next",
+				"duration": "",
+				"text_speed": 0.03,
+				"sfx": ""
+			},
+			{
+				"state": "read_eggs",
+				"text": "This indicates your current egg count, these will hatch into goblins babbies.",
+				"animation": "wizard",
+				"button_text": "Next",
+				"next_action": "next",
+				"duration": "",
+				"text_speed": 0.03,
+				"sfx": ""
+			},
+			{
+				"state": "read",
+				"text": "Ideally you will want to be collecting and building during the day time, because at night king Clement's men will attack!",
+				"animation": "wizard",
+				"button_text": "Next",
+				"next_action": "next",
+				"duration": "",
+				"text_speed": 0.03,
+				"sfx": ""
+			},
+			{
+				"state": "read_clock",
+				"text": "The day time and night time cycle is displayed at the top left of your screen, keep an eye on it.",
+				"animation": "wizard",
+				"button_text": "Next",
+				"next_action": "next",
+				"duration": "",
+				"text_speed": 0.03,
+				"sfx": ""
+			},
+			{
+				"state": "read",
+				"text": "You can move yourself with a right click and your camera by dragging with a middle mouse click. Goodluck little one!",
+				"animation": "wizard",
+				"button_text": "Next",
+				"next_action": "next",
+				"duration": "",
+				"text_speed": 0.03,
+				"sfx": ""
+			},
+			{
+				"state": "read",
+				"text": "Gee, thanks!",
+				"animation": "goblin",
+				"button_text": "next",
+				"next_action": "Next",
+				"duration": "",
+				"text_speed": 0.03,
+				"sfx": ""
+			},
+			{
+				"state": "read_food",
+				"text": "Oh one more thing, make sure you have food. If you don't, your goblins will starve and then eventually die.",
+				"animation": "wizard",
+				"button_text": "Next",
+				"next_action": "next",
+				"duration": "",
+				"text_speed": 0.03,
+				"sfx": ""
+			},
+			{
+				"state": "read",
+				"text": "Well duh!",
+				"animation": "goblin",
+				"button_text": "Start Game",
 				"next_action": "close",
 				"duration": "",
-				"text_speed": 0.01,
+				"text_speed": 0.03,
+				"sfx": ""
+			},
+		],
+		"hut": [
+			{
+				"state": "read",
+				"text": "goblins can sleep there if low on energy also increases max pop",
+				"animation": "wizard",
+				"button_text": "Got it",
+				"next_action": "Close",
+				"duration": "",
+				"text_speed": 0.03,
+				"sfx": ""
+			}
+		],
+		"mess": [
+			{
+				"state": "read",
+				"text": "goblins eat there when hungry increases attractiveness for new goblins",
+				"animation": "wizard",
+				"button_text": "Got it",
+				"next_action": "Close",
+				"duration": "",
+				"text_speed": 0.03,
+				"sfx": ""
+			}
+		],
+		"camp": [
+			{
+				"state": "read",
+				"text": "increases attractivenees when goblins are unhappy they can relax here",
+				"animation": "wizard",
+				"button_text": "Got it.",
+				"next_action": "Close",
+				"duration": "",
+				"text_speed": 0.03,
+				"sfx": ""
+			}
+		],
+		"hatchery": [
+			{
+				"state": "read",
+				"text": "regularly hatches eggs into a new goblin",
+				"animation": "wizard",
+				"button_text": "Got it",
+				"next_action": "Close",
+				"duration": "",
+				"text_speed": 0.03,
 				"sfx": ""
 			}
 		],

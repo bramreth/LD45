@@ -1,9 +1,6 @@
 extends Node2D
 
 
-signal show_overlay()
-signal hide_overlay()
-
 var dialog = {}
 var current_dialog = {}
 var dialog_index
@@ -41,9 +38,17 @@ func kill_dialog():
 	self.visible = false
 
 func handle_dialog():
+	get_parent().resource_arrows.hide()
+	get_parent().attract_arrow.hide()
+	get_parent().food_arrow.hide()
+	get_parent().population_arrow.hide()
+	get_parent().eggs_arrow.hide()
+	get_parent().time_arrow.hide()
+	get_parent().building_arrows.hide()
 	var current_dialog_item = dialog[dialog_index]
 	var state = current_dialog_item["state"]
 	var text = current_dialog_item["text"]
+	text = text.replace("[GOBLIN_NAME]", SystemManager.data["player_data"]["name"])
 	var animation = current_dialog_item["animation"] if !current_dialog_item["animation"].empty() else "default"
 	var button_text = current_dialog_item["button_text"]
 	next_action = current_dialog_item["next_action"]
@@ -79,7 +84,41 @@ func handle_dialog():
 			startButton(button_text)
 		"cutscene":
 			startCutScene(duration)
-	
+		"read_building_resources":
+			get_parent().resource_arrows.show()
+			showAnimation(animation)
+			startDialog(text, text_speed, sfx)
+			startButton(button_text)
+		"read_building_actions":
+			get_parent().building_arrows.show()
+			showAnimation(animation)
+			startDialog(text, text_speed, sfx)
+			startButton(button_text)
+		"read_foood":
+			get_parent().food_arrow.show()
+			showAnimation(animation)
+			startDialog(text, text_speed, sfx)
+			startButton(button_text)
+		"read_attractiveness":
+			get_parent().attract_arrow.show()
+			showAnimation(animation)
+			startDialog(text, text_speed, sfx)
+			startButton(button_text)
+		"read_population":
+			get_parent().population_arrow.show()
+			showAnimation(animation)
+			startDialog(text, text_speed, sfx)
+			startButton(button_text)
+		"read_eggs":
+			get_parent().eggs_arrow.show()
+			showAnimation(animation)
+			startDialog(text, text_speed, sfx)
+			startButton(button_text)
+		"read_clock":
+			get_parent().time_arrow.show()
+			showAnimation(animation)
+			startDialog(text, text_speed, sfx)
+			startButton(button_text)
 	
 func showAnimation(animation):
 	$dialog_menu/dialog_image/sprite_container/goblin.visible = false
@@ -117,12 +156,13 @@ func startButton(text):
 	action_button.text = text
 	
 func startCutScene(duration):
-	print(duration)
 	if duration != null:
+		get_parent().hide_overlay()
 		self.visible = false
 		yield(get_tree().create_timer(duration), "timeout")
 		self.visible = true
 		next_dialog()
+		get_parent().show_overlay()
 		
 
 func _on_action_button_pressed():
