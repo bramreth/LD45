@@ -585,7 +585,7 @@ margin_right = 324.0
 margin_bottom = 1478.0
 rect_scale = Vector2( 0.15, 0.15 )
 mouse_filter = 2
-value = 100.0
+value = 2.0
 texture_over = ExtResource( 18 )
 texture_progress = ExtResource( 19 )
 fill_mode = 3
@@ -597,6 +597,7 @@ scale = Vector2( 0.15, 0.15 )
 texture = ExtResource( 20 )
 region_enabled = true
 region_rect = Rect2( 710, 520, 310, 1200 )
+
 [connection signal="pressed" from="VBoxContainer/Container/mess_button" to="." method="_on_build_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Container/camp_button" to="." method="_on_camp_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Container/hut_button" to="." method="_on_hut_button_pressed"]
