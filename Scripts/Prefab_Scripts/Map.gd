@@ -27,6 +27,7 @@ var prices = {}
 var p1 = {}
 var p2 ={}
 var p3 ={}
+var p4 ={}
 	
 
 var entitiesNode
@@ -48,9 +49,14 @@ func _ready():
 	p3[ResourceManager.Resource.STONE] = 1
 	p3[ResourceManager.Resource.GOLD] = 0
 	
+	p4[ResourceManager.Resource.WOOD] = 2
+	p4[ResourceManager.Resource.STONE] = 2
+	p4[ResourceManager.Resource.GOLD] = 3
+	
 	prices[GameManager.Building.HUT] = p1
 	prices[GameManager.Building.CAMP] = p2
 	prices[GameManager.Building.MESS] = p3
+	prices[GameManager.Building.HATCHERY] = p4
 	
 
 func get_cell_size():

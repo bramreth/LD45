@@ -321,6 +321,7 @@ func _physics_process(delta):
 		$Map/Navigation/YSort/build_tool.position =  $Map/Navigation/Map.map_to_world(tile) +Vector2(0, ($Map/Navigation/Map.cell_size.y/2)-172)
 		var cell = $Map/Navigation/Map.get_cell_val(tile)
 		if $Map/Navigation/Map.check_can_build(tile, current_building):
+			
 			$Map/Navigation/YSort/build_tool/Sprite.get_material().set_shader_param("color", Color("8c980101"))
 		else:
 			$Map/Navigation/YSort/build_tool/Sprite.get_material().set_shader_param("color", Color("8c299801"))	
@@ -385,13 +386,7 @@ func stop_building():
 func _on_overlay_build(type, val):
 	building = val
 	current_building = type
-	match type:
-		GameManager.Building.HUT:
-			$Map/Navigation/YSort/build_tool/Sprite.texture = blank
-		GameManager.Building.CAMP:
-			$Map/Navigation/YSort/build_tool/Sprite.texture = blank
-		GameManager.Building.MESS:
-			$Map/Navigation/YSort/build_tool/Sprite.texture = blank
+	$Map/Navigation/YSort/build_tool/Sprite.texture = AssetLoader.assets["resources"][current_building]
 #		"blank":
 #			print("none")
 #			$Map/Navigation/YSort/build_tool/Sprite.texture = blank
