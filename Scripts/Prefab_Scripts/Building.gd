@@ -62,6 +62,7 @@ func finish_construction():
 		GameManager.Building.HATCHERY:
 			GameManager.update_attractiveness(10)
 			print("build hatchery")
+			
 			#increase attractiveness
 
 func _ready():
@@ -130,6 +131,7 @@ func gameplay_tick():
 				ResourceManager.update_resource(ResourceManager.Resource.EGG, -1)
 				GameManager.emit_signal("spawn_goblin")
 				$Sprite/AnimationPlayer.play("hatch")
+				SystemManager.playSfx("pickup.wav")
 				
 
 func get_building_position():

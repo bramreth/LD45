@@ -13,6 +13,7 @@ func _ready():
 	debug = data["debug"] if typeof(data["debug"]) == TYPE_BOOL else false
 	self.add_child(musicPlayer)
 	self.add_child(sfxPlayer)
+	sfxPlayer.volume_db = -10
 	
 func load_Player_data():
 	var file = File.new()
@@ -28,12 +29,12 @@ func save_player_data():
 		
 func changeBackgroundMusic(track):	
 	musicPlayer.stream = load(bgm_dir + track)
-	#musicPlayer.play()
+	musicPlayer.play()
 
 func playSfx(track):
 	sfxPlayer.stream = load(sfx_dir + track)
 	print("playing_tune", sfxPlayer)
-	#sfxPlayer.play()
+	sfxPlayer.play()
 
 func print(string):
 	if debug:

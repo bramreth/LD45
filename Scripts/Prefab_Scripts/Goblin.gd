@@ -8,6 +8,8 @@ export var hunger = 100
 export var energy = 100
 export var happiness = 100
 
+var walking = false
+
 # possible jobs
 var jobs = ["gather", "rest", "relax", "eat", "build", "fight", "wander"]
 #Gather - go to neareast item on the floor and pick up
@@ -78,6 +80,8 @@ func handle_job(path, target):
 	#wander doesn't need a target
 	if currentJob == "wander" and path != null:
 		move(path)
+		walking = true
+		$AudioStreamPlayer2D.play()
 		return
 	
 	#Eat, rest and relax can be done without a target on te spot
@@ -99,8 +103,12 @@ func handle_job(path, target):
 	
 	currentTarget = target
 	move(path)
+	$AudioStreamPlayer2D.play()
+	walking = true
 
 func job_movement_done():
+	$AudioStreamPlayer2D.stop()
+	walking = false
 	drain_energy_and_food()
 	call(currentJob)
 
@@ -309,3 +317,8 @@ func get_details():
 #			move(path)
 #		else:
 #			job_movement_done()
+
+func _on_AudioStreamPlayer2D_finished():
+	if walking:
+		$AudioStreamPlayer2D.play()
+	pass # Replace with function body.
