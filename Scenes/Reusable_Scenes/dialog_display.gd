@@ -24,7 +24,8 @@ func start_dialog(scene):
 	dialog = StringManager.get_dialog(current_dialog_name)
 	if dialog != null:
 		dialog_index = 0
-		get_parent().show_overlay()
+		if scene != "tutorial":
+			get_parent().show_overlay()
 		GameManager.set_physics_process(false)
 		self.visible = true
 		handle_dialog()
@@ -94,7 +95,7 @@ func handle_dialog():
 			showAnimation(animation)
 			startDialog(text, text_speed, sfx)
 			startButton(button_text)
-		"read_foood":
+		"read_food":
 			get_parent().food_arrow.show()
 			showAnimation(animation)
 			startDialog(text, text_speed, sfx)
