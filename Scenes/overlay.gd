@@ -69,17 +69,6 @@ func no_build():
 	build = false
 	reset_build_buttons()
 
-func _on_build_button_pressed():
-	build = not build
-	reset_build_buttons()
-	if current != "mess":
-		build = true
-		current = "mess"
-	if build:
-		$VBoxContainer/Container/mess_button.modulate = Color(1.0,1.0,1.0,1.0)
-	
-	emit_signal("build", GameManager.Building.MESS, build)
-
 
 func play_music():
 	randomize()
@@ -176,3 +165,27 @@ func _on_camp_button_pressed():
 		$VBoxContainer/Container/camp_button.modulate = Color(1.0,1.0,1.0,1.0)
 	
 	emit_signal("build", GameManager.Building.CAMP, build)
+
+
+func _on_mess_button_pressed():
+	build = not build
+	reset_build_buttons()
+	if current != "mess":
+		build = true
+		current = "mess"
+	if build:
+		$VBoxContainer/Container/mess_button.modulate = Color(1.0,1.0,1.0,1.0)
+	
+	emit_signal("build", GameManager.Building.MESS, build)
+
+
+func _on_hatch_button_pressed():
+	build = not build
+	reset_build_buttons()
+	if current != "mess":
+		build = true
+		current = "mess"
+	if build:
+		$VBoxContainer/Container/hatch_button.modulate = Color(1.0,1.0,1.0,1.0)
+	
+	emit_signal("build", GameManager.Building.HATCHERY, build)

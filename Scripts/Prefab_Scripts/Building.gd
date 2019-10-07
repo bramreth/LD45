@@ -19,6 +19,9 @@ var buildingStats = {
 	}
 }
 
+var building
+var timer = 0
+
 var occupants = {}
 
 export(GameManager.Building) var building_type := GameManager.Building.HUT
@@ -41,6 +44,7 @@ func finish_construction():
 	position -= Vector2(0, 100)
 	$MapEntity_Sprite.texture = AssetLoader.assets["resources"][building_type]
 	$MapEntity_Sprite/UnderConstruction.hide()
+	building = building_type
 	print($MapEntity_Sprite.texture)
 	match building_type:
 		GameManager.Building.HUT:
@@ -55,6 +59,9 @@ func finish_construction():
 		GameManager.Building.CAMP:
 			GameManager.update_attractiveness(10)
 			print("build camp")
+		GameManager.Building.HATCHERY:
+			GameManager.update_attractiveness(10)
+			print("build hatchery")
 			#increase attractiveness
 
 func _ready():
@@ -114,6 +121,16 @@ func gameplay_tick():
 				occupant.show()
 				occupants.erase(occupant)
 				occupant.finish_job()
+				
+	if building == GameManager.Building.HATCHERY:
+		timer += 1
+		if timer > 10:
+			timer = 0 
+			if ResourceManager.get_value(ResourceManager.Resource.EGG) >= 1:
+				ResourceManager.update_resource(ResourceManager.Resource.EGG, -1)
+				GameManager.emit_signal("spawn_goblin")
+				$Sprite/AnimationPlayer.play("hatch")
+				
 
 func get_building_position():
 	return position + $Entrance.position
