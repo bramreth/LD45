@@ -168,6 +168,7 @@ func perform_contextual_action(character):
 					print("Occupants: " + String(selectedEntity.use_building(player)))
 			elif selectedEntity.type == GameManager.ENTITY_TYPE.ITEM:
 				selectedEntity.pickup()
+				selectedEntity = null
 
 func stop_construction():
 	if selectedEntity != null:
