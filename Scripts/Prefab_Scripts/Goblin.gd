@@ -186,8 +186,15 @@ func wander():
 	finish_job()
 
 func die():
-	start_specific_job("wander")
+	ResourceManager.update_resource(ResourceManager.Resource.POPULATION, -1)
 	$MapEntity_Sprite.modulate = Color.red
+	$AnimationPlayer.play("die")
+	
+	for enemy in get_tree().get_nodes_in_group("enemies"):
+		enemy.is_this_current_target(self)
+	
+	yield(get_tree().create_timer(3), "timeout")
+	queue_free()
 
 func drain_energy_and_food():
 	adjust_stats(-2,-3,0)

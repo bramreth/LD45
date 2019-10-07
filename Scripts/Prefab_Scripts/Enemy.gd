@@ -50,7 +50,7 @@ func start_specific_job(job):
 
 func handle_job(path, target):
 	print(target)
-	if target == null:
+	if target == null or path == null:
 		finish_job()
 		return
 	
@@ -79,7 +79,6 @@ func cancel_job():
 	start_job()
 
 func attack():
-	print("ATTACK")
 	emit_signal("start_combat", currentTarget, self)
 	finish_job()
 
@@ -87,15 +86,25 @@ func fight():
 	currentTarget.enter_combat(self)
 
 func die():
-	start_specific_job("wander")
+	ResourceManager.update_resource(ResourceManager.Resource.POPULATION, -1)
 	$MapEntity_Sprite.modulate = Color.red
+	$AnimationPlayer.play("die")
+	yield(get_tree().create_timer(3), "timeout")
+	queue_free()
+
+func move(newPath: PoolVector2Array):
+	.move(newPath)
+	$AnimationPlayer.play("waddle_knight")
 
 func _process(delta):
 	if !path:
 		isMoving = false
 		#$AnimationPlayer.stop()
-		$Tween.interpolate_property($MapEntity_Sprite, "offset", $MapEntity_Sprite.offset, 0, 0.1, Tween.TRANS_CUBIC, Tween.EASE_IN)
-		$Tween.interpolate_property($MapEntity_Sprite, "rotation_degrees", $MapEntity_Sprite.rotation_degrees, 0, 0.1, Tween.TRANS_CUBIC, Tween.EASE_IN)
+		$Tween.interpolate_property($Knight, "offset", $MapEntity_Sprite.offset, 0, 0.1, Tween.TRANS_CUBIC, Tween.EASE_IN)
+		$Tween.interpolate_property($Knight, "rotation_degrees", $MapEntity_Sprite.rotation_degrees, 0, 0.1, Tween.TRANS_CUBIC, Tween.EASE_IN)
+		$Tween.interpolate_property($Knight/Sword, "offset", $MapEntity_Sprite.offset, 0, 0.1, Tween.TRANS_CUBIC, Tween.EASE_IN)
+		$Tween.interpolate_property($Knight/Sword, "rotation_degrees", $MapEntity_Sprite.rotation_degrees, 0, 0.1, Tween.TRANS_CUBIC, Tween.EASE_IN)
+		$Tween.interpolate_property($Knight/Helmet, "rotation_degrees", $MapEntity_Sprite.rotation_degrees, 0, 0.1, Tween.TRANS_CUBIC, Tween.EASE_IN)
 		$Tween.start()
 		set_process(false)
 		job_movement_done()

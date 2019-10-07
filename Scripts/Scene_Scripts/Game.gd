@@ -304,9 +304,9 @@ func ai_join(character):
 
 func ai_attack(character):
 	var goblin = get_closest_goblin(character.position)
-	goblin.stun()
 	var path = null
 	if goblin != null:
+		goblin.stun()
 		path = get_path_between_points(character.position, goblin.position)
 	character.handle_job(path, goblin)
 ################################################################################################
