@@ -32,7 +32,7 @@ func background_load(path):
 		#print('loading...')
 		# Update the loading screen on the progress
 		emit_signal("loading_progress",loader.get_stage())
-		print(loader.get_stage())
+		#print(loader.get_stage())
 		# Delay for 0.01 second
 		OS.delay_msec(10.0)
 		

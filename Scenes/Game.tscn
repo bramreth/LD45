@@ -1,14 +1,16 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scripts/Scene_Scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Tiles/MapTilesLarge.tres" type="TileSet" id=2]
 [ext_resource path="res://Scripts/Prefab_Scripts/Map.gd" type="Script" id=3]
 [ext_resource path="res://Assets/Images/cave (2).png" type="Texture" id=4]
-[ext_resource path="res://Assets/Images/ui_icons/wood.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Images/ui_icons/gold.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Prefabs/PlayerCharacterMapEntity.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Assets/Prefabs/ItemMapEntity.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scenes/overlay.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Assets/shader/new_shadermaterial.tres" type="Material" id=5]
+[ext_resource path="res://Assets/Images/ui_icons/rock.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Images/ui_icons/wood.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Images/ui_icons/gold.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Prefabs/PlayerCharacterMapEntity.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Assets/Prefabs/ItemMapEntity.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/overlay.tscn" type="PackedScene" id=11]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
@@ -35,17 +37,14 @@ texture = ExtResource( 4 )
 offset = Vector2( 0, -120 )
 
 [node name="build_tool" type="Node2D" parent="Map/Navigation/YSort"]
-editor/display_folded = true
-visible = false
 
 [node name="Sprite" type="Sprite" parent="Map/Navigation/YSort/build_tool"]
+material = ExtResource( 5 )
 scale = Vector2( 0.8, 0.8 )
 
 [node name="ColorRect" type="ColorRect" parent="Map/Navigation/YSort/build_tool/Sprite"]
-margin_left = 80.0
-margin_top = 20.0
-margin_right = 160.0
-margin_bottom = 140.0
+margin_right = 80.0
+margin_bottom = 120.0
 color = Color( 0.117647, 0.117647, 0.117647, 0.588235 )
 
 [node name="Sprite3" type="TextureRect" parent="Map/Navigation/YSort/build_tool/Sprite/ColorRect"]
@@ -53,7 +52,7 @@ margin_top = 40.0
 margin_right = 40.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 40, 40 )
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 expand = true
 
 [node name="wood" type="Label" parent="Map/Navigation/YSort/build_tool/Sprite/ColorRect"]
@@ -82,7 +81,7 @@ text = "gold"
 margin_right = 40.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 40, 40 )
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 expand = true
 
 [node name="Sprite4" type="TextureRect" parent="Map/Navigation/YSort/build_tool/Sprite/ColorRect"]
@@ -90,43 +89,44 @@ margin_top = 80.0
 margin_right = 40.0
 margin_bottom = 120.0
 rect_min_size = Vector2( 40, 40 )
+texture = ExtResource( 8 )
 expand = true
 
-[node name="Player" parent="Map/Navigation/YSort" instance=ExtResource( 7 )]
+[node name="Player" parent="Map/Navigation/YSort" instance=ExtResource( 9 )]
 position = Vector2( 226.097, 910.261 )
 
-[node name="MapEntity" parent="Map/Navigation/YSort" instance=ExtResource( 8 )]
+[node name="MapEntity" parent="Map/Navigation/YSort" instance=ExtResource( 10 )]
 position = Vector2( -509.474, 617.895 )
 
-[node name="MapEntity2" parent="Map/Navigation/YSort" instance=ExtResource( 8 )]
+[node name="MapEntity2" parent="Map/Navigation/YSort" instance=ExtResource( 10 )]
 position = Vector2( -775.79, 741.053 )
 resourceType = 1
 
-[node name="MapEntity3" parent="Map/Navigation/YSort" instance=ExtResource( 8 )]
+[node name="MapEntity3" parent="Map/Navigation/YSort" instance=ExtResource( 10 )]
 position = Vector2( -227.368, 988.421 )
 resourceType = 2
 
-[node name="MapEntity4" parent="Map/Navigation/YSort" instance=ExtResource( 8 )]
+[node name="MapEntity4" parent="Map/Navigation/YSort" instance=ExtResource( 10 )]
 position = Vector2( 258.948, 991.579 )
 resourceType = 1
 
-[node name="MapEntity5" parent="Map/Navigation/YSort" instance=ExtResource( 8 )]
+[node name="MapEntity5" parent="Map/Navigation/YSort" instance=ExtResource( 10 )]
 position = Vector2( 1532.63, 1132.63 )
 
-[node name="MapEntity6" parent="Map/Navigation/YSort" instance=ExtResource( 8 )]
+[node name="MapEntity6" parent="Map/Navigation/YSort" instance=ExtResource( 10 )]
 position = Vector2( 1021.89, 1381.86 )
 resourceType = 1
 
-[node name="MapEntity7" parent="Map/Navigation/YSort" instance=ExtResource( 8 )]
+[node name="MapEntity7" parent="Map/Navigation/YSort" instance=ExtResource( 10 )]
 position = Vector2( 1773.27, 1524.28 )
 
-[node name="MapEntity8" parent="Map/Navigation/YSort" instance=ExtResource( 8 )]
+[node name="MapEntity8" parent="Map/Navigation/YSort" instance=ExtResource( 10 )]
 position = Vector2( 1280.95, 740.984 )
 
-[node name="MapEntity9" parent="Map/Navigation/YSort" instance=ExtResource( 8 )]
+[node name="MapEntity9" parent="Map/Navigation/YSort" instance=ExtResource( 10 )]
 position = Vector2( -246.361, 1529.19 )
 
-[node name="MapEntity10" parent="Map/Navigation/YSort" instance=ExtResource( 8 )]
+[node name="MapEntity10" parent="Map/Navigation/YSort" instance=ExtResource( 10 )]
 position = Vector2( -1023.52, 1384.32 )
 resourceType = 3
 
@@ -144,8 +144,9 @@ editor_draw_limits = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
 
-[node name="overlay" parent="Camera2D/CanvasLayer" instance=ExtResource( 9 )]
+[node name="overlay" parent="Camera2D/CanvasLayer" instance=ExtResource( 11 )]
 margin_top = -0.774048
 margin_bottom = -0.774048
 mouse_filter = 2
+
 [connection signal="build" from="Camera2D/CanvasLayer/overlay" to="." method="_on_overlay_build"]

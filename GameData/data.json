@@ -29,8 +29,23 @@
 			}, 
 			{
 				"dialog":"battle-3",
-				"min-population": 5		,
+				"min-population": 5,
+				"num_of_enemies": 5
+			},
+			{
+				"dialog":"battle-4",
+				"min-population": 15,
 				"num_of_enemies": 10
+			},
+			{
+				"dialog":"battle-5",
+				"min-population": 30,
+				"num_of_enemies": 20
+			},
+			{
+				"dialog":"battle-6",
+				"min-population": 50,
+				"num_of_enemies": 50
 			},
 		] 
 		
@@ -348,7 +363,19 @@
 			},
 			{
 				"state": "read",
-				"text": "Men! Slaughter them all with the upmost haste!",
+				"text": "Oh boy! Here we go again.",
+				"animation": "goblin",
+				"button_text": "Start Battle!",
+				"next_action": "close",
+				"duration": "",
+				"text_speed": 0.03,
+				"sfx": ""
+			}
+		],
+		"battle-2": [
+			{
+				"state": "read",
+				"text": "Knights, to arms!",
 				"animation": "king",
 				"button_text": "next",
 				"next_action": "next",
@@ -358,7 +385,7 @@
 			},
 			{
 				"state": "read",
-				"text": "Oh boy! Here we go again.",
+				"text": "You're going down!",
 				"animation": "goblin",
 				"button_text": "Start Battle!",
 				"next_action": "close",
@@ -367,10 +394,10 @@
 				"sfx": "goblin4.wav"
 			}
 		],
-		"battle-2": [
+		"battle-3": [
 			{
 				"state": "read",
-				"text": "Knights, to arms!",
+				"text": "Will no one rid me of these turbulent goblins?!",
 				"animation": "king",
 				"button_text": "Next",
 				"next_action": "next",
@@ -409,7 +436,7 @@
 				"sfx": "wizard1.wav"
 			}
 		],
-		"battle-3": [
+		"battle-6": [
 			{
 				"state": "read",
 				"text": "Goblins, you will be dead by dawn!!",

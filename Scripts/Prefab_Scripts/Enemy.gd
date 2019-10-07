@@ -9,14 +9,20 @@ export var gname = "ENEMY"
 var currentJob = "wander"
 var currentTarget = null
 
+var stunned = false
+
+func show():
+	show()
+	$MapEntity_Sprite.hide()
+
 func _ready():
 	._ready()
 	randomize()
 	type = GameManager.ENTITY_TYPE.ENEMY
 	strength = 3
 	health = 15
-	yield(get_tree().create_timer(randf()*3+1), "timeout")
-	start_job()
+#	yield(get_tree().create_timer(randf()*3+1), "timeout")
+#	start_job()
 
 func join_clan():
 	emit_signal("request_job_target", self, "join")
@@ -40,16 +46,18 @@ func check_for_construction():
 	return false
 
 func start_job():
-	print("START JOB")
-	currentJob = determine_jobs()
-	emit_signal("request_job_target", self, currentJob)
+	if !stunned:
+		#"START JOB")
+		currentJob = determine_jobs()
+		emit_signal("request_job_target", self, currentJob)
 
 func start_specific_job(job):
-	currentJob = job
-	emit_signal("request_job_target", self, currentJob)
+	if !stunned:
+		currentJob = job
+		emit_signal("request_job_target", self, currentJob)
 
 func handle_job(path, target):
-	print(target)
+	#print(target)
 	if target == null or path == null:
 		finish_job()
 		return
@@ -58,7 +66,7 @@ func handle_job(path, target):
 	move(path)
 
 func job_movement_done():
-	print("JOB MOVEMENT DONE")
+	#print("JOB MOVEMENT DONE")
 	call(currentJob)
 
 func finish_job():

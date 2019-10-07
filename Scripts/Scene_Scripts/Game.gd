@@ -20,6 +20,7 @@ onready var player = $Map/Navigation/YSort/Player
 var mousePos = Vector2()
 
 func _ready():
+	GameManager.start_of_daytime_tick()
 	GameManager.connect("spawn_items", self, "spawn_items")
 	GameManager.connect("spawn_goblin", self, "spawn_goblin")
 	GameManager.connect("night_started", self, "start_night")
@@ -28,11 +29,13 @@ func _ready():
 	for character in get_tree().get_nodes_in_group("goblins"):
 		character.connect("request_job_target", self, "provide_movement_target")
 		character.connect("selected", self, "select_character")
+		character.start_job()
 		
 	for character in get_tree().get_nodes_in_group("enemies"):
 		character.connect("request_job_target", self, "provide_movement_target")
 		character.connect("selected", self, "select_character")
 		character.connect("start_combat", self, "start_combat")
+		character.start_job()
 	
 	for building in get_tree().get_nodes_in_group("buildings"):
 		building.connect("selected", self, "select_entity")
@@ -81,6 +84,7 @@ func building_spawned():
 
 var goblinSpawningThread: Thread
 func spawn_goblin():
+	ResourceManager.update_resource(ResourceManager.Resource.POPULATION, 1)
 	goblinSpawningThread = Thread.new()
 	goblinSpawningThread.start(self, "_thread_spawn_goblin")
 

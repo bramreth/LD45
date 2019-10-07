@@ -9,6 +9,7 @@ export var energy = 100
 export var happiness = 100
 
 var walking = false
+var stunned = false
 
 # possible jobs
 var jobs = ["gather", "rest", "relax", "eat", "build", "fight", "wander"]
@@ -29,8 +30,8 @@ func _ready():
 	type = GameManager.ENTITY_TYPE.GOBLIN
 	strength = 3
 	health = 15
-	yield(get_tree().create_timer(randf()*3+1), "timeout")
-	start_job()
+#	yield(get_tree().create_timer(randf()*3+1), "timeout")
+#	start_job()
 
 func join_clan():
 	emit_signal("request_job_target", self, "join")
@@ -63,18 +64,20 @@ func check_for_combat():
 	return false
 	
 func check_for_construction():
-	for site in get_tree().get_nodes_in_group("construction_sites"):
-		if !site.is_at_capacity():
+	for site in get_tree().get_nodes_in_group("buildings"):
+		if !site.is_at_capacity() and site.underConstruction:
 			return true
 	return false
 
 func start_job():
-	currentJob = determine_jobs()
-	emit_signal("request_job_target", self, currentJob)
+	if !stunned:
+		currentJob = determine_jobs()
+		emit_signal("request_job_target", self, currentJob)
 
 func start_specific_job(job):
-	currentJob = job
-	emit_signal("request_job_target", self, currentJob)
+	if !stunned:
+		currentJob = job
+		emit_signal("request_job_target", self, currentJob)
 
 func handle_job(path, target):
 	#wander doesn't need a target
@@ -123,6 +126,7 @@ func is_this_current_target(target):
 		cancel_job()
 
 func stun():
+	stunned = true
 	set_process(false)
 	$AnimationPlayer.stop()
 	$Tween.interpolate_property($MapEntity_Sprite, "offset", $MapEntity_Sprite.offset, 0, 0.1, Tween.TRANS_CUBIC, Tween.EASE_IN)

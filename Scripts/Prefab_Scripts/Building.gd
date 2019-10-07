@@ -7,7 +7,8 @@ var buildingStats = {
 		GameManager.Building.SENTRY: 2, #UNUSED
 		GameManager.Building.HATCHERY: 10,#UNUSED
 		GameManager.Building.MESS: 1,
-		GameManager.Building.RUBBLE: 2
+		GameManager.Building.RUBBLE: 2,
+		GameManager.Building.THRONE_ROOM: 0
 	},
 	"usage_time": {
 		GameManager.Building.CAMP: 3,
@@ -124,7 +125,7 @@ func gameplay_tick():
 				
 	if building == GameManager.Building.HATCHERY:
 		timer += 1
-		if timer > 10:
+		if timer > 30:
 			timer = 0 
 			if ResourceManager.get_value(ResourceManager.Resource.EGG) >= 1:
 				ResourceManager.update_resource(ResourceManager.Resource.EGG, -1)

@@ -28,10 +28,15 @@ func leave_combat(character):
 		if character.health <= 0:
 			character.die()
 		else:
+			character.stunned  = false
 			character.finish_job()
 	character.show()
 
 func combat_over():
+	for character in get_tree().get_nodes_in_group("goblins"):
+		character.is_this_current_target(self)
+	for character in get_tree().get_nodes_in_group("enemies"):
+		character.is_this_current_target(self)
 	for combatent in friendlies:
 		leave_combat(combatent)
 	for combatent in enemies:
@@ -60,7 +65,7 @@ func assign_damage(friendlyDamage, enemyDamage):
 	friendlies[0].health -= enemyDamage%friendlies.size()
 	for combatent in friendlies:
 		combatent.health -= enemyDamage
-		print(combatent.health)
+		#print(combatent.health)
 		if combatent.health <= 0:
 			leave_combat(combatent)
 	#ENEMIES

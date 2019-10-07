@@ -15,13 +15,13 @@ var debug_flag = false
 onready var night_events = SystemManager.data["events"]["night"]
 
 const DAY_LENGTH = 120
-const NIGHT_LENGTH = 60
+const NIGHT_LENGTH = 40
 
 var currentTick: int = 0 #1/60th seconds since started
 var currentGamePlayTick: int = 0 #Seconds since started
 var currentDay: int = 0 #number of day/night cycles since started
 
-var tutorial = true
+var tutorial = false
 
 func set_tutorial(t_in):
 	tutorial = t_in
@@ -81,8 +81,10 @@ func _ready():
 	randomize()
 	set_physics_process(false)
 	update_goblin_spawn_rate()
+	
 
 func start_game():
+	
 #	ResourceManager.update_resource(ResourceManager.Resource.WOOD, 30)
 #	ResourceManager.update_resource(ResourceManager.Resource.STONE, 30)
 #	ResourceManager.update_resource(ResourceManager.Resource.GOLD, 30)
@@ -99,7 +101,7 @@ func get_current_day():
 
 func _physics_process(delta):
 	currentGamePlayTick = currentTick/60
-	debug_day_cycle_print()
+	#debug_day_cycle_print()
 	
 	if currentTick%60 == 0:
 		emit_signal("gameplay_tick")
@@ -125,6 +127,12 @@ func start_of_daytime_tick():
 	spawn_items_list[ResourceManager.Resource.GOLD] = randi()%4
 	spawn_items_list[ResourceManager.Resource.STONE] = randi()%6+1
 	spawn_items_list[ResourceManager.Resource.WOOD] = randi()%6+1
+	emit_signal("spawn_items", spawn_items_list)
+	spawn_items_list[ResourceManager.Resource.EGG] = randi()%32
+	spawn_items_list[ResourceManager.Resource.FOOD] = randi()%35
+	spawn_items_list[ResourceManager.Resource.GOLD] = randi()%24
+	spawn_items_list[ResourceManager.Resource.STONE] = randi()%36+1
+	spawn_items_list[ResourceManager.Resource.WOOD] = randi()%36+1
 	emit_signal("spawn_items", spawn_items_list)
 	#print(spawn_items_list)
 
@@ -210,8 +218,8 @@ onready var goblin_ticker = 0
 func check_for_goblin_spawn():
 	if ResourceManager.get_value(ResourceManager.Resource.POPULATION) < ResourceManager.get_value(ResourceManager.Resource.MAX_POPULATION):
 		var sr = get_goblin_spawn_rate()
-		print(sr)
-		print(goblin_ticker)
+		#print(sr)
+		#goblin_ticker)
 		if goblin_ticker >= sr:
 			emit_signal("spawn_goblin")
 			goblin_ticker = 0
