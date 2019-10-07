@@ -49,3 +49,4 @@ one_shot = true
 explosiveness = 0.75
 process_material = SubResource( 2 )
 texture = ExtResource( 4 )
+
