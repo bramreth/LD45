@@ -122,12 +122,6 @@ func _physics_process(delta):
 func start_of_daytime_tick():
 	emit_signal("day_started")
 	#print("Day Started " + String(currentGamePlayTick))
-	spawn_items_list[ResourceManager.Resource.EGG] = randi()%2
-	spawn_items_list[ResourceManager.Resource.FOOD] = randi()%4+1
-	spawn_items_list[ResourceManager.Resource.GOLD] = randi()%4
-	spawn_items_list[ResourceManager.Resource.STONE] = randi()%6+1
-	spawn_items_list[ResourceManager.Resource.WOOD] = randi()%6+1
-	emit_signal("spawn_items", spawn_items_list)
 	spawn_items_list[ResourceManager.Resource.EGG] = randi()%32
 	spawn_items_list[ResourceManager.Resource.FOOD] = randi()%35
 	spawn_items_list[ResourceManager.Resource.GOLD] = randi()%24
