@@ -198,7 +198,6 @@ func get_closest_item(position):
 			if distance == null or position.distance_to(item.position) < distance:
 				distance = position.distance_to(item.position)
 				closestItem = item
-	print(closestItem.position)
 	return closestItem
 
 func provide_movement_target(character, job):

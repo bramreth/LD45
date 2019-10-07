@@ -111,7 +111,7 @@ func start_of_daytime_tick():
 	spawn_items_list[ResourceManager.Resource.GOLD] = randi()%4
 	spawn_items_list[ResourceManager.Resource.STONE] = randi()%6+1
 	spawn_items_list[ResourceManager.Resource.WOOD] = randi()%6+1
-	emit_signal("spawn_items", spawn_items_list)
+#	emit_signal("spawn_items", spawn_items_list)
 	#print(spawn_items_list)
 
 func daytime_tick():

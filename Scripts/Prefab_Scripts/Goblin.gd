@@ -79,12 +79,18 @@ func start_specific_job(job):
 
 #Gets a path to the job target and the target from the Game script
 func handle_job(path, target):
-	currentTarget = weakref(target)
-	
-	if path != null:
-		move(path)
+	if currentJob == "gather" and target != null:
+		currentTarget = weakref(target)
 	else:
-		job_movement_done()
+		currentTarget = target
+	
+	if currentJob == "gather" and currentTarget == null:
+		finish_job()
+	else:
+		if path != null:
+			move(path)
+		else:
+			job_movement_done()
 
 func job_movement_done():
 	drain_energy_and_food()
