@@ -7,7 +7,8 @@ var buildingStats = {
 		GameManager.Building.SENTRY: 2, #UNUSED
 		GameManager.Building.HATCHERY: 10,#UNUSED
 		GameManager.Building.MESS: 1,
-		GameManager.Building.RUBBLE: 2
+		GameManager.Building.RUBBLE: 2,
+		GameManager.Building.THRONE_ROOM: 0
 	},
 	"usage_time": {
 		GameManager.Building.CAMP: 3,

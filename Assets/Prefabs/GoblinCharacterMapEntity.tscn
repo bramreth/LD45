@@ -92,9 +92,8 @@ anims/death = SubResource( 1 )
 [node name="soul" type="Sprite" parent="." index="8"]
 visible = false
 material = SubResource( 3 )
-position = Vector2( -2.58459, -104.681 )
+position = Vector2( -2.585, -300 )
 rotation = 1.5708
-scale = Vector2( 0.2, 0.2 )
+scale = Vector2( 1e-005, 1e-005 )
 texture = ExtResource( 5 )
-
 [connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_AudioStreamPlayer2D_finished"]

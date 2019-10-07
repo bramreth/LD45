@@ -21,7 +21,7 @@ var currentTick: int = 0 #1/60th seconds since started
 var currentGamePlayTick: int = 0 #Seconds since started
 var currentDay: int = 0 #number of day/night cycles since started
 
-var tutorial = true
+var tutorial = false
 
 func set_tutorial(t_in):
 	tutorial = t_in
@@ -99,7 +99,7 @@ func get_current_day():
 
 func _physics_process(delta):
 	currentGamePlayTick = currentTick/60
-	debug_day_cycle_print()
+	#debug_day_cycle_print()
 	
 	if currentTick%60 == 0:
 		emit_signal("gameplay_tick")
@@ -210,8 +210,8 @@ onready var goblin_ticker = 0
 func check_for_goblin_spawn():
 	if ResourceManager.get_value(ResourceManager.Resource.POPULATION) < ResourceManager.get_value(ResourceManager.Resource.MAX_POPULATION):
 		var sr = get_goblin_spawn_rate()
-		print(sr)
-		print(goblin_ticker)
+		#print(sr)
+		#goblin_ticker)
 		if goblin_ticker >= sr:
 			emit_signal("spawn_goblin")
 			goblin_ticker = 0

@@ -28,11 +28,13 @@ func _ready():
 	for character in get_tree().get_nodes_in_group("goblins"):
 		character.connect("request_job_target", self, "provide_movement_target")
 		character.connect("selected", self, "select_character")
+		character.start_job()
 		
 	for character in get_tree().get_nodes_in_group("enemies"):
 		character.connect("request_job_target", self, "provide_movement_target")
 		character.connect("selected", self, "select_character")
 		character.connect("start_combat", self, "start_combat")
+		character.start_job()
 	
 	for building in get_tree().get_nodes_in_group("buildings"):
 		building.connect("selected", self, "select_entity")
