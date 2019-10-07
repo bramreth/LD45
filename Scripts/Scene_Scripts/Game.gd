@@ -38,7 +38,7 @@ func _ready():
 	for building in $Map/Navigation/YSort/Building.get_children():
 		building.connect("selected", self, "select_entity")
 	
-	#GameManager.start_dialog("tutorial")
+	GameManager.start_dialog("tutorial")
 	map.setup($Map/Navigation/YSort/Items, $Map/Navigation/YSort/Characters, $Map/Navigation/YSort/Building,  self)
 	GameManager.start_game()
 	

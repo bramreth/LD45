@@ -1,9 +1,6 @@
 extends Node2D
 
 
-signal show_overlay()
-signal hide_overlay()
-
 var dialog = {}
 var current_dialog = {}
 var dialog_index
@@ -44,6 +41,7 @@ func handle_dialog():
 	var current_dialog_item = dialog[dialog_index]
 	var state = current_dialog_item["state"]
 	var text = current_dialog_item["text"]
+	text = text.replace("[GOBLIN_NAME]", SystemManager.data["player_data"]["name"])
 	var animation = current_dialog_item["animation"] if !current_dialog_item["animation"].empty() else "default"
 	var button_text = current_dialog_item["button_text"]
 	next_action = current_dialog_item["next_action"]
@@ -117,12 +115,13 @@ func startButton(text):
 	action_button.text = text
 	
 func startCutScene(duration):
-	print(duration)
 	if duration != null:
+		get_parent().hide_overlay()
 		self.visible = false
 		yield(get_tree().create_timer(duration), "timeout")
 		self.visible = true
 		next_dialog()
+		get_parent().show_overlay()
 		
 
 func _on_action_button_pressed():
