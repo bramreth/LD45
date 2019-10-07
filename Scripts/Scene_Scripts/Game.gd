@@ -82,13 +82,11 @@ func _thread_spawn_goblin(userdata):
 func goblin_spawned():
 	goblinSpawningThread.wait_to_finish()
 
-
 var enemySpawningThread: Thread
 func spawn_enemies(amount):
 	print("spawning enemies: " + String(amount))
 	enemySpawningThread = Thread.new()
 	enemySpawningThread.start(self, "_thread_spawn_enemies", amount)
-	
 
 func _thread_spawn_enemies(amount):
 	for i in range(amount):
@@ -112,7 +110,6 @@ func _exit_tree():
 		goblinSpawningThread.wait_to_finish()
 	if enemySpawningThread != null:
 		enemySpawningThread.wait_to_finish()
-
 
 ################################################################################################
 # ENTITY SELECTION
@@ -167,8 +164,6 @@ func move_character(target):
 	player.move(path)
 	if selectedCharacter != player:
 		select_character(player)
-	
-
 ################################################################################################
 # AI MOVEMENT
 ################################################################################################
@@ -177,7 +172,8 @@ func get_closest_building_by_type(type, position):
 	var closestBuilding = null
 	for build in $Map/Navigation/YSort/Building.get_children():
 		if build.building_type == type and !build.is_at_capacity() and !build.underConstruction:
-			if distance == null or position.distance_to(build.get_position) < distance:
+			if distance == null or position.distance_to(build.get_building_position()) < distance:
+				distance = position.distance_to(build.get_building_position())
 				closestBuilding = build
 	return closestBuilding
 
@@ -186,12 +182,24 @@ func get_closest_construction_site(position):
 	var closestBuilding = null
 	for build in $Map/Navigation/YSort/Building.get_children():
 		if !build.is_at_capacity() and build.underConstruction:
-			if distance == null or position.distance_to(build.get_position) < distance:
+			if distance == null or position.distance_to(build.get_building_position()) < distance:
+				distance = position.distance_to(build.get_building_position())
 				closestBuilding = build
 	return closestBuilding
 
 func get_closest_combat(position):
 	return null
+
+func get_closest_item(position):
+	var distance = null
+	var closestItem = null
+	for item in $Map/Navigation/YSort/Items.get_children():
+		if !item.pickedUp:
+			if distance == null or position.distance_to(item.position) < distance:
+				distance = position.distance_to(item.position)
+				closestItem = item
+	print(closestItem.position)
+	return closestItem
 
 func provide_movement_target(character, job):
 	call(("ai_" + job), character)
@@ -213,6 +221,13 @@ func ai_build(character):
 	if buildSite != null:
 		path = get_path_between_points(character.position, buildSite.get_building_position())
 	character.handle_job(path, buildSite)
+
+func ai_gather(character):
+	var itemLocation = get_closest_item(character.position)
+	var path = null
+	if itemLocation != null:
+		path = get_path_between_points(character.position, itemLocation.position)
+	character.handle_job(path, itemLocation)
 
 func ai_join(character):
 	match character.type:

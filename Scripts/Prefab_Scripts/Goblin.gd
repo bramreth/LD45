@@ -37,7 +37,7 @@ func join_clan():
 	start_specific_job("wander")
 
 func determine_jobs():
-	return "build"
+	return "gather"
 	# essentials
 	if constructionsInProgress > 0:
 		return "fight"
@@ -47,11 +47,13 @@ func determine_jobs():
 		return "eat"
 	if energy < 30:
 		return "rest"
-		
-
+	
 	var free_will = randi() % 100
 	if free_will <= 30:
-		return "gather"
+		if GameManager.is_daytime():
+			return "gather"
+		else:
+			return "rest"
 	elif free_will <= 60:
 		return "relax"
 	elif free_will <= 80:
@@ -77,7 +79,7 @@ func start_specific_job(job):
 
 #Gets a path to the job target and the target from the Game script
 func handle_job(path, target):
-	currentTarget = target
+	currentTarget = weakref(target)
 	
 	if path != null:
 		move(path)
@@ -91,7 +93,7 @@ func job_movement_done():
 func finish_job():
 	currentJob = "idle"
 	currentTarget = null
-	yield(get_tree().create_timer(randi()%5+1), "timeout")
+	yield(get_tree().create_timer(randi()%10+1), "timeout")
 	start_job()
 
 func log_stats():
@@ -120,33 +122,56 @@ func adjust_stats(hun, ener, happ):
 		happiness = 100
 
 func gather():
-	adjust_stats(-10,-10,-10)
+	print("GATHERING")
+	if GameManager.is_daytime():
+		if !currentTarget.get_ref():
+			adjust_stats(-2,-2,-2)
+			finish_job()
+		else: 
+			currentTarget = currentTarget.get_ref()
+			if currentTarget != null:
+				if !currentTarget.pickedUp:
+					currentTarget.pickup()
+					adjust_stats(-10,-10,-10)
+					finish_job()
+				else:
+					adjust_stats(-2,-2,-2)
+					emit_signal("request_job_target", self, currentJob)
+			else :
+				adjust_stats(-2,-2,-2)
+				finish_job()
+	else:
+		finish_job()
 
 func rest():
 	print("RESTING")
 	if currentTarget != null:
-		adjust_stats(0,50,10)
 		var success = currentTarget.use_building(self)
 		if !success: #House is full :(
+			adjust_stats(-2,-2,-2)
 			emit_signal("request_job_target", self, currentJob)
+		else:
+			adjust_stats(0,50,30)
 	else :
 		yield(get_tree().create_timer(10), "timeout")
-		adjust_stats(0,10,0)
+		adjust_stats(0,10,5)
 		finish_job()
 
 func relax():
-	adjust_stats(0,50,10)
+	adjust_stats(0,30,50)
 	
 func eat():
-	adjust_stats(50,0,10)
+	adjust_stats(50,0,30)
 
 func build():
 	print("BUILDING")
 	if currentTarget != null:
-		adjust_stats(-10,-10,-10)
 		var success = currentTarget.use_building(self)
-		if !success: #Construction wip
+		if !success: #Construction
+			adjust_stats(-2,-2,-2)
 			finish_job()
+		else:
+			adjust_stats(-10,-10,-10)
 	else :
 		finish_job()
 	

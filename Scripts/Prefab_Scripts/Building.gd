@@ -15,7 +15,7 @@ var buildingStats = {
 		GameManager.Building.SENTRY: 10,
 		GameManager.Building.HATCHERY: 10,
 		GameManager.Building.MESS: 10,
-		GameManager.Building.RUBBLE: 30
+		GameManager.Building.RUBBLE: 3
 	}
 }
 
@@ -35,8 +35,6 @@ func setup(finalType, wip):
 		finish_construction()
 
 func finish_construction():
-	for goblin in get_tree().get_nodes_in_group("goblin"):
-			goblin.construction_update(-1)
 	$MapEntity_Sprite.texture = AssetLoader.assets["resources"][building_type]
 	print($MapEntity_Sprite.texture)
 	match building_type:
@@ -58,7 +56,7 @@ func is_at_capacity():
 
 func use_building(character):
 	if underConstruction:
-		if occupants.size() < buildingStats["capacity"][building_type]:
+		if occupants.size() < buildingStats["capacity"][GameManager.Building.RUBBLE]:
 			occupants[character] = GameManager.currentGamePlayTick
 			return true
 		else:
@@ -80,6 +78,8 @@ func gameplay_tick():
 			buildProgress += GameManager.currentGamePlayTick - occupants[occupant]
 		if buildProgress > buildingStats["usage_time"][GameManager.Building.RUBBLE]:
 			finish_construction()
+			for goblin in get_tree().get_nodes_in_group("goblin"):
+				goblin.construction_update(-1)
 			underConstruction = false
 			for occupant in occupants:
 				occupants.erase(occupant)
