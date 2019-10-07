@@ -13,8 +13,9 @@ func load_resource_icons():
 	assets["resources"][ResourceManager.Resource.STONE] = load("res://Assets/Images/ui_icons/rock.png")
 	assets["resources"][ResourceManager.Resource.WOOD] = load("res://Assets/Images/ui_icons/wood.png")
 	assets["resources"][ResourceManager.Resource.WOOD] = load("res://Assets/Images/ui_icons/wood.png")
-	assets["resources"][GameManager.Building.HUT] = load("res://Assets/Images/hut.png")
-	assets["resources"][GameManager.Building.MESS] = load("res://Assets/Images/mess.png")
-	assets["resources"][GameManager.Building.CAMP] = load("res://Assets/Images/camp.png")
+	assets["resources"][GameManager.Building.HUT] = load("res://Assets/Images/buildings/hut.png")
+	assets["resources"][GameManager.Building.MESS] = load("res://Assets/Images/buildings/mess.png")
+	assets["resources"][GameManager.Building.CAMP] = load("res://Assets/Images/buildings/camp.png")
+	assets["resources"][GameManager.Building.HUMAN_HUT] = load("res://Assets/Images/buildings/human_hut.png")	
 	assets["resources"][GameManager.Building.RUBBLE] = load("res://Assets/Images/ui_icons/rock.png")
 	

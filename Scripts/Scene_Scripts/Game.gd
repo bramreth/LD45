@@ -23,7 +23,7 @@ func _ready():
 	GameManager.connect("spawn_items", self, "spawn_items")
 	GameManager.connect("spawn_goblin", self, "spawn_goblin")
 	GameManager.connect("night_started", self, "start_night")
-	#GameManager.connect("night_started", self, "remove_items_from_map")
+	GameManager.connect("night_started", self, "remove_items_from_map")
 	
 	for character in $Map/Navigation/YSort/Characters.get_children():
 		if character.type == GameManager.ENTITY_TYPE.GOBLIN:
@@ -34,6 +34,9 @@ func _ready():
 		
 	for item in $Map/Navigation/YSort/Items.get_children():
 		item.connect("selected", self, "select_entity")
+	
+	for building in $Map/Navigation/YSort/Building.get_children():
+		building.connect("selected", self, "select_entity")
 	
 	#GameManager.start_dialog("tutorial")
 	map.setup($Map/Navigation/YSort/Items, $Map/Navigation/YSort/Characters, $Map/Navigation/YSort/Building,  self)
@@ -115,6 +118,8 @@ func _exit_tree():
 # ENTITY SELECTION
 ################################################################################################
 func select_character(character):
+	stop_construction()
+		
 	if selectedCharacter:
 		selectedCharacter.remove_highlight()
 	selectedCharacter = character
@@ -122,31 +127,41 @@ func select_character(character):
 	$Camera2D/CanvasLayer/overlay.show_goblin(character.get_details())
 
 func select_entity(entity):
+	stop_construction()
+	
 	selectedEntity = entity 
 	if selectedEntity.type == GameManager.ENTITY_TYPE.BUILDING:
 		move_character(selectedEntity.get_building_position())
 	elif selectedEntity.type == GameManager.ENTITY_TYPE.ITEM:
 		move_character(selectedEntity.position)
 
-func select_item(item):
-	selectedItem = item
-	move_character(selectedItem.position)
-
 func perform_contextual_action(character):
-	print("THIS SHOULDNT HAPPEN")
 	if selectedEntity != null:
 		if character.type == GameManager.ENTITY_TYPE.PLAYER:
 			if selectedEntity.type == GameManager.ENTITY_TYPE.BUILDING:
-				pass
+				if selectedEntity.underConstruction:
+					print("CONSTRUCTING")
+					selectedEntity.use_building(player)
+				else:
+					print("Occupants: " + String(selectedEntity.use_building(player)))
 			elif selectedEntity.type == GameManager.ENTITY_TYPE.ITEM:
 				selectedEntity.pickup()
 			selectedEntity = null
 
+func stop_construction():
+	print("STOP CONSTRUCTING")
+	if selectedEntity != null:
+		if selectedEntity.type == GameManager.ENTITY_TYPE.BUILDING:
+			if selectedEntity.underConstruction:
+				selectedEntity.occupants.erase(player)
 ################################################################################################
 # PLAYER MOVEMENT
 ################################################################################################
 func _unhandled_input(event: InputEvent):
 	if event is InputEventMouseButton:
+		
+		stop_construction()
+		
 		if event.button_index == BUTTON_RIGHT and event.pressed:
 			stop_building()
 			get_tree().set_input_as_handled()

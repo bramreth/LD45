@@ -35,7 +35,9 @@ enum Building {
 	SENTRY,
 	HATCHERY,
 	MESS,
-	RUBBLE
+	RUBBLE,
+	HUMAN_HUT,
+	THRONE_ROOM
 }
 
 enum Attractiveness {
@@ -118,7 +120,6 @@ func daytime_tick():
 	pass
 	#TODO - ADD FUNCTIONALITY TO HAPPEN DURING DAYTIME
 
-
 var prev_events = []
 func start_of_nighttime_tick():
 	var event = {}
@@ -149,8 +150,6 @@ func debug_day_cycle_print():
 		if currentTick%(60*(DAY_LENGTH+NIGHT_LENGTH)) == 0:
 			SystemManager.print("NEW DAY: " + String(get_current_day()) + " <====================")
 
-
-
 func update_moral(value):
 	SystemManager.data["player_data"]["moral"] += value
 	if SystemManager.data["player_data"]["moral"] > 100: SystemManager.data["player_data"]["moral"] = 100
@@ -170,7 +169,10 @@ func update_moral(value):
 
 func get_moral():
 	return SystemManager.data["player_data"]["moral"]
-	
+
+func update_attractiveness(val):
+	SystemManager.data["player_data"]["attractiveness"] + val
+
 func get_attractiveness():
 	return SystemManager.data["player_data"]["attractiveness"]
 	

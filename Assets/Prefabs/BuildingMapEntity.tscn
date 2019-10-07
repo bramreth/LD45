@@ -2,22 +2,22 @@
 
 [ext_resource path="res://Assets/Prefabs/MapEntity.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Prefab_Scripts/Building.gd" type="Script" id=2]
-[ext_resource path="res://Assets/Images/debug_hut.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Images/buildings/mess.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 32, 32 )
+extents = Vector2( 256, 300 )
 
 [node name="MapEntity" instance=ExtResource( 1 )]
+scale = Vector2( 0.8, 0.8 )
 script = ExtResource( 2 )
 
 [node name="MapEntity_Sprite" parent="." index="0"]
-position = Vector2( 0, -32 )
+position = Vector2( 0, -178 )
 texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" parent="Click_Area" index="0"]
-position = Vector2( 0, -32 )
+position = Vector2( 0, -178 )
 shape = SubResource( 1 )
 
 [node name="Entrance" type="Node2D" parent="." index="2"]
 position = Vector2( 0, 10 )
-

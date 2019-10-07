@@ -21,8 +21,6 @@ var jobs = ["gather", "rest", "relax", "eat", "build", "fight", "wander"]
 
 var currentJob = "idle"
 var currentTarget = null
-var constructionsInProgress = 0
-var combatsInProgress = 0
 
 
 func _ready():
@@ -37,11 +35,13 @@ func join_clan():
 	start_specific_job("wander")
 
 func determine_jobs():
-	return "rest"
+	
+	print(check_for_construction())
+	
 	# essentials
-	if constructionsInProgress > 0:
+	if check_for_combat():
 		return "fight"
-	if combatsInProgress > 0:
+	if check_for_construction():
 		return "build"
 	if hunger < 40:
 		return "eat"
@@ -63,12 +63,15 @@ func determine_jobs():
 	else:
 		return "rest"
 
-func combat_update(change):
-	combatsInProgress += change
+func check_for_combat():
+	false
 	
-func construction_update(change):
-	constructionsInProgress += change
-	
+func check_for_construction():
+	for site in get_tree().get_nodes_in_group("construction_sites"):
+		if !site.is_at_capacity():
+			return true
+	return false
+
 func start_job():
 	currentJob = determine_jobs()
 	emit_signal("request_job_target", self, currentJob)

@@ -9,4 +9,3 @@ void vertex(){
 
 [resource]
 shader = SubResource( 1 )
-

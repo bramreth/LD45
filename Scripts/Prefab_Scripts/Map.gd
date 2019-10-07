@@ -110,8 +110,9 @@ func build_building(tile, type):
 	newItem.setup(type, true)
 	newItem.position = map_to_world(tile) + Vector2(1, cell_size.y/2)
 	buildingsNode.call_deferred("add_child", newItem)
-	for goblin in get_tree().get_nodes_in_group("goblin"):
-			goblin.construction_update(1)
+	newItem.connect("selected", gameRoot, "select_entity")
+#	for goblin in get_tree().get_nodes_in_group("goblin"):
+#			goblin.construction_update(1)
 	
 	# we need this to create a construction tile that saves the texture and stats of the building
 	# we want. then once a build is completed applies all of it's bonuses.
