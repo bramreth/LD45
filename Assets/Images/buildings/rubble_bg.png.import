@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/camp.png-a182f3a0cf64016eb86a4f9fe7bf07e2.stex"
+path="res://.import/rubble_bg.png-9ac63290d0d8aa81cc87dbad0716c99a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/buildings/camp.png"
-dest_files=[ "res://.import/camp.png-a182f3a0cf64016eb86a4f9fe7bf07e2.stex" ]
+source_file="res://Assets/Images/buildings/rubble_bg.png"
+dest_files=[ "res://.import/rubble_bg.png-9ac63290d0d8aa81cc87dbad0716c99a.stex" ]
 
 [params]
 

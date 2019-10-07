@@ -31,12 +31,16 @@ func setup(finalType, wip):
 	
 	if underConstruction:
 		add_to_group("construction_sites")
+		position += Vector2(0, 100)
 		$MapEntity_Sprite.texture = AssetLoader.assets["resources"][GameManager.Building.RUBBLE]
+		$MapEntity_Sprite/UnderConstruction.show()
 	else:
 		finish_construction()
 
 func finish_construction():
+	position -= Vector2(0, 100)
 	$MapEntity_Sprite.texture = AssetLoader.assets["resources"][building_type]
+	$MapEntity_Sprite/UnderConstruction.hide()
 	print($MapEntity_Sprite.texture)
 	match building_type:
 		GameManager.Building.HUT:

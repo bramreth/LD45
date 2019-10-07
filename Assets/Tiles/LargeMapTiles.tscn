@@ -13,9 +13,9 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 outlines = [ PoolVector2Array( 0, -128, -256, 0, 0, 128, 256, 0 ) ]
 
 [sub_resource type="NavigationPolygon" id=2]
-vertices = PoolVector2Array( -160, 48, -256, 0, 0, -128, 0, -32, 256, 0, 160, 48 )
-polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 2, 4, 5, 3 ) ]
-outlines = [ PoolVector2Array( -256, 0, 0, -128, 256, 0, 160, 48, 0, -32, -160, 48 ) ]
+vertices = PoolVector2Array( 0, 128, -256, 0, -160, -48, 0, 32, 160, -48, 256, 0 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 5, 0, 3 ) ]
+outlines = [ PoolVector2Array( 0, 128, 256, 0, 160, -48, 0, 32, -160, -48, -256, 0 ) ]
 
 [sub_resource type="NavigationPolygon" id=3]
 vertices = PoolVector2Array( -256, 0, 0, -128, 256, 0, 0, 128 )
@@ -43,19 +43,19 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 2, 4, 5, 3 ) ]
 outlines = [ PoolVector2Array( -256, 0, 0, -128, 256, 0, 160, 48, 0, -32, -160, 48 ) ]
 
 [sub_resource type="NavigationPolygon" id=8]
-vertices = PoolVector2Array( -192, 32, -256, 0, 0, -128, 0, -16, 256, 0, 192, 32 )
-polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 2, 4, 5, 3 ) ]
-outlines = [ PoolVector2Array( -256, 0, 0, -128, 256, 0, 192, 32, 0, -16, -192, 32 ) ]
+vertices = PoolVector2Array( 0, 128, -256, 0, -224, -16, 0, 16, 224, -16, 256, 0 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 5, 0, 3 ) ]
+outlines = [ PoolVector2Array( -256, 0, -224, -16, 0, 16, 224, -16, 256, 0, 0, 128 ) ]
 
 [sub_resource type="NavigationPolygon" id=9]
-vertices = PoolVector2Array( -192, 32, -256, 0, 0, -128, 0, -32, 256, 0, 192, 32 )
-polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 2, 4, 5, 3 ) ]
-outlines = [ PoolVector2Array( -256, 0, 0, -128, 256, 0, 192, 32, 0, -32, -192, 32 ) ]
+vertices = PoolVector2Array( 0, 128, -256, 0, -192, -32, 0, 64, 192, -32, 256, 0 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 5, 0, 3 ) ]
+outlines = [ PoolVector2Array( -256, 0, -192, -32, 0, 64, 192, -32, 256, 0, 0, 128 ) ]
 
 [sub_resource type="NavigationPolygon" id=10]
-vertices = PoolVector2Array( -160, 48, -256, 0, 0, -128, 0, -32, 256, 0, 160, 48 )
-polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 2, 4, 5, 3 ) ]
-outlines = [ PoolVector2Array( -256, 0, 0, -128, 256, 0, 160, 48, 0, -32, -160, 48 ) ]
+vertices = PoolVector2Array( 0, 128, -256, 0, -160, -48, 0, 16, 160, -48, 256, 0 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 5, 0, 3 ) ]
+outlines = [ PoolVector2Array( -256, 0, -160, -48, 0, 16, 160, -48, 256, 0, 0, 128 ) ]
 
 [node name="LargeMapTiles" type="Node2D"]
 

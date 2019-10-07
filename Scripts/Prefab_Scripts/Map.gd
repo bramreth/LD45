@@ -107,8 +107,8 @@ func build_building(tile, type):
 	
 	var newItem = buildEntity.instance()
 	construction[tile] = [type, newItem]
-	newItem.setup(type, true)
 	newItem.position = map_to_world(tile) + Vector2(1, cell_size.y/2)
+	newItem.setup(type, true)
 	newItem.connect("selected", gameRoot, "select_entity")
 	buildingsNode.call_deferred("add_child", newItem)
 #	for goblin in get_tree().get_nodes_in_group("goblin"):
