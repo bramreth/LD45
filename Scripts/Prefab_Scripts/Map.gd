@@ -228,7 +228,7 @@ func spawn_goblin():
 	newGoblin.connect("selected", gameRoot, "select_character")
 	newGoblin.connect("request_job_target", gameRoot, "provide_movement_target")
 	ySort.call_deferred("add_child", newGoblin)
-	newGoblin.start_specific_job("wander")
+	newGoblin.call_deferred("start_specific_job", "wander")
 	
 func spawn_enemy():
 	var validSpawns = get_used_cells()
@@ -237,7 +237,7 @@ func spawn_enemy():
 	newEnemy.position = map_to_world(spawn) + Vector2(1, cell_size.y/2)
 	newEnemy.connect("selected", gameRoot, "select_character")
 	ySort.call_deferred("add_child", newEnemy)
-	newEnemy.start_job()
+	newEnemy.call_deferred("start_job")
 
 func remove_foliage(pos):
 	var cell = world_to_map(pos)
