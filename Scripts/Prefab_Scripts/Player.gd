@@ -5,6 +5,7 @@ signal movement_done()
 func _ready():
 	._ready()
 	type = GameManager.ENTITY_TYPE.PLAYER
+	speed = 250
 
 func _process(delta):
 	if !path:

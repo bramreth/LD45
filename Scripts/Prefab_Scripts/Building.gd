@@ -16,7 +16,7 @@ var buildingStats = {
 		GameManager.Building.SENTRY: 10, #UNUSED
 		GameManager.Building.HATCHERY: 10, #UNUSED
 		GameManager.Building.MESS: 3,
-		GameManager.Building.RUBBLE: 10
+		GameManager.Building.RUBBLE: 2
 	}
 }
 
