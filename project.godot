@@ -61,5 +61,5 @@ click={
 
 [rendering]
 
-environment/default_clear_color=Color( 0.207843, 0.505882, 0.666667, 1 )
+environment/default_clear_color=Color( 0.00392157, 0.145098, 0.0235294, 1 )
 environment/default_environment="res://default_env.tres"
