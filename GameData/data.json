@@ -1,7 +1,7 @@
 {
 	"debug":true,
 	"player_data": {
-		"name": "Sir Goblin",
+		"name": "Mr Goblin",
 		"moral": 2,
 		"attractiveness": 0,
 		"goblin_spawn_rate": 100,
