@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scripts/Scene_Scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Tiles/MapTilesLarge.tres" type="TileSet" id=2]
@@ -10,7 +10,8 @@
 [ext_resource path="res://Assets/Images/ui_icons/gold.png" type="Texture" id=8]
 [ext_resource path="res://Assets/Prefabs/PlayerCharacterMapEntity.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Assets/Prefabs/ItemMapEntity.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Scenes/overlay.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Assets/Prefabs/GoblinCharacterMapEntity.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/overlay.tscn" type="PackedScene" id=12]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
@@ -102,6 +103,22 @@ position = Vector2( -509.474, 617.895 )
 position = Vector2( -1046.36, 876.338 )
 resourceType = 1
 
+[node name="MapEntity12" parent="Map/Navigation/YSort" instance=ExtResource( 10 )]
+position = Vector2( 1548.13, 1139.67 )
+resourceType = 1
+
+[node name="MapEntity19" parent="Map/Navigation/YSort" instance=ExtResource( 10 )]
+position = Vector2( 2072.64, 1146.15 )
+resourceType = 1
+
+[node name="MapEntity13" parent="Map/Navigation/YSort" instance=ExtResource( 10 )]
+position = Vector2( -1285.95, 731.72 )
+resourceType = 1
+
+[node name="MapEntity14" parent="Map/Navigation/YSort" instance=ExtResource( 10 )]
+position = Vector2( -1788.88, 999.371 )
+resourceType = 1
+
 [node name="MapEntity3" parent="Map/Navigation/YSort" instance=ExtResource( 10 )]
 position = Vector2( -227.368, 988.421 )
 resourceType = 2
@@ -111,10 +128,14 @@ position = Vector2( 258.948, 991.579 )
 resourceType = 1
 
 [node name="MapEntity5" parent="Map/Navigation/YSort" instance=ExtResource( 10 )]
-position = Vector2( 1532.63, 1132.63 )
+position = Vector2( -1294.97, 998.804 )
 
 [node name="MapEntity6" parent="Map/Navigation/YSort" instance=ExtResource( 10 )]
 position = Vector2( 1021.89, 1381.86 )
+resourceType = 1
+
+[node name="MapEntity18" parent="Map/Navigation/YSort" instance=ExtResource( 10 )]
+position = Vector2( -242.976, 1763.91 )
 resourceType = 1
 
 [node name="MapEntity7" parent="Map/Navigation/YSort" instance=ExtResource( 10 )]
@@ -126,9 +147,26 @@ position = Vector2( 1556.53, 874.599 )
 [node name="MapEntity9" parent="Map/Navigation/YSort" instance=ExtResource( 10 )]
 position = Vector2( -246.361, 1529.19 )
 
+[node name="MapEntity16" parent="Map/Navigation/YSort" instance=ExtResource( 10 )]
+position = Vector2( 1029.3, 1906.92 )
+
+[node name="MapEntity17" parent="Map/Navigation/YSort" instance=ExtResource( 10 )]
+position = Vector2( 245.771, 1781.73 )
+
 [node name="MapEntity10" parent="Map/Navigation/YSort" instance=ExtResource( 10 )]
 position = Vector2( -1023.52, 1384.32 )
 resourceType = 3
+
+[node name="MapEntity20" parent="Map/Navigation/YSort" instance=ExtResource( 10 )]
+position = Vector2( -1010.57, 1662.76 )
+resourceType = 2
+
+[node name="MapEntity15" parent="Map/Navigation/YSort" instance=ExtResource( 10 )]
+position = Vector2( -1530.76, 1392.95 )
+resourceType = 3
+
+[node name="MapEntity11" parent="Map/Navigation/YSort" instance=ExtResource( 11 )]
+position = Vector2( 494.291, 1629.65 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( -169.998, 377.087 )
@@ -144,7 +182,7 @@ editor_draw_limits = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
 
-[node name="overlay" parent="Camera2D/CanvasLayer" instance=ExtResource( 11 )]
+[node name="overlay" parent="Camera2D/CanvasLayer" instance=ExtResource( 12 )]
 margin_top = -0.774048
 margin_bottom = -0.774048
 mouse_filter = 2
