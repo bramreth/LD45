@@ -14,8 +14,8 @@ var debug_flag = false
 
 onready var night_events = SystemManager.data["events"]["night"]
 
-const DAY_LENGTH = 120
-const NIGHT_LENGTH = 40
+const DAY_LENGTH = 180
+const NIGHT_LENGTH = 90
 
 var currentTick: int = 0 #1/60th seconds since started
 var currentGamePlayTick: int = 0 #Seconds since started

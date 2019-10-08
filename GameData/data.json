@@ -20,32 +20,32 @@
 			{
 		 		"dialog":"battle-1",
 				"min-population": 0,
-				"num_of_enemies": 3
+				"num_of_enemies": 2
 			}, 
 			{
 				"dialog":"battle-2",
-				"min-population": 0,
+				"min-population": 5,
 				"num_of_enemies": 3
 			}, 
 			{
 				"dialog":"battle-3",
-				"min-population": 5,
+				"min-population": 10,
 				"num_of_enemies": 5
 			},
 			{
 				"dialog":"battle-4",
-				"min-population": 15,
+				"min-population": 20,
 				"num_of_enemies": 10
 			},
 			{
 				"dialog":"battle-5",
-				"min-population": 30,
+				"min-population": 40,
 				"num_of_enemies": 20
 			},
 			{
 				"dialog":"battle-6",
-				"min-population": 50,
-				"num_of_enemies": 50
+				"min-population": 75,
+				"num_of_enemies": 30
 			},
 		] 
 		
