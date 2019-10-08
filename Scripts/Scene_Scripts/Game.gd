@@ -417,7 +417,7 @@ func build_can_color():
 # EVENT HANDLING
 ################################################################################################
 func start_night(event):
-	#remove_items_from_map()
+#	remove_items_from_map()
 	if event != null:
 		GameManager.start_dialog(event["dialog"])
 		spawn_enemies(event["num_of_enemies"])
