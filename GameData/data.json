@@ -58,7 +58,7 @@
 				"button_text": "Next",
 				"next_action": "next",
 				"duration": "",
-				"text_speed": 0.03,
+				"text_speed": 0.02,
 				"sfx": ""
 			},
 			{
@@ -68,7 +68,7 @@
 				"button_text": "Next",
 				"next_action": "next",
 				"duration": "",
-				"text_speed": 0.03,
+				"text_speed": 0.02,
 				"sfx": ""
 			},
 			{
@@ -78,7 +78,7 @@
 				"button_text": "Confirm",
 				"next_action": "submit_name",
 				"duration": "",
-				"text_speed": 0.03,
+				"text_speed": 0.02,
 				"sfx": ""
 			},
 			{
@@ -88,7 +88,7 @@
 				"button_text": "next",
 				"next_action": "next",
 				"duration": "",
-				"text_speed": 0.03,
+				"text_speed": 0.02,
 				"sfx": ""
 			},
 			{
@@ -98,7 +98,7 @@
 				"button_text": "Next",
 				"next_action": "next",
 				"duration": "",
-				"text_speed": 0.03,
+				"text_speed": 0.02,
 				"sfx": "wizard1.wav"
 			},
 			{
@@ -108,7 +108,7 @@
 				"button_text": "Next",
 				"next_action": "next",
 				"duration": "",
-				"text_speed": 0.03,
+				"text_speed": 0.02,
 				"sfx": "goblin1.wav"
 			},
 			{
@@ -118,7 +118,7 @@
 				"button_text": "Next",
 				"next_action": "next",
 				"duration": "",
-				"text_speed": 0.03,
+				"text_speed": 0.02,
 				"sfx": "wizard2.wav"
 			},
 			{
@@ -128,7 +128,7 @@
 				"button_text": "Next",
 				"next_action": "next",
 				"duration": "goblin2.wav",
-				"text_speed": 0.03,
+				"text_speed": 0.02,
 				"sfx": "goblin2.wav"
 			},
 			{
@@ -138,7 +138,7 @@
 				"button_text": "Next",
 				"next_action": "next",
 				"duration": "",
-				"text_speed": 0.03,
+				"text_speed": 0.02,
 				"sfx": "wizard3.wav"
 			},
 			{
@@ -148,7 +148,7 @@
 				"button_text": "Next",
 				"next_action": "next",
 				"duration": "",
-				"text_speed": 0.03,
+				"text_speed": 0.02,
 				"sfx": "goblin3.wav"
 			},
 			{
@@ -158,7 +158,7 @@
 				"button_text": "Next",
 				"next_action": "next",
 				"duration": "wizard4.wav",
-				"text_speed": 0.03,
+				"text_speed": 0.02,
 				"sfx": "wizard4.wav"
 			},
 			{
@@ -168,7 +168,7 @@
 				"button_text": "Next",
 				"next_action": "next",
 				"duration": "wizard5.wav",
-				"text_speed": 0.03,
+				"text_speed": 0.02,
 				"sfx": "wizard5.wav"
 			},
 			{
@@ -178,7 +178,7 @@
 				"button_text": "Next",
 				"next_action": "next",
 				"duration": "",
-				"text_speed": 0.03,
+				"text_speed": 0.02,
 				"sfx": "wizard6.wav"
 			},
 			{
@@ -188,7 +188,7 @@
 				"button_text": "Next",
 				"next_action": "next",
 				"duration": "",
-				"text_speed": 0.03,
+				"text_speed": 0.02,
 				"sfx": "wizard1.wav"
 			},
 			{
@@ -198,7 +198,7 @@
 				"button_text": "Next",
 				"next_action": "next",
 				"duration": "",
-				"text_speed": 0.03,
+				"text_speed": 0.02,
 				"sfx": "wizard2.wav"
 			},
 			{
@@ -208,7 +208,7 @@
 				"button_text": "Next",
 				"next_action": "next",
 				"duration": "",
-				"text_speed": 0.03,
+				"text_speed": 0.02,
 				"sfx": "wizard3.wav"
 			},
 			{
@@ -218,7 +218,7 @@
 				"button_text": "Next",
 				"next_action": "next",
 				"duration": "",
-				"text_speed": 0.03,
+				"text_speed": 0.02,
 				"sfx": "wizard4.wav"
 			},
 			{
@@ -228,7 +228,7 @@
 				"button_text": "Next",
 				"next_action": "next",
 				"duration": "",
-				"text_speed": 0.03,
+				"text_speed": 0.02,
 				"sfx": "wizard5.wav"
 			},
 			{
@@ -238,7 +238,7 @@
 				"button_text": "Next",
 				"next_action": "next",
 				"duration": "",
-				"text_speed": 0.03,
+				"text_speed": 0.02,
 				"sfx": "wizard6.wav"
 			},
 			{
@@ -248,7 +248,7 @@
 				"button_text": "next",
 				"next_action": "next",
 				"duration": "",
-				"text_speed": 0.03,
+				"text_speed": 0.02,
 				"sfx": "goblin4.wav"
 			},
 			{
@@ -258,7 +258,7 @@
 				"button_text": "Next",
 				"next_action": "next",
 				"duration": "",
-				"text_speed": 0.03,
+				"text_speed": 0.02,
 				"sfx": "wizard1.wav"
 			},
 			{
@@ -268,7 +268,7 @@
 				"button_text": "Start Game",
 				"next_action": "close",
 				"duration": "",
-				"text_speed": 0.03,
+				"text_speed": 0.02,
 				"sfx": "goblin5.wav"
 			},
 		],
@@ -280,7 +280,7 @@
 				"button_text": "Got it",
 				"next_action": "Close",
 				"duration": "",
-				"text_speed": 0.03,
+				"text_speed": 0.02,
 				"sfx": "wizard1.wav"
 			}
 		],
@@ -292,7 +292,7 @@
 				"button_text": "Got it",
 				"next_action": "Close",
 				"duration": "",
-				"text_speed": 0.03,
+				"text_speed": 0.02,
 				"sfx": "wizard2.wav"
 			}
 		],
@@ -304,7 +304,7 @@
 				"button_text": "Got it.",
 				"next_action": "Close",
 				"duration": "",
-				"text_speed": 0.03,
+				"text_speed": 0.02,
 				"sfx": "wizard3.wav"
 			}
 		],
@@ -316,7 +316,7 @@
 				"button_text": "Got it",
 				"next_action": "Close",
 				"duration": "",
-				"text_speed": 0.03,
+				"text_speed": 0.02,
 				"sfx": "wizard4.wav"
 			}
 		],
@@ -328,18 +328,18 @@
 				"button_text": "Next",
 				"next_action": "next",
 				"duration": "",
-				"text_speed": 0.03,
+				"text_speed": 0.02,
 				"sfx": "pre_combat_horn.wav"
 			},
 			{
 				"state": "read",
 				"text": "oh come on! That was quick!",
-				"animation": "king",
+				"animation": "goblin",
 				"button_text": "Next",
 				"next_action": "next",
 				"duration": "",
-				"text_speed": 0.03,
-				"sfx": "king1.wav"
+				"text_speed": 0.02,
+				"sfx": "gobiln1.wav"
 			},
 			{
 				"state": "read",
@@ -348,7 +348,7 @@
 				"button_text": "Next",
 				"next_action": "next",
 				"duration": "",
-				"text_speed": 0.03,
+				"text_speed": 0.02,
 				"sfx": "wizard5.wav"
 			},
 			{
@@ -358,7 +358,7 @@
 				"button_text": "next",
 				"next_action": "next",
 				"duration": "",
-				"text_speed": 0.03,
+				"text_speed": 0.02,
 				"sfx": "king3.wav"
 			},
 			{
@@ -368,7 +368,7 @@
 				"button_text": "Start Battle!",
 				"next_action": "close",
 				"duration": "",
-				"text_speed": 0.03,
+				"text_speed": 0.02,
 				"sfx": "goblin2.wav"
 			}
 		],
@@ -380,7 +380,7 @@
 				"button_text": "next",
 				"next_action": "next",
 				"duration": "",
-				"text_speed": 0.03,
+				"text_speed": 0.02,
 				"sfx": "king4.wav"
 			},
 			{
@@ -390,7 +390,7 @@
 				"button_text": "Start Battle!",
 				"next_action": "close",
 				"duration": "",
-				"text_speed": 0.03,
+				"text_speed": 0.02,
 				"sfx": "goblin4.wav"
 			}
 		],
@@ -402,7 +402,7 @@
 				"button_text": "Next",
 				"next_action": "next",
 				"duration": "",
-				"text_speed": 0.03,
+				"text_speed": 0.02,
 				"sfx": "pre_combat_horn.wav"
 			},
 			{
@@ -412,7 +412,7 @@
 				"button_text": "Next",
 				"next_action": "next",
 				"duration": "",
-				"text_speed": 0.03,
+				"text_speed": 0.02,
 				"sfx": "king2.wav"
 			},
 			{
@@ -422,7 +422,7 @@
 				"button_text": "Next",
 				"next_action": "next",
 				"duration": "",
-				"text_speed": 0.03,
+				"text_speed": 0.02,
 				"sfx": "wizard1.wav"
 			},
 			{
@@ -432,7 +432,7 @@
 				"button_text": "Start Battle!",
 				"next_action": "close",
 				"duration": "",
-				"text_speed": 0.03,
+				"text_speed": 0.02,
 				"sfx": "wizard1.wav"
 			}
 		],
@@ -444,7 +444,7 @@
 				"button_text": "Next",
 				"next_action": "next",
 				"duration": "",
-				"text_speed": 0.03,
+				"text_speed": 0.02,
 				"sfx": "pre_combat_horn.wav"
 			},
 			{
@@ -454,7 +454,7 @@
 				"button_text": "Next",
 				"next_action": "next",
 				"duration": "",
-				"text_speed": 0.03,
+				"text_speed": 0.02,
 				"sfx": "goblin4.wav"
 			},
 			{
@@ -464,7 +464,7 @@
 				"button_text": "Next",
 				"next_action": "next",
 				"duration": "",
-				"text_speed": 0.03,
+				"text_speed": 0.02,
 				"sfx": "king4.wav"
 			},
 			{
@@ -474,7 +474,7 @@
 				"button_text": "Start Battle!",
 				"next_action": "close",
 				"duration": "",
-				"text_speed": 0.03,
+				"text_speed": 0.02,
 				"sfx": "king4.wav"
 			}
 		],
@@ -486,7 +486,7 @@
 				"button_text": "Next",
 				"next_action": "next",
 				"duration": "",
-				"text_speed": 0.03,
+				"text_speed": 0.02,
 				"sfx": "wizard5.wav"
 			},
 			{
@@ -496,7 +496,7 @@
 				"button_text": "Next",
 				"next_action": "next",
 				"duration": "",
-				"text_speed": 0.03,
+				"text_speed": 0.02,
 				"sfx": "goblin4.wav"
 			},
 			{
@@ -506,7 +506,7 @@
 				"button_text": "Start Battle!",
 				"next_action": "close",
 				"duration": "",
-				"text_speed": 0.03,
+				"text_speed": 0.02,
 				"sfx": "king4.wav"
 			}
 		],
@@ -518,7 +518,7 @@
 				"button_text": "Next",
 				"next_action": "next",
 				"duration": "",
-				"text_speed": 0.03,
+				"text_speed": 0.02,
 				"sfx": "pre_combat_horn.wav"
 			},
 			{
@@ -528,7 +528,7 @@
 				"button_text": "Next",
 				"next_action": "next",
 				"duration": "",
-				"text_speed": 0.03,
+				"text_speed": 0.02,
 				"sfx": "goblin5.wav"
 			},
 			{
@@ -538,7 +538,7 @@
 				"button_text": "Start Battle!",
 				"next_action": "close",
 				"duration": "",
-				"text_speed": 0.03,
+				"text_speed": 0.02,
 				"sfx": "wizard5.wav"
 			},
 		]
