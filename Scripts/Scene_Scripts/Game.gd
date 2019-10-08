@@ -24,7 +24,6 @@ func _ready():
 	GameManager.connect("spawn_items", self, "spawn_items")
 	GameManager.connect("spawn_goblin", self, "spawn_goblin")
 	GameManager.connect("night_started", self, "start_night")
-	GameManager.connect("night_started", self, "remove_items_from_map")
 	
 	for character in get_tree().get_nodes_in_group("goblins"):
 		character.connect("request_job_target", self, "provide_movement_target")
@@ -124,12 +123,6 @@ func _thread_spawn_combat(startingCombatents):
 
 func combat_spawned():
 	combatSpawningThread.wait_to_finish()
-
-func remove_items_from_map():
-	
-	for child in get_tree().get_nodes_in_group("items"):
-		if not child.pickedUp:
-			child.queue_free()
 
 func _exit_tree():
 	if itemSpawningThread != null:
