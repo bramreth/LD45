@@ -236,6 +236,8 @@ func spawn_enemy():
 	var newEnemy = enemyEntity.instance()
 	newEnemy.position = map_to_world(spawn) + Vector2(1, cell_size.y/2)
 	newEnemy.connect("selected", gameRoot, "select_character")
+	newEnemy.connect("request_job_target", gameRoot, "provide_movement_target")
+	newEnemy.connect("start_combat", gameRoot, "start_combat")
 	ySort.call_deferred("add_child", newEnemy)
 	newEnemy.call_deferred("start_job")
 
